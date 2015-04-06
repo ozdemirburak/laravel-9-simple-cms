@@ -1,0 +1,12 @@
+/vendor
+.idea
+/node_modules
+vendor
+resources/assets/vendor
+node_modules
+public/build
+public/css
+public/js
+.env
+_ide_helper.php
+.phpstorm.meta.php
