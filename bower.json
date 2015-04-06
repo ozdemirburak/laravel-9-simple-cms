@@ -1,0 +1,18 @@
+{
+  "name": "laravel-5-simple-cms",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ozdemirburak/laravel-5-simple-cms",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "admin-lte": "~2.0.5",
+    "font-awesome": "~4.3.0",
+    "datatables": "~1.10.6",
+    "datatables-bootstrap3": "*",
+    "mjolnic-bootstrap-colorpicker": "~2.1.1",
+    "bootstrap-datepicker": "~1.4.0",
+    "select2": "~3.5.2",
+    "select2-bootstrap-css": "~1.2.5"
+  }
+}
