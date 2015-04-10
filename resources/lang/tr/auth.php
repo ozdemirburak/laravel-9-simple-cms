@@ -16,6 +16,7 @@ return [
         "submit"    => "Giriş Yap",
         "forgot"    => "Şifremi Unuttum?"
     ],
+    "logout" => "Çıkış Yap"
 
 
 ];

@@ -1,27 +1,32 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', 'HomeController@index');
-
-Route::get('auth/login',  array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post('auth/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
-Route::get('auth/logout', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogout'));
+Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
 
 Route::controllers([
-	'password' => 'Auth\PasswordController',
+    'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 {
-    Route::get('/', 'Admin\DashboardController@index');
+    Route::get('/', ['as' => 'auth.root', 'uses' => 'AuthController@getLogin']);
+    Route::get('login',  ['as' => 'auth.login', 'uses' => 'AuthController@getLogin']);
+    Route::post('login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
+    Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+    Route::get('user/table', array('as'=>'admin.user.table', 'uses'=>'UserController@getDatatable'));
+    Route::get('article/table', array('as'=>'admin.article.table', 'uses'=>'ArticleController@getDatatable'));
+    Route::get('category/table', array('as'=>'admin.category.table', 'uses'=>'CategoryController@getDatatable'));
+    Route::get('language/table', array('as'=>'admin.language.table', 'uses'=>'LanguageController@getDatatable'));
+    Route::group(['middleware' => 'auth'], function(){
+        Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
+        Route::resource('language', 'LanguageController');
+        Route::resource('user', 'UserController');
+        Route::resource('article', 'ArticleController');
+        Route::resource('category', 'CategoryController');
+        Route::resource('page', 'PageController');
+        Route::get('settings', ['as' => 'admin.settings', 'uses' => 'SettingController@index']);
+    });
 });

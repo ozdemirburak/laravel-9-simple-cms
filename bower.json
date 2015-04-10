@@ -8,7 +8,7 @@
     "jquery": "~1.11.2",
     "admin-lte": "~2.0.5",
     "font-awesome": "~4.3.0",
-    "datatables": "~1.10.6",
+    "datatables": "~1.9",
     "datatables-bootstrap3": "*",
     "mjolnic-bootstrap-colorpicker": "~2.1.1",
     "bootstrap-datepicker": "~1.4.0",
