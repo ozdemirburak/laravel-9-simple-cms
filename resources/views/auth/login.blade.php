@@ -12,7 +12,7 @@
             {{ trans('admin.title') }}
         </div>
 
-        {!! Form::open(['method' => 'POST', 'url' => '/auth/login']) !!}
+        {!! Form::open(['method' => 'POST', 'route' => 'auth.login']) !!}
 
         <div class="body bg-gray-50">
 

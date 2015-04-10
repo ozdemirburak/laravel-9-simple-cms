@@ -6,7 +6,7 @@ class DashboardController extends Controller {
 
     public function index()
     {
-        return 'Admin Panel';
+        return view('admin.dashboard.index');
     }
 
 }
