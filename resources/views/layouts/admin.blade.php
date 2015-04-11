@@ -13,6 +13,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="{{ url( elixir('js/admin.js') ) }}" type="text/javascript"></script>
+    <script src="{{ url( 'tinymce/tinymce.min.js' ) }}" type="text/javascript"></script>
     <script src="{{ url( 'js/admin-custom.js' ) }}" type="text/javascript"></script>
 </head>
 <body class="skin-blue">

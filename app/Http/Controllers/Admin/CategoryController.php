@@ -121,7 +121,7 @@ class CategoryController extends Controller {
             ->addColumn(trans('admin.fields.category.title'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('admin.category.table'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oCategory' => trans('admin.datatables')))
+            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
     }
 
@@ -134,9 +134,9 @@ class CategoryController extends Controller {
     {
         return Datatable::collection(Category::all())
             ->showColumns('title')
-            ->addColumn('updated_at',function($model)
+            ->addColumn('updated_at', function($model)
             {
-                return $model->updated_at->toDateTimeString();
+                return $model->updated_at->diffForHumans();
             })
             ->addColumn('',function($model)
             {

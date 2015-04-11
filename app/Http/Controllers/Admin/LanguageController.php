@@ -157,9 +157,9 @@ class LanguageController extends Controller {
     {
         return Datatable::collection(Language::all())
             ->showColumns('title', 'code')
-            ->addColumn('updated_at',function($model)
+            ->addColumn('updated_at', function($model)
             {
-                return $model->updated_at->toDateTimeString();
+                return $model->updated_at->diffForHumans();
             })
             ->addColumn('',function($model)
             {

@@ -54,7 +54,10 @@ return [
     ],
     // Form Fields
     "fields" => [
-        "updated_at"            => "Son Güncelleme",
+        "updated_at"            => "Güncelleme",
+        "created_at"            => "Oluşturulma",
+        "published_at"          => "Yayınlanma",
+        "read"                  => "Okunma",
         "user" => [
             "name"              => "Ad",
             "email"             => "E-mail",
@@ -67,10 +70,16 @@ return [
             "flag"              => "Bayrak"
         ],
         "category" => [
-            "title"             => "Kategori Başlığı",
+            "title"             => "Başlık",
             "description"       => "Kategori Tanımı",
             "color"             => "Kategori Rengi",
             "language_id"       => "Kategori Dili"
+        ],
+        "article" => [
+            "title"             => "Başlık",
+            "description"       => "Makale Tanımı",
+            "category_id"       => "Kategori",
+            "content"           => "Makale İçeriği",
         ],
         "save"                  => "Kaydet",
         "reset"                 => "Reset",
