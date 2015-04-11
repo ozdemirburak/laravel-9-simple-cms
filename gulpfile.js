@@ -36,6 +36,7 @@ elixir(function(mix) {
         .version(['css/admin.css', 'js/admin.js'])
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
         .copy('resources/assets/js/application.js', 'public/js/application-custom.js')
+        .copy(bowerDir + 'tinymce', 'public/build/tinymce')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts', 'public/build/fonts')
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img', 'public/build/img')

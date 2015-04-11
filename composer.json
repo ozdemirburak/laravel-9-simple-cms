@@ -6,7 +6,6 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.0.*",
-		"barryvdh/laravel-ide-helper": "~2.0",
 		"doctrine/dbal": "~2.5",
         "laravelcollective/html": "~5.0",
         "baum/baum": "~1.1",
@@ -22,7 +21,9 @@
 		"phpspec/phpspec": "~2.1",
         "squizlabs/php_codesniffer": "~1.5",
 		"laracasts/generators": "~1.1",
-        "laracasts/testdummy": "~2.0"
+        "laracasts/testdummy": "~2.0",
+        "barryvdh/laravel-ide-helper": "~2.0",
+        "barryvdh/laravel-debugbar": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

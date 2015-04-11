@@ -1,6 +1,9 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 /**
  * App\Article
@@ -27,14 +30,34 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  */
-class Article extends Model {
+class Article extends Model implements SluggableInterface{
+
+    use SluggableTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'content', 'published_at'];
+    protected $fillable = ['title', 'description', 'content', 'category_id', 'published_at'];
+
+    /**
+     * Carbon instance fields
+     *
+     * @var array
+     */
+    protected $dates = ['published_at'];
+
+    /**
+     * Create slug from title using 3rd party trait
+     *
+     * @var array
+     */
+    protected $sluggable = array(
+        'build_from' => 'title',
+        'save_to'    => 'slug',
+        'on_update'  => true
+    );
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -42,6 +65,37 @@ class Article extends Model {
     public function category()
     {
         return $this->belongsTo('App\Category');
+    }
+
+    /**
+     * Get the published_at attribute.
+     *
+     * @param  $date
+     * @return string
+     */
+    public function getPublishedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
+
+    /**
+     * Set article publish date
+     *
+     * @param $date
+     */
+    public function setPublishedAtAttribute($date)
+    {
+        $this->attributes['published_at'] = Carbon::parse($date);
+    }
+
+    /**
+     * Scope queries to articles that are published
+     *
+     * @param $query
+     */
+    public function scopePublished($query)
+    {
+        $query->where('published_at', '<=', Carbon::now());
     }
 
 }

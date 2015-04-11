@@ -1,7 +1,19 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 style="color: {{ $category->color }}"> {{ $category->title  }} </h1>
-    <h2> {{ trans('admin.fields.category.description') . ': ' . $category->description  }}</h2>
-    <h3> {{ trans('admin.fields.category.language_id') . ': ' . $category->language()->title  }}</h3>
+    <div class="col-xs-12 no-padding">
+        <div class="post-title pull-left">
+            <h1> {{ $article->title }} </h1>
+        </div>
+        <div class="pull-right category">
+            <a style="background-color: {{ $article->category->color }}" href="{{  route('admin.category.show', ['id' => $article->category->id]) }}">
+                {{ $article->category->title }}
+            </a>
+        </div>
+    </div>
+    <p>
+        {!! $article->content !!}
+    </p>
+    <h2> {{ trans('admin.fields.article.description') . ': ' . $article->description  }}</h2>
+
 @endsection

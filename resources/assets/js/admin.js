@@ -1,6 +1,6 @@
 $(function() {
 
-    $('#date').datepicker({
+    $('#published_at').datepicker({
         language: 'tr',
         format: 'yyyy-mm-dd',
         todayHighlight: true
@@ -10,8 +10,8 @@ $(function() {
         $(this).css('background-color', event.color.toHex());
     });
 
-    if( !$("#date").val() ) {
-        $("#date").datepicker("setDate", new Date());
+    if( !$("#published_at").val() ) {
+        $("#published_at").datepicker("setDate", new Date());
     }
 
 });
