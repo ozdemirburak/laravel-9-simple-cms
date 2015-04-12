@@ -34,7 +34,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
         Route::resource('category', 'CategoryController');
         Route::resource('page', 'PageController');
         Route::get('settings', ['as' => 'admin.settings', 'uses' => 'SettingController@index']);
-        // TinyMCE route for Filemanager
-        Route::controller('filemanager', 'FileController');
     });
 });

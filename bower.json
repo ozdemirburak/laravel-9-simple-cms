@@ -14,7 +14,6 @@
     "bootstrap-datepicker": "~1.4.0",
     "select2": "~3.5.2",
     "select2-bootstrap-css": "~1.2.5",
-    "Filemanager" : "2.1.0",
     "tinymce": "~4.1.9"
   }
 }

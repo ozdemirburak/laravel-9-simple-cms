@@ -42,6 +42,6 @@ elixir(function(mix) {
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img', 'public/build/img')
         .copy(bowerDir + 'datatables/media/images/*.png', 'public/build/images')
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img')
-        .copy(bowerDir + 'select2/*.png', 'public/js')
+        .copy(bowerDir + 'select2/*.png', 'public/css')
     ;
 });
