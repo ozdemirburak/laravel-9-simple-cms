@@ -4,125 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a9251f4e5c5cc6d3bbbcad600f4872f8",
+    "hash": "ba047c3de9975e18d34b72cb83e6eb27",
     "packages": [
-        {
-            "name": "barryvdh/laravel-debugbar",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "77be5170f3777e2e899ec98105ce5686cd4aa63b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/77be5170f3777e2e899ec98105ce5686cd4aa63b",
-                "reference": "77be5170f3777e2e899ec98105ce5686cd4aa63b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.0.x",
-                "maximebf/debugbar": "~1.10.2",
-                "php": ">=5.4.0",
-                "symfony/finder": "~2.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\Debugbar\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "PHP Debugbar integration for Laravel",
-            "keywords": [
-                "debug",
-                "debugbar",
-                "laravel",
-                "profiler",
-                "webprofiler"
-            ],
-            "time": "2015-03-07 15:15:23"
-        },
-        {
-            "name": "barryvdh/laravel-ide-helper",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa",
-                "reference": "d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "5.0.x",
-                "illuminate/filesystem": "5.0.x",
-                "illuminate/support": "5.0.x",
-                "php": ">=5.4.0",
-                "phpdocumentor/reflection-docblock": "2.0.x",
-                "symfony/class-loader": "~2.3"
-            },
-            "require-dev": {
-                "doctrine/dbal": "~2.3"
-            },
-            "suggest": {
-                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\LaravelIdeHelper\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
-            "keywords": [
-                "autocomplete",
-                "codeintel",
-                "helper",
-                "ide",
-                "laravel",
-                "netbeans",
-                "phpdoc",
-                "phpstorm",
-                "sublime"
-            ],
-            "time": "2015-03-17 08:00:28"
-        },
         {
             "name": "baum/baum",
             "version": "1.1.1",
@@ -1044,6 +927,62 @@
             "time": "2015-01-01 16:31:18"
         },
         {
+            "name": "intervention/image",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "8f3761154b4c1f5128365dfc32cbf757f27d97b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/8f3761154b4c1f5128365dfc32cbf757f27d97b6",
+                "reference": "8f3761154b4c1f5128365dfc32cbf757f27d97b6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "3.*"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.net",
+                    "homepage": "http://olivervogel.net/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "time": "2015-03-18 17:41:04"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "v1.0.4",
             "source": {
@@ -1584,73 +1523,17 @@
             "time": "2015-03-29 14:01:43"
         },
         {
-            "name": "maximebf/debugbar",
-            "version": "v1.10.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/7b2006e6e095126b5a061ec33fca3d90ea8a8219",
-                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0",
-                "symfony/var-dumper": "~2.6"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "kriswallsmith/assetic": "The best way to manage assets",
-                "monolog/monolog": "Log using Monolog",
-                "predis/predis": "Redis storage"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.10-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "DebugBar": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maxime Bouroumeau-Fuseau",
-                    "email": "maxime.bouroumeau@gmail.com",
-                    "homepage": "http://maximebf.com"
-                }
-            ],
-            "description": "Debug bar in the browser for php application",
-            "homepage": "https://github.com/maximebf/php-debugbar",
-            "keywords": [
-                "debug"
-            ],
-            "time": "2015-02-05 07:51:20"
-        },
-        {
             "name": "mews/purifier",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/Purifier.git",
-                "reference": "086c0fc2614e5c0389beff401a08903d287fd268"
+                "reference": "34b7d15002ce5f6fa28c6012e69f88181bab86b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/086c0fc2614e5c0389beff401a08903d287fd268",
-                "reference": "086c0fc2614e5c0389beff401a08903d287fd268",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/34b7d15002ce5f6fa28c6012e69f88181bab86b0",
+                "reference": "34b7d15002ce5f6fa28c6012e69f88181bab86b0",
                 "shasum": ""
             },
             "require": {
@@ -1695,7 +1578,7 @@
                 "security",
                 "xss"
             ],
-            "time": "2015-04-06 06:22:15"
+            "time": "2015-04-11 13:35:46"
         },
         {
             "name": "monolog/monolog",
@@ -1907,40 +1790,28 @@
             "time": "2015-04-03 14:33:59"
         },
         {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
+            "name": "pqb/filemanager-laravel",
+            "version": "2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+                "url": "https://github.com/guillermomartinez/filemanager-laravel.git",
+                "reference": "f104a45ba613c258fc282918f53e1bd6c1c5c811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "url": "https://api.github.com/repos/guillermomartinez/filemanager-laravel/zipball/f104a45ba613c258fc282918f53e1bd6c1c5c811",
+                "reference": "f104a45ba613c258fc282918f53e1bd6c1c5c811",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
+                "illuminate/support": "5.0.*",
+                "intervention/image": "2.*",
+                "php": ">=5.4.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
-                    "phpDocumentor": [
-                        "src/"
-                    ]
+                    "Pqb\\FilemanagerLaravel\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1949,11 +1820,12 @@
             ],
             "authors": [
                 {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
+                    "name": "Guillermo M.",
+                    "email": "guille_55_88@hotmail.com"
                 }
             ],
-            "time": "2015-02-03 12:10:50"
+            "description": "Filemanager for Laravel 4",
+            "time": "2015-02-11 22:08:47"
         },
         {
             "name": "predis/predis",
@@ -2165,57 +2037,6 @@
                 "mailer"
             ],
             "time": "2015-03-14 06:06:39"
-        },
-        {
-            "name": "symfony/class-loader",
-            "version": "v2.6.6",
-            "target-dir": "Symfony/Component/ClassLoader",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "861765b3e5f32979de5bd19ad2577cbb830a29d5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/861765b3e5f32979de5bd19ad2577cbb830a29d5",
-                "reference": "861765b3e5f32979de5bd19ad2577cbb830a29d5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/finder": "~2.0,>=2.0.5",
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\ClassLoader\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony ClassLoader Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-03-27 10:19:51"
         },
         {
             "name": "symfony/console",
@@ -2983,6 +2804,123 @@
     ],
     "packages-dev": [
         {
+            "name": "barryvdh/laravel-debugbar",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-debugbar.git",
+                "reference": "77be5170f3777e2e899ec98105ce5686cd4aa63b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/77be5170f3777e2e899ec98105ce5686cd4aa63b",
+                "reference": "77be5170f3777e2e899ec98105ce5686cd4aa63b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.x",
+                "maximebf/debugbar": "~1.10.2",
+                "php": ">=5.4.0",
+                "symfony/finder": "~2.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Debugbar\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "PHP Debugbar integration for Laravel",
+            "keywords": [
+                "debug",
+                "debugbar",
+                "laravel",
+                "profiler",
+                "webprofiler"
+            ],
+            "time": "2015-03-07 15:15:23"
+        },
+        {
+            "name": "barryvdh/laravel-ide-helper",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
+                "reference": "d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa",
+                "reference": "d8d5517f2cc55d534a7fc8f50ff62cb55115e1aa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.0.x",
+                "illuminate/filesystem": "5.0.x",
+                "illuminate/support": "5.0.x",
+                "php": ">=5.4.0",
+                "phpdocumentor/reflection-docblock": "2.0.x",
+                "symfony/class-loader": "~2.3"
+            },
+            "require-dev": {
+                "doctrine/dbal": "~2.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\LaravelIdeHelper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
+            "keywords": [
+                "autocomplete",
+                "codeintel",
+                "helper",
+                "ide",
+                "laravel",
+                "netbeans",
+                "phpdoc",
+                "phpstorm",
+                "sublime"
+            ],
+            "time": "2015-03-17 08:00:28"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.4",
             "source": {
@@ -3181,6 +3119,111 @@
             "time": "2015-03-29 15:07:54"
         },
         {
+            "name": "maximebf/debugbar",
+            "version": "v1.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maximebf/php-debugbar.git",
+                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/7b2006e6e095126b5a061ec33fca3d90ea8a8219",
+                "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0",
+                "symfony/var-dumper": "~2.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "kriswallsmith/assetic": "The best way to manage assets",
+                "monolog/monolog": "Log using Monolog",
+                "predis/predis": "Redis storage"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.10-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "DebugBar": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Bouroumeau-Fuseau",
+                    "email": "maxime.bouroumeau@gmail.com",
+                    "homepage": "http://maximebf.com"
+                }
+            ],
+            "description": "Debug bar in the browser for php application",
+            "homepage": "https://github.com/maximebf/php-debugbar",
+            "keywords": [
+                "debug"
+            ],
+            "time": "2015-02-05 07:51:20"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2015-02-03 12:10:50"
+        },
+        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -3352,16 +3395,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.15",
+            "version": "2.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "34cc484af1ca149188d0d9e91412191e398e0b67"
+                "reference": "934fd03eb6840508231a7f73eb8940cf32c3b66c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/34cc484af1ca149188d0d9e91412191e398e0b67",
-                "reference": "34cc484af1ca149188d0d9e91412191e398e0b67",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/934fd03eb6840508231a7f73eb8940cf32c3b66c",
+                "reference": "934fd03eb6840508231a7f73eb8940cf32c3b66c",
                 "shasum": ""
             },
             "require": {
@@ -3410,7 +3453,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-01-24 10:06:35"
+            "time": "2015-04-11 04:35:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3598,16 +3641,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.6.2",
+            "version": "4.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6c773fda0bdb5ea891d9e4430dcc26c990b9130b"
+                "reference": "163232991e652e6efed2f8470326fffa61e848e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6c773fda0bdb5ea891d9e4430dcc26c990b9130b",
-                "reference": "6c773fda0bdb5ea891d9e4430dcc26c990b9130b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/163232991e652e6efed2f8470326fffa61e848e2",
+                "reference": "163232991e652e6efed2f8470326fffa61e848e2",
                 "shasum": ""
             },
             "require": {
@@ -3666,7 +3709,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-04-07 09:16:49"
+            "time": "2015-04-11 05:23:21"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4168,6 +4211,57 @@
                 "standards"
             ],
             "time": "2014-12-04 22:32:15"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v2.6.6",
+            "target-dir": "Symfony/Component/ClassLoader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ClassLoader.git",
+                "reference": "861765b3e5f32979de5bd19ad2577cbb830a29d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/861765b3e5f32979de5bd19ad2577cbb830a29d5",
+                "reference": "861765b3e5f32979de5bd19ad2577cbb830a29d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.0,>=2.0.5",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-03-27 10:19:51"
         },
         {
             "name": "symfony/yaml",

@@ -5,15 +5,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Language
  *
- * @property integer $id 
- * @property string $title 
- * @property string $flag 
- * @property string $code 
- * @property string $site_title 
- * @property string $site_description 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Category[] $categories 
+ * @property integer $id
+ * @property string $title
+ * @property string $flag
+ * @property string $code
+ * @property string $site_title
+ * @property string $site_description
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Category[] $categories
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Page[] $pages
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereTitle($value)

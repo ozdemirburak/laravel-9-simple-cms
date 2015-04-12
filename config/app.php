@@ -155,7 +155,8 @@ return [
         'Laracasts\Flash\FlashServiceProvider',
         'Caffeinated\Menus\MenusServiceProvider',
         'Mews\Purifier\PurifierServiceProvider',
-        'Cviebrock\EloquentSluggable\SluggableServiceProvider'
+        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+        'Pqb\FilemanagerLaravel\FilemanagerLaravelServiceProvider',
 	],
 
 	/*
@@ -212,7 +213,8 @@ return [
         'FormBuilder' => 'Kris\LaravelFormBuilder\Facades\FormBuilder',
         'Flash'       => 'Laracasts\Flash\Flash',
         'Menu'        => 'Caffeinated\Menus\Facades\Menu',
-        'Purifier'    => 'Mews\Purifier\Facades\Purifier'
+        'Purifier'    => 'Mews\Purifier\Facades\Purifier',
+        'FilemanagerLaravel'=> 'Pqb\FilemanagerLaravel\Facades\FilemanagerLaravel',
 	],
 
 ];

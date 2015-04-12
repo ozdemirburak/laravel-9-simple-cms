@@ -14,7 +14,8 @@
         "laracasts/flash": "~1.3",
         "caffeinated/menus": "~1.0@dev",
         "mews/purifier": "dev-master",
-        "cviebrock/eloquent-sluggable" : ">=3.0.0-alpha"
+        "cviebrock/eloquent-sluggable" : ">=3.0.0-alpha",
+        "pqb/filemanager-laravel": "2.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -45,8 +46,8 @@
 		],
         "post-update-cmd": [
           "php artisan clear-compiled",
-          "php artisan ide-helper:generate",
-          "php artisan optimize"
+          "php artisan optimize",
+          "php artisan ide-helper:generate"
         ],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
