@@ -144,7 +144,6 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-        'App\Providers\MenuServiceProvider',
         'App\Providers\HelperServiceProvider',
         /*
          * Third Party Stuff
