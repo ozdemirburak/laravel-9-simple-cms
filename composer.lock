@@ -4,8 +4,167 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba047c3de9975e18d34b72cb83e6eb27",
+    "hash": "9cabc0e9405f5f5580a78dbcc6275724",
     "packages": [
+        {
+            "name": "barryvdh/elfinder-builds",
+            "version": "v2.1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/elfinder-builds.git",
+                "reference": "5826d79edbeccf2a63404f7ca8e9ca66758fd762"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/elfinder-builds/zipball/5826d79edbeccf2a63404f7ca8e9ca66758fd762",
+                "reference": "5826d79edbeccf2a63404f7ca8e9ca66758fd762",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Levashov",
+                    "email": "dio@std42.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Troex Nevelin",
+                    "email": "troex@fury.scancode.ru",
+                    "homepage": "http://std42.ru"
+                },
+                {
+                    "name": "Naoki Sawada",
+                    "email": "hypweb@gmail.com",
+                    "homepage": "http://xoops.hypweb.net"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/Studio-42/elFinder/contributors"
+                }
+            ],
+            "description": "File manager for web",
+            "homepage": "http://elfinder.org",
+            "time": "2015-02-11 11:10:51"
+        },
+        {
+            "name": "barryvdh/elfinder-flysystem-driver",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/elfinder-flysystem-driver.git",
+                "reference": "63649341e0e5417fd585fd1ada761282eed2ab02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/elfinder-flysystem-driver/zipball/63649341e0e5417fd585fd1ada761282eed2ab02",
+                "reference": "63649341e0e5417fd585fd1ada761282eed2ab02",
+                "shasum": ""
+            },
+            "require": {
+                "intervention/image": "~2.0",
+                "league/flysystem": "~1.0",
+                "php": ">=5.4"
+            },
+            "suggest": {
+                "barryvdh/elfinder-builds": "~2.1",
+                "league/glide": "~0.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A Flysystem Driver for elFinder",
+            "keywords": [
+                "Flysystem",
+                "elfinder",
+                "filesystem"
+            ],
+            "time": "2015-01-28 13:33:19"
+        },
+        {
+            "name": "barryvdh/laravel-elfinder",
+            "version": "v0.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-elfinder.git",
+                "reference": "a4c0bba90b177b304a3fe442e9b8aba8ed251cea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-elfinder/zipball/a4c0bba90b177b304a3fe442e9b8aba8ed251cea",
+                "reference": "a4c0bba90b177b304a3fe442e9b8aba8ed251cea",
+                "shasum": ""
+            },
+            "require": {
+                "barryvdh/elfinder-builds": "2.1.x",
+                "barryvdh/elfinder-flysystem-driver": "0.1.x@dev",
+                "illuminate/support": "5.0.x",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\Elfinder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "A Laravel Package to integrate elFinder 2",
+            "keywords": [
+                "elfinder",
+                "filebrowser",
+                "laravel",
+                "tinymce"
+            ],
+            "time": "2015-04-09 11:18:10"
+        },
         {
             "name": "baum/baum",
             "version": "1.1.1",
@@ -1788,44 +1947,6 @@
                 "php"
             ],
             "time": "2015-04-03 14:33:59"
-        },
-        {
-            "name": "pqb/filemanager-laravel",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guillermomartinez/filemanager-laravel.git",
-                "reference": "f104a45ba613c258fc282918f53e1bd6c1c5c811"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guillermomartinez/filemanager-laravel/zipball/f104a45ba613c258fc282918f53e1bd6c1c5c811",
-                "reference": "f104a45ba613c258fc282918f53e1bd6c1c5c811",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.0.*",
-                "intervention/image": "2.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Pqb\\FilemanagerLaravel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guillermo M.",
-                    "email": "guille_55_88@hotmail.com"
-                }
-            ],
-            "description": "Filemanager for Laravel 4",
-            "time": "2015-02-11 22:08:47"
         },
         {
             "name": "predis/predis",

@@ -8,6 +8,9 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
+use Session;
+use Input;
+use Redirect;
 
 class LanguageController extends Controller {
 
@@ -168,6 +171,12 @@ class LanguageController extends Controller {
             ->searchColumns('title')
             ->orderColumns('title','code')
             ->make();
+    }
+
+    public function postChange()
+    {
+        Session::put('language', Input::get('language'));
+        return Redirect::back();
     }
 
 }
