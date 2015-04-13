@@ -1,16 +1,26 @@
-<?php namespace App\Providers;
+<?php namespace App\Http\Middleware;
 
+use App\Language;
+use Closure;
 use Menu;
-use Illuminate\Support\ServiceProvider;
 
-class MenuServiceProvider extends ServiceProvider {
+class MakeMenu {
+
 
     /**
-     * Bootstrap the application services.
+     * Set menus in middleware as sessions are not stored already in service providers instead
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function boot()
+    public function handle($request, Closure $next)
+    {
+        $this->makeAdminMenu();
+        return $next($request);
+    }
+
+    protected function makeAdminMenu()
     {
         Menu::make('admin', function($menu) {
             $dashboard = $menu->add(trans('admin.menu.dashboard'), ['route' => 'admin.root'])
@@ -81,16 +91,6 @@ class MenuServiceProvider extends ServiceProvider {
                 ->icon('gears')
                 ->prependIcon();
         });
-    }
-
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
     }
 
 }
