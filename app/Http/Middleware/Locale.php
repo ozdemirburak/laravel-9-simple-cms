@@ -1,12 +1,21 @@
 <?php namespace App\Http\Middleware;
 
 use Session;
+use App\Language;
 use Closure;
 use App;
 use Carbon\Carbon;
 use Config;
 
 class Locale {
+
+    /**
+     * Store all languages in a config variable
+     */
+    public function __construct()
+    {
+        Config::set(['languages' => Language::all()]);
+    }
 
     /**
      * Set locale

@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'tr',
+	'locale' => 'en',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -156,6 +156,7 @@ return [
         'Caffeinated\Menus\MenusServiceProvider',
         'Mews\Purifier\PurifierServiceProvider',
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
+        'Barryvdh\Elfinder\ElfinderServiceProvider'
 	],
 
 	/*

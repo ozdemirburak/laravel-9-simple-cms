@@ -89,6 +89,16 @@ class Article extends Model implements SluggableInterface{
     }
 
     /**
+     * Purify the content
+     *
+     * @param $content
+     */
+    public function setContentAttribute($content)
+    {
+        $this->attributes['content'] = clean($content,'youtube');
+    }
+
+    /**
      * Scope queries to articles that are published
      *
      * @param $query

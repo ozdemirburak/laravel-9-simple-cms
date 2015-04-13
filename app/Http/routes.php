@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
     Route::get('language/table', ['as'=>'admin.language.table', 'uses'=>'LanguageController@getDatatable']);
     Route::group(['middleware' => 'auth'], function(){
         Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
+        Route::post('change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
         Route::resource('language', 'LanguageController');
         Route::resource('user', 'UserController');
         Route::resource('article', 'ArticleController');
@@ -36,3 +37,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
         Route::get('settings', ['as' => 'admin.settings', 'uses' => 'SettingController@index']);
     });
 });
+
+// Tinymce elfinder integration
+Route::get('elfinder', [ 'as' => 'elfinder', 'middleware' => 'auth', 'uses' => 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4'] );

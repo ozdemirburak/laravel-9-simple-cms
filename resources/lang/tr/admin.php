@@ -11,6 +11,7 @@ return [
     "submit"                    => "Gönder",
     "last_login"                => "Son Oturum Başlangıcı",
     "profile"                   => "Profil",
+    "elfinder"                  => "Dosya Yoneticisi",
     // Menu
     "menu" => [
         "dashboard"             => "Dashboard",
