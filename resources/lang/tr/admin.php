@@ -64,23 +64,23 @@ return [
             "email"             => "E-mail",
         ],
         "language" => [
-            "title"             => "Dil Adı",
-            "code"              => "Dil Kısa Kodu",
+            "title"             => "Adı",
+            "code"              => "Kısa Kodu",
             "site_title"        => "Site Başlığı",
             "site_description"  => "Site Tanımı",
             "flag"              => "Bayrak"
         ],
         "category" => [
             "title"             => "Başlık",
-            "description"       => "Kategori Tanımı",
-            "color"             => "Kategori Rengi",
-            "language_id"       => "Kategori Dili"
+            "description"       => "Tanımı",
+            "color"             => "Rengi",
+            "language_id"       => "Dili"
         ],
         "article" => [
             "title"             => "Başlık",
-            "description"       => "Makale Tanımı",
+            "description"       => "Tanımı",
             "category_id"       => "Kategori",
-            "content"           => "Makale İçeriği",
+            "content"           => "İçeriği",
         ],
         "save"                  => "Kaydet",
         "reset"                 => "Reset",
