@@ -226,12 +226,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/caffeinated/menus.git",
-                "reference": "6f1ee4d1bc0f32e5388cb3b01cecfc1e1824036d"
+                "reference": "300301bd901e8134303e15b0b3ac5a846d743749"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caffeinated/menus/zipball/6f1ee4d1bc0f32e5388cb3b01cecfc1e1824036d",
-                "reference": "6f1ee4d1bc0f32e5388cb3b01cecfc1e1824036d",
+                "url": "https://api.github.com/repos/caffeinated/menus/zipball/300301bd901e8134303e15b0b3ac5a846d743749",
+                "reference": "300301bd901e8134303e15b0b3ac5a846d743749",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
                 "menu",
                 "navigation"
             ],
-            "time": "2015-04-09 22:50:49"
+            "time": "2015-04-16 21:10:22"
         },
         {
             "name": "chumper/datatable",
@@ -526,16 +526,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "eeda578cbe24a170331a1cfdf78be723412df7a4"
+                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/eeda578cbe24a170331a1cfdf78be723412df7a4",
-                "reference": "eeda578cbe24a170331a1cfdf78be723412df7a4",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b5202eb9e83f8db52e0e58867e0a46e63be8332e",
+                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e",
                 "shasum": ""
             },
             "require": {
@@ -590,20 +590,20 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-12-20 20:49:38"
+            "time": "2014-12-23 22:40:37"
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "2346085d2b027b233ae1d5de59b07440b9f288c8"
+                "reference": "c9eadeb743ac6199f7eec423cb9426bc518b7b03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/2346085d2b027b233ae1d5de59b07440b9f288c8",
-                "reference": "2346085d2b027b233ae1d5de59b07440b9f288c8",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/c9eadeb743ac6199f7eec423cb9426bc518b7b03",
+                "reference": "c9eadeb743ac6199f7eec423cb9426bc518b7b03",
                 "shasum": ""
             },
             "require": {
@@ -614,13 +614,13 @@
             },
             "require-dev": {
                 "phpunit/phpunit": ">=3.7",
-                "predis/predis": "~0.8",
+                "predis/predis": "~1.0",
                 "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.5.x-dev"
                 }
             },
             "autoload": {
@@ -660,24 +660,27 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-01-15 20:38:55"
+            "time": "2015-04-15 00:11:59"
         },
         {
             "name": "doctrine/collections",
-            "version": "v1.2",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2"
+                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/b99c5c46c87126201899afe88ec490a25eedd6a2",
-                "reference": "b99c5c46c87126201899afe88ec490a25eedd6a2",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
@@ -696,17 +699,6 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com",
-                    "homepage": "http://www.jwage.com/",
-                    "role": "Creator"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
@@ -715,10 +707,16 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
                     "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "Collections Abstraction library",
@@ -728,7 +726,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2014-02-03 23:07:43"
+            "time": "2015-04-14 22:21:58"
         },
         {
             "name": "doctrine/common",
@@ -1329,16 +1327,16 @@
         },
         {
             "name": "kris/laravel-form-builder",
-            "version": "1.4.03",
+            "version": "1.4.06",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
-                "reference": "ce6af1822ca6a145c3c2f590a2894235ebb63a04"
+                "reference": "502bdd8788ffda0232e0d6dbe4c2f7184c9c669f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/ce6af1822ca6a145c3c2f590a2894235ebb63a04",
-                "reference": "ce6af1822ca6a145c3c2f590a2894235ebb63a04",
+                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/502bdd8788ffda0232e0d6dbe4c2f7184c9c669f",
+                "reference": "502bdd8788ffda0232e0d6dbe4c2f7184c9c669f",
                 "shasum": ""
             },
             "require": {
@@ -1377,7 +1375,7 @@
                 }
             ],
             "description": "Laravel form builder - symfony like",
-            "time": "2015-04-02 09:25:28"
+            "time": "2015-04-15 20:29:01"
         },
         {
             "name": "laracasts/flash",
@@ -1687,18 +1685,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/Purifier.git",
-                "reference": "34b7d15002ce5f6fa28c6012e69f88181bab86b0"
+                "reference": "73b5195eb64941079bbf895d65999b7f1e50e7f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/34b7d15002ce5f6fa28c6012e69f88181bab86b0",
-                "reference": "34b7d15002ce5f6fa28c6012e69f88181bab86b0",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/73b5195eb64941079bbf895d65999b7f1e50e7f9",
+                "reference": "73b5195eb64941079bbf895d65999b7f1e50e7f9",
                 "shasum": ""
             },
             "require": {
                 "ezyang/htmlpurifier": "4.6.*",
                 "illuminate/config": "~5.0",
                 "illuminate/filesystem": "~5.0",
+                "laravel/framework": "~5.0",
                 "php": ">=5.4"
             },
             "require-dev": {
@@ -1737,7 +1736,7 @@
                 "security",
                 "xss"
             ],
-            "time": "2015-04-11 13:35:46"
+            "time": "2015-04-14 20:14:44"
         },
         {
             "name": "monolog/monolog",

@@ -9,7 +9,6 @@ public/css
 public/js
 public/uploads
 public/packages
-public/files/*
 .env
 _ide_helper.php
 .phpstorm.meta.php
