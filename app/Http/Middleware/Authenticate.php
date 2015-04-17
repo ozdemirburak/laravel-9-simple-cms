@@ -2,6 +2,8 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use App\Events\UserLoggedIn as UpdateUserMetaData;
+use Auth;
 
 class Authenticate {
 

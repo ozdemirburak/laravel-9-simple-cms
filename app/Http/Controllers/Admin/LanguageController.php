@@ -125,7 +125,6 @@ class LanguageController extends Controller {
         {
             $file = $request->file($field);
             $request->file($field);
-            dd($file->getClientOriginalName());
             $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
             $path = '/uploads/' . str_plural($field);
             $move_path = public_path() . $path;

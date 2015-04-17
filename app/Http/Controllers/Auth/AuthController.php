@@ -11,7 +11,7 @@ class AuthController extends Controller {
 	| Login Controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller handles the registration authentication of existing users.
+	| This controller handles the authentication of existing users.
 	|
 	*/
 
@@ -26,7 +26,6 @@ class AuthController extends Controller {
 	 * Create a new authentication controller instance.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @return void
 	 */
 	public function __construct(Guard $auth)
 	{

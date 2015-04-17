@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 /**
  * App\User
@@ -33,7 +35,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['name', 'email', 'password', 'picture'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -42,6 +44,59 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-    // TODO: Add last session start timestamp
+    /**
+     * Set password encrypted
+     *
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] =  Hash::make($password);
+    }
+
+    /**
+     * Get the logged_in_at attribute.
+     *
+     * @param  $date
+     * @return string
+     */
+    public function getLoggedInAtAttribute($date)
+    {
+        return Carbon::parse($date);
+    }
+
+    /**
+     * Get the logged_out_at attribute.
+     *
+     * @param  $date
+     * @return string
+     */
+    public function getLoggedOutAtAttribute($date)
+    {
+        return Carbon::parse($date);
+    }
+
+    /**
+     * Set the ip address attribute.
+     *
+     * @param $ip
+     * @return string
+     */
+    public function setIpAddressAttribute($ip)
+    {
+        $this->attributes['ip_address'] = inet_pton($ip);
+    }
+
+
+    /**
+     * Get the ip address attribute.
+     *
+     * @param $ip
+     * @return string
+     */
+    public function getIpAddressAttribute($ip)
+    {
+        return inet_ntop($ip);
+    }
 
 }

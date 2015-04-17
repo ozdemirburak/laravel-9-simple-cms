@@ -11,9 +11,12 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $listen = [
-		'event.name' => [
-			'EventListener',
+		'auth.login' => [
+			'App\Handlers\Events\LoginEventHandler',
 		],
+        'auth.logout' => [
+            'App\Handlers\Events\LogoutEventHandler',
+        ],
 	];
 
 	/**
@@ -25,8 +28,6 @@ class EventServiceProvider extends ServiceProvider {
 	public function boot(DispatcherContract $events)
 	{
 		parent::boot($events);
-
-		//
 	}
 
 }
