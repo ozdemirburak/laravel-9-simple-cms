@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\User;
 use App\Http\Requests\UserRequest;
 use Datatable;
@@ -73,7 +72,7 @@ class UserController extends Controller {
     public function edit(User $user, FormBuilder $formBuilder)
     {
         $form = $formBuilder->create('App\Forms\UsersForm', [
-            'method' => 'PUT',
+            'method' => 'PATCH',
             'url' => route('admin.user.update', ['id' => $user->id]),
             'model' => $user
         ]);

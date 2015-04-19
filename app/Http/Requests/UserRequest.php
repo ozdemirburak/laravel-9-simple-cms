@@ -24,7 +24,7 @@ class UserRequest extends Request {
     {
         return [
             'name' => 'required|min:3',
-            'email'	=> 'required|min:7|unique:users,email,'.$this->segment(3),
+            'email'	=> 'required|email|min:7|unique:users,email,'.$this->segment(3),
             'password' => 'required|confirmed|min:6|max:20',
             'picture' => 'sometimes|max:2048|image'
         ];

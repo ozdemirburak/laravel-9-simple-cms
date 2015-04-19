@@ -40,7 +40,7 @@ return [
             "all"                   => "All Users",
             "add"                   => "Add a User"
         ],
-        "settings"                  => "Settings"
+        "setting"                   => "Settings"
     ],
     // Operations
     "ops" => [
@@ -88,6 +88,17 @@ return [
             "logged_out_at"         => "Logout At",
             "ip_address"            => "IP"
         ],
+        "setting" => [
+            "email"                 => "Email",
+            "facebook"              => "Facebook",
+            "twitter"               => "Twitter",
+            "logo"                  => "Logo",
+            "status" => [
+                "title"             => "Maintenance Mode",
+                "down"              => "Active",
+                "up"                => "Not Active"
+            ]
+        ],
         "save"                      => "Save",
         "reset"                     => "Reset",
         "uploaded"                  => "Uploaded file :"
@@ -118,7 +129,9 @@ return [
         "create"                    => "Create language",
         "show"                      => "Show language"
     ],
-    "settings"                      => "Settings",
+    "setting" => [
+        "index"                     => "Settings"
+    ],
     // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
     "datatables" => [
         "sProcessing"               => "Processing...",

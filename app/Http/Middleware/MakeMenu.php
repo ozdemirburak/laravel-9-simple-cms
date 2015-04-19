@@ -87,7 +87,7 @@ class MakeMenu {
                 ->icon('circle-o')
                 ->prependIcon();
 
-            $settings = $menu->add(trans('admin.menu.settings'), ['route' => 'admin.settings'])
+            $settings = $menu->add(trans('admin.menu.setting'), ['route' => 'admin.setting.index'])
                 ->icon('gears')
                 ->prependIcon();
         });

@@ -40,7 +40,7 @@ return [
             "all"                   => "Tüm Kullanıcılar",
             "add"                   => "Kullanıcı Ekle"
         ],
-        "settings"                  => "Ayarlar"
+        "setting"                   => "Ayarlar"
     ],
     // Operations
     "ops" => [
@@ -88,6 +88,17 @@ return [
             "logged_out_at"         => "Son Çıkış",
             "ip_address"            => "IP"
         ],
+        "setting" => [
+            "email"                 => "Email",
+            "facebook"              => "Facebook",
+            "twitter"               => "Twitter",
+            "logo"                  => "Logo",
+            "status" => [
+                "title"             => "Bakım Modu",
+                "down"              => "Aktif",
+                "up"                => "Aktif Değil"
+            ]
+        ],
         "save"                      => "Kaydet",
         "reset"                     => "Reset",
         "uploaded"                  => "Yüklenmiş Dosya :"
@@ -118,7 +129,9 @@ return [
         "create"                    => "Dil oluştur",
         "show"                      => "Dil göster"
     ],
-    "settings"                      => "Ayarlar",
+    "setting" => [
+        "index"                     => "Ayarlar"
+    ],
     // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
     "datatables" => [
         "sProcessing"               => "İşleniyor...",

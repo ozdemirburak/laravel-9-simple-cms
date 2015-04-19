@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\LanguageRequest;
 use App\Language;
 use Laracasts\Flash\Flash;
@@ -75,7 +74,7 @@ class LanguageController extends Controller {
     public function edit(Language $language, FormBuilder $formBuilder)
     {
         $form = $formBuilder->create('App\Forms\LanguagesForm', [
-            'method' => 'PUT',
+            'method' => 'PATCH',
             'url' => route('admin.language.update', ['id' => $language->id]),
             'model' => $language
         ]);
