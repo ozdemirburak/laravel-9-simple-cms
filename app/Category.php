@@ -7,15 +7,15 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 /**
  * App\Category
  *
- * @property integer $id 
- * @property integer $language_id 
- * @property string $title 
- * @property string $slug 
- * @property string $description 
- * @property string $color 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \App\Language $language 
+ * @property integer $id
+ * @property integer $language_id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property string $color
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Language $language
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereLanguageId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereTitle($value)

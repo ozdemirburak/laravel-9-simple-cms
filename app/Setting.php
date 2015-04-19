@@ -5,15 +5,15 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Setting
  *
- * @property integer $id 
- * @property string $logo 
- * @property string $email 
- * @property string $facebook 
- * @property string $twitter 
- * @property boolean $status 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \App\Language $language 
+ * @property integer $id
+ * @property string $logo
+ * @property string $email
+ * @property string $facebook
+ * @property string $twitter
+ * @property boolean $status
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Language $language
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereLogo($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereEmail($value)

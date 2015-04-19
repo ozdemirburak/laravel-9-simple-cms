@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\ArticleRequest;
 use App\Article;
 use App\Category;
@@ -74,7 +73,7 @@ class ArticleController extends Controller {
     {
         $categories = Category::lists('title', 'id');
         $form = $formBuilder->create('App\Forms\ArticlesForm', [
-            'method' => 'PUT',
+            'method' => 'PATCH',
             'url' => route('admin.article.update', ['id' => $article->id]),
             'model' => $article
         ], $categories);

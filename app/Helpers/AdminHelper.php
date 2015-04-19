@@ -78,11 +78,14 @@ if ( ! function_exists('header_title'))
         if( strpos($route, 'index')  !== false )
         {
             $new = substr($route, 0, strrpos($route, '.') + 1) . 'create';
-            $title .= '<small>';
-            $title .= '<a href="'.route($new).'" title="'.trans($new).'">';
-            $title .= '<i class="fa fa-plus"></i>';
-            $title .= '</a>';
-            $title .= '</small>';
+            if(Route::has($new))
+            {
+                $title .= '<small>';
+                $title .= '<a href="'.route($new).'" title="'.trans($new).'">';
+                $title .= '<i class="fa fa-plus"></i>';
+                $title .= '</a>';
+                $title .= '</small>';
+            }
         }
         $title .= '</h1>';
         return $title;

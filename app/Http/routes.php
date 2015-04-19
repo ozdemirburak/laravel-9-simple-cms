@@ -3,12 +3,10 @@
 // Application routes
 Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
 
-
 // TODO: Change implicit routing
 Route::controllers([
     'password' => 'Auth\PasswordController'
 ]);
-
 
 // Auth routes
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
@@ -34,7 +32,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
         Route::resource('article', 'ArticleController');
         Route::resource('category', 'CategoryController');
         Route::resource('page', 'PageController');
-        Route::get('settings', ['as' => 'admin.settings', 'uses' => 'SettingController@index']);
+        Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
+        Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
     });
 });
 

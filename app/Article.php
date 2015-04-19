@@ -8,17 +8,17 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 /**
  * App\Article
  *
- * @property integer $id 
- * @property integer $category_id 
- * @property string $title 
- * @property string $slug 
- * @property string $content 
- * @property string $published_at 
- * @property string $description 
- * @property integer $read 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \App\Category $category 
+ * @property integer $id
+ * @property integer $category_id
+ * @property string $title
+ * @property string $slug
+ * @property string $content
+ * @property string $published_at
+ * @property string $description
+ * @property integer $read
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Category $category
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereCategoryId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereTitle($value)
@@ -29,6 +29,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereRead($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
+ * @method static \App\Article published()
  */
 class Article extends Model implements SluggableInterface{
 

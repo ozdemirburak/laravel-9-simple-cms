@@ -5,21 +5,21 @@ use Baum\Node;
 /**
  * App\Page
  *
- * @property integer $id 
- * @property integer $language_id 
- * @property integer $parent_id 
- * @property integer $lft 
- * @property integer $rgt 
- * @property integer $depth 
- * @property string $title 
- * @property string $slug 
- * @property string $content 
- * @property string $description 
- * @property \Carbon\Carbon $created_at 
- * @property \Carbon\Carbon $updated_at 
- * @property-read \App\Language $language 
- * @property-read App\Page $parent 
- * @property-read \Illuminate\Database\Eloquent\Collection|App\Page[] $children 
+ * @property integer $id
+ * @property integer $language_id
+ * @property integer $parent_id
+ * @property integer $lft
+ * @property integer $rgt
+ * @property integer $depth
+ * @property string $title
+ * @property string $slug
+ * @property string $content
+ * @property string $description
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Language $language
+ * @property-read App\Page $parent
+ * @property-read \Illuminate\Database\Eloquent\Collection|App\Page[] $children
  * @method static \Illuminate\Database\Query\Builder|\App\Page whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Page whereLanguageId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Page whereParentId($value)

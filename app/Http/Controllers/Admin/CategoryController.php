@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\CategoryRequest;
 use App\Category;
 use App\Language;
@@ -74,7 +73,7 @@ class CategoryController extends Controller {
     {
         $languages = Language::lists('title', 'id');
         $form = $formBuilder->create('App\Forms\CategoriesForm', [
-            'method' => 'PUT',
+            'method' => 'PATCH',
             'url' => route('admin.category.update', ['id' => $category->id]),
             'model' => $category
         ], $languages);
