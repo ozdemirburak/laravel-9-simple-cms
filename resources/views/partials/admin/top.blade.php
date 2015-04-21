@@ -16,12 +16,6 @@
                             <img class="img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
                             <p>{{ Auth::user()->name  }}</p>
                             @include('partials.admin.languages', ['languages' => Config::get('languages') ])
-                            <!--
-                            <p><small>{{ trans('admin.last_login') }}</small></p>
-                            <!-- TODO: ADD USER LAST LOGIN -->
-                            <!--
-                            <small>date("d-m-Y ~ H:i:s", $current_user->last_login)</small>
-                            -->
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">

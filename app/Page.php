@@ -1,6 +1,8 @@
 <?php namespace App;
 
 use Baum\Node;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 /**
  * App\Page
@@ -37,11 +39,39 @@ use Baum\Node;
  * @method static \Baum\Node withoutRoot()
  * @method static \Baum\Node limitDepth($limit)
  */
-class Page extends Node {
+class Page extends Node implements SluggableInterface{
 
+    use SluggableTrait;
+
+    protected $fillable = ['title', 'description', 'content', 'language_id'];
+
+    /**
+     * Create slug from title using 3rd party trait
+     *
+     * @var array
+     */
+    protected $sluggable = array(
+        'build_from' => 'title',
+        'save_to'    => 'slug',
+        'on_update'  => true
+    );
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function language()
     {
         return $this->belongsTo('App\Language');
+    }
+
+    /**
+     * Purify the content
+     *
+     * @param $content
+     */
+    public function setContentAttribute($content)
+    {
+        $this->attributes['content'] = clean($content,'youtube');
     }
 
 }

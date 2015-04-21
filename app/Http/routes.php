@@ -26,12 +26,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
     Route::get('language/table', ['as'=>'admin.language.table', 'uses'=>'LanguageController@getDatatable']);
     Route::group(['middleware' => 'auth'], function(){
         Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
-        Route::post('change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
         Route::resource('language', 'LanguageController');
+        Route::post('language/change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
         Route::resource('user', 'UserController');
         Route::resource('article', 'ArticleController');
         Route::resource('category', 'CategoryController');
         Route::resource('page', 'PageController');
+        Route::post('page/order', ['as' => 'admin.page.order' , 'uses' => 'PageController@postOrder']);
         Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
         Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
     });

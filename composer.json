@@ -6,7 +6,6 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.0.*",
-		"doctrine/dbal": "~2.5",
         "laravelcollective/html": "~5.0",
         "baum/baum": "~1.1",
         "chumper/datatable": "dev-develop",
@@ -20,6 +19,7 @@
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
+        "doctrine/dbal": "~2.5",
         "squizlabs/php_codesniffer": "~1.5",
 		"laracasts/generators": "~1.1",
         "laracasts/testdummy": "~2.0",
