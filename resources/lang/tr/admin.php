@@ -12,6 +12,7 @@ return [
     "last_login"                    => "Son Oturum Başlangıcı",
     "profile"                       => "Profil",
     "elfinder"                      => "Dosya Yoneticisi",
+    "empty"                         => "Kaydedilmiş herhangi bir içerik bulunamadı. Yeni bir içerik eklemeyi deneyebilirsiniz?",
     // Menu
     "menu" => [
         "dashboard"                 => "Dashboard",
@@ -66,6 +67,12 @@ return [
             "site_description"      => "Site Tanımı",
             "flag"                  => "Bayrak"
         ],
+        "page" => [
+            "title"                 => "Başlık",
+            "description"           => "Tanımı",
+            "language_id"           => "Dil",
+            "content"               => "İçeriği",
+        ],
         "category" => [
             "title"                 => "Başlık",
             "description"           => "Tanımı",
@@ -105,17 +112,17 @@ return [
     ],
     // Titles of the pages, naming is made with each routes' name
     "root"                          => "Dashboard",
-    "user" => [
-        "index"                     => "Kullanıcılar",
-        "edit"                      => "Kullanıcı düzenle",
-        "create"                    => "Kullanıcı oluştur",
-        "show"                      => "Kullanıcı göster"
+    "language" => [
+        "index"                     => "Diller",
+        "edit"                      => "Dil düzenle",
+        "create"                    => "Dil oluştur",
+        "show"                      => "Dil göster"
     ],
-    "article" => [
-        "index"                     => "Makaleler",
-        "edit"                      => "Makale düzenle",
-        "create"                    => "Makale oluştur",
-        "show"                      => "Makale göster"
+    "page" => [
+        "index"                     => "Sayfalar",
+        "edit"                      => "Sayfa düzenle",
+        "create"                    => "Sayfa oluştur",
+        "show"                      => "Sayfa göster"
     ],
     "category" => [
         "index"                     => "Kategoriler",
@@ -123,11 +130,17 @@ return [
         "create"                    => "Kategori oluştur",
         "show"                      => "Kategori göster"
     ],
-    "language" => [
-        "index"                     => "Diller",
-        "edit"                      => "Dil düzenle",
-        "create"                    => "Dil oluştur",
-        "show"                      => "Dil göster"
+    "article" => [
+        "index"                     => "Makaleler",
+        "edit"                      => "Makale düzenle",
+        "create"                    => "Makale oluştur",
+        "show"                      => "Makale göster"
+    ],
+    "user" => [
+        "index"                     => "Kullanıcılar",
+        "edit"                      => "Kullanıcı düzenle",
+        "create"                    => "Kullanıcı oluştur",
+        "show"                      => "Kullanıcı göster"
     ],
     "setting" => [
         "index"                     => "Ayarlar"

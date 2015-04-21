@@ -12,6 +12,7 @@ return [
     "last_login"                    => "Last Login",
     "profile"                       => "Profile",
     "elfinder"                      => "File Manager",
+    "empty"                         => "There are not any saved records yet. Why don't you create a new one first?",
     // Menu
     "menu" => [
         "dashboard"                 => "Dashboard",
@@ -66,6 +67,12 @@ return [
             "site_description"      => "Site Description",
             "flag"                  => "Flag"
         ],
+        "page" => [
+            "title"                 => "Title",
+            "description"           => "Description",
+            "language_id"           => "Language",
+            "content"               => "Content",
+        ],
         "category" => [
             "title"                 => "Title",
             "description"           => "Description",
@@ -105,17 +112,17 @@ return [
     ],
     // Titles of the pages, naming is made with each routes' name
     "root"                          => "Dashboard",
-    "user" => [
-        "index"                     => "Users",
-        "edit"                      => "Edit user",
-        "create"                    => "Create user",
-        "show"                      => "Show user"
+    "language" => [
+        "index"                     => "Languages",
+        "edit"                      => "Edit language",
+        "create"                    => "Create language",
+        "show"                      => "Show language"
     ],
-    "article" => [
-        "index"                     => "Articles",
-        "edit"                      => "Edit article",
-        "create"                    => "Create article",
-        "show"                      => "Show article"
+    "page" => [
+        "index"                     => "Pages",
+        "edit"                      => "Edit page",
+        "create"                    => "Create page",
+        "show"                      => "Show page"
     ],
     "category" => [
         "index"                     => "Categories",
@@ -123,11 +130,17 @@ return [
         "create"                    => "Create category",
         "show"                      => "Show category"
     ],
-    "language" => [
-        "index"                     => "Languages",
-        "edit"                      => "Edit language",
-        "create"                    => "Create language",
-        "show"                      => "Show language"
+    "article" => [
+        "index"                     => "Articles",
+        "edit"                      => "Edit article",
+        "create"                    => "Create article",
+        "show"                      => "Show article"
+    ],
+    "user" => [
+        "index"                     => "Users",
+        "edit"                      => "Edit user",
+        "create"                    => "Create user",
+        "show"                      => "Show user"
     ],
     "setting" => [
         "index"                     => "Settings"

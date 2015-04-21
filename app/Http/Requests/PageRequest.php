@@ -21,9 +21,12 @@ class PageRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+        return [
+            'language_id' => 'required|integer',
+            'title' => 'required|min:3',
+            'description' => 'required|max:160',
+            'content' => 'required'
+        ];
 	}
 
 }

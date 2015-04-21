@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "jquery": "~1.11.2",
+    "nestable2" : "~1.2.3",
     "admin-lte": "~2.0.5",
     "font-awesome": "~4.3.0",
     "datatables": "~1.9",

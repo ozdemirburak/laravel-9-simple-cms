@@ -10,6 +10,7 @@ var adminLess  = [
 
 var adminCss = [
     'bootstrap/dist/css/bootstrap.min.css',
+    'nestable2/jquery.nestable.css',
     'admin.css',
     'select2/select2.css',
     'select2-bootstrap-css/select2-bootstrap.css',
@@ -20,6 +21,7 @@ var adminCss = [
 
 var adminJs = [
     'jquery/dist/jquery.min.js',
+    'nestable2/jquery.nestable.js',
     'bootstrap/dist/js/bootstrap.min.js',
     'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',

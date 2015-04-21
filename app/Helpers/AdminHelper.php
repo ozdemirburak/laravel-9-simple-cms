@@ -3,27 +3,40 @@
 if( ! function_exists('get_ops'))
 {
     /**
-     * Returns resource operations for the datatable
+     * Returns resource operations for the datatables or nested sets
      *
      * @param $resource
      * @param $id
+     * @param $class
      * @return string
      */
-    function get_ops($resource, $id)
+    function get_ops($resource, $id, $class="btn")
     {
+        if($class=="btn")
+        {
+            $show_class = "btn btn-xs bg-navy";
+            $edit_class = "btn btn-xs bg-olive";
+            $delete_class = "btn btn-xs btn-danger destroy";
+        }
+        else
+        {
+            $show_class = "inline-show";
+            $edit_class = "inline-edit";
+            $delete_class = "inline-delete";
+        }
         $show_path = route('admin.'.$resource.'.show', ['id' => $id]);
         $edit_path = route('admin.'.$resource.'.edit', ['id' => $id]);
         $delete_path = route('admin.'.$resource.'.destroy', ['id' => $id]);
         $ops  = '<ul class="list-inline no-margin-bottom">';
         $ops .=  '<li>';
-        $ops .=  '<a class="btn btn-xs bg-navy" href="'.$show_path.'"><i class="fa fa-search"></i> '.trans('admin.ops.show').'</a>';
+        $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'"><i class="fa fa-search"></i> '.trans('admin.ops.show').'</a>';
         $ops .=  '</li>';
         $ops .=  '<li>';
-        $ops .=  '<a class="btn btn-xs bg-olive" href="'.$edit_path.'"><i class="fa fa-pencil-square-o"></i> '.trans('admin.ops.edit').'</a>';
+        $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'"><i class="fa fa-pencil-square-o"></i> '.trans('admin.ops.edit').'</a>';
         $ops .=  '</li>';
         $ops .=  '<li>';
         $ops .= Form::open(['method' => 'DELETE', 'url' => $delete_path]);
-        $ops .= Form::submit('&#xf1f8; ' .trans('admin.ops.delete'), ['onclick' => "return confirm('".trans('admin.ops.confirmation')."');", 'class'=>'btn btn-xs btn-danger destroy']);
+        $ops .= Form::submit('&#xf1f8; ' .trans('admin.ops.delete'), ['onclick' => "return confirm('".trans('admin.ops.confirmation')."');", 'class' => $delete_class]);
         $ops .= Form::close();
         $ops .=  '</li>';
         $ops .=  '</ul>';
@@ -108,5 +121,40 @@ if ( ! function_exists('rename_file'))
         $filename = str_slug($filename, "-");
         $filename = '/' . $filename . '_' . str_random(32) .  '.' . $mime;
         return $filename;
+    }
+}
+
+if( ! function_exists('renderNode')) {
+    /**
+     * Render nodes for nested sets
+     *
+     * @param $node
+     * @param $resource
+     * @return string
+     */
+    function renderNode($node, $resource)
+    {
+        $id = 'data-id="' . $node->id .'"';
+        $list = 'class="dd-list"';
+        $class = 'class="dd-item"';
+        $handle = 'class="dd-handle"';
+        $title  = '<span class="ol-buttons"> ' . get_ops($resource, $node->id, 'inline') . '</span>';
+        $title  .= '<div '.$handle.'>' . $node->title . '</div>';
+        if ($node->isLeaf())
+        {
+            return '<li '.$class.' '.$id.'>' . $title . '</li>';
+        }
+        else
+        {
+            $html = '<li '.$class.' '.$id.'>' . $title;
+            $html .= '<ol '.$list.'>';
+            foreach ($node->children as $child)
+            {
+                $html .= renderNode($child, $resource);
+            }
+            $html .= '</ol>';
+            $html .= '</li>';
+        }
+        return $html;
     }
 }
