@@ -14,7 +14,8 @@
         "caffeinated/menus": "~1.0@dev",
         "mews/purifier": "dev-master",
         "cviebrock/eloquent-sluggable" : ">=3.0.0-alpha",
-		"barryvdh/laravel-elfinder": "0.3.*"
+		"barryvdh/laravel-elfinder": "0.3.*",
+		"spatie/laravel-analytics": "~1.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

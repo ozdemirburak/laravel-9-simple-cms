@@ -54,12 +54,34 @@ return [
         "confirmation"              => "Are you sure?",
         "modified"                  => "Modified on"
     ],
-    // Form Fields
+    // Fields
     "fields" => [
         "updated_at"                => "Updated at",
         "created_at"                => "Created at",
         "published_at"              => "Published at",
         "read"                      => "Read",
+        "dashboard" => [
+            'total_visits'          => "Total visits",
+            'unique_visits'         => "Unique visits",
+            'bounce_rate'           => "Bounce rate",
+            'average_time'          => "Average time",
+            'page_visits'           => "Average page visits",
+            'pages'                 => "Pages",
+            'keywords'              => "Keywords",
+            'entrance_pages'        => "Entrance",
+            'exit_pages'            => "Exit",
+            'time_pages'            => "Time",
+            'os'                    => "OS",
+            'browsers'              => "Browser",
+            'traffic_sources'       => "Source",
+            'visits'                => "Visits",
+            'visitors'              => "Visitors",
+            'world_visitors'        => "Visitor distribution: World",
+            'region_visitors'       => "Visitor distribution: Regions",
+            'chart_visitors'        => "Visitor",
+            'chart_region'          => "Region",
+            'chart_country'         => "Country"
+        ],
         "language" => [
             "title"                 => "Title",
             "code"                  => "Code",
