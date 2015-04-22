@@ -158,3 +158,39 @@ if( ! function_exists('renderNode')) {
         return $html;
     }
 }
+
+if( ! function_exists('formatMilliseconds'))
+{
+    function formatMilliseconds($seconds)
+    {
+        $hours = 0;
+        $milliseconds = str_replace( "0.", '', $seconds - floor( $seconds ) );
+        if ( $seconds > 3600 )
+        {
+            $hours = floor( $seconds / 3600 );
+        }
+        $seconds = $seconds % 3600;
+        return str_pad( $hours, 2, '0', STR_PAD_LEFT )
+        . gmdate( ':i:s', $seconds )
+        . ($milliseconds ? ".$milliseconds" : '');
+    }
+}
+
+if( ! function_exists('dashboard_box'))
+{
+    function dashboard_box($bg, $icon, $text, $number)
+    {
+        $str  = '<div class="col-md-3 col-sm-6 col-xs-12">';
+        $str .= '<div class="info-box">';
+        $str .= '<span class="info-box-icon '.$bg.'">';
+        $str .= '<i class="fa fa-'.$icon.'"></i>';
+        $str .= '</span>';
+        $str .= '<div class="info-box-content">';
+        $str .= '<span class="info-box-text">'. $text .'</span>';
+        $str .= '<span class="info-box-number">'. $number .'</span>';
+        $str .= '</div>';
+        $str .= '</div>';
+        $str .= '</div>';
+        return $str;
+    }
+}

@@ -54,12 +54,34 @@ return [
         "confirmation"              => "Emin misiniz?",
         "modified"                  => "Son Düzenlenme"
     ],
-    // Form Fields
+    // Fields
     "fields" => [
         "updated_at"                => "Güncelleme",
         "created_at"                => "Oluşturulma",
         "published_at"              => "Yayınlanma",
         "read"                      => "Okunma",
+        "dashboard" => [
+            'total_visits'          => "Toplam Ziyaretçi Sayısı",
+            'unique_visits'         => "Günlük Tekil Ziyaretçi Sayısı",
+            'bounce_rate'           => "Hemen Çıkma Oranı",
+            'average_time'          => "Ortalama Ziyaret Süresi",
+            'page_visits'           => "Ortalama Gezilen Sayfa",
+            'pages'                 => "Sayfalar",
+            'os'                    => "OS",
+            'keywords'              => "Kelimeler",
+            'entrance_pages'        => "Giriş",
+            'exit_pages'            => "Çıkış",
+            'time_pages'            => "Süre",
+            'browsers'              => "Tarayıcılar",
+            'traffic_sources'       => "Kaynaklar",
+            'visits'                => "Ziyaretler",
+            'visitors'              => "Ziyaretçiler",
+            'world_visitors'        => "Ziyaretçi Dağılımı: Dünya",
+            'region_visitors'       => "Ziyaretçi Dağılımı: Bölge",
+            'chart_visitors'        => "Ziyaretci",
+            'chart_region'          => "Bölge",
+            'chart_country'         => "Ülke",
+        ],
         "language" => [
             "title"                 => "Adı",
             "code"                  => "Kısa Kodu",

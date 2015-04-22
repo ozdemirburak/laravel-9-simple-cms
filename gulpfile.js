@@ -16,6 +16,7 @@ var adminCss = [
     'select2-bootstrap-css/select2-bootstrap.css',
     'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
     'datatables-bootstrap3/BS3/assets/css/datatables.css',
+    'morris.js/morris.css',
     'admin-lte/dist/css/skins/skin-blue.min.css'
 ];
 
@@ -28,6 +29,8 @@ var adminJs = [
     'datatables/media/js/jquery.dataTables.js',
     'datatables-bootstrap3/BS3/assets/js/datatables.js',
     'select2/select2.min.js',
+    'raphael/raphael.js',
+    'morris.js/morris.js',
     'admin-lte/dist/js/app.min.js'
 ];
 
