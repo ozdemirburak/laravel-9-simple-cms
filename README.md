@@ -8,7 +8,6 @@ On progress, coming soon..
 * [Requirements](#item2)
 * [Installation](#item3)
 * [License](#item4)
-* [Screenshots](#item5)
 -----
 <a name="item1"></a>
 ## Features:
@@ -23,10 +22,6 @@ On progress, coming soon..
 	* TinyMCE WYSIWYG editor with photo uploading features
 * Front-end
 	* View articles, categories, pages
-	
-* Packages included:
-	* Datatables Bundle
-
 -----
 <a name="item2"></a>
 ##Requirements
@@ -51,9 +46,5 @@ On progress, coming soon..
 -----
 <a name="item4"></a>
 ## License
-
 This is free software distributed under the terms of the MIT license
-
 -----
-<a name="item5"></a>
-## Screenshots
