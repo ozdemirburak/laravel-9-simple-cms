@@ -8,7 +8,6 @@ On progress, coming soon..
 * [Requirements](#item2)
 * [Installation](#item3)
 * [License](#item4)
------
 <a name="item1"></a>
 ##Features:
 * Admin Panel
@@ -21,6 +20,7 @@ On progress, coming soon..
 	* TinyMCE WYSIWYG editor with photo uploading features
 * Front-end
 	* View articles, categories, pages
+
 -----
 <a name="item2"></a>
 ##Requirements
