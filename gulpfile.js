@@ -34,19 +34,32 @@ var adminJs = [
     'admin-lte/dist/js/app.min.js'
 ];
 
+var applicationLess  = [
+    bowerDir + 'font-awesome/less'
+];
+
+var applicationCss = [
+    'bootstrap/dist/css/bootstrap.min.css',
+    'application.css',
+];
+
+var applicationJs = [
+    'jquery/dist/jquery.min.js',
+    'bootstrap/dist/js/bootstrap.min.js'
+];
+
 elixir(function(mix) {
     mix.less('admin.less', bowerDir, { paths: adminLess })
         .styles(adminCss, 'public/css/admin.css', bowerDir)
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
-        .version(['css/admin.css', 'js/admin.js'])
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
-        .copy('resources/assets/js/application.js', 'public/js/application-custom.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts', 'public/build/fonts')
-        .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img', 'public/build/img')
-        .copy(bowerDir + 'datatables/media/images/*.png', 'public/build/images')
-        .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img')
-        .copy(bowerDir + 'select2/*.png', 'public/css')
-    ;
+        //.copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img/bootstrap-colorpicker')
+    mix.less('application.less', bowerDir, { paths: applicationLess })
+        .styles(applicationCss, 'public/css/application.css', bowerDir)
+        .scripts(applicationJs, 'public/js/application.js', bowerDir)
+        .copy('resources/assets/js/application.js', 'public/js/application-custom.js');
+    mix.version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
 });

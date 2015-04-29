@@ -55,4 +55,12 @@ class Category extends Model implements SluggableInterface{
         return $this->belongsTo('App\Language');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
+
 }

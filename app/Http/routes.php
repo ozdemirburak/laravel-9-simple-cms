@@ -1,12 +1,13 @@
 <?php
 
 // Application routes
-Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
-
-// TODO: Change implicit routing
-Route::controllers([
-    'password' => 'Auth\PasswordController'
-]);
+Route::group(['namespace' => 'Application', 'middleware' => 'app'], function()
+{
+    Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
+    Route::get('article/{article}',  ['as' => 'article', 'uses' => 'ArticleController@index']);
+    Route::get('page/{page}',  ['as' => 'page', 'uses' => 'PageController@index']);
+    Route::get('category/{category}',  ['as' => 'category', 'uses' => 'CategoryController@index']);
+});
 
 // Auth routes
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
@@ -16,6 +17,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
     Route::post('login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
 });
+
+// Password routes
+Route::controllers([
+    'password' => 'Auth\PasswordController'
+]);
 
 // Admin routes
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
