@@ -3,15 +3,14 @@ Simple Laravel 5 content management system for starters.
 
 On progress, coming soon..
 
-## Table of Contents
+##Table of Contents
 * [Features](#item1)
 * [Requirements](#item2)
 * [Installation](#item3)
 * [License](#item4)
------
-<a name="item1"></a>
-## Features:
 
+<a name="item1"></a>
+##Features:
 * Admin Panel
     * Based on AdminLTE theme
     * Statistics fetched by Google Analytics API integrated dashboard
@@ -22,7 +21,7 @@ On progress, coming soon..
 	* TinyMCE WYSIWYG editor with photo uploading features
 * Front-end
 	* View articles, categories, pages
-	
+
 -----
 <a name="item2"></a>
 ##Requirements
