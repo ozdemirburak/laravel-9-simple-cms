@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Application;
 
+use App\Http\Controllers\Controller;
 use App\Article;
 
 class ArticleController extends Controller {

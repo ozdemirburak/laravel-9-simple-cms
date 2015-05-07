@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers\Application;
 
+use App\Http\Controllers\Controller;
+use App\Category;
+
 class CategoryController extends Controller {
 
     /**
@@ -10,7 +13,8 @@ class CategoryController extends Controller {
      */
     public function index(Category $category)
     {
-        return view('application.category.index', compact('category'));
+        $articles = $category->articles()->paginate(5);
+        return view('application.category.index', compact('articles', 'category'));
     }
 
 }

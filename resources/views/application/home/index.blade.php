@@ -1,5 +1,8 @@
 @extends('layouts.application')
 
+@section('title'){{ Config::get('language')->site_title }}@endsection
+@section('description'){{ Config::get('language')->site_description }}@endsection
+
 @section('content')
     @if(count($articles))
         @foreach($articles as $article)

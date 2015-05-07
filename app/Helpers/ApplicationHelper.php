@@ -16,7 +16,7 @@ if( ! function_exists('limit_to_numwords'))
         {
             array_pop($excerpt);
         }
-        $excerpt = implode(' ', $excerpt);
+        $excerpt = implode(' ', $excerpt) . ' ...';
         return $excerpt;
     }
 }
