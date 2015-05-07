@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
+use App\Page;
 
 class PageController extends Controller {
 
