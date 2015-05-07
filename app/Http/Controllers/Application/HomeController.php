@@ -15,7 +15,7 @@ class HomeController extends Controller {
 	public function index()
 	{
         $language = Session::get('language', Config::get('app.locale'));
-        $articles = Language::whereCode($language)->first()->articles()->paginate(5);
+        $articles = Language::whereCode($language)->first()->articles()->published()->orderBy('published_at','desc')->paginate(5);
         return view('application.home.index', compact('articles'));
 	}
 
