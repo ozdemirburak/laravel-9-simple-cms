@@ -22,8 +22,6 @@ class SetConfiguration {
      */
     public function handle($request, Closure $next)
     {
-        $language = Session::get('language', Config::get('app.locale'));
-        Config::set(['language' => Language::whereCode($language)->firstOrFail()]);
         Config::set(['settings' => Setting::firstOrFail()]);
         return $next($request);
     }

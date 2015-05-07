@@ -19,7 +19,7 @@ class MakeMenu {
         return $next($request);
     }
 
-    protected function makeAdminMenu()
+    private function makeAdminMenu()
     {
         Menu::make('admin', function($menu) {
             $dashboard = $menu->add(trans('admin.menu.dashboard'), ['route' => 'admin.root'])

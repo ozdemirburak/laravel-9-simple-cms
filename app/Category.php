@@ -24,6 +24,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereColor($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Article[] $articles 
  */
 class Category extends Model implements SluggableInterface{
 

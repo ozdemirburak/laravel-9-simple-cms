@@ -1,39 +1,16 @@
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- TODO: Fix Title -->
-            <a href="#" class="navbar-brand">Title</a>
-        </div>
-        <div class="collapse navbar-collapse" id="menu-collapse">
-            <ul class="nav navbar-nav">
-                @foreach($menu_application->roots() as $item)
-                    <li @if($item->hasChildren())class ="dropdown"@endif>
-                        @if($item->link) <a @if($item->hasChildren()) class="dropdown-toggle" data-toggle="dropdown" @endif href="{{ $item->url() }}">
-                            {{ $item->title }}
-                            @if($item->hasChildren()) <b class="caret"></b> @endif
-                        </a>
-                        @else
-                            {{$item->title}}
-                        @endif
-                        @if($item->hasChildren())
-                            <ul class="dropdown-menu">
-                                @foreach($item->children() as $child)
-                                    <li><a href="{{ $child->url() }}">{{ $child->title }}</a></li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </li>
-                    @if($item->divider)
-                        <li{{\HTML::attributes($item->divider)}}></li>
-                    @endif
-                @endforeach
-            </ul>
-        </div>
-    </div>
-</nav>
+<ul class="nav navbar-nav">
+    @foreach(Session::get('current_lang')->pages->toHierarchy() as $node)
+        {!! renderMenuNode($node) !!}
+    @endforeach
+</ul>
+<ul class="nav navbar-nav navbar-right">
+    @if(!empty(Config::get('settings')->facebook))
+        <li><a target="_blank" href="{{ Config::get('settings')->facebook }}"><i class="fa fa-facebook"></i></a></li>
+    @endif
+    @if(!empty(Config::get('settings')->twitter))
+        <li><a target="_blank" href="{{ Config::get('settings')->twitter }}"><i class="fa fa-twitter"></i></a></li>
+    @endif
+    @if(!empty(Config::get('settings')->email))
+        <li><a target="_blank" href="mailto:{{ Config::get('settings')->email }}"><i class="fa fa-envelope"></i></a></li>
+    @endif
+</ul>

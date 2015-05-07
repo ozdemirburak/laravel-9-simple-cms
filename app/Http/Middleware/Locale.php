@@ -27,8 +27,10 @@ class Locale {
     public function handle($request, Closure $next)
     {
         $language = Session::get('language', Config::get('app.locale'));
+        $current_lang = Language::whereCode($language)->firstOrFail();
         App::setLocale($language);
         Carbon::setLocale($language);
+        Session::set('current_lang', $current_lang);
         return $next($request);
     }
 

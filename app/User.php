@@ -25,10 +25,10 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @property string $logged_in_at 
- * @property string $logged_out_at 
- * @property mixed $ip_address 
- * @property string $picture 
+ * @property string $logged_in_at
+ * @property string $logged_out_at
+ * @property mixed $ip_address
+ * @property string $picture
  * @method static \Illuminate\Database\Query\Builder|\App\User whereLoggedInAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereLoggedOutAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIpAddress($value)
