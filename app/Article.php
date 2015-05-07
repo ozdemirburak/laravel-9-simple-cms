@@ -96,7 +96,7 @@ class Article extends Model implements SluggableInterface{
      */
     public function setContentAttribute($content)
     {
-        $this->attributes['content'] = clean($content,'youtube');
+        $this->attributes['content'] = clean($content, 'youtube');
     }
 
     /**
