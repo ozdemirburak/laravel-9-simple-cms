@@ -8,6 +8,7 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Http\Request;
+use Session;
 
 class PageController extends Controller {
 
@@ -18,7 +19,8 @@ class PageController extends Controller {
 	 */
 	public function index()
 	{
-        $pages = Page::all()->toHierarchy();
+        $language = Session::get('current_lang');
+        $pages = $language->pages->toHierarchy();
         return view('admin.pages.index', compact('pages'));
 	}
 

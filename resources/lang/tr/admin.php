@@ -121,12 +121,9 @@ return [
             "email"                 => "Email",
             "facebook"              => "Facebook",
             "twitter"               => "Twitter",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "disqus_shortname"      => "Disqus Shortname",
             "logo"                  => "Logo",
-            "status" => [
-                "title"             => "Bakım Modu",
-                "down"              => "Aktif",
-                "up"                => "Aktif Değil"
-            ]
         ],
         "save"                      => "Kaydet",
         "reset"                     => "Reset",

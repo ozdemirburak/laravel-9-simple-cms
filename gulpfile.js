@@ -40,12 +40,14 @@ var applicationLess  = [
 
 var applicationCss = [
     'bootstrap/dist/css/bootstrap.min.css',
+    'jquery-floating-social-share/dist/css/jquery.floating-social-share.min.css',
     'application.css',
 ];
 
 var applicationJs = [
     'jquery/dist/jquery.min.js',
-    'bootstrap/dist/js/bootstrap.min.js'
+    'jquery-floating-social-share/dist/js/jquery.floating-social-share.min.js',
+    'bootstrap/dist/js/bootstrap.min.js',
 ];
 
 elixir(function(mix) {
@@ -54,9 +56,9 @@ elixir(function(mix) {
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
-        .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
-        .copy(bowerDir + 'bootstrap/fonts', 'public/build/fonts')
-        //.copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img/bootstrap-colorpicker')
+        .copy(bowerDir + 'font-awesome/fonts/*', 'public/build/fonts')
+        .copy(bowerDir + 'bootstrap/fonts/*', 'public/build/fonts')
+        .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img/bootstrap-colorpicker')
     mix.less('application.less', bowerDir, { paths: applicationLess })
         .styles(applicationCss, 'public/css/application.css', bowerDir)
         .scripts(applicationJs, 'public/js/application.js', bowerDir)

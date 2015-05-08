@@ -49,6 +49,9 @@ class Language extends Model {
         return $this->hasMany('App\Page');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function articles()
     {
         return $this->hasManyThrough('App\Article', 'App\Category');

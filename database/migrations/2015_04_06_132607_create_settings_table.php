@@ -18,7 +18,8 @@ class CreateSettingsTable extends Migration {
             $table->string('email');
             $table->string('facebook');
             $table->string('twitter');
-            $table->tinyInteger('status');
+            $table->string('disqus_shortname');
+            $table->string('analytics_id');
             $table->timestamps();
         });
 	}

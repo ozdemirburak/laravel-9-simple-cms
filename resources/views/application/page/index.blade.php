@@ -15,7 +15,9 @@
                 {!! $page->content !!}
             </div>
             <footer class="post-footer">
-
+                @if(!empty(Config::get('settings')->disqus_shortname))
+                    <div id="disqus_thread" class="comments"></div>
+                @endif
             </footer>
         </article>
     @endif

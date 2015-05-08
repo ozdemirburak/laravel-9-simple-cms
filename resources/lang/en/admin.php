@@ -121,12 +121,9 @@ return [
             "email"                 => "Email",
             "facebook"              => "Facebook",
             "twitter"               => "Twitter",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "disqus_shortname"      => "Disqus Shortname",
             "logo"                  => "Logo",
-            "status" => [
-                "title"             => "Maintenance Mode",
-                "down"              => "Active",
-                "up"                => "Not Active"
-            ]
         ],
         "save"                      => "Save",
         "reset"                     => "Reset",
