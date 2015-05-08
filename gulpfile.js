@@ -58,7 +58,6 @@ elixir(function(mix) {
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'font-awesome/fonts/*', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts/*', 'public/build/fonts')
-        .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/bootstrap-colorpicker/*.png', 'public/build/img/bootstrap-colorpicker')
     mix.less('application.less', bowerDir, { paths: applicationLess })
         .styles(applicationCss, 'public/css/application.css', bowerDir)
         .scripts(applicationJs, 'public/js/application.js', bowerDir)

@@ -1,6 +1,6 @@
-@if(count(Session::get('current_lang')->pages))
-    <nav class="navbar navbar-default navbar-custom">
-        <div class="container">
+<nav class="navbar navbar-default navbar-custom">
+    <div class="container">
+        <div class="inside">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle</span>
@@ -14,5 +14,5 @@
                 @include('partials.menu.application')
             </div>
         </div>
-    </nav>
-@endif
+    </div>
+</nav>
