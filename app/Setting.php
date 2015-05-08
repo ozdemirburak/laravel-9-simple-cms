@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $facebook
  * @property string $twitter
- * @property boolean $status
+ * @property string $disqus_shortname
+ * @property string $analytics_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Language $language
@@ -19,7 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereEmail($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereFacebook($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereTwitter($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Setting whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Setting whereDisqusShortname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Setting whereAnalyticsId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereUpdatedAt($value)
  */
@@ -30,14 +32,6 @@ class Setting extends Model {
      *
      * @var array
      */
-    protected $fillable = ['logo', 'email', 'facebook', 'twitter', 'status'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function language()
-    {
-        return $this->belongsTo('App\Language');
-    }
+    protected $fillable = ['logo', 'email', 'facebook', 'twitter', 'analytics_id', 'disqus_shortname'];
 
 }

@@ -16,13 +16,15 @@ class SettingsForm extends Form
             ->add('twitter', 'text', [
                 'label' => trans('admin.fields.setting.twitter')
             ])
+            ->add('analytics_id', 'text', [
+                'label' => trans('admin.fields.setting.analytics_id')
+            ])
+            ->add('disqus_shortname', 'text', [
+                'label' => trans('admin.fields.setting.disqus_shortname')
+            ])
             ->add('logo', 'file', [
                 'label' => trans('admin.fields.setting.logo'),
                 'attr' => ['class' => '']
-            ])
-            ->add('status', 'choice', [
-                'label' => trans('admin.fields.setting.status.title'),
-                'choices' => ['0' => trans('admin.fields.setting.status.down'), '1' => trans('admin.fields.setting.status.up')]
             ])
             ->add('save', 'submit', [
                 'label' => trans('admin.fields.save'),

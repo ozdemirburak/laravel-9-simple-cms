@@ -22,6 +22,9 @@
                     <i class="fa fa-clock-o"></i>
                     {{ $article->published_at }}
                 </div>
+                @if(!empty(Config::get('settings')->disqus_shortname))
+                    <div id="disqus_thread" class="comments"></div>
+                @endif
             </footer>
         </article>
     @endif

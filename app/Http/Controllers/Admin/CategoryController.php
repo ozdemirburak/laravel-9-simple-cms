@@ -8,6 +8,7 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
+use Session;
 
 class CategoryController extends Controller {
 
@@ -131,7 +132,8 @@ class CategoryController extends Controller {
      */
     public function getDatatable()
     {
-        return Datatable::collection(Category::all())
+        $language = Session::get('current_lang');
+        return Datatable::collection($language->categories)
             ->showColumns('title')
             ->addColumn('updated_at', function($model)
             {
