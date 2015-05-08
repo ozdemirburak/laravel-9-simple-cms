@@ -1,8 +1,10 @@
-<ul class="nav navbar-nav">
-    @foreach(Session::get('current_lang')->pages->toHierarchy() as $node)
-        {!! renderMenuNode($node) !!}
-    @endforeach
-</ul>
+@if(count(Session::get('current_lang')->pages))
+    <ul class="nav navbar-nav">
+        @foreach(Session::get('current_lang')->pages->toHierarchy() as $node)
+            {!! renderMenuNode($node) !!}
+        @endforeach
+    </ul>
+@endif
 <ul class="nav navbar-nav navbar-right">
     @if(!empty(Config::get('settings')->facebook))
         <li><a target="_blank" href="{{ Config::get('settings')->facebook }}"><i class="fa fa-facebook"></i></a></li>
