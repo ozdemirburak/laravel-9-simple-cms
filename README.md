@@ -139,289 +139,303 @@ Lets assume we want to create a new resource for fruits where we'd like to manag
 
 This will create everything that we need to manage our Fruits. Then check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first. 
  
-    "fruit" => [
-        "root"                  => "Fruits",
-        "all"                   => "All Fruits",
-        "add"                   => "Add a Fruit"
-    ],
+```php
+"fruit" => [
+    "root"       => "Fruits",
+    "all"        => "All Fruits",
+    "add"        => "Add a Fruit"
+],
+ ``` 
  
 Then to the `fields` array, add the translations for the form that will be generated for it again.
  
- 
-    "fruit" => [
-        "title"                 => "Title",
-        "content"               => "Content",
-        "language_id"           => "Language"
-    ],
+```php
+"fruit" => [
+    "title"       => "Title",
+    "content"     => "Content",
+    "language_id" => "Language"
+],
+```  
 
 Finally for the breadcrumbs generation add the `fruit` translations like below.
 
-
-    "fruit" => [
-        "index"                     => "Fruits",
-        "edit"                      => "Edit fruit",
-        "create"                    => "Create fruit",
-        "show"                      => "Show fruit"
-    ],
-
+```php
+"fruit" => [
+    "index"        => "Fruits",
+    "edit"         => "Edit fruit",
+    "create"       => "Create fruit",
+    "show"         => "Show fruit"
+],
+```
 
 After finishing the language parts, check the Fruit model, which is located in `app` folder as `Fruit.php`. As we are using slugs, configure the model as below.
+```php
+<?php namespace App;
 
-    <?php namespace App;
+use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
     
-    use Illuminate\Database\Eloquent\Model;
-    use Cviebrock\EloquentSluggable\SluggableInterface;
-    use Cviebrock\EloquentSluggable\SluggableTrait;
+class Fruit extends Model implements SluggableInterface{
+
+    use SluggableTrait;
     
-    class Fruit extends Model implements SluggableInterface{
+    protected $sluggable = array(
+        'build_from' => 'title',
+        'save_to'    => 'slug',
+        'on_update'  => true
+    );
     
-        use SluggableTrait;
-    
-        protected $sluggable = array(
-            'build_from' => 'title',
-            'save_to'    => 'slug',
-            'on_update'  => true
-        );
-    
-        protected $fillable = ['title', 'content', 'language_id'];
-    
-        public function language()
-        {
-            return $this->belongsTo('App\Language');
-        }
-    
+    protected $fillable = ['title', 'content', 'language_id'];
+
+    public function language()
+    {
+        return $this->belongsTo('App\Language');
     }
+    
+}
+```
 
 Then configure the controller `FruitController.php` file located in Controllers folder's Admin subfolder as below:
 
-    <?php namespace App\Http\Controllers\Admin;
-    
-    use App\Http\Requests;
-    use App\Http\Controllers\Controller;
-    use App\Http\Requests\FruitRequest;
-    use App\Fruit;
-    use App\Language;
-    use Laracasts\Flash\Flash;
-    use Kris\LaravelFormBuilder\FormBuilder;
-    use Datatable;
-    use Session;
-    
-    class FruitController extends Controller {
-    
-        public function index()
-        {
-            $table = $this->setDatatable();
-            return view('admin.fruits.index', compact('table'));
-        }
-    
-        public function create(FormBuilder $formBuilder)
-        {
-            $languages = Language::lists('title', 'id');
-            $form = $formBuilder->create('App\Forms\FruitsForm', [
-                'method' => 'POST',
-                'url' => route('admin.fruit.store')
-            ], $languages);
-            return view('admin.fruits.create', compact('form'));
-        }
-    
-        public function store(FruitRequest $request)
-        {
-            Fruit::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
-                Flash::error(trans('admin.create.fail'));
-            return redirect(route('admin.fruit.index'));
-        }
-    
-        public function show(Fruit $fruit)
-        {
-            return view('admin.fruits.show', compact('fruit'));
-        }
-    
-        public function edit(Fruit $fruit, FormBuilder $formBuilder)
-        {
-            $languages = Language::lists('title', 'id');
-            $form = $formBuilder->create('App\Forms\FruitsForm', [
-                'method' => 'PATCH',
-                'url' => route('admin.fruit.update', ['id' => $fruit->id]),
-                'model' => $fruit
-            ], $languages);
-            return view('admin.fruits.edit', compact('form', 'fruit'));
-        }
-    
-        public function update(Fruit $fruit, FruitRequest $request)
-        {
-            $fruit->fill($request->all());
-            $fruit->save() == true ? Flash::success(trans('admin.update.success')) :
-                Flash::error(trans('admin.update.fail'));
-            return redirect(route('admin.fruit.index'));
-        }
-    
-        public function destroy(Fruit $fruit)
-        {
-            $fruit->delete() == true ? Flash::success(trans('admin.delete.success')) :
-                Flash::error(trans('admin.delete.fail'));
-            return redirect(route('admin.fruit.index'));
-        }
-    
-        private function setDatatable()
-        {
-            return Datatable::table()
-                ->addColumn(trans('admin.fields.fruit.title'), trans('admin.fields.updated_at'))
-                ->addColumn(trans('admin.ops.name'))
-                ->setUrl(route('admin.fruit.table'))
-                ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
-                ->render();
-        }
-    
-        public function getDatatable()
-        {
-            $language = Session::get('current_lang');
-            return Datatable::collection($language->fruits)
-                ->showColumns('title')
-                ->addColumn('updated_at', function($model)
-                {
-                    return $model->updated_at->diffForHumans();
-                })
-                ->addColumn('',function($model)
-                {
-                    return get_ops('fruit', $model->id);
-                })
-                ->searchColumns('title')
-                ->orderColumns('title')
-                ->make();
-        }
-    
-    }
+```php
+<?php namespace App\Http\Controllers\Admin;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\FruitRequest;
+use App\Fruit;
+use App\Language;
+use Laracasts\Flash\Flash;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Datatable;
+use Session;
 
+class FruitController extends Controller {
+    
+    public function index()
+    {
+        $table = $this->setDatatable();
+        return view('admin.fruits.index', compact('table'));
+    }
+    
+    public function create(FormBuilder $formBuilder)
+    {
+        $languages = Language::lists('title', 'id');
+        $form = $formBuilder->create('App\Forms\FruitsForm', [
+            'method' => 'POST',
+            'url' => route('admin.fruit.store')
+        ], $languages);
+        return view('admin.fruits.create', compact('form'));
+    }
+    
+    public function store(FruitRequest $request)
+    {
+        Fruit::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
+            Flash::error(trans('admin.create.fail'));
+        return redirect(route('admin.fruit.index'));
+    }
+    
+    public function show(Fruit $fruit)
+    {
+        return view('admin.fruits.show', compact('fruit'));
+    }
+    
+    public function edit(Fruit $fruit, FormBuilder $formBuilder)
+    {
+        $languages = Language::lists('title', 'id');
+        $form = $formBuilder->create('App\Forms\FruitsForm', [
+            'method' => 'PATCH',
+            'url' => route('admin.fruit.update', ['id' => $fruit->id]),
+            'model' => $fruit
+        ], $languages);
+        return view('admin.fruits.edit', compact('form', 'fruit'));
+    }
+    
+    public function update(Fruit $fruit, FruitRequest $request)
+    {
+        $fruit->fill($request->all());
+        $fruit->save() == true ? Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
+        return redirect(route('admin.fruit.index'));
+    }
+    
+    public function destroy(Fruit $fruit)
+    {
+        $fruit->delete() == true ? Flash::success(trans('admin.delete.success')) :
+            Flash::error(trans('admin.delete.fail'));
+        return redirect(route('admin.fruit.index'));
+    }
+        
+    private function setDatatable()
+    {
+        return Datatable::table()
+            ->addColumn(trans('admin.fields.fruit.title'), trans('admin.fields.updated_at'))
+            ->addColumn(trans('admin.ops.name'))
+            ->setUrl(route('admin.fruit.table'))
+            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->render();
+    }
+    
+    public function getDatatable()
+    {
+        $language = Session::get('current_lang');
+        return Datatable::collection($language->fruits)
+            ->showColumns('title')
+            ->addColumn('updated_at', function($model)
+            {
+                return $model->updated_at->diffForHumans();
+            })
+            ->addColumn('',function($model)
+            {
+                return get_ops('fruit', $model->id);
+            })
+            ->searchColumns('title')
+            ->orderColumns('title')
+            ->make();
+    }
+    
+}    
+```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
-    <?php namespace App\Http\Requests;
+```php
+<?php namespace App\Http\Requests;
+
+use App\Http\Requests\Request;
+
+class FruitRequest extends Request {
     
-    use App\Http\Requests\Request;
-    
-    class FruitRequest extends Request {
-    
-        public function authorize()
-        {
-            return true;
-        }
-    
-        public function rules()
-        {
-            return [
-                'title' => 'required|min:3',
-                'content' => 'required|max:160',
-                'language_id' => 'required|integer'
-            ];
-        }
-    
+    public function authorize()
+    {
+        return true;
     }
+    
+    public function rules()
+    {
+        return [
+            'title' => 'required|min:3',
+            'content' => 'required|max:160',
+            'language_id' => 'required|integer'
+        ];
+    }
+    
+}
+```
 
 Then open your `FruitsForm.php` file located in `app/Forms` folder and configure it.
 
-    <?php namespace App\Forms;
-    
-    use Kris\LaravelFormBuilder\Form;
-    
-    class FruitsForm extends Form
+```php
+<?php namespace App\Forms;
+
+use Kris\LaravelFormBuilder\Form;
+
+class FruitsForm extends Form
+{
+    public function buildForm()
     {
-        public function buildForm()
-        {
-            $this
-                ->add('language_id', 'choice', [
-                    'choices' => $this->data,
-                    'label' => trans('admin.fields.fruit.language_id')
-                ])
-                ->add('title', 'text', [
-                    'label' => trans('admin.fields.fruit.title')
-                ])
-                 ->add('content', 'textarea', [
-                    'label' => trans('admin.fields.fruit.content')
-                 ])
-                ->add('save', 'submit', [
-                    'label' => trans('admin.fields.save'),
-                    'attr' => ['class' => 'btn btn-primary']
-                ])
-                ->add('clear', 'reset', [
-                    'label' => trans('admin.fields.reset'),
-                    'attr' => ['class' => 'btn btn-warning']
-                ]);
-        }
+        $this
+            ->add('language_id', 'choice', [
+                'choices' => $this->data,
+                'label' => trans('admin.fields.fruit.language_id')
+            ])
+            ->add('title', 'text', [
+                'label' => trans('admin.fields.fruit.title')
+            ])
+            ->add('content', 'textarea', [
+                'label' => trans('admin.fields.fruit.content')
+            ])
+            ->add('save', 'submit', [
+                'label' => trans('admin.fields.save'),
+                'attr' => ['class' => 'btn btn-primary']
+            ])
+            ->add('clear', 'reset', [
+                'label' => trans('admin.fields.reset'),
+                'attr' => ['class' => 'btn btn-warning']
+            ]);
     }
+}
+```
 
 Finally, create the fruits folder within `resources/views/admin` and create the views.
  
- `create.blade.php` and `edit.blade.php` file as below:
+`create.blade.php` and `edit.blade.php` file as below:
 
-    @extends('layouts.admin')
+```php
+@extends('layouts.admin')
+@section('content')
+    {!! form($form) !!}
+    @include('partials.admin.tinymce')
+@endsection
+```    
     
-    @section('content')
-        {!! form($form) !!}
-        @include('partials.admin.tinymce')
-    @endsection
-    
-    
- `index.blade.php` file as below:
+`index.blade.php` file as below:
+
+```php 
+@extends('layouts.admin')
+@section('content')
+    {!! $table !!}
+@endsection
+```
+  
+`show.blade.php` file as below:
  
-    @extends('layouts.admin')
-    
-    @section('content')
-        {!! $table !!}
-    @endsection
-    
-    
- `show.blade.php` file as below:
- 
-    @extends('layouts.admin')
-    
-    @section('content')
-        <div class="col-xs-12 no-padding">
-            <div class="post-title pull-left">
-                <h1> {{ $fruit->title }} </h1>
-            </div>
+```php
+@extends('layouts.admin')
+@section('content')
+    <div class="col-xs-12 no-padding">
+        <div class="post-title pull-left">
+            <h1> {{ $fruit->title }} </h1>
         </div>
-        <p>
-            {!! $fruit->content !!}
-        </p>
-    @endsection
+    </div>
+    <p>{!! $fruit->content !!}</p>
+@endsection
+```
 
 Add the fruit routes, to `routes.php` file.
 
-    Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
-    {
+```php
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+    *
+    *
+    Route::get('fruit/table', ['as'=>'admin.fruit.table', 'uses'=>'FruitController@getDatatable']);
+    Route::group(['middleware' => 'auth'], function(){
         *
         *
-        Route::get('fruit/table', ['as'=>'admin.fruit.table', 'uses'=>'FruitController@getDatatable']);
-        Route::group(['middleware' => 'auth'], function(){
-            *
-            *
-            Route::resource('fruit', 'FruitController');
-            *
-            *
-        });
+        Route::resource('fruit', 'FruitController');
+        *
+        *
     });
+    
+});
+```
 
 Open the `RouteServiceProvider.php` file located in `Providers` folder and bind the fruit.
-        
-    $router->model('fruit', 'App\Fruit');
-    $router->bind('admin.fruit', function($id)
-    {
-        return \App\Fruit::findOrFail($id);
-    });
+
+```php
+$router->model('fruit', 'App\Fruit');
+$router->bind('admin.fruit', function($id)
+{
+    return \App\Fruit::findOrFail($id);
+});
+```
         
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
+  
+```php  
+$fruits = $menu->add(trans('admin.menu.fruit.root'), '#')
+    ->icon('apple')
+    ->prependIcon();
          
-    $fruits = $menu->add(trans('admin.menu.fruit.root'), '#')
-        ->icon('apple')
-        ->prependIcon();
+$fruits->add(trans('admin.menu.fruit.add'), ['route' => 'admin.fruit.create'])
+    ->icon('circle-o')
+    ->prependIcon();
          
-    $fruits->add(trans('admin.menu.fruit.add'), ['route' => 'admin.fruit.create'])
-        ->icon('circle-o')
-        ->prependIcon();
-         
-    $fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
-        ->icon('circle-o')
-        ->prependIcon();
-
+$fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
+    ->icon('circle-o')
+    ->prependIcon();
+```
+ 
 Now you have your fruit resource that can be manageable within your admin panel.
 
 -----
