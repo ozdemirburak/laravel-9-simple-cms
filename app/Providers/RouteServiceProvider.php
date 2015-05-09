@@ -40,7 +40,6 @@ class RouteServiceProvider extends ServiceProvider {
         $router->model('language', 'App\Language');
         $router->bind('admin.language', function($id)
         {
-            dd($id);
             return \App\Language::findOrFail($id);
         });
         // bind language
