@@ -10,7 +10,7 @@ Simple Laravel 5 content management system for starters.
 * [Installation Guide](#item4)
 * [User Guide](#item5)
 * [Screenshots](#item6)
-* [Screenshots](#item7)
+* [Türkçe](#item7)
 * [License](#item8)
 
 -----
