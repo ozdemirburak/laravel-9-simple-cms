@@ -157,6 +157,7 @@ return [
         'Cviebrock\EloquentSluggable\SluggableServiceProvider',
         'Barryvdh\Elfinder\ElfinderServiceProvider',
         'Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider',
+        'Fadion\Maneuver\ManeuverServiceProvider',
 	],
 
 	/*
