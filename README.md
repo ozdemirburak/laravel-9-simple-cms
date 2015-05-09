@@ -435,10 +435,11 @@ If you have set your FTP credentials within your `.env` file, then all you need 
 <a name="item6"></a>
 ## Screenshots
 
-![Index](http://i.imgur.com/P93hxFj.png)
+![Index](http://i.imgur.com/tWeEAtp.png)
 ![Single post](http://i.imgur.com/UzGG7jM.png)
+![Admin login](http://i.imgur.com/YCbW9hx.png)
 ![Admin dashboard](http://i.imgur.com/Tv9il5u.png)
-![Admin dashboard worldmap](http://i.imgur.com/X5accLx.png)
+![Admin dashboard worldmap](http://i.imgur.com/RqKodcK.png)
 ![Admin datatables](http://i.imgur.com/IxZggki.png)
 ![Admin nested sets](http://i.imgur.com/4bZA94c.png)
 ![Admin settings](http://i.imgur.com/gkFO9x4.png)
