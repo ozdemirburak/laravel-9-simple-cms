@@ -15,7 +15,7 @@
                         <li class="user-header">
                             <img class="img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
                             <p>{{ Auth::user()->name  }}</p>
-                            @include('partials.admin.languages', ['languages' => Config::get('languages') ])
+                            @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'admin.language.change' ])
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
