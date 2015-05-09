@@ -1,0 +1,6 @@
+.idea
+node_modules
+resources/assets/vendor
+_ide_helper.php
+.phpstorm.meta.php
+composer.lock
