@@ -169,6 +169,7 @@ Finally for the breadcrumbs generation add the `fruit` translations like below.
 ```
 
 After finishing the language parts, check the Fruit model, which is located in `app` folder as `Fruit.php`. As we are using slugs, configure the model as below.
+
 ```php
 <?php namespace App;
 
@@ -193,6 +194,15 @@ class Fruit extends Model implements SluggableInterface{
         return $this->belongsTo('App\Language');
     }
     
+}
+```
+
+Hence add the relation to Language model that references our fruits.
+
+```php
+public function fruits()
+{
+    return $this->hasMany('App\Fruit');
 }
 ```
 
