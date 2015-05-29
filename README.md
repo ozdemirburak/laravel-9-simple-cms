@@ -41,19 +41,24 @@ Simple Laravel 5 content management system for starters.
 
     git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY
     cd CUSTOM_DIRECTORY
-    composer install
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar install
     chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
     
-Create database, rename `.env.example` file to `.env` and configure it
+Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.env.example` file, located in your root dir, to `.env` and configure it
 
     php artisan key:generate
     php artisan migrate
     php artisan db:seed
+    sudo apt-get install nodejs
+    sudo apt-get install npm
+    sudo npm install --global gulp bower
+    sudo npm install
     bower install
     gulp --production
     php -S localhost:8000 -t public 
 
-Open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`.
+Open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing, then upon login, just hit <a href="http://localhost:8000/admin/user">http://localhost:8000/admin/user</a> to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
      
 -----
 <a name="item4"></a>
