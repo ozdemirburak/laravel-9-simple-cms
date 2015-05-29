@@ -81,15 +81,15 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 <a name="step2"></a>
 ### Step 2: Install Dependencies
 
-If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies run `composer install`. 
+If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`. Thus, as this application uses HTML Purifier, you need to change permissions for it. To do that, run `chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`. 
 
-To install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
+As this project relies on bower and gulp heavily, you need to install them. First, install node, `sudo apt-get install nodejs`, then install npm `sudo apt-get install npm` and install gulp and bower globally, `sudo npm install --global gulp bower`. Finally, to install Laravel project dependencies, run `sudo npm install`. 
+
+After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
  
-Finally, as this application uses HTML Purifier, you need to change permissions for it. To do that, run `chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`. 
-
 Rename your `.env.example` file as `.env` and change the variables as your own.
  
- inally, to generate a unique application key, run `php artisan key:generate`.
+Finally, to generate a unique application key, run `php artisan key:generate`.
 
 -----
 <a name="step3"></a>
