@@ -26,7 +26,6 @@ var adminJs = [
     'mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',
     'datatables/media/js/jquery.dataTables.js',
     'datatables-bootstrap3/BS3/assets/js/datatables.js',
-    //'raphael/raphael-min.js',
     'morris.js/morris.js',
     'admin-lte/dist/js/app.min.js'
 ];
@@ -52,6 +51,7 @@ elixir(function(mix) {
         .styles(adminCss, 'public/css/admin.css', bowerDir)
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
+        .copy('resources/assets/vendor/raphael/raphael-min.js', 'public/js/raphael.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'font-awesome/fonts/*', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts/*', 'public/build/fonts')

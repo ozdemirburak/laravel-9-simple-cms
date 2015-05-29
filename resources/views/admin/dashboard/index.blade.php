@@ -172,6 +172,7 @@
     </section>
 
 
+    <script src="{{ url('js/raphael.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script>
 
