@@ -459,9 +459,7 @@ Now you have your fruit resource that can be manageable within your admin panel.
 -----
 ### How to Deploy
 
-If you have set your FTP credentials within your `.env` file, then all you need is to turn your project into a git project. Then after you commit something, all you need to is call the `deploy` command as below.
-
-    php artisan deploy
+On progress
 
 -----
 <a name="item6"></a>
