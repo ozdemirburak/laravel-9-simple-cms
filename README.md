@@ -31,7 +31,7 @@ Simple Laravel 5 content management system for starters.
 -----
 <a name="item2"></a>
 ##Requirements
-	PHP >= 5.5.0
+	PHP >= 5.5.9
 	MCrypt PHP Extension
 	Database
 	

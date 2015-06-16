@@ -1,13 +1,13 @@
-<?php namespace App\Http\Middleware;
+<?php
+
+namespace App\Http\Middleware;
 
 use Closure;
-use Session;
-use App\Language;
 use Config;
 use App\Setting;
 
-class SetConfiguration {
-
+class SetConfiguration
+{
     public function __construct()
     {
         //

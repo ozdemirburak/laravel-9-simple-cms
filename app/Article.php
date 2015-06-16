@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
@@ -31,8 +33,8 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  * @method static \App\Article published()
  */
-class Article extends Model implements SluggableInterface{
-
+class Article extends Model implements SluggableInterface
+{
     use SluggableTrait;
 
     /**

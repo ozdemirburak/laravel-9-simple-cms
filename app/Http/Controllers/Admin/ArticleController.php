@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,8 +12,8 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
 use Session;
 
-class ArticleController extends Controller {
-
+class ArticleController extends Controller
+{
     /**
      * Display a listing of the articles.
      *
@@ -32,7 +34,7 @@ class ArticleController extends Controller {
     public function create(FormBuilder $formBuilder)
     {
         $language = Session::get('current_lang');
-        $categories = $language->categories->lists('title', 'id');
+        $categories = $language->categories->lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\ArticlesForm', [
             'method' => 'POST',
             'url' => route('admin.article.store')
@@ -74,7 +76,7 @@ class ArticleController extends Controller {
     public function edit(Article $article, FormBuilder $formBuilder)
     {
         $language = Session::get('current_lang');
-        $categories = $language->categories->lists('title', 'id');
+        $categories = $language->categories->lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\ArticlesForm', [
             'method' => 'PATCH',
             'url' => route('admin.article.update', ['id' => $article->id]),

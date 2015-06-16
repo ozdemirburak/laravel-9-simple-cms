@@ -1,32 +1,34 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "ozdemirburak/laravel-5-simple-cms",
+	"description": "Simple Laravel 5 content management system for starters.",
+	"keywords": ["framework", "laravel", "cms"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.*",
+        "php": ">=5.5.9",
+		"laravel/framework": "5.1.*",
         "laravelcollective/html": "~5.0",
         "baum/baum": "~1.1",
         "chumper/datatable": "dev-develop",
         "kris/laravel-form-builder": "~1.4",
         "laracasts/flash": "~1.3",
-        "caffeinated/menus": "~1.0@dev",
         "mews/purifier": "dev-master",
-        "cviebrock/eloquent-sluggable" : ">=3.0.0-alpha",
+        "cviebrock/eloquent-sluggable" : ">=3.0.0-beta",
 		"barryvdh/laravel-elfinder": "0.3.*",
-		"spatie/laravel-analytics": "~1.1"
+		"spatie/laravel-analytics": "~1.1",
+		"caffeinated/menus": "~2.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1",
         "doctrine/dbal": "~2.5",
         "squizlabs/php_codesniffer": "~1.5",
 		"laracasts/generators": "~1.1",
         "laracasts/testdummy": "~2.0",
         "barryvdh/laravel-ide-helper": "~2.0",
-        "barryvdh/laravel-debugbar": "~2.0",
-        "fadion/maneuver": "dev-l5"
+        "barryvdh/laravel-debugbar": "~2.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -46,16 +48,20 @@
 			"php artisan clear-compiled",
 			"php artisan optimize"
 		],
+        "pre-update-cmd": [
+          "php artisan clear-compiled"
+        ],
         "post-update-cmd": [
-          "php artisan clear-compiled",
           "php artisan optimize",
           "php artisan ide-helper:generate",
           "php artisan elfinder:publish"
         ],
-		"post-create-project-cmd": [
-			"php -r \"copy('.env.example', '.env');\"",
-			"php artisan key:generate"
-		]
+        "post-root-package-install": [
+          "php -r \"copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+          "php artisan key:generate"
+        ]
 	},
 	"config": {
 		"preferred-install": "dist"

@@ -3,8 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnsToUsersTable extends Migration {
-
+class AddColumnsToUsersTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *

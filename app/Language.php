@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,8 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereUpdatedAt($value)
  */
-class Language extends Model {
-
+class Language extends Model
+{
     /**
      * The attributes that are mass assignable.
      *

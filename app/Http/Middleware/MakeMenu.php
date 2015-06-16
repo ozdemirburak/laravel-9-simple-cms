@@ -1,11 +1,12 @@
-<?php namespace App\Http\Middleware;
+<?php
+
+namespace App\Http\Middleware;
 
 use Closure;
 use Menu;
 
-class MakeMenu {
-
-
+class MakeMenu
+{
     /**
      * Set menus in middleware as sessions are not stored already in service providers instead
      *

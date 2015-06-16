@@ -1,11 +1,16 @@
-<?php namespace App\Handlers\Events;
+<?php
 
-use Illuminate\Http\Request;
-use Carbon\Carbon;
+namespace App\Listeners;
+
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class LogoutEventHandler {
-
+class SetUserLogoutCredentials
+{
+    /**
+     * @var Request
+     */
     protected $request;
 
     /**

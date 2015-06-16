@@ -1,11 +1,13 @@
-<?php namespace App\Http\Controllers\Application;
+<?php
+
+namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
 use Session;
 use App;
 
-class HomeController extends Controller {
-
+class HomeController extends Controller
+{
 	/**
 	 * Show the application homepage to the user.
 	 *

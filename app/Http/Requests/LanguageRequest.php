@@ -1,10 +1,12 @@
-<?php namespace App\Http\Requests;
+<?php
+
+namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use App\Language;
 
-class LanguageRequest extends Request {
-
+class LanguageRequest extends Request
+{
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *

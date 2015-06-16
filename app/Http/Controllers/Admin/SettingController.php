@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -7,8 +9,8 @@ use App\Http\Requests\SettingRequest;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-class SettingController extends Controller {
-
+class SettingController extends Controller
+{
     /**
      * Show the form for editing the settings.
      *

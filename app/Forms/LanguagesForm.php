@@ -1,4 +1,6 @@
-<?php namespace App\Forms;
+<?php
+
+namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 

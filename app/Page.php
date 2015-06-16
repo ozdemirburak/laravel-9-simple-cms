@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use App\Language;
 use Baum\Node;
@@ -40,8 +42,8 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Baum\Node withoutRoot()
  * @method static \Baum\Node limitDepth($limit)
  */
-class Page extends Node implements SluggableInterface{
-
+class Page extends Node implements SluggableInterface
+{
     use SluggableTrait;
 
     protected $fillable = ['title', 'description', 'content', 'language_id'];

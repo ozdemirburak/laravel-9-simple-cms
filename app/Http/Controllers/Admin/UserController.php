@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -9,8 +11,8 @@ use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Auth;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
 	/**
 	 * Display a listing of the users.
 	 *

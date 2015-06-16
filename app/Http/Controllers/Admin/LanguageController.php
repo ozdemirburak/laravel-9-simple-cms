@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -11,8 +13,8 @@ use Session;
 use Input;
 use Redirect;
 
-class LanguageController extends Controller {
-
+class LanguageController extends Controller
+{
     /**
      * Display a listing of the languages.
      *
