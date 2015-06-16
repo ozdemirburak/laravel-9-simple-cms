@@ -47,7 +47,8 @@ var applicationJs = [
 ];
 
 elixir(function(mix) {
-    mix.less('admin.less', bowerDir, { paths: adminLess })
+    mix
+        .less('admin.less', bowerDir + 'admin.css', { paths: adminLess })
         .styles(adminCss, 'public/css/admin.css', bowerDir)
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
@@ -55,9 +56,9 @@ elixir(function(mix) {
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'font-awesome/fonts/*', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts/*', 'public/build/fonts')
-    mix.less('application.less', bowerDir, { paths: applicationLess })
+        .less('application.less', bowerDir + 'application.css', { paths: applicationLess })
         .styles(applicationCss, 'public/css/application.css', bowerDir)
         .scripts(applicationJs, 'public/js/application.js', bowerDir)
-        .copy('resources/assets/js/application.js', 'public/js/application-custom.js');
-    mix.version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
+        .copy('resources/assets/js/application.js', 'public/js/application-custom.js')
+        .version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
 });
