@@ -1,12 +1,14 @@
-<?php namespace App\Http\Controllers\Application;
+<?php
+
+namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
 use Session;
 use Input;
 use Redirect;
 
-class LanguageController extends Controller {
-
+class LanguageController extends Controller
+{
     /**
      * Set the application language
      *

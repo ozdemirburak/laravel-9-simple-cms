@@ -1,10 +1,12 @@
-<?php namespace App\Http\Controllers\Application;
+<?php
+
+namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
 use App\Page;
 
-class PageController extends Controller {
-
+class PageController extends Controller
+{
     /**
      * Show the page
      *

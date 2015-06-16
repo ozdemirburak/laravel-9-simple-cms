@@ -1,11 +1,12 @@
-<?php namespace App\Providers;
+<?php
 
-use App\Language;
+namespace App\Providers;
+
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider {
-
+class RouteServiceProvider extends ServiceProvider
+{
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -23,7 +24,6 @@ class RouteServiceProvider extends ServiceProvider {
      */
     public function boot(Router $router)
     {
-        parent::boot($router);
         // bind article
         $router->model('article',  'App\Article');
         $router->bind('admin.article', function($id)
@@ -60,6 +60,7 @@ class RouteServiceProvider extends ServiceProvider {
         {
             return \App\User::findOrFail($id);
         });
+        parent::boot($router);
     }
 
     /**

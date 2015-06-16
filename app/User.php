@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -34,8 +36,8 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIpAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePicture($value)
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
-
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+{
 	use Authenticatable, CanResetPassword;
 
 	/**

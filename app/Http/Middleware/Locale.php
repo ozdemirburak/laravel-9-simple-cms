@@ -1,4 +1,6 @@
-<?php namespace App\Http\Middleware;
+<?php
+
+namespace App\Http\Middleware;
 
 use Session;
 use App\Language;
@@ -7,8 +9,8 @@ use App;
 use Carbon\Carbon;
 use Config;
 
-class Locale {
-
+class Locale
+{
     /**
      * Store all languages in a config variable
      */

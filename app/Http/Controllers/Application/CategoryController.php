@@ -1,10 +1,12 @@
-<?php namespace App\Http\Controllers\Application;
+<?php
+
+namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
 use App\Category;
 
-class CategoryController extends Controller {
-
+class CategoryController extends Controller
+{
     /**
      * Show the category articles
      *

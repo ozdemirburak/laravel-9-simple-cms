@@ -1,4 +1,6 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,8 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereUpdatedAt($value)
  */
-class Setting extends Model {
-
+class Setting extends Model
+{
     /**
      * The attributes that are mass assignable.
      *

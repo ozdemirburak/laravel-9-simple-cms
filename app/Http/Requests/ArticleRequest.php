@@ -1,9 +1,11 @@
-<?php namespace App\Http\Requests;
+<?php
+
+namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ArticleRequest extends Request {
-
+class ArticleRequest extends Request
+{
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *

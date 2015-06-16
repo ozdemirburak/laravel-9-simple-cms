@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\Language;
 
-class LanguageTableSeeder extends Seeder {
+class LanguageTableSeeder extends Seeder
+{
 
     public function run()
     {

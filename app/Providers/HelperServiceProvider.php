@@ -1,9 +1,11 @@
-<?php namespace App\Providers;
+<?php
+
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class HelperServiceProvider extends ServiceProvider {
-
+class HelperServiceProvider extends ServiceProvider
+{
 	/**
 	 * Bootstrap the application services.
 	 *

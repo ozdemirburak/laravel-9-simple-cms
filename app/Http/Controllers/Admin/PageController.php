@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,8 +12,8 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Http\Request;
 use Session;
 
-class PageController extends Controller {
-
+class PageController extends Controller
+{
 	/**
 	 * Display a listing of the pages.
 	 *
@@ -32,7 +34,7 @@ class PageController extends Controller {
      */
     public function create(FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
+        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\PagesForm', [
             'method' => 'POST',
             'url' => route('admin.page.store')
@@ -73,7 +75,7 @@ class PageController extends Controller {
      */
     public function edit(Page $page, FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
+        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\PagesForm', [
             'method' => 'PATCH',
             'url' => route('admin.page.update', ['id' => $page->id]),

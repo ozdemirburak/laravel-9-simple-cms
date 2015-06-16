@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,8 +12,8 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
 use Session;
 
-class CategoryController extends Controller {
-
+class CategoryController extends Controller
+{
     /**
      * Display a listing of the categories.
      *
@@ -31,7 +33,7 @@ class CategoryController extends Controller {
      */
     public function create(FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
+        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\CategoriesForm', [
             'method' => 'POST',
             'url' => route('admin.category.store')
@@ -72,7 +74,7 @@ class CategoryController extends Controller {
      */
     public function edit(Category $category, FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
+        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\CategoriesForm', [
             'method' => 'PATCH',
             'url' => route('admin.category.update', ['id' => $category->id]),

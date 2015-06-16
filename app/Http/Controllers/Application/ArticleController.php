@@ -1,10 +1,14 @@
-<?php namespace App\Http\Controllers\Application;
+<?php
 
+namespace App\Http\Controllers\Application;
+
+use Event;
+use App\Events\ArticleWasViewed;
 use App\Http\Controllers\Controller;
 use App\Article;
 
-class ArticleController extends Controller {
-
+class ArticleController extends Controller
+{
     /**
      * Show the article.
      *
@@ -13,6 +17,7 @@ class ArticleController extends Controller {
      */
     public function index(Article $article)
     {
+        Event::fire(new ArticleWasViewed($article));
         return view('application.article.index', compact('article'));
     }
 
