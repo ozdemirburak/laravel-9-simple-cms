@@ -19,7 +19,6 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
 });
 
-
 // Password routes
 Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function()
 {
