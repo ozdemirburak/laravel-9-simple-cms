@@ -19,10 +19,15 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
     Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
 });
 
+
 // Password routes
-Route::controllers([
-    'password' => 'Auth\PasswordController'
-]);
+Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function()
+{
+    Route::get('email',  ['as' => 'password.email', 'uses' => 'PasswordController@getEmail']);
+    Route::post('email', ['as' => 'password.email', 'uses' => 'PasswordController@postEmail']);
+    Route::get('reset/{token}',  ['as' => 'password.reset', 'uses' => 'PasswordController@getReset']);
+    Route::post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@postEmail']);
+});
 
 // Admin routes
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
