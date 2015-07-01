@@ -113,26 +113,14 @@ class LanguageController extends Controller
     }
 
     /**
-     * Save image to uploads folder and change the name to something unique
+     * Change language
      *
-     * @param LanguageRequest $request
-     * @param $field
-     * @return array
+     * @return \Illuminate\Http\RedirectResponse
      */
-    private function storeImage(LanguageRequest $request, $field)
+    public function postChange()
     {
-        $data = $request->except([$field]);
-        if($request->file($field))
-        {
-            $file = $request->file($field);
-            $request->file($field);
-            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
-            $path = '/uploads/' . str_plural($field);
-            $move_path = public_path() . $path;
-            $file->move($move_path, $fileName);
-            $data[$field] = $path . $fileName;
-        }
-        return $data;
+        Session::put('language', Input::get('language'));
+        return Redirect::back();
     }
 
     /**
@@ -173,10 +161,27 @@ class LanguageController extends Controller
             ->make();
     }
 
-    public function postChange()
+    /**
+     * Save image to uploads folder and change the name to something unique
+     *
+     * @param LanguageRequest $request
+     * @param $field
+     * @return array
+     */
+    private function storeImage(LanguageRequest $request, $field)
     {
-        Session::put('language', Input::get('language'));
-        return Redirect::back();
+        $data = $request->except([$field]);
+        if($request->file($field))
+        {
+            $file = $request->file($field);
+            $request->file($field);
+            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
+            $path = '/uploads/' . str_plural($field);
+            $move_path = public_path() . $path;
+            $file->move($move_path, $fileName);
+            $data[$field] = $path . $fileName;
+        }
+        return $data;
     }
 
 }
