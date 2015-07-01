@@ -13,31 +13,31 @@ use Auth;
 
 class UserController extends Controller
 {
-	/**
-	 * Display a listing of the users.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
+    /**
+     * Display a listing of the users.
+     *
+     * @return Response
+     */
+    public function index()
+    {
         $table = $this->setDatatable();
         return view('admin.users.index', compact('table'));
-	}
+    }
 
-	/**
-	 * Show the form for creating a new user.
-	 *
+    /**
+     * Show the form for creating a new user.
+     *
      * @param FormBuilder $formBuilder
-	 * @return Response
-	 */
-	public function create(FormBuilder $formBuilder)
-	{
+     * @return Response
+     */
+    public function create(FormBuilder $formBuilder)
+    {
         $form = $formBuilder->create('App\Forms\UsersForm', [
             'method' => 'POST',
             'url' => route('admin.user.store')
         ]);
         return view('admin.users.create', compact('form'));
-	}
+    }
 
     /**
      * Store a newly created user in storage
@@ -97,14 +97,14 @@ class UserController extends Controller
         return redirect(route('admin.user.index'));
     }
 
-	/**
-	 * Remove the specified user from storage.
-	 *
-	 * @param User $user
-	 * @return Response
-	 */
-	public function destroy(User $user)
-	{
+    /**
+     * Remove the specified user from storage.
+     *
+     * @param User $user
+     * @return Response
+     */
+    public function destroy(User $user)
+    {
         if($user->id != Auth::user()->id)
         {
 
@@ -116,7 +116,49 @@ class UserController extends Controller
             Flash::error(trans('admin.delete.self'));
         }
         return redirect(route('admin.user.index'));
-	}
+    }
+
+    /**
+     * Create Datatable HTML
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    private function setDatatable()
+    {
+        return Datatable::table()
+            ->addColumn(trans('admin.fields.user.name'), trans('admin.fields.user.ip_address'), trans('admin.fields.user.logged_in_at'), trans('admin.fields.user.logged_out_at'))
+            ->addColumn(trans('admin.ops.name'))
+            ->setUrl(route('admin.user.table'))
+            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->render();
+    }
+
+    /**
+     * JSON data for seeding Datatable
+     *
+     * @return mixed
+     */
+    public function getDatatable()
+    {
+        return Datatable::collection(User::all())
+            ->showColumns('name', 'ip_address')
+            ->addColumn('logged_in_at', function($model)
+            {
+                return $model->logged_in_at->diffForHumans();
+            })
+            ->addColumn('logged_out_at', function($model)
+            {
+                return $model->logged_out_at->diffForHumans();
+            })
+            ->addColumn('',function($model)
+            {
+                return get_ops('user', $model->id);
+            })
+            ->searchColumns('name','ip_address')
+            ->orderColumns('name','logged_in_at','logged_out_at')
+            ->make();
+    }
 
     /**
      * Save image to uploads folder and change the name to something unique
@@ -139,37 +181,6 @@ class UserController extends Controller
             $data[$field] = $path . $fileName;
         }
         return $data;
-    }
-
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(trans('admin.fields.user.name'), trans('admin.fields.user.ip_address'), trans('admin.fields.user.logged_in_at'), trans('admin.fields.user.logged_out_at'))
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('admin.user.table'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
-            ->render();
-    }
-
-    public function getDatatable()
-    {
-        return Datatable::collection(User::all())
-            ->showColumns('name', 'ip_address')
-            ->addColumn('logged_in_at', function($model)
-            {
-                return $model->logged_in_at->diffForHumans();
-            })
-            ->addColumn('logged_out_at', function($model)
-            {
-                return $model->logged_out_at->diffForHumans();
-            })
-            ->addColumn('',function($model)
-            {
-                return get_ops('user', $model->id);
-            })
-            ->searchColumns('name','ip_address')
-            ->orderColumns('name','logged_in_at','logged_out_at')
-            ->make();
     }
 
 }
