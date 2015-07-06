@@ -13,18 +13,21 @@
         ],
         toolbar1: "bold italic underline hr | link unlink |  image media | forecolor backcolor  | bullist numlist outdent indent | code | preview | styleselect",
         entity_encoding: "raw",
-        file_browser_callback : elFinderBrowser
+        file_picker_callback : elFinderBrowser
     });
-    function elFinderBrowser (field_name, url, type, win) {
+
+    function elFinderBrowser(callback, value, meta) {
+        var request = "{{ action('\Barryvdh\Elfinder\ElfinderController@showTinyMCE4') }}";
+
         tinymce.activeEditor.windowManager.open({
-            file: '{{ action('Barryvdh\Elfinder\ElfinderController@showTinyMCE4') }}', // use an absolute path!
             title: '{{  trans('admin.elfinder') }}',
+            url: request,
             width: 900,
             height: 450,
-            resizable: 'yes'
+            resizable: 'yes',
         }, {
-            setUrl: function (url) {
-                win.document.getElementById(field_name).value = url;
+            oninsert: function (url) {
+                callback(url);
             }
         });
         return false;
