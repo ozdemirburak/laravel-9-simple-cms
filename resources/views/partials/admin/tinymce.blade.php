@@ -17,14 +17,13 @@
     });
 
     function elFinderBrowser(callback, value, meta) {
-        var request = "{{ action('\Barryvdh\Elfinder\ElfinderController@showTinyMCE4') }}";
-
+        var request = "{{ route('elfinder.tinymce4') }}";
         tinymce.activeEditor.windowManager.open({
             title: '{{  trans('admin.elfinder') }}',
             url: request,
             width: 900,
             height: 450,
-            resizable: 'yes',
+            resizable: 'yes'
         }, {
             oninsert: function (url) {
                 callback(url);
