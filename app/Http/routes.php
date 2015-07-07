@@ -48,6 +48,3 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
         Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
     });
 });
-
-// Tinymce elfinder integration
-Route::get('elfinder', [ 'as' => 'elfinder', 'middleware' => 'auth', 'uses' => 'Barryvdh\Elfinder\ElfinderController@showTinyMCE4'] );
