@@ -136,15 +136,17 @@ To serve the application, you can use `php -S localhost:8000 -t public`, then op
 
 Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content. 
 
-Attention: The schema migration may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates. 
-
     php artisan make:controller Admin/FruitController
     php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
     php artisan make:request FruitRequest
     php artisan make:form Forms/FruitsForm
     php artisan migrate
 
-This will create everything that we need to manage our Fruits. Then check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first. 
+This will create everything that we need to manage our Fruits.
+
+**Attention:** The schema migration above may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates. 
+ 
+Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first. 
  
 ```php
 "fruit" => [
