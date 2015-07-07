@@ -134,10 +134,12 @@ To serve the application, you can use `php -S localhost:8000 -t public`, then op
 <a name="u1"></a>
 ### How to Create a New Resource
 
-Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content.
+Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content. 
+
+Attention: The schema migration may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates. 
 
     php artisan make:controller Admin/FruitController
-    php artisan make:migration:schema create_fruits_table --model=0 --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
+    php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
     php artisan make:request FruitRequest
     php artisan make:form Forms/FruitsForm
     php artisan migrate
