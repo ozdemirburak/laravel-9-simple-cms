@@ -155,6 +155,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
         Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
+        Fadion\Maneuver\ManeuverServiceProvider::class
 	],
 
 	/*
