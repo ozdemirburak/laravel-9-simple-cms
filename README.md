@@ -219,6 +219,7 @@ Then configure the controller `FruitController.php` file located in Controllers 
 
 ```php
 <?php namespace App\Http\Controllers\Admin;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FruitRequest;
