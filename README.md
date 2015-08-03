@@ -1,5 +1,5 @@
 # Laravel 5 Simple CMS
-Laravel 5.1 content management system for starters. 
+Laravel 5.1 content management system for starters.
 
 -----
 ##Table of Contents
@@ -34,7 +34,7 @@ Laravel 5.1 content management system for starters.
 	PHP >= 5.5.9
 	MCrypt PHP Extension
 	Database
-	
+
 -----
 <a name="item3"></a>
 ##Quick Start:
@@ -44,7 +44,7 @@ Laravel 5.1 content management system for starters.
     curl -s https://getcomposer.org/installer | php
     php composer.phar install
     chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
-    
+
 Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.env.example` file, located in your root dir, to `.env` and configure it
 
     php artisan key:generate
@@ -52,14 +52,17 @@ Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.
     php artisan db:seed
     sudo apt-get install nodejs
     sudo apt-get install npm
+    sudo ln -s "$(which nodejs)" /usr/bin/node
     sudo npm install --global gulp bower
     sudo npm install
     bower install
     gulp --production
-    php -S localhost:8000 -t public 
+    php artisan serve
 
 Open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing, then upon login, just hit <a href="http://localhost:8000/admin/user">http://localhost:8000/admin/user</a> to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
-     
+
+**Attention:** If you have xdebug installed and get an error `Maximum function nesting level of '100' reached, aborting!`, you need to increase the value of `xdebug.max_nesting_level` in your php.ini. See <a href="https://stackoverflow.com/questions/8656089/solution-for-fatal-error-maximum-function-nesting-level-of-100-reached-abor">this</a> for further information.
+
 -----
 <a name="item4"></a>
 ##Installation Guide:
@@ -81,14 +84,14 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 <a name="step2"></a>
 ### Step 2: Install Dependencies
 
-If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`. Thus, as this application uses HTML Purifier, you need to change permissions for it. To do that, run `chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`. 
+If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`. Thus, as this application uses HTML Purifier, you need to change permissions for it. To do that, run `chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
 
-As this project relies on bower and gulp heavily, you need to install them. First, install node, `sudo apt-get install nodejs`, then install npm `sudo apt-get install npm` and install gulp and bower globally, `sudo npm install --global gulp bower`. Finally, to install Laravel project dependencies, run `sudo npm install`. 
+As this project relies on bower and gulp heavily, you need to install them. First, install node, `sudo apt-get install nodejs`, then install npm `sudo apt-get install npm` and install gulp and bower globally, `sudo npm install --global gulp bower`. Finally, to install Laravel project dependencies, run `sudo npm install`.
 
 After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
- 
+
 Rename your `.env.example` file as `.env` and change the variables as your own.
- 
+
 Finally, to generate a unique application key, run `php artisan key:generate`.
 
 -----
@@ -101,9 +104,9 @@ Create a database with `utf8_unicode_ci` preferably or any utf8 collation you wi
 <a name="step4"></a>
 ### Step 4: Set Configuration
 
-Open your `.env` file and change the fields corresponding to your own configurations. 
+Open your `.env` file and change the fields corresponding to your own configurations.
 
-All variables with `DB_` prefixes relates to your database configuration. 
+All variables with `DB_` prefixes relates to your database configuration.
 
 For the mail configuration, this application uses Gmail as a mail server. To configure it correctly, you need to change the `MAIL_USERNAME` variable as your Gmail username without `@gmail.com` and password as your Gmail password, `MAIL_FROM_ADDRESS` is your Gmail account with `@gmail.com` and `MAIL_FROM_NAME` is your name that is registered to that Gmail account.
 
@@ -115,13 +118,13 @@ For the deployment, all you need is to set your FTP credentials.
 <a name="step5"></a>
 ### Step 5: Migrate and Seed
 
-To migrate the database tables, run `php artisan migrate` and to seed the database with some data, run `php artisan db:seed`. 
+To migrate the database tables, run `php artisan migrate` and to seed the database with some data, run `php artisan db:seed`.
 
 -----
 <a name="step6"></a>
 ### Step 6: Serve
 
-To serve the application, you can use `php -S localhost:8000 -t public`, then open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`.
+To serve the application, you can use `php artisan serve`, then open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`.
 
 -----
 <a name="item5"></a>
@@ -134,7 +137,7 @@ To serve the application, you can use `php -S localhost:8000 -t public`, then op
 <a name="u1"></a>
 ### How to Create a New Resource
 
-Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content. 
+Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content.
 
     php artisan make:controller Admin/FruitController
     php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
@@ -144,20 +147,20 @@ Lets assume we want to create a new resource for fruits where we'd like to manag
 
 This will create everything that we need to manage our Fruits.
 
-**Attention:** The schema migration above may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates. 
- 
-Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first. 
- 
+**Attention:** The schema migration above may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates.
+
+Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first.
+
 ```php
 "fruit" => [
     "root"       => "Fruits",
     "all"        => "All Fruits",
     "add"        => "Add a Fruit"
 ],
- ``` 
- 
+ ```
+
 Then to the `fields` array, add the translations for the form that will be generated for it again.
- 
+
 ```php
 "fruit" => [
     "title"       => "Title",
@@ -185,24 +188,24 @@ After finishing the language parts, check the Fruit model, which is located in `
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-    
+
 class Fruit extends Model implements SluggableInterface{
 
     use SluggableTrait;
-    
+
     protected $sluggable = array(
         'build_from' => 'title',
         'save_to'    => 'slug',
         'on_update'  => true
     );
-    
+
     protected $fillable = ['title', 'content', 'language_id'];
 
     public function language()
     {
         return $this->belongsTo('App\Language');
     }
-    
+
 }
 ```
 
@@ -230,13 +233,13 @@ use Datatable;
 use Session;
 
 class FruitController extends Controller {
-    
+
     public function index()
     {
         $table = $this->setDatatable();
         return view('admin.fruits.index', compact('table'));
     }
-    
+
     public function create(FormBuilder $formBuilder)
     {
         $languages = Language::lists('title', 'id');
@@ -246,19 +249,19 @@ class FruitController extends Controller {
         ], $languages);
         return view('admin.fruits.create', compact('form'));
     }
-    
+
     public function store(FruitRequest $request)
     {
         Fruit::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
             Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.fruit.index'));
     }
-    
+
     public function show(Fruit $fruit)
     {
         return view('admin.fruits.show', compact('fruit'));
     }
-    
+
     public function edit(Fruit $fruit, FormBuilder $formBuilder)
     {
         $languages = Language::lists('title', 'id');
@@ -269,7 +272,7 @@ class FruitController extends Controller {
         ], $languages);
         return view('admin.fruits.edit', compact('form', 'fruit'));
     }
-    
+
     public function update(Fruit $fruit, FruitRequest $request)
     {
         $fruit->fill($request->all());
@@ -277,14 +280,14 @@ class FruitController extends Controller {
             Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.fruit.index'));
     }
-    
+
     public function destroy(Fruit $fruit)
     {
         $fruit->delete() == true ? Flash::success(trans('admin.delete.success')) :
             Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.fruit.index'));
     }
-        
+
     private function setDatatable()
     {
         return Datatable::table()
@@ -294,7 +297,7 @@ class FruitController extends Controller {
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
     }
-    
+
     public function getDatatable()
     {
         $language = Session::get('current_lang');
@@ -312,8 +315,8 @@ class FruitController extends Controller {
             ->orderColumns('title')
             ->make();
     }
-    
-}    
+
+}
 ```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
@@ -323,12 +326,12 @@ Open your `FruitRequest.php` file within `Requests` folder and configure it as b
 use App\Http\Requests\Request;
 
 class FruitRequest extends Request {
-    
+
     public function authorize()
     {
         return true;
     }
-    
+
     public function rules()
     {
         return [
@@ -337,7 +340,7 @@ class FruitRequest extends Request {
             'language_id' => 'required|integer'
         ];
     }
-    
+
 }
 ```
 
@@ -376,7 +379,7 @@ class FruitsForm extends Form
 ```
 
 Finally, create the fruits folder within `resources/views/admin` and create the views.
- 
+
 `create.blade.php` and `edit.blade.php` file as below:
 
 ```php
@@ -385,19 +388,19 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
     {!! form($form) !!}
     @include('partials.admin.tinymce')
 @endsection
-```    
-    
+```
+
 `index.blade.php` file as below:
 
-```php 
+```php
 @extends('layouts.admin')
 @section('content')
     {!! $table !!}
 @endsection
 ```
-  
+
 `show.blade.php` file as below:
- 
+
 ```php
 @extends('layouts.admin')
 @section('content')
@@ -425,7 +428,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
         *
         *
     });
-    
+
 });
 ```
 
@@ -438,23 +441,23 @@ $router->bind('admin.fruit', function($id)
     return \App\Fruit::findOrFail($id);
 });
 ```
-        
+
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
-  
+
 ```php  
 $fruits = $menu->add(trans('admin.menu.fruit.root'), '#')
     ->icon('apple')
     ->prependIcon();
-         
+
 $fruits->add(trans('admin.menu.fruit.add'), ['route' => 'admin.fruit.create'])
     ->icon('circle-o')
     ->prependIcon();
-         
+
 $fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
     ->icon('circle-o')
     ->prependIcon();
 ```
- 
+
 Now you have your fruit resource that can be manageable within your admin panel.
 
 -----
