@@ -22,7 +22,8 @@ class PageController extends Controller
 	public function index()
 	{
         $language = Session::get('current_lang');
-        $pages = $language->pages->toHierarchy();
+        $pages = Page::whereLanguageId($language->id);
+        $pages = $pages->count() > 1 ? $language->pages->toHierarchy() : $pages->get();
         return view('admin.pages.index', compact('pages'));
 	}
 
