@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-        "php": ">=5.5.9",
+    	"php": ">=5.5.9",
 		"laravel/framework": ">=5.1.4",
         "laravelcollective/html": "~5.0",
         "baum/baum": "~1.1",
