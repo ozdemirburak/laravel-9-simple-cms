@@ -8,6 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
+    "failed"                    => "Bu kimlik bilgileri, bizim kayıtlarımız ile eşleşmiyor.",
     "login" => [
         "title"                 => "Giriş Yap",
         "email"                 => "E-mail adresi",
@@ -27,7 +28,8 @@ return [
         "submit"                => "Gönder",
         "password"              => "Yeni şifre",
         "password_confirmation" => "Yeni şifre tekrar"
-    ]
+    ],
+    "throttle"                  => "Çok sayıda oturum açma girişimi. Lütfen :seconds saniye sonra tekrar deneyiniz.",
 
 
 ];
