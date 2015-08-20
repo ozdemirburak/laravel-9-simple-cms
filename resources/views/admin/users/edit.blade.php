@@ -2,5 +2,5 @@
 
 @section('content')
     {!! form($form) !!}
-    @include('partials.admin.image', ['image'=> $user->picture])
+    @include('partials.admin.file', ['file'=> $user->picture])
 @endsection

@@ -2,5 +2,5 @@
 
 @section('content')
     {!! form($form) !!}
-    @include('partials.admin.image', ['image'=> $language->flag])
+    @include('partials.admin.file', ['file'=> $language->flag])
 @endsection

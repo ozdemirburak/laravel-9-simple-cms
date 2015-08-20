@@ -2,5 +2,5 @@
 
 @section('content')
     {!! form($form) !!}
-    @include('partials.admin.image', ['image'=> $setting->logo])
+    @include('partials.admin.file', ['file'=> $setting->logo])
 @endsection
