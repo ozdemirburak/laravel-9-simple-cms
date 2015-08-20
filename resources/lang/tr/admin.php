@@ -127,7 +127,7 @@ return [
         ],
         "save"                      => "Kaydet",
         "reset"                     => "Reset",
-        "uploaded"                  => "Yüklenmiş Dosya :"
+        "uploaded"                  => "Yüklenmiş Dosya"
     ],
     // Titles of the pages, naming is made with each routes' name
     "root"                          => "Dashboard",
