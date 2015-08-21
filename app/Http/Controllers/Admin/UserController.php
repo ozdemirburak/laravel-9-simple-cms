@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 use App\User;
 use App\Http\Requests\UserRequest;
 use Datatable;
@@ -47,9 +48,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $data = $this->storeImage($request, 'picture');
-        User::create($data) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $user = User::create(ImageService::uploadImage($request, 'picture'));
+        $user->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.user.index'));
     }
 
@@ -90,10 +90,8 @@ class UserController extends Controller
      */
     public function update(User $user, UserRequest $request)
     {
-        $data = $this->storeImage($request, 'picture');
-        $user->fill($data);
-        $user->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $user->fill(ImageService::uploadImage($request, 'picture'));
+        $user->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.user.index'));
     }
 
@@ -107,9 +105,7 @@ class UserController extends Controller
     {
         if($user->id != Auth::user()->id)
         {
-
-            $user->delete() == true ? Flash::success(trans('admin.delete.success')) :
-                Flash::error(trans('admin.delete.fail'));
+            $user->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         }
         else
         {
@@ -158,29 +154,6 @@ class UserController extends Controller
             ->searchColumns('name','ip_address')
             ->orderColumns('name','logged_in_at','logged_out_at')
             ->make();
-    }
-
-    /**
-     * Save image to uploads folder and change the name to something unique
-     *
-     * @param UserRequest $request
-     * @param $field
-     * @return array
-     */
-    private function storeImage(UserRequest $request, $field)
-    {
-        $data = $request->except([$field]);
-        if($request->file($field))
-        {
-            $file = $request->file($field);
-            $request->file($field);
-            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
-            $path = '/uploads/' . str_plural($field);
-            $move_path = public_path() . $path;
-            $file->move($move_path, $fileName);
-            $data[$field] = $path . $fileName;
-        }
-        return $data;
     }
 
 }

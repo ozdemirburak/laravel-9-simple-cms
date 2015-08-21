@@ -51,8 +51,8 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        Page::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $page = Page::create($request->all());
+        $page->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.page.index'));
     }
 
@@ -95,8 +95,7 @@ class PageController extends Controller
     public function update(Page $page, PageRequest $request)
     {
         $page->fill($request->all());
-        $page->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $page->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.page.index'));
     }
 
@@ -108,8 +107,7 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
-        $page->delete() == true ? Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $page->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.page.index'));
     }
 
