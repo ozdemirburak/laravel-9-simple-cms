@@ -50,8 +50,8 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        Article::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $article = Article::create($request->all());
+        $article->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.article.index'));
     }
 
@@ -95,8 +95,7 @@ class ArticleController extends Controller
     public function update(Article $article, ArticleRequest $request)
     {
         $article->fill($request->all());
-        $article->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $article->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.article.index'));
     }
 
@@ -108,8 +107,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete() == true ? Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $article->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.article.index'));
     }
 

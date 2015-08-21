@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LanguageRequest;
 use App\Language;
+use App\Services\ImageService;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
@@ -49,9 +50,8 @@ class LanguageController extends Controller
      */
     public function store(LanguageRequest $request)
     {
-        $data = $this->storeImage($request, 'flag');
-        Language::create($data) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $language = Language::create(ImageService::uploadImage($request, 'flag'));
+        $language->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -92,10 +92,8 @@ class LanguageController extends Controller
      */
     public function update(Language $language, LanguageRequest $request)
     {
-        $data = $this->storeImage($request, 'flag');
-        $language->fill($data);
-        $language->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $language->fill(ImageService::uploadImage($request, 'flag'));
+        $language->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -107,8 +105,7 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language)
     {
-        $language->delete() == true ? Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $language->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -159,29 +156,6 @@ class LanguageController extends Controller
             ->searchColumns('title')
             ->orderColumns('title','code')
             ->make();
-    }
-
-    /**
-     * Save image to uploads folder and change the name to something unique
-     *
-     * @param LanguageRequest $request
-     * @param $field
-     * @return array
-     */
-    private function storeImage(LanguageRequest $request, $field)
-    {
-        $data = $request->except([$field]);
-        if($request->file($field))
-        {
-            $file = $request->file($field);
-            $request->file($field);
-            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
-            $path = '/uploads/' . str_plural($field);
-            $move_path = public_path() . $path;
-            $file->move($move_path, $fileName);
-            $data[$field] = $path . $fileName;
-        }
-        return $data;
     }
 
 }

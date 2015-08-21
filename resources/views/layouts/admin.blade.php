@@ -27,8 +27,8 @@
                 @if(!isset($no_boxes))
                     <div class="col-xs-12"><div class="box"><div class="box-body">
                 @endif
-                    @include('flash::message')
-                    @yield('content')
+                @include('flash::message')
+                @yield('content')
                 @if(!isset($no_boxes))
                     </div></div> </div>
                 @endif

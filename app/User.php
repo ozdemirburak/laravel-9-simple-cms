@@ -106,7 +106,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getIpAddressAttribute($ip)
     {
-        return inet_ntop($ip);
+        return $ip ? inet_ntop($ip) : "";
     }
 
 }

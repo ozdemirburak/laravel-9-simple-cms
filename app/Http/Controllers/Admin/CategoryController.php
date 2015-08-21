@@ -49,8 +49,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $category = Category::create($request->all());
+        $category->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.category.index'));
     }
 
@@ -93,8 +93,7 @@ class CategoryController extends Controller
     public function update(Category $category, CategoryRequest $request)
     {
         $category->fill($request->all());
-        $category->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $category->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.category.index'));
     }
 
@@ -106,8 +105,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete() == true ? Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $category->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.category.index'));
     }
 
