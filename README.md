@@ -253,8 +253,8 @@ class FruitController extends Controller {
 
     public function store(FruitRequest $request)
     {
-        Fruit::create($request->all()) == true ? Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
+        $fruit = Fruit::create($request->all());
+        $fruit->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.fruit.index'));
     }
 
@@ -277,15 +277,13 @@ class FruitController extends Controller {
     public function update(Fruit $fruit, FruitRequest $request)
     {
         $fruit->fill($request->all());
-        $fruit->save() == true ? Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
+        $fruit->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.fruit.index'));
     }
 
     public function destroy(Fruit $fruit)
     {
-        $fruit->delete() == true ? Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $fruit->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.fruit.index'));
     }
 
