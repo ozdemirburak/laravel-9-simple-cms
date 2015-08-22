@@ -9,9 +9,9 @@
         plugins: [
             "advlist autolink link image lists charmap print preview hr anchor pagebreak",
             "searchreplace wordcount visualblocks visualchars media nonbreaking",
-            "table contextmenu directionality paste textcolor"
+            "table contextmenu directionality paste textcolor localautosave"
         ],
-        toolbar1: "bold italic underline hr | link unlink |  image media | forecolor backcolor  | bullist numlist outdent indent | code | preview | styleselect",
+        toolbar1: "localautosave | bold italic underline hr | link unlink image media | styleselect forecolor backcolor paste | bullist numlist outdent indent | preview ",
         entity_encoding: "raw",
         file_picker_callback : elFinderBrowser
     });
