@@ -15,6 +15,7 @@
     "bootstrap-datepicker": "~1.4.0",
     "morris.js" : "~0.5.1",
     "jquery-floating-social-share" : "~1.0.1",
-    "tinymce": "~4.2.1"
+    "tinymce": "~4.2.1",
+    "tinymce-localautosave" : "~0.4.2"
   }
 }

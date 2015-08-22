@@ -54,6 +54,7 @@ elixir(function(mix) {
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
         .copy('resources/assets/vendor/raphael/raphael-min.js', 'public/js/raphael.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
+        .copy(bowerDir + 'tinymce-localautosave/localautosave', 'public/packages/tinymce/plugins/localautosave')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts', 'public/build/fonts')
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/*', 'public/build/img')
