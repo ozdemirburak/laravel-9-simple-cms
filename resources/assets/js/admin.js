@@ -1,6 +1,6 @@
 $(function() {
 
-    $('#published_at').datepicker({
+    $('input[type=date]').datepicker({
         format: 'yyyy-mm-dd',
         todayHighlight: true
     });
