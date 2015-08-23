@@ -28,23 +28,31 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function()
     Route::post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@postEmail']);
 });
 
-// Admin routes
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+// API routes
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function()
 {
-    Route::get('user/table', ['as'=>'admin.user.table', 'uses'=>'UserController@getDatatable']);
-    Route::get('article/table', ['as'=>'admin.article.table', 'uses'=>'ArticleController@getDatatable']);
-    Route::get('category/table', ['as'=>'admin.category.table', 'uses'=>'CategoryController@getDatatable']);
-    Route::get('language/table', ['as'=>'admin.language.table', 'uses'=>'LanguageController@getDatatable']);
-    Route::group(['middleware' => 'auth'], function(){
-        Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
-        Route::resource('language', 'LanguageController');
-        Route::post('language/change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
-        Route::resource('user', 'UserController');
-        Route::resource('article', 'ArticleController');
-        Route::resource('category', 'CategoryController');
-        Route::resource('page', 'PageController');
-        Route::post('page/order', ['as' => 'admin.page.order' , 'uses' => 'PageController@postOrder']);
-        Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
-        Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
-    });
+    // DataTables
+    Route::get('table/article', ['as'=>'api.table.article', 'uses'=>'DataTableController@getArticles']);
+    Route::get('table/category', ['as'=>'api.table.category', 'uses'=>'DataTableController@getCategories']);
+    Route::get('table/language', ['as'=>'api.table.language', 'uses'=>'DataTableController@getLanguages']);
+    Route::get('table/user', ['as'=>'api.table.user', 'uses'=>'DataTableController@getUsers']);
+});
+
+// Admin routes
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function()
+{
+    // GET
+    Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
+    Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
+    // POST
+    Route::post('language/change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
+    Route::post('page/order', ['as' => 'admin.page.order' , 'uses' => 'PageController@postOrder']);
+    // PATCH
+    Route::patch('setting/{setting}', ['as' => 'admin.setting.update', 'uses' => 'SettingController@patchSettings']);
+    // Resources
+    Route::resource('article', 'ArticleController');
+    Route::resource('category', 'CategoryController');
+    Route::resource('language', 'LanguageController');
+    Route::resource('page', 'PageController');
+    Route::resource('user', 'UserController');
 });

@@ -10,7 +10,6 @@ use App\Language;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
-use Session;
 
 class CategoryController extends Controller
 {
@@ -110,7 +109,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Create Datatable HTML
+     * Create DataTable HTML
      *
      * @return mixed
      * @throws \Exception
@@ -120,32 +119,9 @@ class CategoryController extends Controller
         return Datatable::table()
             ->addColumn(trans('admin.fields.category.title'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('admin.category.table'))
+            ->setUrl(route('api.table.category'))
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
-    }
-
-    /**
-     * JSON data for seeding Datatable
-     *
-     * @return mixed
-     */
-    public function getDatatable()
-    {
-        $language = Session::get('current_lang');
-        return Datatable::collection($language->categories)
-            ->showColumns('title')
-            ->addColumn('updated_at', function($model)
-            {
-                return $model->updated_at->diffForHumans();
-            })
-            ->addColumn('',function($model)
-            {
-                return get_ops('category', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('title')
-            ->make();
     }
 
 }
