@@ -301,7 +301,14 @@ class FruitController extends Controller {
 ```
 
 Then open your DataTableController.php file Controllers folder's sub-folder Api, add the part below.
+
 ```php
+class DataTableController extends Controller
+{
+    *
+    *
+    *
+    *
     public function getFruits()
     {
         $language = Session::get('current_lang');
@@ -319,6 +326,8 @@ Then open your DataTableController.php file Controllers folder's sub-folder Api,
             ->orderColumns('title')
             ->make();
     }
+    
+}
 ```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
