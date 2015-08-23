@@ -18,7 +18,7 @@ class DataTableController extends Controller
      */
     public function __construct(Request $request)
     {
-        if(! $request->ajax() || ! Datatable::shouldHandle()) abort(403, 'Forbidden');;
+        if(! $request->ajax() || ! Datatable::shouldHandle()) abort(403, 'Forbidden');
     }
 
     /**
