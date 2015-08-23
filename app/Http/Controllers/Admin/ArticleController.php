@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Article;
-use App\Category;
 use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
@@ -112,7 +111,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Create Datatable HTML
+     * Create DataTable HTML
      *
      * @return mixed
      * @throws \Exception
@@ -122,40 +121,9 @@ class ArticleController extends Controller
         return Datatable::table()
             ->addColumn(trans('admin.fields.article.title'), trans('admin.fields.read'), trans('admin.fields.article.category_id'), trans('admin.fields.published_at'),trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('admin.article.table'))
+            ->setUrl(route('api.table.article'))
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
-    }
-
-    /**
-     * JSON data for seeding Datatable
-     *
-     * @return mixed
-     */
-    public function getDatatable()
-    {
-        $language = Session::get('current_lang');
-        return Datatable::collection($language->articles)
-            ->showColumns('title', 'read')
-            ->addColumn('category_id', function($model)
-            {
-                return $model->category->title;
-            })
-            ->addColumn('published_at', function($model)
-            {
-                return $model->published_at;
-            })
-            ->addColumn('updated_at', function($model)
-            {
-                return $model->updated_at->diffForHumans();
-            })
-            ->addColumn('',function($model)
-            {
-                return get_ops('article', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('title', 'category_id', 'published_at', 'read')
-            ->make();
     }
 
 }

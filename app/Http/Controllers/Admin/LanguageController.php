@@ -121,7 +121,7 @@ class LanguageController extends Controller
     }
 
     /**
-     * Create Datatable HTML
+     * Create DataTable HTML
      *
      * @return mixed
      * @throws \Exception
@@ -131,31 +131,9 @@ class LanguageController extends Controller
         return Datatable::table()
             ->addColumn(trans('admin.fields.language.title'), trans('admin.fields.language.code'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('admin.language.table'))
+            ->setUrl(route('api.table.language'))
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
-    }
-
-    /**
-     * JSON data for seeding Datatable
-     *
-     * @return mixed
-     */
-    public function getDatatable()
-    {
-        return Datatable::collection(Language::all())
-            ->showColumns('title', 'code')
-            ->addColumn('updated_at', function($model)
-            {
-                return $model->updated_at->diffForHumans();
-            })
-            ->addColumn('',function($model)
-            {
-                return get_ops('language', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('title','code')
-            ->make();
     }
 
 }
