@@ -218,7 +218,7 @@ public function fruits()
 }
 ```
 
-Then configure the controller `FruitController.php` file located in Controllers folder's Admin subfolder as below:
+Then configure the controller `FruitController.php` file located in Controllers folder's Admin sub-folder as below:
 
 ```php
 <?php namespace App\Http\Controllers\Admin;
@@ -292,12 +292,17 @@ class FruitController extends Controller {
         return Datatable::table()
             ->addColumn(trans('admin.fields.fruit.title'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('admin.fruit.table'))
+            ->setUrl(route('api.table.fruit'))
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
     }
 
-    public function getDatatable()
+}
+```
+
+Then open your DataTableController.php file Controllers folder's sub-folder Api, add the part below.
+```php
+    public function getFruits()
     {
         $language = Session::get('current_lang');
         return Datatable::collection($language->fruits)
@@ -314,8 +319,6 @@ class FruitController extends Controller {
             ->orderColumns('title')
             ->make();
     }
-
-}
 ```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
@@ -415,19 +418,19 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 Add the fruit routes, to `routes.php` file.
 
 ```php
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function()
 {
     *
     *
-    Route::get('fruit/table', ['as'=>'admin.fruit.table', 'uses'=>'FruitController@getDatatable']);
-    Route::group(['middleware' => 'auth'], function(){
-        *
-        *
-        Route::resource('fruit', 'FruitController');
-        *
-        *
-    });
+    Route::get('table/fruit', ['as'=>'api.table.fruit', 'uses'=>'DataTableController@getFruits']);
+});
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function()
+{
+    *
+    *
+    Route::resource('fruit', 'FruitController');
 });
 ```
 
