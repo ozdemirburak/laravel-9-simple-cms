@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    {{ trans('auth.password.title') }}
+    {{ trans('auth.password.title') }} | {{ trans('admin.title') }}
 @stop
 
 @section('content')
@@ -9,10 +9,10 @@
     <div class="login-box" id="login-box">
 
         <div class="header">
-            {{ trans('auth.password.title') }}
+            <i class="fa fa-lock"></i> {{ trans('auth.password.title') }}
         </div>
 
-        {!! Form::open(['method' => 'POST', 'url' => '/password/reset']) !!}
+        {!! Form::open(['method' => 'POST', 'route' => route('password.reset')]) !!}
 
         <div class="body bg-gray-50">
 
@@ -41,7 +41,7 @@
         </div>
 
         <div class="footer">
-            {!! Form::submit(trans('auth.reset.submit'), ['class' => 'btn bg-olive btn-block btn-flat']) !!}
+            {!! Form::submit(trans('auth.reset.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
         </div>
 
         {!!  Form::close() !!}
@@ -49,3 +49,4 @@
     </div>
 
 @endsection
+

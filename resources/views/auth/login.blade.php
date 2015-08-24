@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    {{ trans('auth.login.title') }}
+    {{ trans('auth.login.title') }} | {{ trans('admin.title') }}
 @stop
 
 @section('content')
@@ -9,7 +9,7 @@
     <div class="login-box" id="login-box">
 
         <div class="header">
-            {{ trans('admin.title') }}
+            <i class="fa fa-sign-in"></i> {{ trans('auth.login.title') }}
         </div>
 
         {!! Form::open(['method' => 'POST', 'route' => 'auth.login']) !!}
@@ -37,8 +37,13 @@
         </div>
 
         <div class="footer">
-            {!! Form::submit(trans('auth.login.submit'), ['class' => 'btn bg-olive btn-block btn-flat']) !!}
-            <a class="btn btn-link" href="{{ url('/password/email') }}">{{ trans('auth.login.forgot') }}</a>
+            {!! Form::submit(trans('auth.login.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
+            <hr/>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a class="btn btn-link" href="{{ route('password.email') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
+                </div>
+            </div>
         </div>
 
         {!!  Form::close() !!}
