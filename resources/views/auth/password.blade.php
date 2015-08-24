@@ -9,10 +9,10 @@
     <div class="login-box" id="login-box">
 
         <div class="header">
-            {{ trans('auth.password.title') }}
+            <i class="fa fa-lock"></i> {{ trans('auth.password.title') }}
         </div>
 
-        {!! Form::open(['method' => 'POST', 'url' => '/password/email']) !!}
+        {!! Form::open(['method' => 'POST', 'route' => 'password.email']) !!}
 
         <div class="body bg-gray-50">
 
@@ -32,7 +32,13 @@
         </div>
 
         <div class="footer">
-            {!! Form::submit(trans('auth.password.submit'), ['class' => 'btn bg-olive btn-block btn-flat']) !!}
+            {!! Form::submit(trans('auth.password.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
+            <hr/>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a class="btn btn-link" href="{{ route('auth.login') }}"> <i class="fa fa-sign-in"></i> {{ trans('auth.login.title') }}</a>
+                </div>
+            </div>
         </div>
 
         {!!  Form::close() !!}
