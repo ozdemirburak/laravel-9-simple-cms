@@ -443,14 +443,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 });
 ```
 
-Open the `RouteServiceProvider.php` file located in `Providers` folder and bind the fruit.
+Open the `RouteServiceProvider.php` file located in `Providers` folder and bind the fruit model.
 
 ```php
 $router->model('fruit', 'App\Fruit');
-$router->bind('admin.fruit', function($id)
-{
-    return \App\Fruit::findOrFail($id);
-});
 ```
 
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
