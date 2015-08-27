@@ -11,21 +11,22 @@ Route::group(['namespace' => 'Application', 'middleware' => 'app'], function()
 });
 
 // Auth routes
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
+Route::group(['namespace' => 'Auth'], function()
 {
-    Route::get('/', ['as' => 'auth.root', 'uses' => 'AuthController@getLogin']);
-    Route::get('login',  ['as' => 'auth.login', 'uses' => 'AuthController@getLogin']);
-    Route::post('login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
-    Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
-});
-
-// Password routes
-Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function()
-{
-    Route::get('email',  ['as' => 'password.email', 'uses' => 'PasswordController@getEmail']);
-    Route::post('email', ['as' => 'password.email', 'uses' => 'PasswordController@postEmail']);
-    Route::get('reset/{token}',  ['as' => 'password.reset', 'uses' => 'PasswordController@getReset']);
-    Route::post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@postEmail']);
+    Route::group(['prefix' => 'auth'], function()
+    {
+        Route::get('/', ['as' => 'auth.root', 'uses' => 'AuthController@getLogin']);
+        Route::get('login',  ['as' => 'auth.login', 'uses' => 'AuthController@getLogin']);
+        Route::post('login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
+        Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
+    });
+    Route::group(['prefix' => 'password'], function()
+    {
+        Route::get('email',  ['as' => 'password.email', 'uses' => 'PasswordController@getEmail']);
+        Route::post('email', ['as' => 'password.email', 'uses' => 'PasswordController@postEmail']);
+        Route::get('reset/{token}',  ['as' => 'password.reset', 'uses' => 'PasswordController@getReset']);
+        Route::post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@postEmail']);
+    });
 });
 
 // API routes
