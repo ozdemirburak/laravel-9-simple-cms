@@ -1,6 +1,9 @@
+.env
 .idea
+.phpstorm.meta.php
+.rocketeer
+composer.lock
 node_modules
 resources/assets/vendor
+vendor
 _ide_helper.php
-.phpstorm.meta.php
-composer.lock

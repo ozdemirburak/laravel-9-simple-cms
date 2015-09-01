@@ -43,7 +43,6 @@ Laravel 5.1 content management system for starters.
     cd CUSTOM_DIRECTORY
     curl -s https://getcomposer.org/installer | php
     php composer.phar install
-    chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
 
 Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.env.example` file, located in your root dir, to `.env` and configure it
 
@@ -84,7 +83,7 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 <a name="step2"></a>
 ### Step 2: Install Dependencies
 
-If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`. Thus, as this application uses HTML Purifier, you need to change permissions for it. To do that, run `chmod 777 vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
+If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`.
 
 As this project relies on bower and gulp heavily, you need to install them. First, install node, `sudo apt-get install nodejs`, then install npm `sudo apt-get install npm` and install gulp and bower globally, `sudo npm install --global gulp bower`. Finally, to install Laravel project dependencies, run `sudo npm install`.
 
@@ -131,7 +130,7 @@ To serve the application, you can use `php artisan serve`, then open <a href="ht
 ## User Guide
 
 * [How to Create a New Resource](#u1)
-* [How to Deploy](#u2)
+* [How to Deploy with Rocketeer](#u2)
 
 -----
 <a name="u1"></a>
@@ -326,7 +325,7 @@ class DataTableController extends Controller
             ->orderColumns('title')
             ->make();
     }
-    
+
 }
 ```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
@@ -468,11 +467,21 @@ $fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
 Now you have your fruit resource that can be manageable within your admin panel.
 
 -----
-### How to Deploy
+### How to Deploy with Rocketeer
 
-If you have set your FTP credentials within your `.env` file, then all you need is to turn your project into a git project. Then after you commit something, all you need to is call the `deploy` command as below.
+First, install rocketeer if you haven't done it before.
 
-    php artisan deploy
+  wget http://rocketeer.autopergamene.eu/versions/rocketeer.phar
+  chmod +x rocketeer.phar
+  mv rocketeer.phar /usr/local/bin/rocketeer
+
+Then read this great article on how to deploy in a secure way.  [deploy](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers). Then let's say you will store the project within the `/var/home` folder. Grant the newly created user ownage rights within that folder.
+
+After that, within the remote server, don't forget to install git and composer. If you want to compile css and javascript files within the remote server, you also need to install node, npm, gulp and bower. Thus within the `.rocketeer/strategies.php` file, uncomment the `'dependencies' => 'Polyglot'` line.
+
+Then, within the `.rocketeer/config.php` file, set the host, username and the path to your ssh key. Thus, within the the `.rocketeer/scm.php` , set your git repository.
+
+Finally, you can deploy with `rocketeer deploy` command.
 
 -----
 <a name="item6"></a>
