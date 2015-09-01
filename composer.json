@@ -28,8 +28,7 @@
 	"laracasts/generators": "~1.1",
 	"laracasts/testdummy": "~2.0",
 	"barryvdh/laravel-ide-helper": "~2.0",
-	"barryvdh/laravel-debugbar": "~2.0",
-	"fadion/maneuver": "dev-l5"
+	"barryvdh/laravel-debugbar": "~2.0"
   },
   "autoload": {
 	"classmap": [
