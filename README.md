@@ -471,9 +471,9 @@ Now you have your fruit resource that can be manageable within your admin panel.
 
 First, install rocketeer if you haven't done it before.
 
-  wget http://rocketeer.autopergamene.eu/versions/rocketeer.phar
-  chmod +x rocketeer.phar
-  mv rocketeer.phar /usr/local/bin/rocketeer
+    wget http://rocketeer.autopergamene.eu/versions/rocketeer.phar
+    chmod +x rocketeer.phar
+    mv rocketeer.phar /usr/local/bin/rocketeer
 
 Then read this great article on how to deploy in a secure way.  [deploy](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers). Then let's say you will store the project within the `/var/home` folder. Grant the newly created user ownage rights within that folder.
 
