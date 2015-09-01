@@ -155,8 +155,7 @@ return [
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
-        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
-        Fadion\Maneuver\ManeuverServiceProvider::class
+        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class
 	],
 
 	/*
