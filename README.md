@@ -475,7 +475,7 @@ First, install rocketeer if you haven't done it before.
     chmod +x rocketeer.phar
     mv rocketeer.phar /usr/local/bin/rocketeer
 
-Then read this great article on how to deploy in a secure way.  [deploy](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers). Then let's say you will store the project within the `/var/home` folder. Grant the newly created user ownage rights within that folder.
+Then read this great article on how to deploy in a [secure way](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers). Then let's say you will store the project within the `/var/home` folder. Grant the newly created user ownage rights within that folder.
 
 After that, within the remote server, don't forget to install git and composer. If you want to compile css and javascript files within the remote server, you also need to install node, npm, gulp and bower. Thus within the `.rocketeer/strategies.php` file, uncomment the `'dependencies' => 'Polyglot'` line.
 
