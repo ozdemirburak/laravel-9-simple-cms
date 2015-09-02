@@ -25,7 +25,7 @@
             height: 450,
             resizable: 'yes'
         }, {
-            oninsert: function (url) {
+            setUrl: function (url) {
                 callback(url);
             }
         });
