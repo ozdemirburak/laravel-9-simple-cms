@@ -33,7 +33,8 @@ return [
         'storage/app',
         'storage/framework',
         'storage/logs',
-        'public/uploads'
+        'public/uploads',
+        'public/files'
     ],
 
     // Execution
