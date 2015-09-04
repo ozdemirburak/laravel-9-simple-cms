@@ -19,10 +19,10 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('admin.user.edit', ['id' => Auth::user()->id])  }}" class="btn btn-default btn-flat">{{ trans('admin.profile') }}</a>
+                                <a href="{{ route('root')  }}" class="btn btn-default btn-flat"><i class="fa fa-globe"></i> {{ trans('application.home') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ route('auth.logout') }}" class="btn btn-default btn-flat">{{ trans('auth.logout') }}</a>
+                                <a href="{{ route('auth.logout') }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> {{ trans('auth.logout') }}</a>
                             </div>
                         </li>
                     </ul>

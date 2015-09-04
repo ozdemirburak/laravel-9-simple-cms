@@ -8,6 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    "read_more"     => "Devamını Oku"
+    "read_more"     => "Devamını Oku",
+    "home"          => "Anasayfa"
 
 ];
