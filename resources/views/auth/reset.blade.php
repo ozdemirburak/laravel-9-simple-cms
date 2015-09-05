@@ -12,7 +12,7 @@
             <i class="fa fa-lock"></i> {{ trans('auth.password.title') }}
         </div>
 
-        {!! Form::open(['method' => 'POST', 'route' => route('password.reset')]) !!}
+        {!! Form::open(['method' => 'POST', 'route' => 'password.reset']) !!}
 
         <div class="body bg-gray-50">
 
