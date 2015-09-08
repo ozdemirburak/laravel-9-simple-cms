@@ -61,6 +61,7 @@ Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.
 Open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing, then upon login, just hit <a href="http://localhost:8000/admin/user">http://localhost:8000/admin/user</a> to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
 
 **Attention #1 :** If you have xdebug installed and get an error `Maximum function nesting level of '100' reached, aborting!`, you need to increase the value of `xdebug.max_nesting_level` in your php.ini. See <a href="https://stackoverflow.com/questions/8656089/solution-for-fatal-error-maximum-function-nesting-level-of-100-reached-abor">this</a> for further information.
+
 **Attention #2 :** If HTMLPurifier returns you an error about file permissions, or if purified content can't be posted, fix file permissions with calling `chmod 775 -R storage/purifier` then `chmod 775 -R vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
 
 -----
