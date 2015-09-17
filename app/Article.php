@@ -42,7 +42,7 @@ class Article extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'content', 'category_id', 'published_at'];
+    protected $fillable = ['category_id', 'content', 'description', 'published_at', 'title'];
 
     /**
      * Carbon instance fields

@@ -46,7 +46,7 @@ class Page extends Node implements SluggableInterface
 {
     use SluggableTrait;
 
-    protected $fillable = ['title', 'description', 'content', 'language_id'];
+    protected $fillable = ['content', 'description', 'language_id', 'title'];
 
     /**
      * Create slug from title using 3rd party trait

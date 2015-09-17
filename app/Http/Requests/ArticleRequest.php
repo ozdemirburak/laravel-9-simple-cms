@@ -24,10 +24,11 @@ class ArticleRequest extends Request
 	public function rules()
 	{
         return [
-            'title' => 'required|min:3',
-            'description' => 'required|max:160',
-            'content' => 'required',
-            'published_at' => 'required|date'
+			'category_id'  => 'required|integer',
+			'content' 	   => 'required',
+			'description'  => 'required|max:160',
+			'published_at' => 'required|date',
+            'title' 	   => 'required|min:3'
         ];
 	}
 

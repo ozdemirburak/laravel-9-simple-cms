@@ -48,7 +48,7 @@ class Category extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'color', 'language_id'];
+    protected $fillable = ['color', 'description','language_id', 'title'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

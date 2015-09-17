@@ -24,10 +24,10 @@ class CategoryRequest extends Request
 	public function rules()
 	{
         return [
-            'title' => 'required|min:3',
-            'color' => 'required|min:4|max:7',
-            'description' => 'required|max:160',
-            'language_id' => 'required|integer'
+			'color' 	  => 'required|min:4|max:7',
+			'description' => 'required|max:160',
+			'language_id' => 'required|integer',
+            'title' 	  => 'required|min:3'
         ];
 	}
 

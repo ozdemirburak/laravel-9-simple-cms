@@ -58,7 +58,7 @@ return [
     "fields" => [
         "updated_at"                => "Güncelleme",
         "created_at"                => "Oluşturulma",
-        "published_at"              => "Yayınlanma",
+        "published_at"              => "Yayınlanma Tarihi",
         "read"                      => "Okunma",
         "dashboard" => [
             'total_visits'          => "Toplam Ziyaretçi Sayısı",
