@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ArticleRequest;
 use App\Article;
-use Laracasts\Flash\Flash;
-use Kris\LaravelFormBuilder\FormBuilder;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ArticleRequest;
 use Datatable;
-use Session;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 
 class ArticleController extends Controller
 {
@@ -32,12 +30,10 @@ class ArticleController extends Controller
      */
     public function create(FormBuilder $formBuilder)
     {
-        $language = Session::get('current_lang');
-        $categories = $language->categories->lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\ArticlesForm', [
             'method' => 'POST',
             'url' => route('admin.article.store')
-        ], $categories);
+        ], $this->getSelectList());
         return view('admin.articles.create', compact('form'));
     }
 
@@ -74,13 +70,11 @@ class ArticleController extends Controller
      */
     public function edit(Article $article, FormBuilder $formBuilder)
     {
-        $language = Session::get('current_lang');
-        $categories = $language->categories->lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\ArticlesForm', [
             'method' => 'PATCH',
             'url' => route('admin.article.update', ['id' => $article->id]),
             'model' => $article
-        ], $categories);
+        ], $this->getSelectList());
         return view('admin.articles.edit', compact('form', 'article'));
     }
 
@@ -124,6 +118,16 @@ class ArticleController extends Controller
             ->setUrl(route('api.table.article'))
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
+    }
+
+    /**
+     * Get select list for categories
+     *
+     * @return mixed
+     */
+    protected function getSelectList()
+    {
+        return $this->language->categories->lists('title', 'id')->all();
     }
 
 }

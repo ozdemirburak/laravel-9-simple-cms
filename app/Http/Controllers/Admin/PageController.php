@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PageRequest;
+use App\Http\Requests\Admin\PageRequest;
 use App\Page;
-use App\Language;
-use Laracasts\Flash\Flash;
-use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Http\Request;
-use Session;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 
 class PageController extends Controller
 {
@@ -21,9 +18,8 @@ class PageController extends Controller
      */
     public function index()
     {
-        $language = Session::get('current_lang');
-        $pages = Page::whereLanguageId($language->id);
-        $pages = $pages->count() > 1 ? $language->pages->toHierarchy() : $pages->get();
+        $pages = Page::whereLanguageId($this->language->id);
+        $pages = $pages->count() > 1 ? $this->language->pages->toHierarchy() : $pages->get();
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -35,11 +31,10 @@ class PageController extends Controller
      */
     public function create(FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\PagesForm', [
             'method' => 'POST',
             'url' => route('admin.page.store')
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.pages.create', compact('form'));
     }
 
@@ -76,12 +71,11 @@ class PageController extends Controller
      */
     public function edit(Page $page, FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\PagesForm', [
             'method' => 'PATCH',
             'url' => route('admin.page.update', ['id' => $page->id]),
             'model' => $page
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.pages.edit', compact('form', 'page'));
     }
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
-use Carbon\Carbon;
 use LaravelAnalytics;
 
 class DashboardController extends Controller

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Application;
 
-use Event;
+use App\Article;
 use App\Events\ArticleWasViewed;
 use App\Http\Controllers\Controller;
-use App\Article;
+use Event;
 
 class ArticleController extends Controller
 {
