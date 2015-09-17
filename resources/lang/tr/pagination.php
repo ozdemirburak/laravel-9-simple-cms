@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Pagination Language Lines
+    | Turkish Pagination Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are used by the paginator library to build
@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '&laquo; Önceki',
     'next'     => 'Sonraki &raquo;',
+    'previous' => '&laquo; Önceki',
 
 ];

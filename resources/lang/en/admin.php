@@ -3,197 +3,192 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Language lines for Admin panel
+    | English Admin Language Lines
     |--------------------------------------------------------------------------
     */
 
-    "title"                         => "Control Panel",
-    "submit"                        => "Submit",
-    "last_login"                    => "Last Login",
-    "profile"                       => "Profile",
-    "elfinder"                      => "File Manager",
-    "empty"                         => "There are not any saved records yet. Why don't you create a new one first?",
-    // Menu
-    "menu" => [
-        "dashboard"                 => "Dashboard",
-        "article" => [
-            "root"                  => "Articles",
-            "all"                   => "All Articles",
-            "add"                   => "Add an Article"
-        ],
-        "category" => [
-            "root"                  => "Categories",
-            "all"                   => "All Categories",
-            "add"                   => "Add a Category"
-        ],
-        "language" => [
-            "root"                  => "Languages",
-            "all"                   => "All Languages",
-            "add"                   => "Add a Language"
-        ],
-        "page" => [
-            "root"                  => "Pages",
-            "all"                   => "All Pages",
-            "add"                   => "Add a Page"
-        ],
-        "user" => [
-            "root"                  => "Users",
-            "all"                   => "All Users",
-            "add"                   => "Add a User"
-        ],
-        "setting"                   => "Settings"
-    ],
-    // Operations
-    "ops" => [
-        "name"                      => "Ops",
-        "edit"                      => "Edit",
-        "create"                    => "Create",
-        "delete"                    => "Delete",
-        "show"                      => "Show",
-        "order"                     => "Order",
-        "confirmation"              => "Are you sure?",
-        "modified"                  => "Modified on"
-    ],
-    // Fields
-    "fields" => [
-        "updated_at"                => "Updated at",
-        "created_at"                => "Created at",
-        "published_at"              => "Published at",
-        "read"                      => "Read",
-        "dashboard" => [
-            'total_visits'          => "Total visits",
-            'unique_visits'         => "Unique visits",
-            'bounce_rate'           => "Bounce rate",
-            'average_time'          => "Average time",
-            'page_visits'           => "Average page visits",
-            'pages'                 => "Pages",
-            'keywords'              => "Keywords",
-            'entrance_pages'        => "Entrance",
-            'exit_pages'            => "Exit",
-            'time_pages'            => "Time",
-            'os'                    => "OS",
-            'browsers'              => "Browser",
-            'traffic_sources'       => "Source",
-            'visits'                => "Visits",
-            'visitors'              => "Visitors",
-            'world_visitors'        => "Visitor distribution: World",
-            'region_visitors'       => "Visitor distribution: Regions",
-            'chart_visitors'        => "Visitor",
-            'chart_region'          => "Region",
-            'chart_country'         => "Country"
-        ],
-        "language" => [
-            "title"                 => "Title",
-            "code"                  => "Code",
-            "site_title"            => "Site Title",
-            "site_description"      => "Site Description",
-            "flag"                  => "Flag"
-        ],
-        "page" => [
-            "title"                 => "Title",
-            "description"           => "Description",
-            "language_id"           => "Language",
-            "content"               => "Content",
-        ],
-        "category" => [
-            "title"                 => "Title",
-            "description"           => "Description",
-            "color"                 => "Color",
-            "language_id"           => "Language"
-        ],
-        "article" => [
-            "title"                 => "Title",
-            "description"           => "Description",
-            "category_id"           => "Category",
-            "content"               => "Content",
-        ],
-        "user" => [
-            "name"                  => "Name",
-            "email"                 => "Email",
-            "password"              => "Password",
-            "password_confirmation" => "Password Confirmation",
-            "picture"               => "Avatar",
-            "logged_in_at"          => "Login At",
-            "logged_out_at"         => "Logout At",
-            "ip_address"            => "IP"
-        ],
-        "setting" => [
-            "email"                 => "Email",
-            "facebook"              => "Facebook",
-            "twitter"               => "Twitter",
-            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
-            "disqus_shortname"      => "Disqus Shortname",
-            "logo"                  => "Logo",
-        ],
-        "save"                      => "Save",
-        "reset"                     => "Reset",
-        "uploaded"                  => "Uploaded file"
-    ],
-    // Titles of the pages, naming is made with each routes' name
-    "root"                          => "Dashboard",
-    "language" => [
-        "index"                     => "Languages",
-        "edit"                      => "Edit language",
-        "create"                    => "Create language",
-        "show"                      => "Show language"
-    ],
-    "page" => [
-        "index"                     => "Pages",
-        "edit"                      => "Edit page",
-        "create"                    => "Create page",
-        "show"                      => "Show page"
-    ],
-    "category" => [
-        "index"                     => "Categories",
-        "edit"                      => "Edit category",
-        "create"                    => "Create category",
-        "show"                      => "Show category"
-    ],
     "article" => [
-        "index"                     => "Articles",
-        "edit"                      => "Edit article",
         "create"                    => "Create article",
+        "edit"                      => "Edit article",
+        "index"                     => "Articles",
         "show"                      => "Show article"
     ],
-    "user" => [
-        "index"                     => "Users",
-        "edit"                      => "Edit user",
-        "create"                    => "Create user",
-        "show"                      => "Show user"
+    "category" => [
+        "create"                    => "Create category",
+        "edit"                      => "Edit category",
+        "index"                     => "Categories",
+        "show"                      => "Show category"
     ],
-    "setting" => [
-        "index"                     => "Settings"
+    "create" => [
+        "fail"                      => "Create operation on resource has failed.",
+        "success"                   => "Resource has been created succesfully."
     ],
-    // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
-    "datatables" => [
-        "sProcessing"               => "Processing...",
-        "sLengthMenu"               => "Show _MENU_ entries",
-        "sZeroRecords"              => "No matching records found",
+    "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "Showing _START_ to _END_ of _TOTAL_ entries",
         "sInfoEmpty"                => "Showing 0 to 0 of 0 entries",
         "sInfoFiltered"             => "(filtered from _MAX_ total entries)",
         "sInfoPostFix"              => "",
+        "sLengthMenu"               => "Show _MENU_ entries",
+        "sProcessing"               => "Processing...",
         "sSearch"                   => "Search:",
         "sUrl"                      => "",
+        "sZeroRecords"              => "No matching records found",
         "oPaginate" => [
             "sFirst"                => "First",
-            "sPrevious"             => "Previous",
-            "sNext"                 => "Next",
             "sLast"                 => "Last",
+            "sNext"                 => "Next",
+            "sPrevious"             => "Previous"
         ]
     ],
-    // Flash messages upon create, update and delete
-    "create" => [
-        "success"                   => "Resource has been created succesfully.",
-        "fail"                      => "Create operation on resource has failed."
-    ],
-    "update" => [
-        "success"                   => "Resource has been updated succesfully.",
-        "fail"                      => "Update operation on resource has failed."
-    ],
     "delete" => [
-        "success"                   => "Resource has been deleted succesfully.",
         "fail"                      => "Delete operation on resource has failed.",
-        "self"                      => "You can't always get what you want."
+        "self"                      => "You can't always get what you want.",
+        "success"                   => "Resource has been deleted succesfully."
+    ],
+    "elfinder"                      => "File Manager",
+    "empty"                         => "There are not any saved records yet. Why don't you create a new one first?",
+    "fields" => [
+        "article" => [
+            "category_id"           => "Category",
+            "content"               => "Content",
+            "description"           => "Description",
+            "title"                 => "Title"
+        ],
+        "category" => [
+            "color"                 => "Color",
+            "description"           => "Description",
+            "language_id"           => "Language",
+            "title"                 => "Title"
+        ],
+        "created_at"                => "Created at",
+        "dashboard" => [
+            'average_time'          => "Average time",
+            'bounce_rate'           => "Bounce rate",
+            'browsers'              => "Browser",
+            'chart_country'         => "Country",
+            'chart_region'          => "Region",
+            'chart_visitors'        => "Visitor",
+            'entrance_pages'        => "Entrance",
+            'exit_pages'            => "Exit",
+            'keywords'              => "Keywords",
+            'os'                    => "OS",
+            'page_visits'           => "Average page visits",
+            'pages'                 => "Pages",
+            'region_visitors'       => "Visitor distribution: Regions",
+            'time_pages'            => "Time",
+            'total_visits'          => "Total visits",
+            'traffic_sources'       => "Source",
+            'unique_visits'         => "Unique visits",
+            'visitors'              => "Visitors",
+            'visits'                => "Visits",
+            'world_visitors'        => "Visitor distribution: World"
+        ],
+        "language" => [
+            "code"                  => "Code",
+            "flag"                  => "Flag",
+            "site_description"      => "Site Description",
+            "site_title"            => "Site Title",
+            "title"                 => "Title"
+        ],
+        "page" => [
+            "content"               => "Content",
+            "description"           => "Description",
+            "language_id"           => "Language",
+            "title"                 => "Title",
+        ],
+        "published_at"              => "Published at",
+        "read"                      => "Read",
+        "reset"                     => "Reset",
+        "save"                      => "Save",
+        "setting" => [
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "disqus_shortname"      => "Disqus Shortname",
+            "email"                 => "Email",
+            "facebook"              => "Facebook",
+            "logo"                  => "Logo",
+            "twitter"               => "Twitter"
+        ],
+        "updated_at"                => "Updated at",
+        "uploaded"                  => "Uploaded file",
+        "user" => [
+            "email"                 => "Email",
+            "ip_address"            => "IP",
+            "logged_in_at"          => "Login At",
+            "logged_out_at"         => "Logout At",
+            "name"                  => "Name",
+            "password"              => "Password",
+            "password_confirmation" => "Password Confirmation",
+            "picture"               => "Avatar"
+        ]
+    ],
+    "language" => [
+        "create"                    => "Create language",
+        "edit"                      => "Edit language",
+        "index"                     => "Languages",
+        "show"                      => "Show language"
+    ],
+    "last_login"                    => "Last Login",
+    "menu" => [
+        "article" => [
+            "add"                   => "Add an Article",
+            "all"                   => "All Articles",
+            "root"                  => "Articles"
+        ],
+        "category" => [
+            "add"                   => "Add a Category",
+            "all"                   => "All Categories",
+            "root"                  => "Categories"
+        ],
+        "dashboard"                 => "Dashboard",
+        "language" => [
+            "add"                   => "Add a Language",
+            "all"                   => "All Languages",
+            "root"                  => "Languages"
+        ],
+        "page" => [
+            "add"                   => "Add a Page",
+            "all"                   => "All Pages",
+            "root"                  => "Pages"
+        ],
+        "setting"                   => "Settings",
+        "user" => [
+            "add"                   => "Add a User",
+            "all"                   => "All Users",
+            "root"                  => "Users"
+        ]
+    ],
+    "ops" => [
+        "confirmation"              => "Are you sure?",
+        "create"                    => "Create",
+        "delete"                    => "Delete",
+        "edit"                      => "Edit",
+        "modified"                  => "Modified on",
+        "name"                      => "Ops",
+        "order"                     => "Order",
+        "show"                      => "Show"
+    ],
+    "page" => [
+        "create"                    => "Create page",
+        "edit"                      => "Edit page",
+        "show"                      => "Show page",
+        "index"                     => "Pages"
+    ],
+    "profile"                       => "Profile",
+    "root"                          => "Dashboard",
+    "setting" => [
+        "index"                     => "Settings"
+    ],
+    "submit"                        => "Submit",
+    "title"                         => "Control Panel",
+    "update" => [
+        "fail"                      => "Update operation on resource has failed.",
+        "success"                   => "Resource has been updated succesfully."
+    ],
+    "user" => [
+        "create"                    => "Create user",
+        "edit"                      => "Edit user",
+        "index"                     => "Users",
+        "show"                      => "Show user"
     ]
+
 ];
