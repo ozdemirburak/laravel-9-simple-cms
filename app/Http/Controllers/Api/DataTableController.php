@@ -7,7 +7,6 @@ use App\Language;
 use App\User;
 use Datatable;
 use Illuminate\Http\Request;
-use Session;
 
 class DataTableController extends Controller
 {
@@ -19,6 +18,7 @@ class DataTableController extends Controller
     public function __construct(Request $request)
     {
         if(! $request->ajax() || ! Datatable::shouldHandle()) abort(403, 'Forbidden');
+        parent::__construct();
     }
 
     /**
@@ -28,8 +28,7 @@ class DataTableController extends Controller
      */
     public function getArticles()
     {
-        $language = Session::get('current_lang');
-        return Datatable::collection($language->articles)
+        return Datatable::collection($this->language->articles)
             ->showColumns('title', 'read')
             ->addColumn('category_id', function($model)
             {
@@ -59,8 +58,7 @@ class DataTableController extends Controller
      */
     public function getCategories()
     {
-        $language = Session::get('current_lang');
-        return Datatable::collection($language->categories)
+        return Datatable::collection($this->language->categories)
             ->showColumns('title')
             ->addColumn('updated_at', function($model)
             {

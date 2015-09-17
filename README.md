@@ -140,7 +140,7 @@ Lets assume we want to create a new resource for fruits where we'd like to manag
 
     php artisan make:controller Admin/FruitController
     php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
-    php artisan make:request FruitRequest
+    php artisan make:request Admin/FruitRequest
     php artisan make:form Forms/FruitsForm
     php artisan migrate
 
@@ -152,9 +152,9 @@ Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en
 
 ```php
 "fruit" => [
-    "root"       => "Fruits",
+    "add"        => "Add a Fruit",
     "all"        => "All Fruits",
-    "add"        => "Add a Fruit"
+    "root"       => "Fruits"
 ],
  ```
 
@@ -162,9 +162,9 @@ Then to the `fields` array, add the translations for the form that will be gener
 
 ```php
 "fruit" => [
-    "title"       => "Title",
     "content"     => "Content",
     "language_id" => "Language"
+    "title"       => "Title"
 ],
 ```  
 
@@ -172,9 +172,9 @@ Finally for the breadcrumbs generation add the `fruit` translations like below.
 
 ```php
 "fruit" => [
-    "index"        => "Fruits",
-    "edit"         => "Edit fruit",
     "create"       => "Create fruit",
+    "edit"         => "Edit fruit",
+    "index"        => "Fruits",
     "show"         => "Show fruit"
 ],
 ```
@@ -184,11 +184,11 @@ After finishing the language parts, check the Fruit model, which is located in `
 ```php
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Database\Eloquent\Model;
 
-class Fruit extends Model implements SluggableInterface{
+class Fruit extends Model implements SluggableInterface {
 
     use SluggableTrait;
 
@@ -198,7 +198,7 @@ class Fruit extends Model implements SluggableInterface{
         'on_update'  => true
     );
 
-    protected $fillable = ['title', 'content', 'language_id'];
+    protected $fillable = ['content', 'language_id', 'title'];
 
     public function language()
     {
@@ -222,15 +222,12 @@ Then configure the controller `FruitController.php` file located in Controllers 
 ```php
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\FruitRequest;
 use App\Fruit;
-use App\Language;
-use Laracasts\Flash\Flash;
-use Kris\LaravelFormBuilder\FormBuilder;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\FruitRequest;
 use Datatable;
-use Session;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 
 class FruitController extends Controller {
 
@@ -242,11 +239,10 @@ class FruitController extends Controller {
 
     public function create(FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
         $form = $formBuilder->create('App\Forms\FruitsForm', [
             'method' => 'POST',
             'url' => route('admin.fruit.store')
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.fruits.create', compact('form'));
     }
 
@@ -264,12 +260,11 @@ class FruitController extends Controller {
 
     public function edit(Fruit $fruit, FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id');
         $form = $formBuilder->create('App\Forms\FruitsForm', [
             'method' => 'PATCH',
             'url' => route('admin.fruit.update', ['id' => $fruit->id]),
             'model' => $fruit
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.fruits.edit', compact('form', 'fruit'));
     }
 
@@ -310,8 +305,7 @@ class DataTableController extends Controller
     *
     public function getFruits()
     {
-        $language = Session::get('current_lang');
-        return Datatable::collection($language->fruits)
+        return Datatable::collection($this->language->fruits)
             ->showColumns('title')
             ->addColumn('updated_at', function($model)
             {
@@ -331,7 +325,7 @@ class DataTableController extends Controller
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
 ```php
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
@@ -345,9 +339,9 @@ class FruitRequest extends Request {
     public function rules()
     {
         return [
-            'title' => 'required|min:3',
-            'content' => 'required|max:160',
-            'language_id' => 'required|integer'
+            'content' => 'required',
+            'language_id' => 'required|integer',
+            'title' => 'required|min:3'
         ];
     }
 
