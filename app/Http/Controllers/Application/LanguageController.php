@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
-use Session;
 use Input;
-use Redirect;
 
 class LanguageController extends Controller
 {
@@ -16,8 +14,8 @@ class LanguageController extends Controller
      */
     public function postChange()
     {
-        Session::put('language', Input::get('language'));
-        return Redirect::back();
+        session(['language' => Input::get('language')]);
+        return back();
     }
 
 }

@@ -93,7 +93,7 @@ return [
             "title"                 => "Başlık",
             "description"           => "Tanımı",
             "language_id"           => "Dil",
-            "content"               => "İçeriği",
+            "content"               => "İçerik",
         ],
         "category" => [
             "title"                 => "Başlık",
@@ -105,7 +105,7 @@ return [
             "title"                 => "Başlık",
             "description"           => "Tanımı",
             "category_id"           => "Kategori",
-            "content"               => "İçeriği",
+            "content"               => "İçerik",
         ],
         "user" => [
             "name"                  => "Ad",

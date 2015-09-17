@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
 use App\Category;
-use App\Language;
-use Laracasts\Flash\Flash;
-use Kris\LaravelFormBuilder\FormBuilder;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CategoryRequest;
 use Datatable;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 
 class CategoryController extends Controller
 {
@@ -32,11 +30,10 @@ class CategoryController extends Controller
      */
     public function create(FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\CategoriesForm', [
             'method' => 'POST',
             'url' => route('admin.category.store')
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.categories.create', compact('form'));
     }
 
@@ -73,12 +70,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category, FormBuilder $formBuilder)
     {
-        $languages = Language::lists('title', 'id')->all();
         $form = $formBuilder->create('App\Forms\CategoriesForm', [
             'method' => 'PATCH',
             'url' => route('admin.category.update', ['id' => $category->id]),
             'model' => $category
-        ], $languages);
+        ], $this->getSelectList());
         return view('admin.categories.edit', compact('form', 'category'));
     }
 

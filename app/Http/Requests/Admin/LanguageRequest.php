@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
-use App\Language;
 
 class LanguageRequest extends Request
 {

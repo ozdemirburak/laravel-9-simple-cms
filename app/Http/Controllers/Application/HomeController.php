@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
-use Session;
 
 class HomeController extends Controller
 {
@@ -14,8 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $language = Session::get('current_lang');
-        $articles = $language->articles()->published()->orderBy('published_at','desc')->paginate(5);
+        $articles = $this->language->articles()->published()->orderBy('published_at','desc')->paginate(5);
         return view('application.home.index', compact('articles'));
     }
 }

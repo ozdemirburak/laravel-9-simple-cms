@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
-class ArticleRequest extends Request
+class CategoryRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,13 +23,12 @@ class ArticleRequest extends Request
 	 */
 	public function rules()
 	{
-        return [
-			'category_id'  => 'required|integer',
-			'content' 	   => 'required',
-			'description'  => 'required|max:160',
-			'published_at' => 'required|date',
-            'title' 	   => 'required|min:3'
-        ];
+		return [
+			'color' 	  => 'required|min:4|max:7',
+			'description' => 'required|max:160',
+			'language_id' => 'required|integer',
+			'title' 	  => 'required|min:3'
+		];
 	}
 
 }

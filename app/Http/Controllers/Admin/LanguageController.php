@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LanguageRequest;
+use App\Http\Requests\Admin\LanguageRequest;
 use App\Language;
 use App\Services\ImageService;
-use Laracasts\Flash\Flash;
-use Kris\LaravelFormBuilder\FormBuilder;
 use Datatable;
-use Session;
 use Input;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 use Redirect;
 
 class LanguageController extends Controller
@@ -116,7 +114,7 @@ class LanguageController extends Controller
      */
     public function postChange()
     {
-        Session::put('language', Input::get('language'));
+        session(['language' => Input::get('language')]);
         return Redirect::back();
     }
 

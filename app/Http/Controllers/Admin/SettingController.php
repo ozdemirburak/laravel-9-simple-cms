@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SettingRequest;
 use App\Services\ImageService;
 use App\Setting;
-use App\Http\Requests\SettingRequest;
-use Laracasts\Flash\Flash;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Laracasts\Flash\Flash;
 
 class SettingController extends Controller
 {
