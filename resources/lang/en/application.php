@@ -4,11 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application language lines
+    | English Application Language Lines
     |--------------------------------------------------------------------------
     */
 
-    "read_more"     => "Read More",
-    "home"          => "Home"
+    "home"          => "Home",
+    "read_more"     => "Read More"
 
 ];

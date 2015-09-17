@@ -4,29 +4,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Auth language lines
+    | English Auth Language Lines
     |--------------------------------------------------------------------------
     */
 
     "login" => [
-        "title"                 => "Login",
         "email"                 => "E-mail address",
+        "forgot"                => "I forgot my password?",
         "password"              => "Password",
         "remember"              => "Remember Me",
         "submit"                => "Login",
-        "forgot"                => "I forgot my password?"
+        "title"                 => "Login"
     ],
     "logout"                    => "Logout",
     "password" => [
-        "title"                 => "Forgot Password",
+        "email_content"         => "Click to this link to reset your password:",
         "submit"                => "Send Password Reset Link",
-        "email_content"         => "Click to this link to reset your password:"
+        "title"                 => "Forgot Password"
     ],
     "reset" => [
-        "title"                 => "Reset my Password",
-        "submit"                => "Submit",
         "password"              => "New password",
-        "password_confirmation" => "New password confirmation"
+        "password_confirmation" => "New password confirmation",
+        "submit"                => "Submit",
+        "title"                 => "Reset my Password"
     ]
 
 ];

@@ -4,32 +4,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Auth language lines
+    | Turkish Auth Language Lines
     |--------------------------------------------------------------------------
     */
 
     "failed"                    => "Bu kimlik bilgileri, bizim kayıtlarımız ile eşleşmiyor.",
     "login" => [
-        "title"                 => "Giriş Yap",
         "email"                 => "E-mail adresi",
+        "forgot"                => "Şifremi Unuttum?",
         "password"              => "Şifre",
         "remember"              => "Beni Hatırla",
         "submit"                => "Giriş Yap",
-        "forgot"                => "Şifremi Unuttum?"
+        "title"                 => "Giriş Yap",
     ],
     "logout"                    => "Çıkış Yap",
     "password" => [
-        "title"                 => "Şifremi unuttum",
+        "email_content"         => "Şifrenizi sıfırlamak için bu linke tıklayınız:",
         "submit"                => "Şifremi gönder",
-        "email_content"         => "Şifrenizi sıfırlamak için bu linke tıklayınız:"
+        "title"                 => "Şifremi unuttum",
     ],
     "reset" => [
-        "title"                 => "Şifremi sıfırla",
-        "submit"                => "Gönder",
         "password"              => "Yeni şifre",
-        "password_confirmation" => "Yeni şifre tekrar"
+        "password_confirmation" => "Yeni şifre tekrar",
+        "submit"                => "Gönder",
+        "title"                 => "Şifremi sıfırla",
     ],
-    "throttle"                  => "Çok sayıda oturum açma girişimi. Lütfen :seconds saniye sonra tekrar deneyiniz.",
-
+    "throttle"                  => "Çok sayıda oturum açma girişimi. Lütfen :seconds saniye sonra tekrar deneyiniz."
 
 ];

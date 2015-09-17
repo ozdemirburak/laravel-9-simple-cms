@@ -4,11 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Application language lines
+    | Turkish Application Language Lines
     |--------------------------------------------------------------------------
     */
 
-    "read_more"     => "Devamını Oku",
-    "home"          => "Anasayfa"
+    "home"          => "Anasayfa",
+    "read_more"     => "Devamını Oku"
 
 ];
