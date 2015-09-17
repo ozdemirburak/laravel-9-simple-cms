@@ -87,8 +87,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'language_id' => [
+            'required'   => 'dil alanı gereklidir.',
+            'integer'    => 'dil değeri rakam olmalıdır.'
         ],
     ],
 
@@ -103,6 +104,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'category_id'       => trans('admin.fields.article.category_id'),
+        'content'           => trans('admin.fields.article.content'),
+        'description'       => trans('admin.fields.article.description'),
+        'published_at'      => trans('admin.fields.article.published_at'),
+        'title'             => trans('admin.fields.article.title'),
+        'color'             => trans('admin.fields.category.color'),
+        'language_id'       => trans('admin.fields.category.language_id'),
+        'code'              => trans('admin.fields.language.code'),
+        'flag'              => trans('admin.fields.language.flag'),
+        'site_description'  => trans('admin.fields.language.site_description'),
+        'site_title'        => trans('admin.fields.language.site_title'),
+        'facebook'          => trans('admin.fields.setting.facebook'),
+        'logo'              => trans('admin.fields.setting.logo'),
+        'twitter'           => trans('admin.fields.setting.twitter'),
+        'email'             => trans('admin.fields.user.email'),
+        'name'              => trans('admin.fields.user.name'),
+        'password'          => trans('admin.fields.user.password'),
+        'picture'           => trans('admin.fields.user.picture')
+    ],
 
 ];

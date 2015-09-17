@@ -33,7 +33,7 @@ class Language extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'flag', 'code', 'site_title', 'site_description'];
+    protected $fillable = ['code', 'flag', 'site_description', 'site_title', 'title'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

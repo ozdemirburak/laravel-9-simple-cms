@@ -34,6 +34,6 @@ class Setting extends Model
      *
      * @var array
      */
-    protected $fillable = ['logo', 'email', 'facebook', 'twitter', 'analytics_id', 'disqus_shortname'];
+    protected $fillable = ['analytics_id', 'disqus_shortname', 'email', 'facebook', 'logo', 'twitter'];
 
 }

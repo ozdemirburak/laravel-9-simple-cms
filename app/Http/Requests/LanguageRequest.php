@@ -25,11 +25,11 @@ class LanguageRequest extends Request
 	public function rules()
 	{
 		return [
-            'title' => 'required|min:3',
-            'code'	=> 'required|max:6|unique:languages,code,'.$this->segment(3),
-            'site_title' => 'required|max:160',
-            'site_description' => 'required|max:160',
-            'flag' => 'sometimes|max:2048|image'
+			'code'			   => 'required|max:6|unique:languages,code,'.$this->segment(3),
+			'flag' 			   => 'sometimes|max:2048|image',
+			'site_description' => 'required|max:160',
+            'site_title' 	   => 'required|max:160',
+			'title' 		   => 'required|min:3'
 		];
 	}
 
