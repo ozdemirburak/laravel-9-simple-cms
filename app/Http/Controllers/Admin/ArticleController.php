@@ -116,7 +116,7 @@ class ArticleController extends Controller
             ->addColumn(trans('admin.fields.article.title'), trans('admin.fields.read'), trans('admin.fields.article.category_id'), trans('admin.fields.published_at'),trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.article'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
 

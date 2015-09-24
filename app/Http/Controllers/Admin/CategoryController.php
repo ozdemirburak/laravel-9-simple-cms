@@ -116,7 +116,7 @@ class CategoryController extends Controller
             ->addColumn(trans('admin.fields.category.title'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.category'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
 

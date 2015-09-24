@@ -125,7 +125,7 @@ class UserController extends Controller
             ->addColumn(trans('admin.fields.user.name'), trans('admin.fields.user.ip_address'), trans('admin.fields.user.logged_in_at'), trans('admin.fields.user.logged_out_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.user'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
 
