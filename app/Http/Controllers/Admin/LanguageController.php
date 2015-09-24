@@ -130,7 +130,7 @@ class LanguageController extends Controller
             ->addColumn(trans('admin.fields.language.title'), trans('admin.fields.language.code'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.language'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
 

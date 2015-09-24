@@ -83,7 +83,7 @@ class DashboardController extends Controller
      * @param string $metrics
      * @return mixed
      */
-    private function query($options=[],$metrics='ga:visits')
+    private function query($options = [],$metrics='ga:visits')
     {
         return LaravelAnalytics::performQuery($this->start,$this->end,$metrics,$options)->rows;
     }
