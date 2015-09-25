@@ -13,16 +13,14 @@
             $(function () {
                 $('.dd').nestable({
                     callback: function(){
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-                            }
-                        });
                         $.ajax({
                             type: 'POST',
                             url: '{{ route('admin.page.order') }}',
                             data: JSON.stringify($('.dd').nestable('asNestedSet')),
                             contentType: "json",
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                            }
                             error:  function (xhr, ajaxOptions, thrownError) {
                                 console.log(xhr.status);
                                 console.log(thrownError);

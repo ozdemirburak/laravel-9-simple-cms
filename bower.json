@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "jquery": "~1.11.2",
-    "nestable2" : "git://github.com/RamonSmit/Nestable.git#3af285bc16c0253b0269419d82940c43a3414df4",
+    "nestable-fork" : "~1.0.0",
     "admin-lte": "~2.0.5",
     "font-awesome": "~4.4.0",
     "datatables": "~1.9",
