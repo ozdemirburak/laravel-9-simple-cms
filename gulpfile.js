@@ -1,6 +1,6 @@
 var elixir = require('laravel-elixir');
 
-var bowerDir  = './resources/assets/vendor/';
+var bowerDir  = 'resources/assets/vendor/';
 
 var adminLess  = [
     bowerDir + 'admin-lte/build/less',
@@ -10,7 +10,7 @@ var adminLess  = [
 
 var adminCss = [
     'bootstrap/dist/css/bootstrap.min.css',
-    'nestable2/jquery.nestable.css',
+    'nestable-fork/dist/jquery.nestable.min.css',
     'admin.css',
     'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
     'datatables-bootstrap3/BS3/assets/css/datatables.css',
@@ -20,7 +20,7 @@ var adminCss = [
 
 var adminJs = [
     'jquery/dist/jquery.min.js',
-    'nestable2/jquery.nestable.js',
+    'nestable-fork/dist/jquery.nestable.min.js',
     'bootstrap/dist/js/bootstrap.min.js',
     'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js',
