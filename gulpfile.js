@@ -36,13 +36,13 @@ var applicationLess  = [
 
 var applicationCss = [
     'bootstrap/dist/css/bootstrap.min.css',
-    'jquery-floating-social-share/dist/css/jquery.floating-social-share.min.css',
+    'jquery-floating-social-share/dist/jquery.floating-social-share.min.css',
     'application.css',
 ];
 
 var applicationJs = [
     'jquery/dist/jquery.min.js',
-    'jquery-floating-social-share/dist/js/jquery.floating-social-share.min.js',
+    'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
     'bootstrap/dist/js/bootstrap.min.js',
 ];
 
