@@ -52,8 +52,9 @@ Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.
     sudo apt-get install nodejs
     sudo apt-get install npm
     sudo ln -s "$(which nodejs)" /usr/bin/node
-    sudo npm install --global gulp bower
-    sudo npm install
+    sudo chown -R "$USER" "$(npm config get prefix)"
+    npm install --global gulp bower
+    npm install
     bower install
     gulp --production
     php artisan serve
