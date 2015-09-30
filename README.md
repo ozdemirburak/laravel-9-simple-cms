@@ -49,10 +49,8 @@ Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.
     php artisan key:generate
     php artisan migrate
     php artisan db:seed
-    sudo apt-get install nodejs
-    sudo apt-get install npm
-    sudo ln -s "$(which nodejs)" /usr/bin/node
-    sudo chown -R "$USER" "$(npm config get prefix)"
+    curl -sL https://deb.nodesource.com/setup | sudo bash -
+    sudo apt-get install -y nodejs
     npm install --global gulp bower
     npm install
     bower install
