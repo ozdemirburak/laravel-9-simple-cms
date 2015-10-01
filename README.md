@@ -86,7 +86,7 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 
 If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`.
 
-As this project relies on bower and gulp heavily, you need to install them. First, install node, `sudo apt-get install nodejs`, then install npm `sudo apt-get install npm` and install gulp and bower globally, `sudo npm install --global gulp bower`. Finally, to install Laravel project dependencies, run `sudo npm install`.
+As this project relies on bower and gulp heavily, you need to install them. To install node and npm, `curl -sL https://deb.nodesource.com/setup | sudo bash -` and `sudo apt-get install -y nodejs`. Then `npm install --global gulp bower` to install gulp and bower globally. Finally, to install Laravel project dependencies, run `npm install`.
 
 After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
 
