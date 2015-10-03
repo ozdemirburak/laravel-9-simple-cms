@@ -91,13 +91,13 @@ return [
             "title"                 => "Adı"
         ],
         "page" => [
-            "title"                 => "Başlık",
+            "content"               => "İçerik",
             "description"           => "Tanımı",
             "language_id"           => "Dil",
-            "content"               => "İçerik"
+            "title"                 => "Başlık"
         ],
         "published_at"              => "Yayınlanma Tarihi",
-        "read"                      => "Okunma",
+        "read_count"                => "Okunma Sayısı",
         "reset"                     => "Reset",
         "save"                      => "Kaydet",
         "setting" => [
@@ -122,9 +122,9 @@ return [
         ]
     ],
     "language" => [
-        "index"                     => "Diller",
-        "edit"                      => "Dil düzenle",
         "create"                    => "Dil oluştur",
+        "edit"                      => "Dil düzenle",
+        "index"                     => "Diller",
         "show"                      => "Dil göster"
     ],
     "last_login"                    => "Son Oturum Başlangıcı",

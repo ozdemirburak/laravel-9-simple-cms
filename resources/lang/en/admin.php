@@ -97,7 +97,7 @@ return [
             "title"                 => "Title",
         ],
         "published_at"              => "Published at",
-        "read"                      => "Read",
+        "read_count"                => "Read Count",
         "reset"                     => "Reset",
         "save"                      => "Save",
         "setting" => [

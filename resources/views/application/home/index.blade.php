@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title'){{ Session::get('current_lang')->site_title }}@endsection
-@section('description'){{ Session::get('current_lang')->site_description }}@endsection
+@section('title'){{ getTitle() }}@endsection
+@section('description'){{ getDescription() }}@endsection
 
 @section('content')
     @if(count($articles))
@@ -18,7 +18,7 @@
                     </div>
                 </header>
                 <div class="post-excerpt">
-                    {{ limit_to_numwords($article->content, 50)  }}
+                    {{ limit_to_numwords(strip_tags($article->content), 50)  }}
                 </div>
                 <footer class="post-footer">
                     <div class="post-meta-date pull-left">

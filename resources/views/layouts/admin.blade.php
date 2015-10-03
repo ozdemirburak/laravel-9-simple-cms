@@ -24,14 +24,10 @@
         @include('partials.admin.header')
         <section class="content">
             <div class="row">
-                @if(!isset($no_boxes))
-                    <div class="col-xs-12"><div class="box"><div class="box-body">
-                @endif
+                @if(!isset($no_boxes))<div class="col-xs-12"><div class="box"><div class="box-body">@endif
                 @include('flash::message')
                 @yield('content')
-                @if(!isset($no_boxes))
-                    </div></div> </div>
-                @endif
+                @if(!isset($no_boxes))</div></div> </div>@endif
             </div>
         </section>
     </div>

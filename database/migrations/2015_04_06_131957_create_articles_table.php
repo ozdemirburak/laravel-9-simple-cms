@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->date('published_at');
             $table->string('description');
-            $table->integer('read')->default(0);
+            $table->integer('read_count')->default(0);
             $table->timestamps();
         });
 	}

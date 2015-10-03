@@ -92,13 +92,24 @@ class Article extends Model implements SluggableInterface
     }
 
     /**
-     * Purify the content
+     * Get the content as purified
      *
      * @param $content
+     * @return string
      */
-    public function setContentAttribute($content)
+    public function getContentAttribute($content)
     {
-        $this->attributes['content'] = clean($content, 'youtube');
+        return clean($content, 'youtube');
+    }
+
+    /**
+     * Set the slug according to Turkish language (Ö => o and Ü => u) instead of German (Ö => oe and Ü => ue)
+     *
+     * @param $slug
+     */
+    public function setSlugAttribute($slug)
+    {
+        $this->attributes['slug'] = str_replace(["oe", "ue"], ["o", "u"], $slug);
     }
 
     /**

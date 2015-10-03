@@ -23,7 +23,7 @@ class IncrementArticleViews
      */
     public function handle(ArticleWasViewed $event)
     {
-        $event->article->read++;
+        $event->article->read_count++;
         $event->article->save();
     }
 
