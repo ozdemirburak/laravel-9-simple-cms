@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Language;
 use App\User;
+use Carbon\Carbon;
 use Datatable;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,7 @@ class DataTableController extends Controller
     public function getArticles()
     {
         return Datatable::collection($this->language->articles)
-            ->showColumns('title', 'read')
+            ->showColumns('title', 'read_count')
             ->addColumn('category_id', function($model)
             {
                 return $model->category->title;
@@ -40,14 +41,14 @@ class DataTableController extends Controller
             })
             ->addColumn('updated_at', function($model)
             {
-                return $model->updated_at->diffForHumans();
+                return $this->setDateTime($model->updated_at);
             })
             ->addColumn('',function($model)
             {
                 return get_ops('article', $model->id);
             })
             ->searchColumns('title')
-            ->orderColumns('title', 'category_id', 'published_at', 'read')
+            ->orderColumns('category_id', 'published_at', 'read_count', 'title', 'updated_at')
             ->make();
     }
 
@@ -62,14 +63,14 @@ class DataTableController extends Controller
             ->showColumns('title')
             ->addColumn('updated_at', function($model)
             {
-                return $model->updated_at->diffForHumans();
+                return $this->setDateTime($model->updated_at);
             })
             ->addColumn('',function($model)
             {
                 return get_ops('category', $model->id);
             })
             ->searchColumns('title')
-            ->orderColumns('title')
+            ->orderColumns('title', 'updated_at')
             ->make();
     }
 
@@ -84,14 +85,14 @@ class DataTableController extends Controller
             ->showColumns('title', 'code')
             ->addColumn('updated_at', function($model)
             {
-                return $model->updated_at->diffForHumans();
+                return $this->setDateTime($model->updated_at);
             })
             ->addColumn('',function($model)
             {
                 return get_ops('language', $model->id);
             })
             ->searchColumns('title')
-            ->orderColumns('title','code')
+            ->orderColumns('code', 'title', 'updated_at')
             ->make();
     }
 
@@ -106,19 +107,24 @@ class DataTableController extends Controller
             ->showColumns('name', 'ip_address')
             ->addColumn('logged_in_at', function($model)
             {
-                return $model->logged_in_at->diffForHumans();
+                return $this->setDateTime($model->logged_in_at);
             })
             ->addColumn('logged_out_at', function($model)
             {
-                return $model->logged_out_at->diffForHumans();
+                return $this->setDateTime($model->logged_out_at);
             })
             ->addColumn('',function($model)
             {
                 return get_ops('user', $model->id);
             })
-            ->searchColumns('name','ip_address')
-            ->orderColumns('name','logged_in_at','logged_out_at')
+            ->searchColumns('ip_address', 'name')
+            ->orderColumns('logged_in_at','logged_out_at', 'name')
             ->make();
+    }
+
+    private function setDateTime(Carbon $datetime)
+    {
+        return $datetime->year > 0 ? $datetime . "<br/><small>(" . $datetime->diffForHumans() . ")</small>" : "-";
     }
 
 }

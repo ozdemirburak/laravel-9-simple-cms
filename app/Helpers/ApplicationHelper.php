@@ -54,3 +54,29 @@ if( ! function_exists('renderMenuNode')) {
         return $html;
     }
 }
+
+if( ! function_exists('getTitle')) {
+    /**
+     * Render nodes for nested sets
+     *
+     * @param $object
+     * @return string
+     */
+    function getTitle($object = null)
+    {
+        return isset($object) && isset($object->title) ? $object->title . ' | ' .  Session::get('current_lang')->site_title : Session::get('current_lang')->site_title;
+    }
+}
+
+if( ! function_exists('getDescription')) {
+    /**
+     * Render nodes for nested sets
+     *
+     * @param $object
+     * @return string
+     */
+    function getDescription($object = null)
+    {
+        return isset($object) && isset($object->description) ? $object->description : Session::get('current_lang')->site_description;
+    }
+}

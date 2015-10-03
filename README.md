@@ -481,14 +481,14 @@ Finally, you can deploy with `rocketeer deploy` command.
 <a name="item6"></a>
 ## Screenshots
 
-![Index](http://i.imgur.com/tWeEAtp.png)
-![Single post](http://i.imgur.com/RUnpPgh.png)
-![Admin login](http://i.imgur.com/UtNKKcA.png)
-![Admin dashboard](http://i.imgur.com/Tv9il5u.png)
-![Admin dashboard worldmap](http://i.imgur.com/RqKodcK.png)
-![Admin datatables](http://i.imgur.com/IxZggki.png)
-![Admin nested sets](http://i.imgur.com/4bZA94c.png)
-![Admin settings](http://i.imgur.com/gkFO9x4.png)
+![Index](https://i.imgur.com/tWeEAtp.png)
+![Single post](https://i.imgur.com/RUnpPgh.png)
+![Admin login](https://i.imgur.com/UtNKKcA.png)
+![Admin dashboard](https://i.imgur.com/Tv9il5u.png)
+![Admin dashboard worldmap](https://i.imgur.com/RqKodcK.png)
+![Admin datatables](https://i.imgur.com/IxZggki.png)
+![Admin nested sets](https://i.imgur.com/4bZA94c.png)
+![Admin settings](https://i.imgur.com/gkFO9x4.png)
 
 -----
 

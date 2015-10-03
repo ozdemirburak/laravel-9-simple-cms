@@ -1,7 +1,7 @@
 @extends('layouts.application')
 
-@section('title'){{ isset($page->title) ? $page->title . ' | ' .  Session::get('current_lang')->site_title : Session::get('current_lang')->site_title }}@endsection
-@section('description'){{ isset($page->description) ? $page->description : Session::get('current_lang')->site_description }}@endsection
+@section('title'){{ getTitle($page) }}@endsection
+@section('description'){{ getDescription($page) }}@endsection
 
 @section('content')
     @if(count($page))
