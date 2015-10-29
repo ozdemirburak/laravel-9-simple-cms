@@ -5,14 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateSettingsTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('settings', function(Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('settings', function (Blueprint $table) {
             $table->tinyInteger('id')->unique();
             $table->string('logo');
             $table->string('email');
@@ -22,16 +22,15 @@ class CreateSettingsTable extends Migration
             $table->string('analytics_id');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('settings');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('settings');
+    }
 }

@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index(Category $category)
     {
-        $articles = $category->articles()->published()->orderBy('published_at','desc')->paginate(5);
+        $articles = $category->articles()->published()->orderBy('published_at', 'desc')->paginate(5);
         return view('application.category.index', compact('articles', 'category'));
     }
-
 }

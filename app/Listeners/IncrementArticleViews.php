@@ -26,5 +26,4 @@ class IncrementArticleViews
         $event->article->read_count++;
         $event->article->save();
     }
-
 }

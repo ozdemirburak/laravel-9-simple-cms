@@ -112,19 +112,16 @@ class PageController extends Controller
      */
     public function postOrder(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $pages = json_decode($request->getContent());
-            foreach($pages as $p)
-            {
+            foreach ($pages as $p) {
                 $page = Page::findOrFail($p->id);
                 $page->lft = $p->lft;
                 $page->rgt = $p->rgt;
-                $page->parent_id = $p->parent_id != "" ? $p->parent_id : NULL;
+                $page->parent_id = $p->parent_id != "" ? $p->parent_id : null;
                 $page->depth = $p->depth;
                 $page->save();
             }
         }
     }
-
 }

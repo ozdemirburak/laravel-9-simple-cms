@@ -34,5 +34,4 @@ class SetUserLogoutCredentials
         $user->logged_out_at = Carbon::now();
         $user->save();
     }
-
 }

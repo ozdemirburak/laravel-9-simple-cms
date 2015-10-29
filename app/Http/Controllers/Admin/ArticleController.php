@@ -113,7 +113,9 @@ class ArticleController extends Controller
     private function setDatatable()
     {
         return Datatable::table()
-            ->addColumn(trans('admin.fields.article.title'), trans('admin.fields.read_count'), trans('admin.fields.article.category_id'), trans('admin.fields.published_at'),trans('admin.fields.updated_at'))
+            ->addColumn(trans('admin.fields.article.title'), trans('admin.fields.read_count'))
+            ->addColumn(trans('admin.fields.article.category_id'), trans('admin.fields.published_at'))
+            ->addColumn(trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.article'))
             ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
@@ -129,5 +131,4 @@ class ArticleController extends Controller
     {
         return $this->language->categories->lists('title', 'id')->all();
     }
-
 }

@@ -1,5 +1,4 @@
 $(function() {
-
     $('input[type=date]').datepicker({
         format: 'yyyy-mm-dd',
         todayHighlight: true
@@ -12,5 +11,4 @@ $(function() {
     if( !$('input[type=date]').val() ) {
         $('input[type=date]').datepicker("setDate", new Date());
     }
-
 });

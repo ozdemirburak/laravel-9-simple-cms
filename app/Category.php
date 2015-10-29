@@ -65,5 +65,4 @@ class Category extends Model implements SluggableInterface
     {
         return $this->hasMany('App\Article');
     }
-
 }

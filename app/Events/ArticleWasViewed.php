@@ -21,5 +21,4 @@ class ArticleWasViewed extends Event
     {
         $this->article = $article;
     }
-
 }

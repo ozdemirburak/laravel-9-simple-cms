@@ -1,5 +1,4 @@
 .env
-.idea
 .phpstorm.meta.php
 composer.lock
 node_modules

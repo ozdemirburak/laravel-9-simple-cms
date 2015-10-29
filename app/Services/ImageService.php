@@ -4,7 +4,6 @@ namespace App\Services;
 
 class ImageService
 {
-
     /**
      * @param $request
      * @param $field
@@ -13,8 +12,7 @@ class ImageService
     public static function uploadImage($request, $field)
     {
         $data = $request->except($field);
-        if($request->file($field))
-        {
+        if ($request->file($field)) {
             $file = $request->file($field);
             $request->file($field);
             $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
@@ -25,5 +23,4 @@ class ImageService
         }
         return $data;
     }
-
 }

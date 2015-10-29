@@ -102,12 +102,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->id != Auth::user()->id)
-        {
+        if ($user->id != Auth::user()->id) {
             $user->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
-        }
-        else
-        {
+        } else {
             Flash::error(trans('admin.delete.self'));
         }
         return redirect(route('admin.user.index'));
@@ -128,5 +125,4 @@ class UserController extends Controller
             ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
-
 }

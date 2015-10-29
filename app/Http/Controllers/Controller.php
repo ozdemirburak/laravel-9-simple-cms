@@ -29,5 +29,4 @@ abstract class Controller extends BaseController
     {
         return Language::lists('title', 'id')->all();
     }
-
 }

@@ -18,7 +18,9 @@ class DataTableController extends Controller
      */
     public function __construct(Request $request)
     {
-        if(! $request->ajax() || ! Datatable::shouldHandle()) abort(403, 'Forbidden');
+        if (! $request->ajax() || ! Datatable::shouldHandle()) {
+            abort(403, 'Forbidden');
+        }
         parent::__construct();
     }
 
@@ -31,20 +33,16 @@ class DataTableController extends Controller
     {
         return Datatable::collection($this->language->articles)
             ->showColumns('title', 'read_count')
-            ->addColumn('category_id', function($model)
-            {
+            ->addColumn('category_id', function ($model) {
                 return $model->category->title;
             })
-            ->addColumn('published_at', function($model)
-            {
+            ->addColumn('published_at', function ($model) {
                 return $model->published_at;
             })
-            ->addColumn('updated_at', function($model)
-            {
+            ->addColumn('updated_at', function ($model) {
                 return $this->setDateTime($model->updated_at);
             })
-            ->addColumn('',function($model)
-            {
+            ->addColumn('', function ($model) {
                 return get_ops('article', $model->id);
             })
             ->searchColumns('title')
@@ -61,12 +59,10 @@ class DataTableController extends Controller
     {
         return Datatable::collection($this->language->categories)
             ->showColumns('title')
-            ->addColumn('updated_at', function($model)
-            {
+            ->addColumn('updated_at', function ($model) {
                 return $this->setDateTime($model->updated_at);
             })
-            ->addColumn('',function($model)
-            {
+            ->addColumn('', function ($model) {
                 return get_ops('category', $model->id);
             })
             ->searchColumns('title')
@@ -83,12 +79,10 @@ class DataTableController extends Controller
     {
         return Datatable::collection(Language::all())
             ->showColumns('title', 'code')
-            ->addColumn('updated_at', function($model)
-            {
+            ->addColumn('updated_at', function ($model) {
                 return $this->setDateTime($model->updated_at);
             })
-            ->addColumn('',function($model)
-            {
+            ->addColumn('', function ($model) {
                 return get_ops('language', $model->id);
             })
             ->searchColumns('title')
@@ -105,20 +99,17 @@ class DataTableController extends Controller
     {
         return Datatable::collection(User::all())
             ->showColumns('name', 'ip_address')
-            ->addColumn('logged_in_at', function($model)
-            {
+            ->addColumn('logged_in_at', function ($model) {
                 return $this->setDateTime($model->logged_in_at);
             })
-            ->addColumn('logged_out_at', function($model)
-            {
+            ->addColumn('logged_out_at', function ($model) {
                 return $this->setDateTime($model->logged_out_at);
             })
-            ->addColumn('',function($model)
-            {
+            ->addColumn('', function ($model) {
                 return get_ops('user', $model->id);
             })
             ->searchColumns('ip_address', 'name')
-            ->orderColumns('logged_in_at','logged_out_at', 'name')
+            ->orderColumns('logged_in_at', 'logged_out_at', 'name')
             ->make();
     }
 
@@ -126,5 +117,4 @@ class DataTableController extends Controller
     {
         return $datetime->year > 0 ? $datetime . "<br/><small>(" . $datetime->diffForHumans() . ")</small>" : "-";
     }
-
 }

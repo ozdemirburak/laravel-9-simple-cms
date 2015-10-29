@@ -35,5 +35,4 @@ class SetUserLoginCredentials
         $user->ip_address = $this->request->getClientIp();
         $user->save();
     }
-
 }

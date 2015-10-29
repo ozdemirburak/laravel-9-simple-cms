@@ -87,5 +87,4 @@ class Page extends Node implements SluggableInterface
     {
         $this->attributes['slug'] = str_replace(["oe", "ue"], ["o", "u"], $slug);
     }
-
 }

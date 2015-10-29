@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->model('article',  'App\Article');
+        $router->model('article', 'App\Article');
         $router->model('category', 'App\Category');
         $router->model('language', 'App\Language');
         $router->model('page', 'App\Page');
@@ -41,10 +41,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function($router)
-        {
+        $router->group(['namespace' => $this->namespace], function ($router) {
             require app_path('Http/routes.php');
         });
     }
-
 }

@@ -1,28 +1,24 @@
 <?php
 
 // Application routes
-Route::group(['namespace' => 'Application', 'middleware' => 'app'], function()
-{
+Route::group(['namespace' => 'Application', 'middleware' => 'app'], function () {
     Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
-    Route::get('article/{article}',  ['as' => 'article', 'uses' => 'ArticleController@index']);
-    Route::get('page/{page}',  ['as' => 'page', 'uses' => 'PageController@index']);
-    Route::get('category/{category}',  ['as' => 'category', 'uses' => 'CategoryController@index']);
+    Route::get('article/{article}', ['as' => 'article', 'uses' => 'ArticleController@index']);
+    Route::get('page/{page}', ['as' => 'page', 'uses' => 'PageController@index']);
+    Route::get('category/{category}', ['as' => 'category', 'uses' => 'CategoryController@index']);
     Route::post('language/change', ['as' => 'app.language.change' , 'uses' => 'LanguageController@postChange']);
 });
 
 // Auth routes
-Route::group(['namespace' => 'Auth'], function()
-{
-    Route::group(['prefix' => 'auth'], function()
-    {
+Route::group(['namespace' => 'Auth'], function () {
+    Route::group(['prefix' => 'auth'], function () {
         Route::get('/', ['as' => 'auth.root', 'uses' => 'AuthController@getLogin']);
-        Route::get('login',  ['as' => 'auth.login', 'uses' => 'AuthController@getLogin']);
+        Route::get('login', ['as' => 'auth.login', 'uses' => 'AuthController@getLogin']);
         Route::post('login', ['as' => 'auth.login', 'uses' => 'AuthController@postLogin']);
         Route::get('logout', ['as' => 'auth.logout', 'uses' => 'AuthController@getLogout']);
     });
-    Route::group(['prefix' => 'password'], function()
-    {
-        Route::get('email',  ['as' => 'password.email', 'uses' => 'PasswordController@getEmail']);
+    Route::group(['prefix' => 'password'], function () {
+        Route::get('email', ['as' => 'password.email', 'uses' => 'PasswordController@getEmail']);
         Route::post('email', ['as' => 'password.email', 'uses' => 'PasswordController@postEmail']);
         Route::get('reset/{token}', ['as' => 'password.reset', 'uses' => 'PasswordController@getReset']);
         Route::post('reset', ['as' => 'password.reset', 'uses' => 'PasswordController@postReset']);
@@ -30,8 +26,7 @@ Route::group(['namespace' => 'Auth'], function()
 });
 
 // API routes
-Route::group(['prefix' => 'api', 'namespace' => 'Api'], function()
-{
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     // DataTables
     Route::get('table/article', ['as'=>'api.table.article', 'uses'=>'DataTableController@getArticles']);
     Route::get('table/category', ['as'=>'api.table.category', 'uses'=>'DataTableController@getCategories']);
@@ -40,8 +35,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function()
 });
 
 // Admin routes
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function()
-{
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     // GET
     Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
     Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);

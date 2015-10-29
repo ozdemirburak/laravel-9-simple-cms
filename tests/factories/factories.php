@@ -7,7 +7,7 @@ $factory('App\User', [
 ]);
 
 $factory('App\Category', [
-    'language_id' => $faker->numberBetween(1,2),
+    'language_id' => $faker->numberBetween(1, 2),
     'title' => $faker->sentence(5),
     'slug' => $faker->slug,
     'description' => $faker->sentence(5),
@@ -15,7 +15,7 @@ $factory('App\Category', [
 ]);
 
 $factory('App\Article', [
-    'category_id' => $faker->numberBetween(1,5),
+    'category_id' => $faker->numberBetween(1, 5),
     'title' => $faker->sentence(5),
     'slug' => $faker->slug,
     'content' => $faker->paragraphs(8),

@@ -41,5 +41,4 @@ class SettingController extends Controller
         $setting->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.setting.index'));
     }
-
 }

@@ -1,7 +1,6 @@
 <?php
 
-if( ! function_exists('limit_to_numwords'))
-{
+if (!function_exists('limit_to_numwords')) {
     /**
      * Limit content with number of words
      *
@@ -12,8 +11,7 @@ if( ! function_exists('limit_to_numwords'))
     function limit_to_numwords($string, $numwords)
     {
         $excerpt = explode(' ', $string, $numwords + 1);
-        if (count($excerpt) >= $numwords)
-        {
+        if (count($excerpt) >= $numwords) {
             array_pop($excerpt);
         }
         $excerpt = implode(' ', $excerpt) . ' ...';
@@ -21,7 +19,7 @@ if( ! function_exists('limit_to_numwords'))
     }
 }
 
-if( ! function_exists('renderMenuNode')) {
+if (!function_exists('renderMenuNode')) {
     /**
      * Render nodes for nested sets
      *
@@ -36,16 +34,12 @@ if( ! function_exists('renderMenuNode')) {
         $link = route('page', ['id' => $node->id]);
         $drop_down = '<a class="dropdown-toggle" data-toggle="dropdown" href="'.$link.'" role="button" aria-expanded="false">' . $node->title . ' ' . $caret . '</a>';
         $single  = '<a href="'. $link .'">' . $node->title . '</a>';
-        if ($node->isLeaf())
-        {
+        if ($node->isLeaf()) {
             return '<li>' . $single . '</li>';
-        }
-        else
-        {
+        } else {
             $html = '<li '.$class.'>' . $drop_down;
             $html .= '<ul '.$list.'>';
-            foreach ($node->children as $child)
-            {
+            foreach ($node->children as $child) {
                 $html .= renderMenuNode($child);
             }
             $html .= '</ul>';
@@ -55,7 +49,7 @@ if( ! function_exists('renderMenuNode')) {
     }
 }
 
-if( ! function_exists('getTitle')) {
+if (!function_exists('getTitle')) {
     /**
      * Render nodes for nested sets
      *
@@ -68,7 +62,7 @@ if( ! function_exists('getTitle')) {
     }
 }
 
-if( ! function_exists('getDescription')) {
+if (!function_exists('getDescription')) {
     /**
      * Render nodes for nested sets
      *
