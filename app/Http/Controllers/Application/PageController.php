@@ -17,5 +17,4 @@ class PageController extends Controller
     {
         return view('application.page.index', compact('page'));
     }
-
 }

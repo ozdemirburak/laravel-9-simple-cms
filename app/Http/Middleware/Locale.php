@@ -35,5 +35,4 @@ class Locale
         Session::set('current_lang', $current_lang);
         return $next($request);
     }
-
 }

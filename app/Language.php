@@ -58,5 +58,4 @@ class Language extends Model
     {
         return $this->hasManyThrough('App\Article', 'App\Category');
     }
-
 }

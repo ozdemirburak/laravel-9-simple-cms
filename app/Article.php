@@ -121,5 +121,4 @@ class Article extends Model implements SluggableInterface
     {
         $query->where('published_at', '<=', Carbon::now());
     }
-
 }

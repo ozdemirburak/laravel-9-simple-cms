@@ -1,7 +1,6 @@
 <?php
 
-if( ! function_exists('get_ops'))
-{
+if (!function_exists('get_ops')) {
     /**
      * Returns resource operations for the datatables or nested sets
      *
@@ -10,16 +9,13 @@ if( ! function_exists('get_ops'))
      * @param $class
      * @return string
      */
-    function get_ops($resource, $id, $class="btn")
+    function get_ops($resource, $id, $class = "btn")
     {
-        if($class=="btn")
-        {
+        if ($class=="btn") {
             $show_class = "btn btn-xs bg-navy";
             $edit_class = "btn btn-xs bg-olive";
             $delete_class = "btn btn-xs btn-danger destroy";
-        }
-        else
-        {
+        } else {
             $show_class = "inline-show";
             $edit_class = "inline-edit";
             $delete_class = "inline-delete";
@@ -45,8 +41,7 @@ if( ! function_exists('get_ops'))
 }
 
 
-if ( ! function_exists('breadcrumbs'))
-{
+if (!function_exists('breadcrumbs')) {
     /**
      * Return breadcrumbs for each resource methods
      *
@@ -60,14 +55,12 @@ if ( ! function_exists('breadcrumbs'))
         $breadcrumbs  = '<ol class="breadcrumb">';
         $breadcrumbs .= '<li><a href="'.route('admin.root').'"><i class="fa fa-dashboard"></i> '.trans('admin.menu.dashboard').'</a></li>';
         // if not admin root
-        if(strpos($route, 'root')  === false)
-        {
+        if (strpos($route, 'root')  === false) {
             $breadcrumbs  .= strpos($route, 'index')  !== false ? '<li class="active">' : '<li>';
             $parent_text   = strpos($route, 'index')  !== false ? trans($route) : trans($index);
             $breadcrumbs  .= strpos($route, 'index')  !== false ? $parent_text : '<a href="'.route($index).'">'.$parent_text.'</a>';
             $breadcrumbs  .= '</li>';
-            if(strpos($route, 'index')  === false)
-            {
+            if (strpos($route, 'index')  === false) {
                 $breadcrumbs  .= '<li class="active">'.trans($route).'</li>';
             }
         }
@@ -76,8 +69,7 @@ if ( ! function_exists('breadcrumbs'))
     }
 }
 
-if ( ! function_exists('header_title'))
-{
+if (!function_exists('header_title')) {
     /**
      * Return the header title for each page
      *
@@ -88,11 +80,9 @@ if ( ! function_exists('header_title'))
         $route = Route::currentRouteName();
         $title = '<h1>';
         $title .= trans(Route::getCurrentRoute()->getName());
-        if( strpos($route, 'index')  !== false )
-        {
+        if (strpos($route, 'index') !== false) {
             $new = substr($route, 0, strrpos($route, '.') + 1) . 'create';
-            if(Route::has($new))
-            {
+            if (Route::has($new)) {
                 $title .= '<small>';
                 $title .= '<a href="'.route($new).'" title="'.trans($new).'">';
                 $title .= '<i class="fa fa-plus"></i>';
@@ -105,8 +95,7 @@ if ( ! function_exists('header_title'))
     }
 }
 
-if ( ! function_exists('rename_file'))
-{
+if (!function_exists('rename_file')) {
     /**
      * Rename the filename, convert string to url friendly form and attach random string
      *
@@ -124,7 +113,7 @@ if ( ! function_exists('rename_file'))
     }
 }
 
-if( ! function_exists('renderNode')) {
+if (!function_exists('renderNode')) {
     /**
      * Render nodes for nested sets
      *
@@ -140,16 +129,12 @@ if( ! function_exists('renderNode')) {
         $handle = 'class="dd-handle"';
         $title  = '<span class="ol-buttons"> ' . get_ops($resource, $node->id, 'inline') . '</span>';
         $title  .= '<div '.$handle.'>' . $node->title . '</div>';
-        if ($node->isLeaf())
-        {
+        if ($node->isLeaf()) {
             return '<li '.$class.' '.$id.'>' . $title . '</li>';
-        }
-        else
-        {
+        } else {
             $html = '<li '.$class.' '.$id.'>' . $title;
             $html .= '<ol '.$list.'>';
-            foreach ($node->children as $child)
-            {
+            foreach ($node->children as $child) {
                 $html .= renderNode($child, $resource);
             }
             $html .= '</ol>';
@@ -159,25 +144,22 @@ if( ! function_exists('renderNode')) {
     }
 }
 
-if( ! function_exists('formatMilliseconds'))
-{
+if (!function_exists('formatMilliseconds')) {
     function formatMilliseconds($seconds)
     {
         $hours = 0;
-        $milliseconds = str_replace( "0.", '', $seconds - floor( $seconds ) );
-        if ( $seconds > 3600 )
-        {
-            $hours = floor( $seconds / 3600 );
+        $milliseconds = str_replace("0.", '', $seconds - floor($seconds));
+        if ($seconds > 3600) {
+            $hours = floor($seconds / 3600);
         }
         $seconds = $seconds % 3600;
-        return str_pad( $hours, 2, '0', STR_PAD_LEFT )
-        . gmdate( ':i:s', $seconds )
+        return str_pad($hours, 2, '0', STR_PAD_LEFT)
+        . gmdate(':i:s', $seconds)
         . ($milliseconds ? ".$milliseconds" : '');
     }
 }
 
-if( ! function_exists('dashboard_box'))
-{
+if (!function_exists('dashboard_box')) {
     function dashboard_box($bg, $icon, $text, $number)
     {
         $str  = '<div class="col-md-3 col-sm-6 col-xs-12">';

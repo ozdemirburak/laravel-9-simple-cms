@@ -5,14 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoriesTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('categories', function(Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
@@ -22,16 +22,15 @@ class CreateCategoriesTable extends Migration
             $table->string('color');
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('categories');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('categories');
+    }
 }

@@ -25,5 +25,4 @@ class SetConfiguration
         Config::set(['settings' => Setting::firstOrFail()]);
         return $next($request);
     }
-
 }

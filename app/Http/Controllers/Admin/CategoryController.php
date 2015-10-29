@@ -119,5 +119,4 @@ class CategoryController extends Controller
             ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
             ->render();
     }
-
 }

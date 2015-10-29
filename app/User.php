@@ -38,21 +38,21 @@ use Carbon\Carbon;
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-	use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword;
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = ['email', 'name', 'password', 'picture'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['email', 'name', 'password', 'picture'];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Set password encrypted
@@ -108,5 +108,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $ip ? inet_ntop($ip) : "";
     }
-
 }

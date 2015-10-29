@@ -17,5 +17,4 @@ class LanguageController extends Controller
         session(['language' => Input::get('language')]);
         return back();
     }
-
 }

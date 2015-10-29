@@ -5,14 +5,14 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateArticlesTable extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('articles', function(Blueprint $table) {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
@@ -24,16 +24,15 @@ class CreateArticlesTable extends Migration
             $table->integer('read_count')->default(0);
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('articles');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('articles');
+    }
 }

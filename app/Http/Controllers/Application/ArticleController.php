@@ -20,5 +20,4 @@ class ArticleController extends Controller
         Event::fire(new ArticleWasViewed($article));
         return view('application.article.index', compact('article'));
     }
-
 }

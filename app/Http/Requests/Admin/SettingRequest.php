@@ -26,11 +26,10 @@ class SettingRequest extends Request
         return [
             'analytics_id'      => 'max:255',
             'disqus_shortname'  => 'max:255',
-            'email'	            => 'required|email|min:7',
+            'email'             => 'required|email|min:7',
             'facebook'          => 'min:21|url|max:255',
             'logo'              => 'sometimes|max:2048|image',
             'twitter'           => 'min:18|url|max:255'
         ];
     }
-
 }

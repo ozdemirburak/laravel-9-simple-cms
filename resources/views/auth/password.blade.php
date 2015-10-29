@@ -15,20 +15,17 @@
         {!! Form::open(['method' => 'POST', 'route' => 'password.email']) !!}
 
         <div class="body bg-gray-50">
-
             @include('errors.validation')
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
             @endif
-
             <div class="form-group has-feedback">
                 {!! Form::label('email', trans('auth.login.email')) !!}
                 {!! Form::text('email', null, ['class' => 'form-control']) !!}
                 <i class="fa fa-envelope form-control-feedback"></i>
             </div>
-
         </div>
 
         <div class="footer">

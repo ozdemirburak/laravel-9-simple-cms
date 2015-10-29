@@ -15,5 +15,4 @@
         {!! $article->content !!}
     </p>
     <h2> {{ trans('admin.fields.article.description') . ': ' . $article->description  }}</h2>
-
 @endsection

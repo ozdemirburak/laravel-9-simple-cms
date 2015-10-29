@@ -83,9 +83,9 @@ class DashboardController extends Controller
      * @param string $metrics
      * @return mixed
      */
-    private function query($options = [],$metrics='ga:visits')
+    private function query($options = [], $metrics = 'ga:visits')
     {
-        return LaravelAnalytics::performQuery($this->start,$this->end,$metrics,$options)->rows;
+        return LaravelAnalytics::performQuery($this->start, $this->end, $metrics, $options)->rows;
     }
 
     /**
@@ -96,16 +96,12 @@ class DashboardController extends Controller
      * @param int $offset
      * @return Collection
      */
-    private function makeCollection($data,$fields,$offset=1)
+    private function makeCollection($data, $fields, $offset = 1)
     {
-        if (is_null($data))
-        {
+        if (is_null($data)) {
             return new Collection([]);
-        }
-        else
-        {
-            foreach ($data as $pageRow)
-            {
+        } else {
+            foreach ($data as $pageRow) {
                 $keywordData[] = [$fields[0] => $pageRow[0], $fields[1] => $pageRow[$offset]];
             }
             return new Collection($keywordData);
@@ -137,7 +133,7 @@ class DashboardController extends Controller
             'sort' => '-ga:entrances',
             'max-results' => $this->limit
         ];
-        $data = $this->query($options,'ga:entrances');
+        $data = $this->query($options, 'ga:entrances');
         return $this->makeCollection($data, ['0' => 'path', '1' => 'visits']);
     }
 
@@ -153,7 +149,7 @@ class DashboardController extends Controller
             'sort' => '-ga:exits',
             'max-results' => $this->limit
         ];
-        $data = $this->query($options,'ga:exits');
+        $data = $this->query($options, 'ga:exits');
         return $this->makeCollection($data, ['0' => 'path', '1' => 'visits']);
     }
 
@@ -186,7 +182,7 @@ class DashboardController extends Controller
             'max-results' => $this->limit
         ];
         $data = $this->query($options);
-        return $this->makeCollection($data, ['0' => 'path', '1' => 'visits'],2);
+        return $this->makeCollection($data, ['0' => 'path', '1' => 'visits'], 2);
     }
 
     /**
@@ -234,10 +230,8 @@ class DashboardController extends Controller
         ];
         $array = $this->query($options);
         $visits = [];
-        if(count($array))
-        {
-            foreach($array as $k => $v)
-            {
+        if (count($array)) {
+            foreach ($array as $k => $v) {
                 $visits[$k] = [$v[0], (int) $v[1]];
             }
         }
@@ -256,8 +250,7 @@ class DashboardController extends Controller
         ];
         $array = $this->query($options);
         $visits = [];
-        foreach($array as $k => $v)
-        {
+        foreach ($array as $k => $v) {
             $visits[$k]['date']   = Carbon::parse($v['0'])->format('Y-m-d');
             $visits[$k]['visits'] = $v['1'];
         }
@@ -278,10 +271,8 @@ class DashboardController extends Controller
         ];
         $array = $this->query($options);
         $visits = [];
-        if(count($array))
-        {
-            foreach($array as $k => $v)
-            {
+        if (count($array)) {
+            foreach ($array as $k => $v) {
                 $visits[$k] = [str_replace(" Province", "", $v[1]), (int) $v[2]];
             }
         }
@@ -298,13 +289,11 @@ class DashboardController extends Controller
         $options = [
             'dimensions' => 'ga:pagePath'
         ];
-        $array = $this->query($options,'ga:avgTimeOnPage , ga:entranceBounceRate, ga:pageviewsPerVisit');
+        $array = $this->query($options, 'ga:avgTimeOnPage, ga:entranceBounceRate, ga:pageviewsPerVisit');
         $count = count($array);
         $average = ['time' => 0, 'bounce' => 0, 'visit' => 0];
-        if(count($array))
-        {
-            foreach($array as $v)
-            {
+        if (count($array)) {
+            foreach ($array as $v) {
                 $average['time']   += $v['1'];
                 $average['bounce'] += $v['2'];
                 $average['visit']  += $v['3'];
@@ -315,5 +304,4 @@ class DashboardController extends Controller
         }
         return $average;
     }
-
 }
