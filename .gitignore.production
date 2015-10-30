@@ -1,7 +1,5 @@
 .env
-.idea
 .phpstorm.meta.php
-.rocketeer
 composer.lock
 node_modules
 resources/assets/vendor
