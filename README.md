@@ -129,7 +129,7 @@ To serve the application, you can use `php artisan serve`, then open <a href="ht
 ## User Guide
 
 * [How to Create a New Resource](#u1)
-* [How to Deploy with Rocketeer](#u2)
+* [How to Deploy](#u2)
 
 -----
 <a name="u1"></a>
@@ -203,7 +203,6 @@ class Fruit extends Model implements SluggableInterface {
     {
         return $this->belongsTo('App\Language');
     }
-
 }
 ```
 
@@ -289,7 +288,6 @@ class FruitController extends Controller {
             ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
             ->render();
     }
-
 }
 ```
 
@@ -306,19 +304,16 @@ class DataTableController extends Controller
     {
         return Datatable::collection($this->language->fruits)
             ->showColumns('title')
-            ->addColumn('updated_at', function($model)
-            {
+            ->addColumn('updated_at', function ($model) {
                 return $model->updated_at->diffForHumans();
             })
-            ->addColumn('',function($model)
-            {
+            ->addColumn('', function ($model) {
                 return get_ops('fruit', $model->id);
             })
             ->searchColumns('title')
             ->orderColumns('title')
             ->make();
     }
-
 }
 ```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
@@ -343,7 +338,6 @@ class FruitRequest extends Request {
             'title' => 'required|min:3'
         ];
     }
-
 }
 ```
 
@@ -420,15 +414,13 @@ Add the fruit routes, to `routes.php` file.
 
 ```php
 
-Route::group(['prefix' => 'api', 'namespace' => 'Api'], function()
-{
+Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     *
     *
     Route::get('table/fruit', ['as'=>'api.table.fruit', 'uses'=>'DataTableController@getFruits']);
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function()
-{
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     *
     *
     Route::resource('fruit', 'FruitController');
@@ -461,21 +453,10 @@ Now you have your fruit resource that can be manageable within your admin panel.
 
 -----
 <a name="u2"></a>
-### How to Deploy with Rocketeer
+### How to Deploy 
 
-First, install rocketeer if you haven't done it before.
-
-    wget http://rocketeer.autopergamene.eu/versions/rocketeer.phar
-    chmod +x rocketeer.phar
-    mv rocketeer.phar /usr/local/bin/rocketeer
-
-Then read this great article on how to deploy in a [secure way](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers). Then let's say you will store the project within the `/var/home` folder. Grant the newly created user ownage rights within that folder.
-
-After that, within the remote server, don't forget to install git and composer. If you want to compile css and javascript files within the remote server, you also need to install node, npm, gulp and bower. Thus within the `.rocketeer/strategies.php` file, uncomment the `'dependencies' => 'Polyglot'` line.
-
-Then, within the `.rocketeer/config.php` file, set the host, username and the path to your ssh key. Thus, within the the `.rocketeer/scm.php` , set your git repository.
-
-Finally, you can deploy with `rocketeer deploy` command.
+I have showed all the required steps in detail for a deployment with Git and Capistrano from scratch on my blog.
+You can check it on: [http://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](http://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
 
 -----
 <a name="item6"></a>
