@@ -39,24 +39,24 @@ Laravel 5.1 content management system for starters.
 <a name="item3"></a>
 ##Quick Start:
 
-    git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY
-    cd CUSTOM_DIRECTORY
-    curl -s https://getcomposer.org/installer | php
-    php composer.phar install
-    mv .env.example .env
+    $ git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY
+    $ cd CUSTOM_DIRECTORY
+    $ curl -s https://getcomposer.org/installer | php
+    $ php composer.phar install
+    $ mv .env.example .env
 
 Create a database and configure the `.env` file.
 
-    php artisan key:generate
-    php artisan migrate
-    php artisan db:seed
-    curl -sL https://deb.nodesource.com/setup | sudo bash -
-    sudo apt-get install -y nodejs
-    npm install --global gulp bower
-    npm install
-    bower install
-    gulp --production
-    php artisan serve
+    $ php artisan key:generate
+    $ php artisan migrate
+    $ php artisan db:seed
+    $ curl -sL https://deb.nodesource.com/setup | sudo bash -
+    $ sudo apt-get install -y nodejs
+    $ npm install --global gulp bower
+    $ npm install
+    $ bower install
+    $ gulp --production
+    $ php artisan serve
 
 Open [http://localhost:8000](http://localhost:8000) from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
 The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing,
@@ -141,11 +141,11 @@ To serve the application, you can use `php artisan serve`, then open <a href="ht
 
 Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content.
 
-    php artisan make:controller Admin/FruitController
-    php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
-    php artisan make:request Admin/FruitRequest
-    php artisan make:form Forms/FruitsForm
-    php artisan migrate
+    $ php artisan make:controller Admin/FruitController
+    $ php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
+    $ php artisan make:request Admin/FruitRequest
+    $ php artisan make:form Forms/FruitsForm
+    $ php artisan migrate
 
 This will create everything that we need to manage our Fruits.
 
