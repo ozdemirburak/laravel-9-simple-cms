@@ -43,8 +43,9 @@ Laravel 5.1 content management system for starters.
     cd CUSTOM_DIRECTORY
     curl -s https://getcomposer.org/installer | php
     php composer.phar install
+    mv .env.example .env
 
-Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.env.example` file, located in your root dir, to `.env` and configure it
+Create a database and configure the `.env` file.
 
     php artisan key:generate
     php artisan migrate
@@ -57,9 +58,12 @@ Create database with `utf8_general_ci` or `utf8_unicode_ci` collation, rename `.
     gulp --production
     php artisan serve
 
-Open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing, then upon login, just hit <a href="http://localhost:8000/admin/user">http://localhost:8000/admin/user</a> to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
+Open [http://localhost:8000](http://localhost:8000) from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
+The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing,
+then upon login, just hit [http://localhost:8000/admin/user](http://localhost:8000/admin/user) to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
 
-**Attention #1 :** If you have xdebug installed and get an error `Maximum function nesting level of '100' reached, aborting!`, you need to increase the value of `xdebug.max_nesting_level` in your php.ini. See <a href="https://stackoverflow.com/questions/8656089/solution-for-fatal-error-maximum-function-nesting-level-of-100-reached-abor">this</a> for further information.
+**Attention #1 :** If you have Xdebug installed and get an error `Maximum function nesting level of '100' reached, aborting!`, you need to increase the value of `xdebug.max_nesting_level` in your php.ini. 
+See [this Stack Overflow question](https://stackoverflow.com/questions/8656089/solution-for-fatal-error-maximum-function-nesting-level-of-100-reached-abor) for further information.
 
 **Attention #2 :** If HTMLPurifier returns you an error about file permissions, or if purified content can't be posted, fix file permissions with calling `chmod 775 -R storage/purifier` then `chmod 775 -R vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
 
