@@ -46,7 +46,9 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $category = Category::create($request->all());
-        $category->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $category->id ?
+            Flash::success(trans('admin.create.success')) :
+            Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.category.index'));
     }
 
@@ -88,7 +90,9 @@ class CategoryController extends Controller
     public function update(Category $category, CategoryRequest $request)
     {
         $category->fill($request->all());
-        $category->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $category->save() ?
+            Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.category.index'));
     }
 
@@ -100,7 +104,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
+        $category->delete() ?
+            Flash::success(trans('admin.delete.success')) :
+            Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.category.index'));
     }
 
@@ -113,10 +119,13 @@ class CategoryController extends Controller
     private function setDatatable()
     {
         return Datatable::table()
-            ->addColumn(trans('admin.fields.category.title'), trans('admin.fields.updated_at'))
+            ->addColumn(
+                trans('admin.fields.category.title'),
+                trans('admin.fields.updated_at')
+            )
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.category'))
-            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
+            ->setOptions(dataTableOptions())
             ->render();
     }
 }

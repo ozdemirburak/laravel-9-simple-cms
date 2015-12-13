@@ -46,7 +46,9 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         $article = Article::create($request->all());
-        $article->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $article->id ?
+            Flash::success(trans('admin.create.success')) :
+            Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.article.index'));
     }
 
@@ -88,7 +90,9 @@ class ArticleController extends Controller
     public function update(Article $article, ArticleRequest $request)
     {
         $article->fill($request->all());
-        $article->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $article->save() ?
+            Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.article.index'));
     }
 
@@ -100,7 +104,9 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
+        $article->delete() ?
+            Flash::success(trans('admin.delete.success')) :
+            Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.article.index'));
     }
 
@@ -113,12 +119,16 @@ class ArticleController extends Controller
     private function setDatatable()
     {
         return Datatable::table()
-            ->addColumn(trans('admin.fields.article.title'), trans('admin.fields.read_count'))
-            ->addColumn(trans('admin.fields.article.category_id'), trans('admin.fields.published_at'))
+            ->addColumn(
+                trans('admin.fields.article.title'),
+                trans('admin.fields.read_count'),
+                trans('admin.fields.article.category_id'),
+                trans('admin.fields.published_at')
+            )
             ->addColumn(trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.article'))
-            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
+            ->setOptions(dataTableOptions())
             ->render();
     }
 

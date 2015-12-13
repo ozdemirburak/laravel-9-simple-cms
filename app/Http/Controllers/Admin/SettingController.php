@@ -38,7 +38,9 @@ class SettingController extends Controller
     public function patchSettings(Setting $setting, SettingRequest $request)
     {
         $setting->fill(ImageService::uploadImage($request, 'logo'));
-        $setting->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $setting->save() ?
+            Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.setting.index'));
     }
 }

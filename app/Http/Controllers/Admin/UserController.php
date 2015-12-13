@@ -48,7 +48,9 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create(ImageService::uploadImage($request, 'picture'));
-        $user->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $user->id ?
+            Flash::success(trans('admin.create.success')) :
+            Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.user.index'));
     }
 
@@ -90,7 +92,9 @@ class UserController extends Controller
     public function update(User $user, UserRequest $request)
     {
         $user->fill(ImageService::uploadImage($request, 'picture'));
-        $user->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $user->save() ?
+            Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.user.index'));
     }
 
@@ -103,7 +107,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->id != Auth::user()->id) {
-            $user->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
+            $user->delete() ?
+                Flash::success(trans('admin.delete.success')) :
+                Flash::error(trans('admin.delete.fail'));
         } else {
             Flash::error(trans('admin.delete.self'));
         }
@@ -119,10 +125,15 @@ class UserController extends Controller
     private function setDatatable()
     {
         return Datatable::table()
-            ->addColumn(trans('admin.fields.user.name'), trans('admin.fields.user.ip_address'), trans('admin.fields.user.logged_in_at'), trans('admin.fields.user.logged_out_at'))
+            ->addColumn(
+                trans('admin.fields.user.name'),
+                trans('admin.fields.user.ip_address'),
+                trans('admin.fields.user.logged_in_at'),
+                trans('admin.fields.user.logged_out_at')
+            )
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.user'))
-            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
+            ->setOptions(dataTableOptions())
             ->render();
     }
 }

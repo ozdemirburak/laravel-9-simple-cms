@@ -32,7 +32,8 @@ if (!function_exists('renderMenuNode')) {
         $class = 'class="dropdown"';
         $caret = '<i class="fa fa-caret-down"></i>';
         $link = route('page', ['id' => $node->id]);
-        $drop_down = '<a class="dropdown-toggle" data-toggle="dropdown" href="'.$link.'" role="button" aria-expanded="false">' . $node->title . ' ' . $caret . '</a>';
+        $drop_down = '<a class="dropdown-toggle" data-toggle="dropdown" href="'.$link.'"
+                        role="button" aria-expanded="false">' . $node->title . ' ' . $caret . '</a>';
         $single  = '<a href="'. $link .'">' . $node->title . '</a>';
         if ($node->isLeaf()) {
             return '<li>' . $single . '</li>';
@@ -58,7 +59,9 @@ if (!function_exists('getTitle')) {
      */
     function getTitle($object = null)
     {
-        return isset($object) && isset($object->title) ? $object->title . ' | ' .  Session::get('current_lang')->site_title : Session::get('current_lang')->site_title;
+        return isset($object) && isset($object->title) ?
+            $object->title . ' | ' .  Session::get('current_lang')->site_title :
+            Session::get('current_lang')->site_title;
     }
 }
 
@@ -71,6 +74,8 @@ if (!function_exists('getDescription')) {
      */
     function getDescription($object = null)
     {
-        return isset($object) && isset($object->description) ? $object->description : Session::get('current_lang')->site_description;
+        return isset($object) && isset($object->description) ?
+            $object->description :
+            Session::get('current_lang')->site_description;
     }
 }
