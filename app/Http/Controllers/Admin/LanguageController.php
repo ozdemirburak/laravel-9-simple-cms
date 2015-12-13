@@ -49,7 +49,9 @@ class LanguageController extends Controller
     public function store(LanguageRequest $request)
     {
         $language = Language::create(ImageService::uploadImage($request, 'flag'));
-        $language->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $language->id ?
+            Flash::success(trans('admin.create.success')) :
+            Flash::error(trans('admin.create.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -91,7 +93,9 @@ class LanguageController extends Controller
     public function update(Language $language, LanguageRequest $request)
     {
         $language->fill(ImageService::uploadImage($request, 'flag'));
-        $language->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $language->save() ?
+            Flash::success(trans('admin.update.success')) :
+            Flash::error(trans('admin.update.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -103,7 +107,9 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language)
     {
-        $language->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
+        $language->delete() ?
+            Flash::success(trans('admin.delete.success')) :
+            Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.language.index'));
     }
 
@@ -127,10 +133,14 @@ class LanguageController extends Controller
     private function setDatatable()
     {
         return Datatable::table()
-            ->addColumn(trans('admin.fields.language.title'), trans('admin.fields.language.code'), trans('admin.fields.updated_at'))
+            ->addColumn(
+                trans('admin.fields.language.title'),
+                trans('admin.fields.language.code'),
+                trans('admin.fields.updated_at')
+            )
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.language'))
-            ->setOptions(['sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')])
+            ->setOptions(dataTableOptions())
             ->render();
     }
 }

@@ -25,14 +25,21 @@ if (!function_exists('get_ops')) {
         $delete_path = route('admin.'.$resource.'.destroy', ['id' => $id]);
         $ops  = '<ul class="list-inline no-margin-bottom">';
         $ops .=  '<li>';
-        $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'"><i class="fa fa-search"></i> '.trans('admin.ops.show').'</a>';
+        $ops .=  '<a class="'.$show_class.'" href="'.$show_path.'">
+                  <i class="fa fa-search"></i>
+                  '.trans('admin.ops.show').'</a>';
         $ops .=  '</li>';
         $ops .=  '<li>';
-        $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'"><i class="fa fa-pencil-square-o"></i> '.trans('admin.ops.edit').'</a>';
+        $ops .=  '<a class="'.$edit_class.'" href="'.$edit_path.'">
+                 <i class="fa fa-pencil-square-o"></i>
+                  '.trans('admin.ops.edit').'</a>';
         $ops .=  '</li>';
         $ops .=  '<li>';
         $ops .= Form::open(['method' => 'DELETE', 'url' => $delete_path]);
-        $ops .= Form::submit('&#xf1f8; ' .trans('admin.ops.delete'), ['onclick' => "return confirm('".trans('admin.ops.confirmation')."');", 'class' => $delete_class]);
+        $ops .= Form::submit('&#xf1f8; ' .trans('admin.ops.delete'), [
+                'onclick' => "return confirm('".trans('admin.ops.confirmation')."');",
+                'class' => $delete_class
+            ]);
         $ops .= Form::close();
         $ops .=  '</li>';
         $ops .=  '</ul>';
@@ -53,12 +60,15 @@ if (!function_exists('breadcrumbs')) {
         // get after last dot
         $index = substr($route, 0, strrpos($route, '.') + 1) . 'index';
         $breadcrumbs  = '<ol class="breadcrumb">';
-        $breadcrumbs .= '<li><a href="'.route('admin.root').'"><i class="fa fa-dashboard"></i> '.trans('admin.menu.dashboard').'</a></li>';
+        $breadcrumbs .= '<li><a href="'.route('admin.root').'">
+                        <i class="fa fa-dashboard"></i>
+                        '.trans('admin.menu.dashboard').'</a></li>';
         // if not admin root
         if (strpos($route, 'root')  === false) {
-            $breadcrumbs  .= strpos($route, 'index')  !== false ? '<li class="active">' : '<li>';
             $parent_text   = strpos($route, 'index')  !== false ? trans($route) : trans($index);
-            $breadcrumbs  .= strpos($route, 'index')  !== false ? $parent_text : '<a href="'.route($index).'">'.$parent_text.'</a>';
+            $breadcrumbs  .= strpos($route, 'index')  !== false ? '<li class="active">' : '<li>';
+            $breadcrumbs  .= strpos($route, 'index')  !== false ? $parent_text :
+                '<a href="'.route($index).'">'.$parent_text.'</a>';
             $breadcrumbs  .= '</li>';
             if (strpos($route, 'index')  === false) {
                 $breadcrumbs  .= '<li class="active">'.trans($route).'</li>';
@@ -174,5 +184,15 @@ if (!function_exists('dashboard_box')) {
         $str .= '</div>';
         $str .= '</div>';
         return $str;
+    }
+}
+
+if (!function_exists('dataTableOptions')) {
+    function dataTableOptions()
+    {
+        return [
+            'sPaginationType' => 'bs_normal',
+            'oLanguage' => trans('admin.datatables')
+        ];
     }
 }
