@@ -6,8 +6,8 @@
 	"type": "project",
 	"require": {
 		"php": ">=5.5.9",
-		"laravel/framework": ">=5.1.4",
-		"laravelcollective/html": "~5.0",
+		"laravel/framework": "5.1.*",
+		"laravelcollective/html": "5.1.*",
 		"baum/baum": "~1.1",
 		"chumper/datatable": "dev-develop",
 		"kris/laravel-form-builder": "~1.6.30",
