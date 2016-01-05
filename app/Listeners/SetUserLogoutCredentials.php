@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\User;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 
 class SetUserLogoutCredentials
@@ -26,12 +26,12 @@ class SetUserLogoutCredentials
     /**
      * Update authenticated user's logout timestamp
      *
-     * @param User $user
+     * @param Logout $event
      * @return void
      */
-    public function handle(User $user)
+    public function handle(Logout $event)
     {
-        $user->logged_out_at = Carbon::now();
-        $user->save();
+        $event->user->logged_out_at = Carbon::now();
+        $event->user->save();
     }
 }

@@ -1,5 +1,5 @@
 # Laravel 5 Simple CMS
-Laravel 5.1 content management system for starters.
+Laravel 5.2 content management system for starters. For 5.1, see the 5.1 branch.
 
 -----
 ##Table of Contents
@@ -94,7 +94,8 @@ As this project relies on bower and gulp heavily, you need to install them. To i
 
 After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
 
-Rename your `.env.example` file as `.env` and change the variables as your own.
+Rename your `.env.example` file as `.env` and change the variables as your own. If you have any variables with any spaces, double quote them, for instance, if you have a variable that equals to John Doe,
+use "John Doe" instead.
 
 Finally, to generate a unique application key, run `php artisan key:generate`.
 
@@ -289,7 +290,7 @@ class FruitController extends Controller {
             ->addColumn(trans('admin.fields.fruit.title'), trans('admin.fields.updated_at'))
             ->addColumn(trans('admin.ops.name'))
             ->setUrl(route('api.table.fruit'))
-            ->setOptions(array('sPaginationType' => 'bs_normal', 'oLanguage' => trans('admin.datatables')))
+            ->setOptions(dataTableOptions())
             ->render();
     }
 }
@@ -417,14 +418,13 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 Add the fruit routes, to `routes.php` file.
 
 ```php
-
-Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
+Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => 'api'], function () {
     *
     *
     Route::get('table/fruit', ['as'=>'api.table.fruit', 'uses'=>'DataTableController@getFruits']);
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     *
     *
     Route::resource('fruit', 'FruitController');

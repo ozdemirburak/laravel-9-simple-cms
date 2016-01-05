@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Language;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Session;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 abstract class Controller extends BaseController
 {
@@ -17,7 +16,7 @@ abstract class Controller extends BaseController
 
     public function __construct()
     {
-        $this->language = Session::get('current_lang');
+        $this->language = session('current_lang');
     }
 
     /**
@@ -27,6 +26,6 @@ abstract class Controller extends BaseController
      */
     protected function getSelectList()
     {
-        return Language::lists('title', 'id')->all();
+        return Language::pluck('title', 'id')->all();
     }
 }

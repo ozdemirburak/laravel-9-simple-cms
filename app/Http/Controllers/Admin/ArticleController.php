@@ -139,6 +139,6 @@ class ArticleController extends Controller
      */
     protected function getSelectList()
     {
-        return $this->language->categories->lists('title', 'id')->all();
+        return $this->language->categories->pluck('title', 'id')->all();
     }
 }

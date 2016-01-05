@@ -19,7 +19,7 @@
             {!! Form::hidden('token', $token) !!}
             <div class="form-group has-feedback">
                 {!! Form::label('email', trans('auth.login.email')) !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                {!! Form::text('email', $email ? $email : old('email'), ['class' => 'form-control']) !!}
                 <i class="fa fa-envelope form-control-feedback"></i>
             </div>
             <div class="form-group has-feedback">

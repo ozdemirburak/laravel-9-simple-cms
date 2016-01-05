@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\User;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 
 class SetUserLoginCredentials
@@ -26,13 +26,13 @@ class SetUserLoginCredentials
     /**
      * Update authenticated user's login timestamp and ip address
      *
-     * @param User $user
+     * @param Login $event
      * @return void
      */
-    public function handle(User $user)
+    public function handle(Login $event)
     {
-        $user->logged_in_at = Carbon::now();
-        $user->ip_address = $this->request->getClientIp();
-        $user->save();
+        $event->user->logged_in_at = Carbon::now();
+        $event->user->ip_address = $this->request->getClientIp();
+        $event->user->save();
     }
 }
