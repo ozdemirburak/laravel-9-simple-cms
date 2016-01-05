@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Custom;
 
 use Closure;
 use Menu;
@@ -27,7 +27,7 @@ class MakeMenu
 
     private function makeAdminMenu()
     {
-        Menu::make('admin', function($menu) {
+        Menu::make('admin', function ($menu) {
             $dashboard = $menu->add(trans('admin.menu.dashboard'), ['route' => 'admin.root'])
                 ->icon('dashboard')
                 ->prependIcon();

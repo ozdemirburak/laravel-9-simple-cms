@@ -46,7 +46,7 @@ class DataTableController extends Controller
                 return get_ops('article', $model->id);
             })
             ->searchColumns('title')
-            ->orderColumns('category_id', 'published_at', 'read_count', 'title', 'updated_at')
+            ->orderColumns('category_id', 'published_at', 'read_count', 'updated_at')
             ->make();
     }
 
@@ -86,7 +86,7 @@ class DataTableController extends Controller
                 return get_ops('language', $model->id);
             })
             ->searchColumns('title')
-            ->orderColumns('code', 'title', 'updated_at')
+            ->orderColumns('code', 'updated_at')
             ->make();
     }
 
