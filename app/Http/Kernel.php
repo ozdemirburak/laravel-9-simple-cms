@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
             'with_language'
         ],
         'api' => [
+            'web',
             'throttle:60,1',
             'with_language'
         ],
