@@ -12,11 +12,12 @@ class ArticleController extends Controller
     /**
      * Show the article.
      *
-     * @param Article $article
+     * @param String $slug
      * @return Response
      */
-    public function index(Article $article)
+    public function index(String $slug)
     {
+        $article = Article::findBySlugOrFail($slug);
         Event::fire(new ArticleWasViewed($article));
         return view('application.article.index', compact('article'));
     }
