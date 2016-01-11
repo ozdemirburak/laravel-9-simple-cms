@@ -15,8 +15,9 @@ class ArticleController extends Controller
      * @param Article $article
      * @return Response
      */
-    public function index(Article $article)
+    public function index($slug)
     {
+        $article = Article::findBySlugOrFail($slug);
         Event::fire(new ArticleWasViewed($article));
         return view('application.article.index', compact('article'));
     }
