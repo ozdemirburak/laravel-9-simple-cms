@@ -10,10 +10,10 @@ class CategoryController extends Controller
     /**
      * Show the category articles
      *
-     * @param Category $category
+     * @param String $slug
      * @return Response
      */
-    public function index($slug)
+    public function index(String $slug)
     {
         $category = Category::findBySlugOrFail($slug);
         $articles = $category->articles()->published()->orderBy('published_at', 'desc')->paginate(5);
