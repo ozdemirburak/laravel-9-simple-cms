@@ -13,8 +13,9 @@ class CategoryController extends Controller
      * @param Category $category
      * @return Response
      */
-    public function index(Category $category)
+    public function index($slug)
     {
+        $category = Category::findBySlugOrFail($slug);
         $articles = $category->articles()->published()->orderBy('published_at', 'desc')->paginate(5);
         return view('application.category.index', compact('articles', 'category'));
     }

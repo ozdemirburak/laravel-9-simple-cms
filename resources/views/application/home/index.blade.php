@@ -9,11 +9,11 @@
             <article class="post">
                 <header class="post-header">
                     <div class="post-category">
-                        <a style="background-color: {{ $article->category->color }}" href="{{ route('category', ['id' => $article->category->id])  }}">{{ $article->category->title }}</a>
+                        <a style="background-color: {{ $article->category->color }}" href="{{ route('category', ['slug' => $article->category->slug])  }}">{{ $article->category->title }}</a>
                     </div>
                     <div class="post-title">
                         <h2>
-                            <a href="{{ route('article', ['id' => $article->id])  }}">{{ $article->title }}</a>
+                            <a href="{{ route('article', ['slug' => $article->slug])  }}">{{ $article->title }}</a>
                         </h2>
                     </div>
                 </header>
@@ -26,7 +26,7 @@
                         {{ $article->published_at }}
                     </div>
                     <div class="pull-right">
-                        <a class="btn post-btn btn-sm" href="{{ route('article', ['id' => $article->id])  }}">{{ trans('application.read_more') }}</a>
+                        <a class="btn post-btn btn-sm" href="{{ route('article', ['slug' => $article->slug])  }}">{{ trans('application.read_more') }}</a>
                     </div>
                 </footer>
             </article>
