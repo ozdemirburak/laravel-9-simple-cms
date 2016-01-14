@@ -33,8 +33,7 @@ class Kernel extends HttpKernel
         ],
         'api' => [
             'web',
-            'throttle:60,1',
-            'with_language'
+            'throttle:60,1'
         ],
         'admin' => [
             'web',

@@ -31,7 +31,7 @@ if (!function_exists('renderMenuNode')) {
         $list = 'class="dropdown-menu"';
         $class = 'class="dropdown"';
         $caret = '<i class="fa fa-caret-down"></i>';
-        $link = route('page', ['id' => $node->id]);
+        $link = route('page', ['page_slug' => $node->slug]);
         $drop_down = '<a class="dropdown-toggle" data-toggle="dropdown" href="'.$link.'"
                         role="button" aria-expanded="false">' . $node->title . ' ' . $caret . '</a>';
         $single  = '<a href="'. $link .'">' . $node->title . '</a>';
