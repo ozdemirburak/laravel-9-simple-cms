@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Controllers\Api\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
-use Datatable;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Laracasts\Flash\Flash;
 
@@ -14,12 +14,12 @@ class CategoryController extends Controller
     /**
      * Display a listing of the categories.
      *
+     * @param CategoryDataTable $dataTable
      * @return Response
      */
-    public function index()
+    public function index(CategoryDataTable $dataTable)
     {
-        $table = $this->setDatatable();
-        return view('admin.categories.index', compact('table'));
+        return $dataTable->render('admin.categories.index');
     }
 
     /**
@@ -108,24 +108,5 @@ class CategoryController extends Controller
             Flash::success(trans('admin.delete.success')) :
             Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.category.index'));
-    }
-
-    /**
-     * Create DataTable HTML
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(
-                trans('admin.fields.category.title'),
-                trans('admin.fields.updated_at')
-            )
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('api.table.category'))
-            ->setOptions(dataTableOptions())
-            ->render();
     }
 }

@@ -2,119 +2,145 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Language;
-use App\User;
-use Carbon\Carbon;
-use Datatable;
-use Illuminate\Http\Request;
+use Yajra\Datatables\Services\DataTable;
 
-class DataTableController extends Controller
+class DataTableController extends DataTable
 {
+    /**
+     * Default parameters
+     *
+     * @var array
+     */
+    protected $parameters = ['dom' => 'Bfrtip', 'buttons' => ['csv', 'excel', 'pdf']];
 
     /**
-     * Abort if request is not ajax
-     * @param Request $request
+     * Columns to show
+     *
+     * @var array
      */
-    public function __construct(Request $request)
+    protected $columns =  [];
+
+    /**
+     * Columns with pluck, relation key, desired relation property
+     *
+     * @var array
+     */
+    protected $pluck_columns =  [];
+
+    /**
+     * Show the action buttons, show, edit and delete
+     *
+     * @var array
+     */
+    protected $ops = true;
+
+    /**
+     * Common columns such that used by more than one class, so that translation belongs to root, not to any model
+     * specially, for instance, every model has `created_at` and `updated_at` attribute, hence translation of those
+     * properties are single, instead of defining for each model, like `admin.fields.published_at` and so on.
+     *
+     * @var array
+     */
+    protected $common_columns = ['created_at', 'updated_at'];
+
+    /**
+     * Model name
+     *
+     * @var string
+     */
+    protected $model = "";
+
+    /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
     {
-        if (! $request->ajax() || ! Datatable::shouldHandle()) {
-            abort(403, 'Forbidden');
+        $model = $this->getModelName();
+        $datatables = $this->datatables->eloquent($this->query());
+        foreach ($this->pluck_columns as $key => $value) {
+            $datatables = $datatables->editColumn($key, function ($model) use ($value) {
+                return $model->$value;
+            });
         }
-        parent::__construct();
+        if ($this->ops === true) {
+            $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
+                return get_ops($model, $data->id);
+            });
+        }
+        return $datatables->make(true);
     }
 
     /**
-     * JSON data for seeding Articles
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * Get the query object to be processed by datatables.
+     *
+     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder
      */
-    public function getArticles()
+    public function query()
     {
-        return Datatable::collection($this->language->articles)
-            ->showColumns('title', 'read_count')
-            ->addColumn('category_id', function ($model) {
-                return $model->category->title;
-            })
-            ->addColumn('published_at', function ($model) {
-                return $model->published_at;
-            })
-            ->addColumn('updated_at', function ($model) {
-                return $this->setDateTime($model->updated_at);
-            })
-            ->addColumn('', function ($model) {
-                return get_ops('article', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('category_id', 'published_at', 'read_count', 'updated_at')
-            ->make();
     }
 
     /**
-     * JSON data for seeding Categories
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\Datatables\Html\Builder
      */
-    public function getCategories()
+    public function html()
     {
-        return Datatable::collection($this->language->categories)
-            ->showColumns('title')
-            ->addColumn('updated_at', function ($model) {
-                return $this->setDateTime($model->updated_at);
-            })
-            ->addColumn('', function ($model) {
-                return get_ops('category', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('title', 'updated_at')
-            ->make();
+        return $this->builder()
+            ->columns($this->getColumns())
+            ->parameters($this->getParameters());
     }
 
     /**
-     * JSON data for seeding Languages
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "DataTable" out
+     *
+     * @return string
      */
-    public function getLanguages()
+    private function getModelName()
     {
-        return Datatable::collection(Language::all())
-            ->showColumns('title', 'code')
-            ->addColumn('updated_at', function ($model) {
-                return $this->setDateTime($model->updated_at);
-            })
-            ->addColumn('', function ($model) {
-                return get_ops('language', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('code', 'updated_at')
-            ->make();
+        return strtolower(
+            empty($this->model) ?
+            explode('DataTable', substr(strrchr(get_class($this), '\\'), 1))[0]  :
+            $this->model
+        );
     }
 
     /**
-     * JSON data for seeding Users
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * Translate column names
+     *
+     * @return array
      */
-    public function getUsers()
+    protected function getColumns()
     {
-        return Datatable::collection(User::all())
-            ->showColumns('name', 'ip_address')
-            ->addColumn('logged_in_at', function ($model) {
-                return $this->setDateTime($model->logged_in_at);
-            })
-            ->addColumn('logged_out_at', function ($model) {
-                return $this->setDateTime($model->logged_out_at);
-            })
-            ->addColumn('', function ($model) {
-                return get_ops('user', $model->id);
-            })
-            ->searchColumns('ip_address', 'name')
-            ->orderColumns('logged_in_at', 'logged_out_at', 'name')
-            ->make();
+        $model = $this->getModelName();
+        $columns = [];
+        foreach (array_merge($this->columns, array_keys($this->pluck_columns)) as $column) {
+            $title = trans('admin.fields.' . $model . '.' . $column);
+            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+        }
+        foreach ($this->common_columns as $column) {
+            $title = trans('admin.fields.' . $column);
+            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+        }
+        if ($this->ops === true) {
+            $title = trans('admin.ops.name');
+            array_push($columns, [
+                'data' => 'ops', 'name' => 'ops', 'title' => $title,
+                'orderable' => false, 'searchable' => false
+            ]);
+        }
+        return $columns;
     }
 
-    private function setDateTime(Carbon $datetime)
+    /**
+     * Translate DataTable parameters, such as search, showing number to number out of number entries exc.
+     *
+     * @return array
+     */
+    protected function getParameters()
     {
-        return $datetime->year > 0 ? $datetime . "<br/><small>(" . $datetime->diffForHumans() . ")</small>" : "-";
+        return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
     }
 }

@@ -55,6 +55,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['logged_in_at', 'logged_out_at'];
+
+    /**
      * Set password encrypted
      *
      * @param $password
@@ -62,28 +69,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] =  Hash::make($password);
-    }
-
-    /**
-     * Get the logged_in_at attribute.
-     *
-     * @param  $date
-     * @return string
-     */
-    public function getLoggedInAtAttribute($date)
-    {
-        return Carbon::parse($date);
-    }
-
-    /**
-     * Get the logged_out_at attribute.
-     *
-     * @param  $date
-     * @return string
-     */
-    public function getLoggedOutAtAttribute($date)
-    {
-        return Carbon::parse($date);
     }
 
     /**

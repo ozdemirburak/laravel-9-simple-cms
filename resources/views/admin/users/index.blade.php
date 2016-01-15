@@ -1,5 +1,5 @@
 @extends('layouts.admin')
 
 @section('content')
-    {!! $table !!}
+    @include('partials.admin.datatable', ['dataTable' => $dataTable, 'buttons' => true])
 @endsection

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Http\Controllers\Api\DataTables\ArticleDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ArticleRequest;
-use Datatable;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Laracasts\Flash\Flash;
 
@@ -14,12 +14,12 @@ class ArticleController extends Controller
     /**
      * Display a listing of the articles.
      *
+     * @param ArticleDataTable $dataTable
      * @return Response
      */
-    public function index()
+    public function index(ArticleDataTable $dataTable)
     {
-        $table = $this->setDatatable();
-        return view('admin.articles.index', compact('table'));
+        return $dataTable->render('admin.articles.index');
     }
 
     /**
@@ -108,28 +108,6 @@ class ArticleController extends Controller
             Flash::success(trans('admin.delete.success')) :
             Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.article.index'));
-    }
-
-    /**
-     * Create DataTable HTML
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(
-                trans('admin.fields.article.title'),
-                trans('admin.fields.read_count'),
-                trans('admin.fields.article.category_id'),
-                trans('admin.fields.published_at')
-            )
-            ->addColumn(trans('admin.fields.updated_at'))
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('api.table.article'))
-            ->setOptions(dataTableOptions())
-            ->render();
     }
 
     /**

@@ -186,13 +186,3 @@ if (!function_exists('dashboard_box')) {
         return $str;
     }
 }
-
-if (!function_exists('dataTableOptions')) {
-    function dataTableOptions()
-    {
-        return [
-            'sPaginationType' => 'bs_normal',
-            'oLanguage' => trans('admin.datatables')
-        ];
-    }
-}

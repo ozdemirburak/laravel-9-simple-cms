@@ -149,12 +149,12 @@ return [
         Baum\Providers\BaumServiceProvider::class,
         Caffeinated\Menus\MenusServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Chumper\Datatable\DatatableServiceProvider::class,
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Mews\Purifier\PurifierServiceProvider::class,
-        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class
+        Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -206,7 +206,6 @@ return [
          */
 
         'Input'             => Illuminate\Support\Facades\Input::class,
-        'Datatable'         => Chumper\Datatable\Facades\DatatableFacade::class,
         'Flash'             => Laracasts\Flash\Flash::class,
         'Form'              => Collective\Html\FormFacade::class,
         'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
@@ -214,6 +213,7 @@ return [
         'Menu'              => Caffeinated\Menus\Facades\Menu::class,
         'LaravelAnalytics'  => Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class,
         'Purifier'          => Mews\Purifier\Facades\Purifier::class,
+        'Datatables'        => Yajra\Datatables\Datatables::class,
     ],
 
 ];

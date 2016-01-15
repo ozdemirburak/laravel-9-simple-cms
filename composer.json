@@ -9,14 +9,14 @@
 		"laravel/framework": "5.2.*",
 		"laravelcollective/html": "5.2.*",
 		"baum/baum": "~1.1",
-		"chumper/datatable": "dev-develop",
 		"kris/laravel-form-builder": "~1.6.30",
 		"laracasts/flash": "~1.3",
 		"mews/purifier": "~2.0",
 		"cviebrock/eloquent-sluggable" : "~3.1.4",
 		"barryvdh/laravel-elfinder": "0.3.*",
 		"spatie/laravel-analytics": "~1.1",
-		"caffeinated/menus": "~2.0"
+		"caffeinated/menus": "~2.0",
+		"yajra/laravel-datatables-oracle": "~6.0"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",
