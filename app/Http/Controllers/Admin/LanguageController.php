@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Api\DataTables\LanguageDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\LanguageRequest;
 use App\Language;
 use App\Services\ImageService;
-use Datatable;
 use Input;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Laracasts\Flash\Flash;
@@ -17,12 +17,12 @@ class LanguageController extends Controller
     /**
      * Display a listing of the languages.
      *
+     * @param LanguageDataTable $dataTable
      * @return Response
      */
-    public function index()
+    public function index(LanguageDataTable $dataTable)
     {
-        $table = $this->setDatatable();
-        return view('admin.languages.index', compact('table'));
+        return $dataTable->render('admin.languages.index');
     }
 
     /**
@@ -122,25 +122,5 @@ class LanguageController extends Controller
     {
         session(['language' => Input::get('language')]);
         return Redirect::back();
-    }
-
-    /**
-     * Create DataTable HTML
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(
-                trans('admin.fields.language.title'),
-                trans('admin.fields.language.code'),
-                trans('admin.fields.updated_at')
-            )
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('api.table.language'))
-            ->setOptions(dataTableOptions())
-            ->render();
     }
 }

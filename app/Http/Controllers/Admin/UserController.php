@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Api\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Services\ImageService;
 use App\User;
 use Auth;
-use Datatable;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Laracasts\Flash\Flash;
 
@@ -16,12 +16,12 @@ class UserController extends Controller
     /**
      * Display a listing of the users.
      *
+     * @param UserDataTable $dataTable
      * @return Response
      */
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
-        $table = $this->setDatatable();
-        return view('admin.users.index', compact('table'));
+        return $dataTable->render('admin.users.index');
     }
 
     /**
@@ -114,26 +114,5 @@ class UserController extends Controller
             Flash::error(trans('admin.delete.self'));
         }
         return redirect(route('admin.user.index'));
-    }
-
-    /**
-     * Create DataTable HTML
-     *
-     * @return mixed
-     * @throws \Exception
-     */
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(
-                trans('admin.fields.user.name'),
-                trans('admin.fields.user.ip_address'),
-                trans('admin.fields.user.logged_in_at'),
-                trans('admin.fields.user.logged_out_at')
-            )
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('api.table.user'))
-            ->setOptions(dataTableOptions())
-            ->render();
     }
 }

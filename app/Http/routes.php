@@ -28,11 +28,7 @@ Route::group(['middleware' => 'web'], function () {
 
 // API routes
 Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => 'api'], function () {
-    // DataTables
-    Route::get('table/article', ['as'=>'api.table.article', 'uses'=>'DataTableController@getArticles']);
-    Route::get('table/category', ['as'=>'api.table.category', 'uses'=>'DataTableController@getCategories']);
-    Route::get('table/language', ['as'=>'api.table.language', 'uses'=>'DataTableController@getLanguages']);
-    Route::get('table/user', ['as'=>'api.table.user', 'uses'=>'DataTableController@getUsers']);
+    //
 });
 
 // Admin routes
