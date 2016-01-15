@@ -60,8 +60,8 @@ class DataTableController extends DataTable
         $model = $this->getModelName();
         $datatables = $this->datatables->eloquent($this->query());
         foreach ($this->pluck_columns as $key => $value) {
-            $datatables = $datatables->editColumn($key, function ($model) use ($value) {
-                return $model->$value;
+            $datatables = $datatables->editColumn($key, function ($relation) use ($value) {
+                return $relation->$value;
             });
         }
         if ($this->ops === true) {
