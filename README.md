@@ -220,24 +220,49 @@ public function fruits()
 }
 ```
 
+Create new FruitDataTable controller for datatables within Http/Controllers/Api/DataTables folder and edit it.
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api\DataTables;
+
+use App\Http\Controllers\Api\DataTableController;
+use App\Fruit;
+
+class FruitDataTable extends DataTableController
+{
+    protected $columns = ['title'];
+    
+    protected $common_columns = ['created_at', 'updated_at'];
+    
+    public function query()
+    {
+        $fruits = Fruit::whereLanguageId(session('current_lang')->id);
+        return $this->applyScopes($fruits);
+    }
+}
+```
+
 Then configure the controller `FruitController.php` file located in Controllers folder's Admin sub-folder as below:
 
 ```php
-<?php namespace App\Http\Controllers\Admin;
+<?php 
+
+namespace App\Http\Controllers\Admin;
 
 use App\Fruit;
+use App\Http\Controllers\Api\DataTables\FruitDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FruitRequest;
-use Datatable;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Laracasts\Flash\Flash;
 
 class FruitController extends Controller {
 
-    public function index()
+    public function index(FruitDataTable $dataTable)
     {
-        $table = $this->setDatatable();
-        return view('admin.fruits.index', compact('table'));
+        return $dataTable->render('admin.fruits.index');
     }
 
     public function create(FormBuilder $formBuilder)
@@ -283,44 +308,9 @@ class FruitController extends Controller {
         $fruit->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
         return redirect(route('admin.fruit.index'));
     }
-
-    private function setDatatable()
-    {
-        return Datatable::table()
-            ->addColumn(trans('admin.fields.fruit.title'), trans('admin.fields.updated_at'))
-            ->addColumn(trans('admin.ops.name'))
-            ->setUrl(route('api.table.fruit'))
-            ->setOptions(dataTableOptions())
-            ->render();
-    }
 }
 ```
 
-Then open your DataTableController.php file Controllers folder's sub-folder Api, add the part below.
-
-```php
-class DataTableController extends Controller
-{
-    *
-    *
-    *
-    *
-    public function getFruits()
-    {
-        return Datatable::collection($this->language->fruits)
-            ->showColumns('title')
-            ->addColumn('updated_at', function ($model) {
-                return $model->updated_at->diffForHumans();
-            })
-            ->addColumn('', function ($model) {
-                return get_ops('fruit', $model->id);
-            })
-            ->searchColumns('title')
-            ->orderColumns('title')
-            ->make();
-    }
-}
-```
 Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
 
 ```php
@@ -418,12 +408,6 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 Add the fruit routes, to `routes.php` file.
 
 ```php
-Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => 'api'], function () {
-    *
-    *
-    Route::get('table/fruit', ['as'=>'api.table.fruit', 'uses'=>'DataTableController@getFruits']);
-});
-
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     *
     *
