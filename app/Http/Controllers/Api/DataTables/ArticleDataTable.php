@@ -19,7 +19,7 @@ class ArticleDataTable extends DataTableController
      *
      * @var array
      */
-    protected $pluck_columns = ['category_id' => 'title'];
+    protected $pluck_columns = ['category_id' => ['category', 'title']];
 
     /**
      * Common columns for translation

@@ -60,8 +60,8 @@ abstract class DataTableController extends DataTable
         $model = $this->getModelName();
         $datatables = $this->datatables->eloquent($this->query());
         foreach ($this->pluck_columns as $key => $value) {
-            $datatables = $datatables->editColumn($key, function ($relation) use ($value) {
-                return $relation->$value;
+            $datatables = $datatables->editColumn($key, function ($model) use ($value) {
+                return $model->$value[0]->$value[1];
             });
         }
         if ($this->ops === true) {
