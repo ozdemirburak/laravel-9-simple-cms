@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Application;
 
 use App\Article;
+use App\Base\Controllers\ApplicationController;
 use App\Events\ArticleWasViewed;
-use App\Http\Controllers\Controller;
 use Event;
 
-class ArticleController extends Controller
+class ArticleController extends ApplicationController
 {
     /**
      * Show the article.

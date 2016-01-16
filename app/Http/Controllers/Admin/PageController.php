@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Base\Controllers\AdminController;
 use App\Http\Requests\Admin\PageRequest;
 use App\Page;
 use Illuminate\Http\Request;
-use Kris\LaravelFormBuilder\FormBuilder;
-use Laracasts\Flash\Flash;
 
-class PageController extends Controller
+class PageController extends AdminController
 {
     /**
      * Display a listing of the pages.
@@ -20,22 +18,7 @@ class PageController extends Controller
     {
         $pages = Page::whereLanguageId($this->language->id);
         $pages = $pages->count() > 1 ? $this->language->pages->toHierarchy() : $pages->get();
-        return view('admin.pages.index', compact('pages'));
-    }
-
-    /**
-     * Show the form for creating a new page.
-     *
-     * @param FormBuilder $formBuilder
-     * @return Response
-     */
-    public function create(FormBuilder $formBuilder)
-    {
-        $form = $formBuilder->create('App\Forms\PagesForm', [
-            'method' => 'POST',
-            'url' => route('admin.page.store')
-        ], $this->getSelectList());
-        return view('admin.pages.create', compact('form'));
+        return $this->viewPath("index", $pages);
     }
 
     /**
@@ -46,11 +29,7 @@ class PageController extends Controller
      */
     public function store(PageRequest $request)
     {
-        $page = Page::create($request->all());
-        $page->id ?
-            Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
-        return redirect(route('admin.page.index'));
+        return $this->createFlashRedirect(Page::class, $request);
     }
 
     /**
@@ -61,28 +40,22 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        return view('admin.pages.show', compact('page'));
+        return $this->viewPath("show", $page);
     }
 
     /**
-     * Show the form for editing the specified page.
+     * Show the form for editing the specified language.
      *
      * @param Page $page
-     * @param FormBuilder $formBuilder
      * @return Response
      */
-    public function edit(Page $page, FormBuilder $formBuilder)
+    public function edit(Page $page)
     {
-        $form = $formBuilder->create('App\Forms\PagesForm', [
-            'method' => 'PATCH',
-            'url' => route('admin.page.update', ['id' => $page->id]),
-            'model' => $page
-        ], $this->getSelectList());
-        return view('admin.pages.edit', compact('form', 'page'));
+        return $this->getForm($page);
     }
 
     /**
-     * Update the specified page in storage.
+     * Update the specified language in storage.
      *
      * @param Page $page
      * @param PageRequest $request
@@ -90,25 +63,18 @@ class PageController extends Controller
      */
     public function update(Page $page, PageRequest $request)
     {
-        $page->fill($request->all());
-        $page->save() ?
-            Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
-        return redirect(route('admin.page.index'));
+        return $this->saveFlashRedirect($page, $request);
     }
 
     /**
-     * Remove the specified page from storage.
+     * Remove the specified language from storage.
      *
      * @param  Page  $page
      * @return Response
      */
     public function destroy(Page $page)
     {
-        $page->delete() ?
-            Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
-        return redirect(route('admin.page.index'));
+        return $this->destroyFlashRedirect($page);
     }
 
     /**

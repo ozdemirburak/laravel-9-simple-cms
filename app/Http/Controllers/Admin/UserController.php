@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Base\Controllers\AdminController;
 use App\Http\Controllers\Api\DataTables\UserDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
-use App\Services\ImageService;
 use App\User;
 use Auth;
-use Kris\LaravelFormBuilder\FormBuilder;
-use Laracasts\Flash\Flash;
 
-class UserController extends Controller
+class UserController extends AdminController
 {
+    /**
+     * Image column of the model
+     *
+     * @var string
+     */
+    private $imageColumn = "picture";
+
     /**
      * Display a listing of the users.
      *
@@ -21,22 +25,7 @@ class UserController extends Controller
      */
     public function index(UserDataTable $dataTable)
     {
-        return $dataTable->render('admin.users.index');
-    }
-
-    /**
-     * Show the form for creating a new user.
-     *
-     * @param FormBuilder $formBuilder
-     * @return Response
-     */
-    public function create(FormBuilder $formBuilder)
-    {
-        $form = $formBuilder->create('App\Forms\UsersForm', [
-            'method' => 'POST',
-            'url' => route('admin.user.store')
-        ]);
-        return view('admin.users.create', compact('form'));
+        return $dataTable->render($this->viewPath());
     }
 
     /**
@@ -47,11 +36,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::create(ImageService::uploadImage($request, 'picture'));
-        $user->id ?
-            Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
-        return redirect(route('admin.user.index'));
+        return $this->createFlashRedirect(User::class, $request, $this->imageColumn);
     }
 
     /**
@@ -62,24 +47,18 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        return $this->viewPath("show", $user);
     }
 
     /**
      * Show the form for editing the specified user.
      *
      * @param User $user
-     * @param FormBuilder $formBuilder
      * @return Response
      */
-    public function edit(User $user, FormBuilder $formBuilder)
+    public function edit(User $user)
     {
-        $form = $formBuilder->create('App\Forms\UsersForm', [
-            'method' => 'PATCH',
-            'url' => route('admin.user.update', ['id' => $user->id]),
-            'model' => $user
-        ]);
-        return view('admin.users.edit', compact('form', 'user'));
+        return $this->getForm($user);
     }
 
     /**
@@ -91,11 +70,7 @@ class UserController extends Controller
      */
     public function update(User $user, UserRequest $request)
     {
-        $user->fill(ImageService::uploadImage($request, 'picture'));
-        $user->save() ?
-            Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
-        return redirect(route('admin.user.index'));
+        return $this->saveFlashRedirect($user, $request, $this->imageColumn);
     }
 
     /**
@@ -107,12 +82,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->id != Auth::user()->id) {
-            $user->delete() ?
-                Flash::success(trans('admin.delete.success')) :
-                Flash::error(trans('admin.delete.fail'));
+            return $this->destroyFlashRedirect($user);
         } else {
-            Flash::error(trans('admin.delete.self'));
+            return $this->redirectRoutePath("index", "admin.delete.self");
         }
-        return redirect(route('admin.user.index'));
     }
 }

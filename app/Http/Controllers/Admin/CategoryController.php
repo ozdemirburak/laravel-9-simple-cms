@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Base\Controllers\AdminController;
 use App\Category;
 use App\Http\Controllers\Api\DataTables\CategoryDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
-use Kris\LaravelFormBuilder\FormBuilder;
-use Laracasts\Flash\Flash;
 
-class CategoryController extends Controller
+class CategoryController extends AdminController
 {
     /**
      * Display a listing of the categories.
@@ -19,22 +17,7 @@ class CategoryController extends Controller
      */
     public function index(CategoryDataTable $dataTable)
     {
-        return $dataTable->render('admin.categories.index');
-    }
-
-    /**
-     * Show the form for creating a new category.
-     *
-     * @param FormBuilder $formBuilder
-     * @return Response
-     */
-    public function create(FormBuilder $formBuilder)
-    {
-        $form = $formBuilder->create('App\Forms\CategoriesForm', [
-            'method' => 'POST',
-            'url' => route('admin.category.store')
-        ], $this->getSelectList());
-        return view('admin.categories.create', compact('form'));
+        return $dataTable->render($this->viewPath());
     }
 
     /**
@@ -45,11 +28,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->all());
-        $category->id ?
-            Flash::success(trans('admin.create.success')) :
-            Flash::error(trans('admin.create.fail'));
-        return redirect(route('admin.category.index'));
+        return $this->createFlashRedirect(Category::class, $request);
     }
 
     /**
@@ -60,24 +39,18 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('admin.categories.show', compact('category'));
+        return $this->viewPath("show", $category);
     }
 
     /**
      * Show the form for editing the specified category.
      *
      * @param Category $category
-     * @param FormBuilder $formBuilder
      * @return Response
      */
-    public function edit(Category $category, FormBuilder $formBuilder)
+    public function edit(Category $category)
     {
-        $form = $formBuilder->create('App\Forms\CategoriesForm', [
-            'method' => 'PATCH',
-            'url' => route('admin.category.update', ['id' => $category->id]),
-            'model' => $category
-        ], $this->getSelectList());
-        return view('admin.categories.edit', compact('form', 'category'));
+        return $this->getForm($category);
     }
 
     /**
@@ -89,11 +62,7 @@ class CategoryController extends Controller
      */
     public function update(Category $category, CategoryRequest $request)
     {
-        $category->fill($request->all());
-        $category->save() ?
-            Flash::success(trans('admin.update.success')) :
-            Flash::error(trans('admin.update.fail'));
-        return redirect(route('admin.category.index'));
+        return $this->saveFlashRedirect($category, $request);
     }
 
     /**
@@ -104,9 +73,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete() ?
-            Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
-        return redirect(route('admin.category.index'));
+        return $this->destroyFlashRedirect($category);
     }
 }

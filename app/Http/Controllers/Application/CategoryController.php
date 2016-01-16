@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Application;
 
+use App\Base\Controllers\ApplicationController;
 use App\Category;
-use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class CategoryController extends ApplicationController
 {
     /**
      * Show the category articles

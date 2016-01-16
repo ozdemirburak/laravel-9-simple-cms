@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Base\Services;
 
 class ImageService
 {
