@@ -10,6 +10,7 @@
     "admin-lte": "~2.0.5",
     "font-awesome": "~4.4.0",
     "datatables": "~1.10",
+    "datatables.net-buttons": "~1.1.0",
     "mjolnic-bootstrap-colorpicker": "~2.1.1",
     "bootstrap-datepicker": "~1.4.0",
     "morris.js" : "~0.5.1",
