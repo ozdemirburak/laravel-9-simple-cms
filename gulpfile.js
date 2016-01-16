@@ -49,7 +49,7 @@ elixir(function(mix) {
         .copy('resources/assets/datatables/buttons.server-side.js', 'public/js/buttons.server-side.js')
         .copy('resources/assets/datatables/buttons.css', 'public/css/buttons.css')
         .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
-        .copy('resources/assets/vendor/raphael/raphael-min.js', 'public/js/raphael.js')
+        .copy(bowerDir + 'raphael/raphael-min.js', 'public/js/raphael.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'tinymce-localautosave/localautosave', 'public/packages/tinymce/plugins/localautosave')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
