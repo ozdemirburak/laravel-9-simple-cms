@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Application;
 
-use App\Http\Controllers\Controller;
+use App\Base\Controllers\ApplicationController;
 use App\Page;
 
-class PageController extends Controller
+class PageController extends ApplicationController
 {
     /**
      * Show the page

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\DataTables;
 
-use App\Http\Controllers\Api\DataTableController;
+use App\Base\Controllers\DataTableController;
 use App\Language;
 
 class LanguageDataTable extends DataTableController

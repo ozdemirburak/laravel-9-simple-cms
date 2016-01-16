@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Base\Controllers\AdminController;
 use Carbon\Carbon;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use LaravelAnalytics;
 
-class DashboardController extends Controller
+class DashboardController extends AdminController
 {
     /**
      * Total day scope for statistics

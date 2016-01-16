@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Application;
 
-use App\Http\Controllers\Controller;
+use App\Base\Controllers\ApplicationController;
 
-class HomeController extends Controller
+class HomeController extends ApplicationController
 {
     /**
      * Show the application homepage to the user.

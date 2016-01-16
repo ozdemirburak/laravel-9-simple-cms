@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Application;
 
-use App\Http\Controllers\Controller;
+use App\Base\Controllers\ApplicationController;
 use Input;
 
-class LanguageController extends Controller
+class LanguageController extends ApplicationController
 {
     /**
      * Set the application language

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Base\Controllers;
 
 use Yajra\Datatables\Services\DataTable;
 
-class DataTableController extends DataTable
+abstract class DataTableController extends DataTable
 {
     /**
      * Default parameters

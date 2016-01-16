@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Forms;
+namespace App\Forms\Admin;
 
-use Kris\LaravelFormBuilder\Form;
+use App\Base\Forms\AdminForm;
 
-class ArticlesForm extends Form
+class ArticlesForm extends AdminForm
 {
     public function buildForm()
     {
@@ -24,14 +24,7 @@ class ArticlesForm extends Form
             ])
             ->add('description', 'text', [
                 'label' => trans('admin.fields.article.description')
-            ])
-            ->add('save', 'submit', [
-                'label' => trans('admin.fields.save'),
-                'attr' => ['class' => 'btn btn-primary']
-            ])
-            ->add('clear', 'reset', [
-                'label' => trans('admin.fields.reset'),
-                'attr' => ['class' => 'btn btn-warning']
             ]);
+        parent::buildForm();
     }
 }

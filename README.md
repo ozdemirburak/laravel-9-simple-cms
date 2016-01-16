@@ -145,7 +145,7 @@ Lets assume we want to create a new resource for fruits where we'd like to manag
     $ php artisan make:controller Admin/FruitController
     $ php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
     $ php artisan make:request Admin/FruitRequest
-    $ php artisan make:form Forms/FruitsForm
+    $ php artisan make:form Forms/Admin/FruitsForm
     $ php artisan migrate
 
 This will create everything that we need to manage our Fruits.
@@ -251,70 +251,51 @@ Then configure the controller `FruitController.php` file located in Controllers 
 
 namespace App\Http\Controllers\Admin;
 
+use App\Base\Controllers\AdminController;
 use App\Fruit;
 use App\Http\Controllers\Api\DataTables\FruitDataTable;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FruitRequest;
-use Kris\LaravelFormBuilder\FormBuilder;
-use Laracasts\Flash\Flash;
 
-class FruitController extends Controller {
-
+class FruitController extends AdminController
+{
     public function index(FruitDataTable $dataTable)
     {
-        return $dataTable->render('admin.fruits.index');
-    }
-
-    public function create(FormBuilder $formBuilder)
-    {
-        $form = $formBuilder->create('App\Forms\FruitsForm', [
-            'method' => 'POST',
-            'url' => route('admin.fruit.store')
-        ], $this->getSelectList());
-        return view('admin.fruits.create', compact('form'));
+        return $dataTable->render($this->viewPath());
     }
 
     public function store(FruitRequest $request)
     {
-        $fruit = Fruit::create($request->all());
-        $fruit->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
-        return redirect(route('admin.fruit.index'));
+        return $this->createFlashRedirect(Fruit::class, $request);
     }
 
     public function show(Fruit $fruit)
     {
-        return view('admin.fruits.show', compact('fruit'));
+        return $this->viewPath("show", $fruit);
     }
 
-    public function edit(Fruit $fruit, FormBuilder $formBuilder)
+    public function edit(Fruit $fruit)
     {
-        $form = $formBuilder->create('App\Forms\FruitsForm', [
-            'method' => 'PATCH',
-            'url' => route('admin.fruit.update', ['id' => $fruit->id]),
-            'model' => $fruit
-        ], $this->getSelectList());
-        return view('admin.fruits.edit', compact('form', 'fruit'));
+        return $this->getForm($fruit);
     }
 
     public function update(Fruit $fruit, FruitRequest $request)
     {
-        $fruit->fill($request->all());
-        $fruit->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
-        return redirect(route('admin.fruit.index'));
+        return $this->saveFlashRedirect($fruit, $request);
     }
 
     public function destroy(Fruit $fruit)
     {
-        $fruit->delete() ? Flash::success(trans('admin.delete.success')) : Flash::error(trans('admin.delete.fail'));
-        return redirect(route('admin.fruit.index'));
+        return $this->destroyFlashRedirect($fruit);
     }
 }
 ```
 
-Open your `FruitRequest.php` file within `Requests` folder and configure it as below or how you wish, put some validation.
+Open your `FruitRequest.php` file within `Requests/Admin` folder and configure it as below or how you wish, put some validation.
 
 ```php
-<?php namespace App\Http\Requests\Admin;
+<?php 
+
+namespace App\Http\Requests\Admin;
 
 use App\Http\Requests\Request;
 
@@ -339,11 +320,13 @@ class FruitRequest extends Request {
 Then open your `FruitsForm.php` file located in `app/Forms` folder and configure it.
 
 ```php
-<?php namespace App\Forms;
+<?php 
 
-use Kris\LaravelFormBuilder\Form;
+namespace App\Forms\Admin;
 
-class FruitsForm extends Form
+use App\Base\Forms\AdminForm;
+
+class FruitsForm extends AdminForm
 {
     public function buildForm()
     {
@@ -357,15 +340,8 @@ class FruitsForm extends Form
             ])
             ->add('content', 'textarea', [
                 'label' => trans('admin.fields.fruit.content')
-            ])
-            ->add('save', 'submit', [
-                'label' => trans('admin.fields.save'),
-                'attr' => ['class' => 'btn btn-primary']
-            ])
-            ->add('clear', 'reset', [
-                'label' => trans('admin.fields.reset'),
-                'attr' => ['class' => 'btn btn-warning']
             ]);
+        parent::buildForm();
     }
 }
 ```
@@ -376,9 +352,9 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 
 ```php
 @extends('layouts.admin')
+
 @section('content')
     {!! form($form) !!}
-    @include('partials.admin.tinymce')
 @endsection
 ```
 
@@ -386,8 +362,9 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 
 ```php
 @extends('layouts.admin')
+
 @section('content')
-    {!! $table !!}
+    @include('partials.admin.datatable', ['dataTable' => $dataTable, 'buttons' => true])
 @endsection
 ```
 
@@ -398,10 +375,10 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 @section('content')
     <div class="col-xs-12 no-padding">
         <div class="post-title pull-left">
-            <h1> {{ $fruit->title }} </h1>
+            <h1> {{ $object->title }} </h1>
         </div>
     </div>
-    <p>{!! $fruit->content !!}</p>
+    <p>{!! $object->content !!}</p>
 @endsection
 ```
 

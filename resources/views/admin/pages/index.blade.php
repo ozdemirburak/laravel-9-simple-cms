@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-    @if(count($pages))
+    @if(count($object))
         <div class="dd">
             <ol class="dd-list">
-                @foreach($pages as $node)
+                @foreach($object as $node)
                     {!! renderNode($node, "page") !!}
                 @endforeach
             </ol>

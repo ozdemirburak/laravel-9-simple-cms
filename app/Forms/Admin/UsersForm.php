@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Forms;
+namespace App\Forms\Admin;
 
-use Kris\LaravelFormBuilder\Form;
+use App\Base\Forms\AdminForm;
 
-class UsersForm extends Form
+class UsersForm extends AdminForm
 {
     public function buildForm()
     {
@@ -24,14 +24,7 @@ class UsersForm extends Form
             ->add('picture', 'file', [
                 'label' => trans('admin.fields.user.picture'),
                 'attr' => ['class' => '']
-            ])
-            ->add('save', 'submit', [
-                'label' => trans('admin.fields.save'),
-                'attr' => ['class' => 'btn btn-primary']
-            ])
-            ->add('clear', 'reset', [
-                'label' => trans('admin.fields.reset'),
-                'attr' => ['class' => 'btn btn-warning']
             ]);
+        parent::buildForm();
     }
 }
