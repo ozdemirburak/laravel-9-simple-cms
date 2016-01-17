@@ -6,15 +6,16 @@
   "private": true,
   "dependencies": {
     "jquery": "~1.11.2",
-    "nestable-fork" : "~1.0.1",
+    "nestable-fork": "~1.0.1",
     "admin-lte": "~2.0.5",
     "font-awesome": "~4.4.0",
     "datatables": "~1.10",
+    "datatables-buttons": "*",
     "mjolnic-bootstrap-colorpicker": "~2.1.1",
     "bootstrap-datepicker": "~1.4.0",
-    "morris.js" : "~0.5.1",
-    "jquery-floating-social-share" : "~1.1.0",
+    "morris.js": "~0.5.1",
+    "jquery-floating-social-share": "~1.1.0",
     "tinymce": "~4.2.5",
-    "tinymce-localautosave" : "~0.4.2"
+    "tinymce-localautosave": "~0.4.2"
   }
 }
