@@ -21,6 +21,13 @@ abstract class DataTableController extends DataTable
     protected $columns =  [];
 
     /**
+     * Image columns to show within image tag
+     *
+     * @var array
+     */
+    protected $image_columns =  [];
+
+    /**
      * Columns with pluck, relation key, desired relation property
      *
      * @var array
@@ -30,7 +37,7 @@ abstract class DataTableController extends DataTable
     /**
      * Show the action buttons, show, edit and delete
      *
-     * @var array
+     * @var bool
      */
     protected $ops = true;
 
@@ -62,6 +69,13 @@ abstract class DataTableController extends DataTable
         foreach ($this->pluck_columns as $key => $value) {
             $datatables = $datatables->editColumn($key, function ($model) use ($value) {
                 return $model->$value[0]->$value[1];
+            });
+        }
+        foreach ($this->image_columns as $image_column) {
+            $datatables = $datatables->editColumn($image_column, function ($model) use ($image_column) {
+                return "<a target='_blank' href='{$model->$image_column}'>
+                            <img style='max-height:50px' class='img-responsive' src='{$model->$image_column}'/>
+                        </a>";
             });
         }
         if ($this->ops === true) {
@@ -116,7 +130,8 @@ abstract class DataTableController extends DataTable
     {
         $model = $this->getModelName();
         $columns = [];
-        foreach (array_merge($this->columns, array_keys($this->pluck_columns)) as $column) {
+        $base_columns = array_merge($this->image_columns, $this->columns);
+        foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
             $title = trans('admin.fields.' . $model . '.' . $column);
             array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
         }
