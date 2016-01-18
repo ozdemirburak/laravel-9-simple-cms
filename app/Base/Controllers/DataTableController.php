@@ -69,7 +69,7 @@ abstract class DataTableController extends DataTable
         foreach ($this->pluck_columns as $key => $value) {
             $datatables = $datatables->editColumn($key, function ($model) use ($key, $value) {
                 if (array_key_exists(0, $value) && array_key_exists(1, $value)) {
-                    return $model->$value[0]->$value[1];
+                    return $model[$value[0]][$value[1]];
                 }
                 return $model->$key;
             });
