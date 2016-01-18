@@ -51,9 +51,10 @@ class DashboardController extends AdminController
         $this->end = Carbon::today();
         $this->start = Carbon::today()->subDays($this->period);
         $this->country = env('ANALYTICS_COUNTRY');
+        parent::__construct();
     }
 
-    public function index()
+    public function getIndex()
     {
         $statistics = [
             'keywords' => LaravelAnalytics::getTopKeywords($this->period, $this->limit),

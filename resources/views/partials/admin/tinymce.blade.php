@@ -17,10 +17,9 @@
     });
 
     function elFinderBrowser(callback, value, meta) {
-        var request = "{{ route('elfinder.tinymce4') }}";
         tinymce.activeEditor.windowManager.open({
             title: '{{  trans('admin.elfinder') }}',
-            url: request,
+            url: '{{ route('elfinder.tinymce4') }}',
             width: 900,
             height: 450,
             resizable: 'yes'

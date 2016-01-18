@@ -34,7 +34,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api', 'middleware' => 'api'], f
 // Admin routes
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     // GET
-    Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@index']);
+    Route::get('/', ['as' => 'admin.root', 'uses' => 'DashboardController@getIndex']);
     Route::get('setting', ['as' => 'admin.setting.index', 'uses' => 'SettingController@getSettings']);
     // POST
     Route::post('language/change', ['as' => 'admin.language.change' , 'uses' => 'LanguageController@postChange']);
