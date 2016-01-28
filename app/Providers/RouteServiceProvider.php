@@ -29,16 +29,16 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
         $router->model('article', 'App\Article');
-        $router->bind('article_slug', function($slug) {
+        $router->bind('article_slug', function ($slug) {
             return Article::findBySlugOrFail($slug);
         });
         $router->model('category', 'App\Category');
-        $router->bind('category_slug', function($slug) {
+        $router->bind('category_slug', function ($slug) {
             return Category::findBySlugOrFail($slug);
         });
         $router->model('language', 'App\Language');
         $router->model('page', 'App\Page');
-        $router->bind('page_slug', function($slug) {
+        $router->bind('page_slug', function ($slug) {
             return Page::findBySlugOrFail($slug);
         });
         $router->model('setting', 'App\Setting');
