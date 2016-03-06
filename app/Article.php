@@ -2,10 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Base\SluggableModel;
 use Carbon\Carbon;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 
 /**
  * App\Article
@@ -33,10 +31,8 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  * @method static \App\Article published()
  */
-class Article extends Model implements SluggableInterface
+class Article extends SluggableModel
 {
-    use SluggableTrait;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -50,17 +46,6 @@ class Article extends Model implements SluggableInterface
      * @var array
      */
     protected $dates = ['published_at'];
-
-    /**
-     * Create slug from title using 3rd party trait
-     *
-     * @var array
-     */
-    protected $sluggable = array(
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
-    );
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -100,16 +85,6 @@ class Article extends Model implements SluggableInterface
     public function getContentAttribute($content)
     {
         return clean($content, 'youtube');
-    }
-
-    /**
-     * Set the slug according to Turkish language (Ö => o and Ü => u) instead of German (Ö => oe and Ü => ue)
-     *
-     * @param $slug
-     */
-    public function setSlugAttribute($slug)
-    {
-        $this->attributes['slug'] = str_replace(["oe", "ue"], ["o", "u"], $slug);
     }
 
     /**
