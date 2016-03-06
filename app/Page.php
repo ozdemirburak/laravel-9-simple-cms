@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Language;
 use Baum\Node;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;

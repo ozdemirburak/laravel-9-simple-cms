@@ -188,19 +188,9 @@ After finishing the language parts, check the Fruit model, which is located in `
 ```php
 <?php namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Database\Eloquent\Model;
+use App\Base\SluggableModel;
 
-class Fruit extends Model implements SluggableInterface {
-
-    use SluggableTrait;
-
-    protected $sluggable = array(
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
-    );
+class Fruit extends SluggableModel {
 
     protected $fillable = ['content', 'language_id', 'title'];
 
