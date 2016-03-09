@@ -30,6 +30,7 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  * @method static \App\Article published()
+ * @property integer $read_count
  */
 class Article extends SluggableModel
 {
