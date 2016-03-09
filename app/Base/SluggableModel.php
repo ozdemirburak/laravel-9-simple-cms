@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 
+/**
+ * App\Base\SluggableModel
+ *
+ * @property-write mixed $slug
+ * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel whereSlug($slug)
+ */
 class SluggableModel extends Model implements SluggableInterface
 {
     use SluggableTrait;

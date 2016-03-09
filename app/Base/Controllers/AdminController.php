@@ -2,7 +2,6 @@
 
 namespace App\Base\Controllers;
 
-use App\Base\Services\ImageService;
 use App\Language;
 use App\Http\Controllers\Controller;
 use FormBuilder;
@@ -44,7 +43,7 @@ abstract class AdminController extends Controller
     /**
      * Show the form for creating a new category.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -55,7 +54,8 @@ abstract class AdminController extends Controller
      * Get form
      *
      * @param null $object
-     * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getForm($object = null)
     {
@@ -70,23 +70,6 @@ abstract class AdminController extends Controller
         }
         $form = $this->createForm($url, $method, $object);
         return view($path, compact('form', 'object'));
-    }
-
-    /**
-     * Create form
-     *
-     * @param $url
-     * @param $method
-     * @param $model
-     * @return \Kris\LaravelFormBuilder\Form
-     */
-    protected function createForm($url, $method, $model)
-    {
-        return FormBuilder::create($this->formPath, [
-                'method' => $method,
-                'url' => $url,
-                'model' => $model
-            ], $this->getSelectList());
     }
 
     /**
@@ -122,18 +105,6 @@ abstract class AdminController extends Controller
     }
 
     /**
-     * Get data, if image column is passed, upload it
-     *
-     * @param $request
-     * @param $imageColumn
-     * @return mixed
-     */
-    private function getData($request, $imageColumn)
-    {
-        return $imageColumn === false ? $request->all() : ImageService::uploadImage($request, $imageColumn);
-    }
-
-    /**
      * Delete and flash success or fail then redirect to path
      *
      * @param $model
@@ -164,22 +135,6 @@ abstract class AdminController extends Controller
     }
 
     /**
-     * Returns full url
-     *
-     * @param string $path
-     * @param bool|false $model
-     * @return string
-     */
-    protected function urlRoutePath($path = "index", $model = false)
-    {
-        if ($model) {
-            return route($this->routePath($path), ['id' => $model->id]);
-        } else {
-            return route($this->routePath($path));
-        }
-    }
-
-    /**
      * Returns route path as string
      *
      * @param string $path
@@ -195,7 +150,8 @@ abstract class AdminController extends Controller
      *
      * @param string $path
      * @param bool|false $object
-     * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function viewPath($path = "index", $object = false)
     {
@@ -204,6 +160,73 @@ abstract class AdminController extends Controller
             return view($path, compact('object'));
         } else {
             return $path;
+        }
+    }
+
+    /**
+     * Create form
+     *
+     * @param $url
+     * @param $method
+     * @param $model
+     * @return \Kris\LaravelFormBuilder\Form
+     */
+    protected function createForm($url, $method, $model)
+    {
+        return FormBuilder::create($this->formPath, [
+            'method' => $method,
+            'url' => $url,
+            'model' => $model
+        ], $this->getSelectList());
+    }
+
+    /**
+     * Get data, if image column is passed, upload it
+     *
+     * @param $request
+     * @param $imageColumn
+     * @return mixed
+     */
+    protected function getData($request, $imageColumn)
+    {
+        return $imageColumn === false ? $request->all() : $this->uploadImage($request, $imageColumn);
+    }
+
+    /**
+     * Upload the image and return the data
+     *
+     * @param $request
+     * @param string $field
+     * @return mixed
+     */
+    protected function uploadImage($request, $field)
+    {
+        $data = $request->except($field);
+        if ($request->file($field)) {
+            $file = $request->file($field);
+            $request->file($field);
+            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
+            $path = '/uploads/' . str_plural($field);
+            $move_path = public_path() . $path;
+            $file->move($move_path, $fileName);
+            $data[$field] = $path . $fileName;
+        }
+        return $data;
+    }
+
+    /**
+     * Returns full url
+     *
+     * @param string $path
+     * @param bool|false $model
+     * @return string
+     */
+    protected function urlRoutePath($path = "index", $model = false)
+    {
+        if ($model) {
+            return route($this->routePath($path), ['id' => $model->id]);
+        } else {
+            return route($this->routePath($path));
         }
     }
 
