@@ -31,6 +31,13 @@ abstract class AdminController extends Controller
     protected $language;
 
     /**
+     * Upload path
+     *
+     * @var string
+     */
+    protected $uploadPath = "uploads";
+
+    /**
      * AdminController constructor.
      */
     public function __construct()
@@ -206,12 +213,24 @@ abstract class AdminController extends Controller
             $file = $request->file($field);
             $request->file($field);
             $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
-            $path = '/uploads/' . str_plural($field);
-            $move_path = public_path() . $path;
+            $path = $this->getUploadPath($field);
+            $move_path = public_path($path);
             $file->move($move_path, $fileName);
             $data[$field] = $path . $fileName;
         }
         return $data;
+    }
+
+    /**
+     * Return upload path
+     *
+     * @param $field
+     *
+     * @return string
+     */
+    protected function getUploadPath($field)
+    {
+        return $this->uploadPath . "/" . str_plural($field);
     }
 
     /**
