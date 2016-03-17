@@ -32,7 +32,7 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
