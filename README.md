@@ -290,12 +290,6 @@ namespace App\Http\Requests\Admin;
 use App\Http\Requests\Request;
 
 class FruitRequest extends Request {
-
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules()
     {
         return [
