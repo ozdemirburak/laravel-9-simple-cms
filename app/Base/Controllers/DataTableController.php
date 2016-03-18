@@ -77,7 +77,10 @@ abstract class DataTableController extends DataTable
         foreach ($this->image_columns as $image_column) {
             $datatables = $datatables->editColumn($image_column, function ($model) use ($image_column) {
                 return "<a target='_blank' href='{$model->$image_column}'>
-                            <img style='max-height:50px' class='img-responsive' src='{$model->$image_column}'/>
+                            <img style='max-height:50px'
+                                 class='img-responsive'
+                                 src='".asset($model->$image_column)."'
+                             />
                         </a>";
             });
         }
