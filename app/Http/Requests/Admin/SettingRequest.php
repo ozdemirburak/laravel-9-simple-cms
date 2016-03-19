@@ -14,12 +14,12 @@ class SettingRequest extends Request
     public function rules()
     {
         return [
-            'analytics_id'      => 'max:255',
-            'disqus_shortname'  => 'max:255',
-            'email'             => 'required|email|min:7',
-            'facebook'          => 'min:21|url|max:255',
+            'analytics_id'      => 'string|max:200|regex:/^UA-\d{4,9}-\d{1,4}$/i',
+            'disqus_shortname'  => 'string|max:200',
+            'email'             => 'email|max:200',
+            'facebook'          => 'string|url|between:21,255',
             'logo'              => 'sometimes|max:2048|image',
-            'twitter'           => 'min:18|url|max:255'
+            'twitter'           => 'string|url|between:18,255'
         ];
     }
 }

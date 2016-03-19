@@ -8,6 +8,11 @@ use App\Category;
 class CategoryDataTable extends DataTableController
 {
     /**
+     * @var string
+     */
+    protected $model = Category::class;
+
+    /**
      * Columns to show
      *
      * @var array

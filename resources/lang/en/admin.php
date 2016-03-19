@@ -52,13 +52,13 @@ return [
             "category_id"           => "Category",
             "content"               => "Content",
             "description"           => "Description",
-            "title"                 => "Title"
+            "title"                 => "Article Title"
         ],
         "category" => [
             "color"                 => "Color",
             "description"           => "Description",
             "language_id"           => "Language",
-            "title"                 => "Title"
+            "title"                 => "Category Title"
         ],
         "created_at"                => "Created at",
         "dashboard" => [
@@ -101,7 +101,7 @@ return [
         "reset"                     => "Reset",
         "save"                      => "Save",
         "setting" => [
-            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXXXXX-YYYY )",
             "disqus_shortname"      => "Disqus Shortname",
             "email"                 => "Email",
             "facebook"              => "Facebook",

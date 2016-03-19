@@ -8,6 +8,11 @@ use App\Article;
 class ArticleDataTable extends DataTableController
 {
     /**
+     * @var string
+     */
+    protected $model = Article::class;
+
+    /**
      * Columns to show
      *
      * @var array
@@ -15,11 +20,11 @@ class ArticleDataTable extends DataTableController
     protected $columns = ['title'];
 
     /**
-     * Columns with pluck, relation key, relation, expected relation property
+     * Columns of relations, relation name as key, relation property as value
      *
      * @var array
      */
-    protected $pluck_columns = ['category_id' => ['category', 'title']];
+    protected $eager_columns = ['category' => 'title'];
 
     /**
      * Common columns for translation
