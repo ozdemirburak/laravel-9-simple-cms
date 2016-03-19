@@ -14,8 +14,8 @@ class UserRequest extends Request
     public function rules()
     {
         return [
-            'email'     => 'required|email|min:6|unique:users,email,'.$this->segment(3),
-            'name'      => 'required|min:3',
+            'email'     => 'required|email|max:255|unique:users,email,'.$this->segment(3),
+            'name'      => 'required|string|max:255',
             'password'  => 'required|min:6|max:20|confirmed',
             'picture'   => 'sometimes|max:2048|image'
         ];

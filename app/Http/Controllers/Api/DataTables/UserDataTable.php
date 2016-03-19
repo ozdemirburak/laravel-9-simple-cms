@@ -8,6 +8,11 @@ use App\User;
 class UserDataTable extends DataTableController
 {
     /**
+     * @var string
+     */
+    protected $model = User::class;
+
+    /**
      * Columns to show
      *
      * @var array

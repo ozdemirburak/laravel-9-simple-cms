@@ -52,13 +52,13 @@ return [
             "category_id"           => "Kategori",
             "content"               => "İçerik",
             "description"           => "Tanımı",
-            "title"                 => "Başlık"
+            "title"                 => "Makale Başlığı"
         ],
         "category" => [
             "color"                 => "Rengi",
             "description"           => "Tanımı",
             "language_id"           => "Dili",
-            "title"                 => "Başlık"
+            "title"                 => "Kategori Başlığı"
         ],
         "created_at"                => "Oluşturulma",
         "dashboard" => [
@@ -101,7 +101,7 @@ return [
         "reset"                     => "Reset",
         "save"                      => "Kaydet",
         "setting" => [
-            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXXXXX-YYYY )",
             "disqus_shortname"      => "Disqus Shortname",
             "email"                 => "Email",
             "facebook"              => "Facebook",

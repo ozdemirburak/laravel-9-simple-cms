@@ -11,7 +11,18 @@ abstract class DataTableController extends DataTable
      *
      * @var array
      */
-    protected $parameters = ['dom' => 'Bfrtip', 'buttons' => ['csv', 'excel', 'pdf']];
+    protected $parameters = [
+        'dom' => 'Bfrtip',
+        'buttons' => ['csv', 'excel', 'pdf'],
+        'columnDefs' => [['defaultContent' => '-', 'targets' => '_all']]
+    ];
+
+    /**
+     * Model that is used to generate this DataTable
+     *
+     * @var string
+     */
+    protected $model = "";
 
     /**
      * Columns to show
@@ -28,11 +39,31 @@ abstract class DataTableController extends DataTable
     protected $image_columns =  [];
 
     /**
-     * Columns with pluck, relation key, desired relation property
+     * Properties of the relationships that are loaded via eager loading
+     * For instance let Article has a Category and we want to show the Category title within the Article Datatable
+     * You can load the article that belongs to category within query function like:
+     *
+     * public function query()
+     * {
+     *      $articles = Article::with('category');
+     *      return $this->applyScopes($articles);
+     * }
+     *
+     * $eager_columns = ['category' => 'title'];
+     *
+     * Another example, if there are two relationships loaded via eager loading
+     *
+     * public function query()
+     * {
+     *      $comments = Comment::with('category', 'article');
+     *      return $this->applyScopes($articles);
+     * }
+     *
+     * $eager_columns = ['category' => 'title', 'article' => 'title'];
      *
      * @var array
      */
-    protected $pluck_columns =  [];
+    protected $eager_columns =  [];
 
     /**
      * Show the action buttons, show, edit and delete
@@ -51,13 +82,6 @@ abstract class DataTableController extends DataTable
     protected $common_columns = ['created_at', 'updated_at'];
 
     /**
-     * Model name
-     *
-     * @var string
-     */
-    protected $model = "";
-
-    /**
      * Display ajax response.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -66,20 +90,12 @@ abstract class DataTableController extends DataTable
     {
         $model = $this->getModelName();
         $datatables = $this->datatables->eloquent($this->query());
-        foreach ($this->pluck_columns as $key => $value) {
-            $datatables = $datatables->editColumn($key, function ($model) use ($key, $value) {
-                if (array_key_exists(0, $value) && array_key_exists(1, $value)) {
-                    return $model[$value[0]][$value[1]];
-                }
-                return $model->$key;
-            });
-        }
         foreach ($this->image_columns as $image_column) {
             $datatables = $datatables->editColumn($image_column, function ($model) use ($image_column) {
                 return "<a target='_blank' href='{$model->$image_column}'>
                             <img style='max-height:50px'
                                  class='img-responsive'
-                                 src='".asset($model->$image_column)."'
+                                 src='". asset($model->$image_column) ."'
                              />
                         </a>";
             });
@@ -90,15 +106,6 @@ abstract class DataTableController extends DataTable
             });
         }
         return $datatables->make(true);
-    }
-
-    /**
-     * Get the query object to be processed by datatables.
-     *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder
-     */
-    public function query()
-    {
     }
 
     /**
@@ -114,17 +121,23 @@ abstract class DataTableController extends DataTable
     }
 
     /**
-     * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "DataTable" out
+     * Get the table name of the model
      *
      * @return string
      */
-    private function getModelName()
+    protected function getTableName()
     {
-        return strtolower(
-            empty($this->model) ?
-            explode('DataTable', substr(strrchr(get_class($this), '\\'), 1))[0]  :
-            $this->model
-        );
+        return ((new $this->model)->getTable());
+    }
+
+    /**
+     * Get model name
+     *
+     * @return string
+     */
+    protected function getModelName()
+    {
+        return strtolower(substr(strrchr($this->model, '\\'), 1));
     }
 
     /**
@@ -134,16 +147,23 @@ abstract class DataTableController extends DataTable
      */
     protected function getColumns()
     {
-        $model = $this->getModelName();
         $columns = [];
-        $base_columns = array_merge($this->image_columns, $this->columns);
-        foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
-            $title = trans('admin.fields.' . $model . '.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+        $model = $this->getModelName();
+        $table = $this->getTableName();
+        foreach (array_merge($this->image_columns, $this->columns) as $column) {
+            $string = join([$table, $column], ".");
+            $title = trans('admin.fields.' . join([$model, $column], '.'));
+            array_push($columns, ['data' => $column, 'name' => $string, 'title' => $title]);
+        }
+        foreach ($this->eager_columns as $key => $value) {
+            $string = join([$key, $value], ".");
+            $title = trans('admin.fields.' . $string);
+            array_push($columns, ['data' => $string, 'name' => $string, 'title' => $title]);
         }
         foreach ($this->common_columns as $column) {
+            $string = join([$table, $column], ".");
             $title = trans('admin.fields.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
+            array_push($columns, ['data' => $column, 'name' => $string, 'title' => $title]);
         }
         if ($this->ops === true) {
             $title = trans('admin.ops.name');
@@ -165,3 +185,4 @@ abstract class DataTableController extends DataTable
         return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
     }
 }
+
