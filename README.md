@@ -222,6 +222,8 @@ use App\Fruit;
 
 class FruitDataTable extends DataTableController
 {
+    protected $model = Fruit::class;
+
     protected $columns = ['title'];
     
     protected $common_columns = ['created_at', 'updated_at'];
