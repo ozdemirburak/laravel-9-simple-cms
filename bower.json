@@ -7,7 +7,7 @@
   "dependencies": {
     "jquery": "~1.11.2",
     "nestable-fork": "~1.0.1",
-    "admin-lte": "~2.0.5",
+    "admin-lte": "~2.3.2",
     "font-awesome": "~4.4.0",
     "datatables": "~1.10",
     "datatables-buttons": "~1.1.0",

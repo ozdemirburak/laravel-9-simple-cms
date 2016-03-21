@@ -29,7 +29,7 @@ return [
         "sInfoFiltered"             => "(filtered from _MAX_ total entries)",
         "sInfoPostFix"              => "",
         "sLengthMenu"               => "Show _MENU_ entries",
-        "sProcessing"               => "Processing...",
+        "sProcessing"               => "<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>",
         "sSearch"                   => "Search:",
         "sUrl"                      => "",
         "sZeroRecords"              => "No matching records found",
@@ -90,6 +90,7 @@ return [
             "site_title"            => "Site Title",
             "title"                 => "Title"
         ],
+        "no"                        => "No",
         "page" => [
             "content"               => "Content",
             "description"           => "Description",
@@ -119,7 +120,8 @@ return [
             "password"              => "Password",
             "password_confirmation" => "Password Confirmation",
             "picture"               => "Avatar"
-        ]
+        ],
+        "yes"                       => "Yes"
     ],
     "language" => [
         "create"                    => "Create language",
