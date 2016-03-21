@@ -66,6 +66,13 @@ abstract class DataTableController extends DataTable
     protected $eager_columns =  [];
 
     /**
+     * Boolean columns for translation, show meaningful text instead of 1/true or 0/false
+     *
+     * @var array
+     */
+    protected $boolean_columns =  [];
+
+    /**
      * Show the action buttons, show, edit and delete
      *
      * @var bool
@@ -98,6 +105,11 @@ abstract class DataTableController extends DataTable
                                  src='". asset($model->$image_column) ."'
                              />
                         </a>";
+            });
+        }
+        foreach ($this->boolean_columns as $boolean_column) {
+            $datatables = $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
+                return $model->$boolean_column == true ? trans("admin.fields.yes") : trans("admin.fields.no");
             });
         }
         if ($this->ops === true) {
@@ -150,7 +162,7 @@ abstract class DataTableController extends DataTable
         $columns = [];
         $model = $this->getModelName();
         $table = $this->getTableName();
-        foreach (array_merge($this->image_columns, $this->columns) as $column) {
+        foreach (array_merge($this->image_columns, $this->columns, $this->boolean_columns) as $column) {
             $string = join([$table, $column], ".");
             $title = trans('admin.fields.' . join([$model, $column], '.'));
             array_push($columns, ['data' => $column, 'name' => $string, 'title' => $title]);

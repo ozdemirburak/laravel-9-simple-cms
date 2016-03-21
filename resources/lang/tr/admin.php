@@ -29,7 +29,7 @@ return [
         "sInfoFiltered"             => "( _MAX_ Kayıt İçerisinden Bulunan)",
         "sInfoPostFix"              => "",
         "sLengthMenu"               => "Sayfada _MENU_ Kayıt Göster",
-        "sProcessing"               => "İşleniyor...",
+        "sProcessing"               => "<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>",
         "sSearch"                   => "Bul:",
         "sUrl"                      => "",
         "sZeroRecords"              => "Eşleşen Kayıt Bulunmadı",
@@ -90,6 +90,7 @@ return [
             "site_title"            => "Site Başlığı",
             "title"                 => "Adı"
         ],
+        "no"                        => "Hayır",
         "page" => [
             "content"               => "İçerik",
             "description"           => "Tanımı",
@@ -119,7 +120,8 @@ return [
             "password"              => "Şifre",
             "password_confirmation" => "Şifre Tekrarı",
             "picture"               => "Fotoğraf"
-        ]
+        ],
+        "yes"                       => "Evet"
     ],
     "language" => [
         "create"                    => "Dil oluştur",
