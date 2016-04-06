@@ -73,6 +73,13 @@ abstract class DataTableController extends DataTable
     protected $boolean_columns =  [];
 
     /**
+     * Relations count columns, show the number of related models
+     *
+     * @var array
+     */
+    protected $count_columns =  [];
+
+    /**
      * Show the action buttons, show, edit and delete
      *
      * @var bool
@@ -110,6 +117,11 @@ abstract class DataTableController extends DataTable
         foreach ($this->boolean_columns as $boolean_column) {
             $datatables = $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
                 return $model->$boolean_column == true ? trans("admin.fields.yes") : trans("admin.fields.no");
+            });
+        }
+        foreach ($this->count_columns as $count_column) {
+            $datatables = $datatables->editColumn($count_column, function ($model) use ($count_column) {
+                return $model->$count_column == true ? $model->$count_column->count() : 0;
             });
         }
         if ($this->ops === true) {
@@ -162,7 +174,7 @@ abstract class DataTableController extends DataTable
         $columns = [];
         $model = $this->getModelName();
         $table = $this->getTableName();
-        foreach (array_merge($this->image_columns, $this->columns, $this->boolean_columns) as $column) {
+        foreach (array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns) as $column) {
             $string = join([$table, $column], ".");
             $title = trans('admin.fields.' . join([$model, $column], '.'));
             array_push($columns, ['data' => $column, 'name' => $string, 'title' => $title]);
