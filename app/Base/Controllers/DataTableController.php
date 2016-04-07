@@ -121,7 +121,7 @@ abstract class DataTableController extends DataTable
         }
         foreach ($this->count_columns as $count_column) {
             $datatables = $datatables->editColumn($count_column, function ($model) use ($count_column) {
-                return $model->$count_column == true ? $model->$count_column->count() : 0;
+                return count($model->$count_column) ? $model->$count_column->count() : 0;
             });
         }
         if ($this->ops === true) {
@@ -174,10 +174,15 @@ abstract class DataTableController extends DataTable
         $columns = [];
         $model = $this->getModelName();
         $table = $this->getTableName();
-        foreach (array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns) as $column) {
+        $array = array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns);
+        foreach ($array as $key => $column) {
             $string = join([$table, $column], ".");
             $title = trans('admin.fields.' . join([$model, $column], '.'));
-            array_push($columns, ['data' => $column, 'name' => $string, 'title' => $title]);
+            $orderAndSearch = $key < (count($array) - count($this->count_columns)) ? true : false;
+            array_push($columns, [
+                'data' => $column, 'name' => $string, 'title' => $title,
+                'orderable' => $orderAndSearch, 'searchable' => $orderAndSearch
+            ]);
         }
         foreach ($this->eager_columns as $key => $value) {
             $string = join([$key, $value], ".");
