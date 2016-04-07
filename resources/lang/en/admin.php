@@ -55,6 +55,7 @@ return [
             "title"                 => "Article Title"
         ],
         "category" => [
+            "articles"              => "Article Count",
             "color"                 => "Color",
             "description"           => "Description",
             "language_id"           => "Language",
