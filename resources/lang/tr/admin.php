@@ -55,6 +55,7 @@ return [
             "title"                 => "Makale Başlığı"
         ],
         "category" => [
+            "articles"              => "Makale Sayısı",
             "color"                 => "Rengi",
             "description"           => "Tanımı",
             "language_id"           => "Dili",
