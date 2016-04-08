@@ -23,6 +23,7 @@ return [
         "fail"                      => "Create operation on resource has failed.",
         "success"                   => "Resource has been created succesfully."
     ],
+    "csrf_error"                    => "Seems like you couldn't submit the form for a longtime. Please try again.",
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "Showing _START_ to _END_ of _TOTAL_ entries",
         "sInfoEmpty"                => "Showing 0 to 0 of 0 entries",

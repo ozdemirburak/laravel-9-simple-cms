@@ -23,6 +23,7 @@ return [
         "fail"                      => "Oluşturma işlemi gerçekleştirilemedi.",
         "success"                   => "Oluşturma işlemi başarıyla gerçekleştirildi."
     ],
+    "csrf_error"                    => "Oturum süreniz dolduğu için isteğiniz işlenemedi, lütfen formu tekrar doldurunuz.",
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar",
         "sInfoEmpty"                => "Kayıt Yok",
