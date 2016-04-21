@@ -95,6 +95,6 @@ class Article extends SluggableModel
      */
     public function scopePublished($query)
     {
-        $query->where('published_at', '<=', Carbon::now());
+        return $query->where('published_at', '<=', Carbon::now());
     }
 }
