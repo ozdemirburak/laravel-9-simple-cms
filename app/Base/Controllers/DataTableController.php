@@ -161,7 +161,7 @@ abstract class DataTableController extends DataTable
      */
     protected function getModelName()
     {
-        return strtolower(substr(strrchr($this->model, '\\'), 1));
+        return snake_case(class_basename($this->model));
     }
 
     /**
