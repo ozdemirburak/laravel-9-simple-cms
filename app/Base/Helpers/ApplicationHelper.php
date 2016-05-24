@@ -54,14 +54,20 @@ if (!function_exists('getTitle')) {
     /**
      * Render nodes for nested sets
      *
-     * @param $object
+     * @param        $object
+     * @param string $property
+     *
      * @return string
      */
-    function getTitle($object = null)
+    function getTitle($object = null, $property = "title")
     {
-        return isset($object) && isset($object->title) ?
-            $object->title . ' | ' .  Session::get('current_lang')->site_title :
-            Session::get('current_lang')->site_title;
+        if (is_object($object) &&  isset($object->$property)) {
+            return $object->$property . ' | ' .  Session::get('current_lang')->site_title;
+        } elseif (is_string($object) && !empty($object)) {
+            return $object . ' | ' .  Session::get('current_lang')->site_title;
+        } else {
+            return Session::get('current_lang')->site_title;
+        }
     }
 }
 
@@ -69,13 +75,20 @@ if (!function_exists('getDescription')) {
     /**
      * Render nodes for nested sets
      *
-     * @param $object
+     * @param        $object
+     * @param string $property
+     *
      * @return string
      */
-    function getDescription($object = null)
+    function getDescription($object = null, $property = "description")
     {
-        return isset($object) && isset($object->description) ?
-            $object->description :
-            Session::get('current_lang')->site_description;
+        if (is_object($object) &&  isset($object->$property)) {
+            return $object->$property;
+        } elseif (is_string($object) && !empty($object)) {
+            return $object;
+        } else {
+            return Session::get('current_lang')->site_description;
+        }
     }
 }
+
