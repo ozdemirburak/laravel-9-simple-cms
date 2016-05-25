@@ -13,6 +13,7 @@
     "datatables-buttons": "~1.1.0",
     "mjolnic-bootstrap-colorpicker": "~2.1.1",
     "bootstrap-datepicker": "~1.4.0",
+    "raphael": "~2.2.0",
     "morris.js": "~0.5.1",
     "jquery-floating-social-share": "~1.2.0",
     "tinymce": "~4.2.5",

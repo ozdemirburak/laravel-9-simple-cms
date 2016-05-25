@@ -25,7 +25,8 @@ var elixir = require('laravel-elixir'),
         'datatables-buttons/js/dataTables.buttons.js',
         'datatables-buttons/js/buttons.bootstrap.js',
         'morris.js/morris.js',
-        'admin-lte/dist/js/app.min.js'
+        'admin-lte/dist/js/app.min.js',
+        '../js/admin.js',
     ],
     applicationLess  = [
         bowerDir + 'font-awesome/less'
@@ -38,7 +39,8 @@ var elixir = require('laravel-elixir'),
     applicationJs = [
         'jquery/dist/jquery.min.js',
         'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
-        'bootstrap/dist/js/bootstrap.min.js'
+        'bootstrap/dist/js/bootstrap.min.js',
+        '../js/application.js',
     ];
 
 elixir(function(mix) {
@@ -48,8 +50,7 @@ elixir(function(mix) {
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .sass('admin-buttons.scss', 'public/css/admin-buttons.css')
         .copy('resources/assets/datatables/buttons.server-side.js', 'public/js/buttons.server-side.js')
-        .copy('resources/assets/js/admin.js', 'public/js/admin-custom.js')
-        .copy(bowerDir + 'raphael/raphael-min.js', 'public/js/raphael.js')
+        .copy(bowerDir + 'raphael/raphael.min.js', 'public/js/raphael.js')
         .copy(bowerDir + 'tinymce', 'public/packages/tinymce')
         .copy(bowerDir + 'tinymce-localautosave/localautosave', 'public/packages/tinymce/plugins/localautosave')
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
@@ -58,6 +59,5 @@ elixir(function(mix) {
         .less('application.less', bowerDir + 'application.css', { paths: applicationLess })
         .styles(applicationCss, 'public/css/application.css', bowerDir)
         .scripts(applicationJs, 'public/js/application.js', bowerDir)
-        .copy('resources/assets/js/application.js', 'public/js/application-custom.js')
         .version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
 });
