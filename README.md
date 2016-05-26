@@ -42,8 +42,8 @@ Laravel 5.2 content management system for starters. For 5.1, see the 5.1 branch.
     $ git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY
     $ cd CUSTOM_DIRECTORY
     $ curl -s https://getcomposer.org/installer | php
-    $ php composer.phar install
     $ mv .env.example .env
+    $ php composer.phar install
 
 Create a database and configure the `.env` file.
 
