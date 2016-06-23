@@ -2,6 +2,7 @@
 
 namespace App\Base;
 
+use Cocur\Slugify\Slugify;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
@@ -21,19 +22,20 @@ class SluggableModel extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $sluggable = array(
+    protected $sluggable = [
         'build_from' => 'title',
         'save_to'    => 'slug',
         'on_update'  => true
-    );
+    ];
 
     /**
-     * Set the slug according to Turkish language (Ö => o and Ü => u) instead of German (Ö => oe and Ü => ue)
-     *
-     * @param $slug
+     * @param \Cocur\Slugify\Slugify $engine
+     * @param string $attribute
+     * @return \Cocur\Slugify\Slugify
      */
-    public function setSlugAttribute($slug)
+    public function customizeSlugEngine(Slugify $engine, $attribute)
     {
-        $this->attributes['slug'] = str_replace(["oe", "ue"], ["o", "u"], $slug);
+        $engine->activateRuleset('turkish');
+        return $engine;
     }
 }
