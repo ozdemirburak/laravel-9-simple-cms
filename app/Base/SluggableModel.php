@@ -12,6 +12,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  *
  * @property-write mixed $slug
  * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel whereSlug($slug)
+ * @mixin \Eloquent
  */
 class SluggableModel extends Model implements SluggableInterface
 {
@@ -24,18 +25,46 @@ class SluggableModel extends Model implements SluggableInterface
      */
     protected $sluggable = [
         'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
+        'save_to' => 'slug',
+        'on_update' => true
     ];
 
     /**
+     * Return a class that has a 'slugify()` method, used to convert
+     * strings into slugs.
+     *
+     * @return Slugify
+     */
+    protected function getSlugEngine()
+    {
+        $engine = new Slugify();
+        return $this->addTurkishRules($engine);
+    }
+
+    /**
+     * Currently, eloquent-sluggable does not provide activeRuleset function, so to do it on your own for any language
+     * with following the key value rule pairs can be found within the link below.
+     *
+     * @link https://github.com/cocur/slugify/blob/3b29d43b0c0d6af590f998ddf096e6d8aaeb6634/src/RuleProvider/DefaultRuleProvider.php#L784
+     *
      * @param \Cocur\Slugify\Slugify $engine
-     * @param string $attribute
+     *
      * @return \Cocur\Slugify\Slugify
      */
-    public function customizeSlugEngine(Slugify $engine, $attribute)
+    protected function addTurkishRules(Slugify $engine)
     {
-        $engine->activateRuleset('turkish');
+        $engine->addRule('Ç', 'C');
+        $engine->addRule('Ğ', 'G');
+        $engine->addRule('İ', 'I');
+        $engine->addRule('Ş', 'S');
+        $engine->addRule('Ö', 'O');
+        $engine->addRule('Ü', 'U');
+        $engine->addRule('ğ', 'g');
+        $engine->addRule('ı', 'i');
+        $engine->addRule('ş', 's');
+        $engine->addRule('ö', 'o');
+        $engine->addRule('ü', 'u');
         return $engine;
     }
 }
+
