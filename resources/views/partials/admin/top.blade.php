@@ -7,13 +7,14 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
+                    {{--*/ $user_image = !empty(Auth::user()->picture) ? asset(Auth::user()->picture) : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' /*--}}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="user-image img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
+                        <img class="user-image img-circle" src="{{ $user_image }}" alt="{{ Auth::user()->name  }}" />
                         <span class="hidden-xs">{{ Auth::user()->name  }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img class="img-circle" src="{{ !empty($user->picture) ? $user->picture : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png' }}" alt="{{ Auth::user()->name  }}" />
+                            <img class="img-circle" src="{{ $user_image }}" alt="{{ Auth::user()->name  }}" />
                             <p>{{ Auth::user()->name  }}</p>
                             @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'admin.language.change' ])
                         </li>
