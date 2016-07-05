@@ -69,27 +69,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $this->attributes['password'] =  Hash::make($password);
     }
-
-    /**
-     * Set the ip address attribute.
-     *
-     * @param $ip
-     * @return string
-     */
-    public function setIpAddressAttribute($ip)
-    {
-        $this->attributes['ip_address'] = inet_pton($ip);
-    }
-
-
-    /**
-     * Get the ip address attribute.
-     *
-     * @param $ip
-     * @return string
-     */
-    public function getIpAddressAttribute($ip)
-    {
-        return $ip ? inet_ntop($ip) : "";
-    }
 }

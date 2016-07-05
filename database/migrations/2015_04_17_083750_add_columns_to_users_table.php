@@ -15,7 +15,7 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->timestamp('logged_in_at');
             $table->timestamp('logged_out_at');
-            $table->binary('ip_address');
+            $table->string('ip_address', 45)->index();
             $table->string('picture');
         });
     }
