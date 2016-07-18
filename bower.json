@@ -17,6 +17,7 @@
     "morris.js": "~0.5.1",
     "jquery-floating-social-share": "~1.3",
     "tinymce": "~4.2.5",
-    "tinymce-localautosave": "~0.4.2"
+    "tinymce-localautosave": "~0.4.2",
+    "webfontloader": "~1.6.24"
   }
 }

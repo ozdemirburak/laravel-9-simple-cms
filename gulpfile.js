@@ -1,18 +1,12 @@
 var elixir = require('laravel-elixir'),
     bowerDir  = 'resources/assets/vendor/',
-    adminLess  = [
-        bowerDir + 'admin-lte/build/less',
-        bowerDir + 'bootstrap-datepicker/less',
-        bowerDir + 'font-awesome/less'
-    ],
     adminCss = [
         'bootstrap/dist/css/bootstrap.min.css',
         'nestable-fork/dist/jquery.nestable.min.css',
-        'admin.css',
         'mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
         'datatables/media/css/dataTables.bootstrap.min.css',
         'morris.js/morris.css',
-        'admin-lte/dist/css/skins/skin-blue.min.css'
+        'admin.css'
     ],
     adminJs = [
         'jquery/dist/jquery.min.js',
@@ -28,11 +22,7 @@ var elixir = require('laravel-elixir'),
         'admin-lte/dist/js/app.min.js',
         '../js/admin.js',
     ],
-    applicationLess  = [
-        bowerDir + 'font-awesome/less'
-    ],
     applicationCss = [
-        'bootstrap/dist/css/bootstrap.min.css',
         'jquery-floating-social-share/dist/jquery.floating-social-share.min.css',
         'application.css'
     ],
@@ -40,12 +30,13 @@ var elixir = require('laravel-elixir'),
         'jquery/dist/jquery.min.js',
         'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
         'bootstrap/dist/js/bootstrap.min.js',
+        'webfontloader/webfontloader.js',
         '../js/application.js',
     ];
 
 elixir(function(mix) {
     mix
-        .less('admin.less', bowerDir + 'admin.css', { paths: adminLess })
+        .less('admin.less', bowerDir + 'admin.css')
         .styles(adminCss, 'public/css/admin.css', bowerDir)
         .scripts(adminJs, 'public/js/admin.js', bowerDir)
         .sass('admin-buttons.scss', 'public/css/admin-buttons.css')
@@ -56,7 +47,7 @@ elixir(function(mix) {
         .copy(bowerDir + 'font-awesome/fonts', 'public/build/fonts')
         .copy(bowerDir + 'bootstrap/fonts', 'public/build/fonts')
         .copy(bowerDir + 'mjolnic-bootstrap-colorpicker/dist/img/*', 'public/build/img')
-        .less('application.less', bowerDir + 'application.css', { paths: applicationLess })
+        .less('application.less', bowerDir + 'application.css')
         .styles(applicationCss, 'public/css/application.css', bowerDir)
         .scripts(applicationJs, 'public/js/application.js', bowerDir)
         .version(['css/admin.css', 'css/application.css', 'js/admin.js', 'js/application.js']);
