@@ -10,10 +10,4 @@
             {!! Form::hidden('language') !!}
         {!! Form::close() !!}
     </ul>
-    <script>
-        $('img.chosen-one').click(function(){
-            $('input[name="language"]').val($(this).attr("alt"));
-            $('#anakin-skywalker').submit();
-        });
-    </script>
 @endif

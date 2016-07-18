@@ -28,73 +28,78 @@ class MakeMenu
     private function makeAdminMenu()
     {
         Menu::make('admin', function ($menu) {
-            $dashboard = $menu->add(trans('admin.menu.dashboard'), ['route' => 'admin.root'])
+            $menu->add($this->translate('dashboard'), ['route' => 'admin.root'])
                 ->icon('dashboard')
                 ->prependIcon();
 
-            $language  = $menu->add(trans('admin.menu.language.root'), '#')
+            $language  = $menu->add($this->translate('language.root'), '#')
                 ->icon('flag')
                 ->prependIcon();
 
-            $language->add(trans('admin.menu.language.add'), ['route' => 'admin.language.create'])
+            $language->add($this->translate('language.add'), ['route' => 'admin.language.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $language->add(trans('admin.menu.language.all'), ['route' => 'admin.language.index'])
+            $language->add($this->translate('language.all'), ['route' => 'admin.language.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $pages = $menu->add(trans('admin.menu.page.root'), '#')
+            $pages = $menu->add($this->translate('page.root'), '#')
                 ->icon('folder')
                 ->prependIcon();
 
-            $pages->add(trans('admin.menu.page.add'), ['route' => 'admin.page.create'])
+            $pages->add($this->translate('page.add'), ['route' => 'admin.page.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $pages->add(trans('admin.menu.page.all'), ['route' => 'admin.page.index'])
+            $pages->add($this->translate('page.all'), ['route' => 'admin.page.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $categories = $menu->add(trans('admin.menu.category.root'), '#')
+            $categories = $menu->add($this->translate('category.root'), '#')
                 ->icon('book')
                 ->prependIcon();
 
-            $categories->add(trans('admin.menu.category.add'), ['route' => 'admin.category.create'])
+            $categories->add($this->translate('category.add'), ['route' => 'admin.category.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $categories->add(trans('admin.menu.category.all'), ['route' => 'admin.category.index'])
+            $categories->add($this->translate('category.all'), ['route' => 'admin.category.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $articles = $menu->add(trans('admin.menu.article.root'), '#')
+            $articles = $menu->add($this->translate('article.root'), '#')
                 ->icon('edit')
                 ->prependIcon();
 
-            $articles->add(trans('admin.menu.article.add'), ['route' => 'admin.article.create'])
+            $articles->add($this->translate('article.add'), ['route' => 'admin.article.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $articles->add(trans('admin.menu.article.all'), ['route' => 'admin.article.index'])
+            $articles->add($this->translate('article.all'), ['route' => 'admin.article.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $users = $menu->add(trans('admin.menu.user.root'), '#')
+            $users = $menu->add($this->translate('user.root'), '#')
                 ->icon('users')
                 ->prependIcon();
 
-            $users->add(trans('admin.menu.user.add'), ['route' => 'admin.user.create'])
+            $users->add($this->translate('user.add'), ['route' => 'admin.user.create'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $users->add(trans('admin.menu.user.all'), ['route' => 'admin.user.index'])
+            $users->add($this->translate('user.all'), ['route' => 'admin.user.index'])
                 ->icon($this->circle)
                 ->prependIcon();
 
-            $settings = $menu->add(trans('admin.menu.setting'), ['route' => 'admin.setting.index'])
+            $menu->add($this->translate('setting'), ['route' => 'admin.setting.index'])
                 ->icon('gears')
                 ->prependIcon();
         });
+    }
+
+    private function translate($resource)
+    {
+        return '<span>' . trans('admin.menu.' . $resource) . '</span>';
     }
 }

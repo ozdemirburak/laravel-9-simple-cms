@@ -107,23 +107,20 @@ abstract class DataTableController extends DataTable
             return $datatables->editColumn($image_column, function ($model) use ($image_column) {
                 return $this->wrapImage($model, $image_column);
             });
-        });
-        collect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
+        })->recollect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
             return $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
                 return $model->$boolean_column == true ? trans("admin.fields.yes") : trans("admin.fields.no");
             });
-        });
-        collect($this->count_columns)->each(function ($count_column) use (&$datatables) {
+        })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
+            return $datatables->editColumn(join(".", [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
+                return $model->$relation->$eager_column;
+            });
+        })->recollect($this->count_columns)->each(function ($count_column) use (&$datatables) {
             return $datatables->editColumn($count_column, function ($model) use ($count_column) {
                 return count($model->$count_column);
             });
         });
-        if ($this->ops === true) {
-            $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
-                return get_ops($model, $data->id);
-            });
-        }
-        return $datatables->make(true);
+        return $this->pushOps($datatables, $model)->make(true);
     }
 
     /**
@@ -166,16 +163,14 @@ abstract class DataTableController extends DataTable
                 'name' => join([$table, $column], "."),
                 'title' => trans('admin.fields.' . join([$model, $column], "."))
             ], $orderAndSearch);
-        });
-        collect($this->eager_columns)->each(function ($column, $key) use (&$result) {
+        })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
             $string = join([$key, $column], ".");
             $this->pushColumns($result, [
                 'data' => $string,
                 'name' => $string,
                 'title' => trans('admin.fields.' . $string),
             ]);
-        });
-        collect($this->common_columns)->each(function ($column) use ($table, &$result) {
+        })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
             $string = join([$table, $column], ".");
             $this->pushColumns($result, [
                 'data' => $column,
@@ -183,14 +178,7 @@ abstract class DataTableController extends DataTable
                 'title' => trans('admin.fields.' . $column),
             ]);
         });
-        if ($this->ops === true) {
-            $this->pushColumns($result, [
-                'data' => 'ops',
-                'name' => 'ops',
-                'title' => trans('admin.ops.name')
-            ], false);
-        }
-        return $result;
+        return $this->pushOps($result);
     }
 
     /**
@@ -206,6 +194,31 @@ abstract class DataTableController extends DataTable
             'orderable' => $orderAndSearch,
             'searchable' => $orderAndSearch
         ]));
+    }
+
+    /**
+     * @param        $result
+     *
+     * @param string $model
+     *
+     * @return mixed
+     */
+    protected function pushOps($result, $model = "")
+    {
+        if ($this->ops === true) {
+            if (empty($model)) {
+                $this->pushColumns($result, [
+                    'data' => 'ops',
+                    'name' => 'ops',
+                    'title' => trans('admin.ops.name')
+                ], false);
+            } else {
+                $result = $result->addColumn('ops', function ($data) use ($model) {
+                    return get_ops($model, $data->id);
+                });
+            }
+        }
+        return $result;
     }
 
     /**
