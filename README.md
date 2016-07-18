@@ -387,15 +387,15 @@ $router->model('fruit', 'App\Fruit');
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
 
 ```php  
-$fruits = $menu->add(trans('admin.menu.fruit.root'), '#')
+$fruits = $menu->add($this->translate('fruit.root'), '#')
     ->icon('apple')
     ->prependIcon();
 
-$fruits->add(trans('admin.menu.fruit.add'), ['route' => 'admin.fruit.create'])
+$fruits->add($this->translate('fruit.add'), ['route' => 'admin.fruit.create'])
     ->icon('circle-o')
     ->prependIcon();
 
-$fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
+$fruits->add($this->translate('fruit.all'), ['route' => 'admin.fruit.index'])
     ->icon('circle-o')
     ->prependIcon();
 ```
