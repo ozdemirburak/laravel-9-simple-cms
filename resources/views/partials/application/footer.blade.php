@@ -10,9 +10,13 @@
         ga('send', 'pageview');
     @endif
     @if(!empty(Config::get('settings')->disqus_shortname))
+        var disqus_shortname = '{{ Config::get('settings')->disqus_shortname }}',
+            disqus_config = function () {
+                this.language = "{{ session('language_code') }}";
+            };
         (function() {
             var d = document, s = d.createElement('script');
-            s.src = '//{{ Config::get('settings')->disqus_shortname }}.disqus.com/embed.js';
+            s.src = '//'+ disqus_shortname + '.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();
