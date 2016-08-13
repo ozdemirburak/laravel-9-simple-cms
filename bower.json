@@ -19,5 +19,8 @@
     "tinymce": "~4.2.5",
     "tinymce-localautosave": "~0.4.2",
     "webfontloader": "~1.6.24"
+  },
+  "resolutions": {
+    "jquery": "~1.11.2"
   }
 }
