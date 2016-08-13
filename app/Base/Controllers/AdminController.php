@@ -209,13 +209,10 @@ abstract class AdminController extends Controller
     protected function uploadImage($request, $field)
     {
         $data = $request->except($field);
-        if ($request->file($field)) {
-            $file = $request->file($field);
-            $request->file($field);
+        if ($file = $request->file($field)) {
             $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
             $path = $this->getUploadPath($field);
-            $move_path = public_path($path);
-            $file->move($move_path, $fileName);
+            $file->move(public_path($path), $fileName);
             $data[$field] = $path . $fileName;
         }
         return $data;
