@@ -22,6 +22,6 @@ class CategoriesForm extends AdminForm
             ->add('description', 'text', [
                 'label' => trans('admin.fields.category.description')
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

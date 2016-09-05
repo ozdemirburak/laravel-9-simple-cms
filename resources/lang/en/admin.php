@@ -72,6 +72,7 @@ return [
             'chart_visitors'        => "Visitor",
             'entrance_pages'        => "Entrance",
             'exit_pages'            => "Exit",
+            'invalid_setup'         => "Please configure your Google Analytics setup defined in your .env file to see the dashboard (ANALYTICS_CONFIGURED).",
             'keywords'              => "Keywords",
             'os'                    => "OS",
             'page_visits'           => "Average page visits",

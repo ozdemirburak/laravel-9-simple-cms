@@ -6,21 +6,23 @@ use Kris\LaravelFormBuilder\Form;
 
 abstract class AdminForm extends Form
 {
-    public function buildForm()
+    /**
+     * @param bool $reset
+     * @param bool $submit
+     */
+    protected function addButtons($reset = true, $submit = true)
     {
-        $this->addButtons();
-    }
-
-    protected function addButtons()
-    {
-        $this
-            ->add('_save', 'submit', [
+        if ($submit === true) {
+            $this->add('_save', 'submit', [
                 'label' => trans('admin.fields.save'),
                 'attr' => ['class' => 'btn btn-primary']
-            ])
-            ->add('_clear', 'reset', [
+            ]);
+        }
+        if ($reset === true) {
+            $this->add('_reset', 'reset', [
                 'label' => trans('admin.fields.reset'),
                 'attr' => ['class' => 'btn btn-warning']
             ]);
+        }
     }
 }

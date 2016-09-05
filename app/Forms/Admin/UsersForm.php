@@ -25,6 +25,6 @@ class UsersForm extends AdminForm
                 'label' => trans('admin.fields.user.picture'),
                 'attr' => ['class' => '']
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

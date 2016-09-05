@@ -40,7 +40,7 @@ class Category extends SluggableModel
      */
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 
     /**
@@ -48,6 +48,6 @@ class Category extends SluggableModel
      */
     public function articles()
     {
-        return $this->hasMany('App\Article');
+        return $this->hasMany(Article::class);
     }
 }

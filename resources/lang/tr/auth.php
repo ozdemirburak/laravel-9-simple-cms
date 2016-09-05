@@ -19,7 +19,12 @@ return [
     ],
     "logout"                    => "Çıkış Yap",
     "password" => [
-        "email_content"         => "Şifrenizi sıfırlamak için bu linke tıklayınız:",
+        "email" => [
+            "action"            => "Şifreyi Sıfırla",
+            "conclusion"        => "Bu isteği sen yapmadıysan, lütfen bu e-postayı yoksay.",
+            "content"           => "Hesabın için bir şifre sıfırlama isteği aldık.",
+            "introduction"      => "Merhaba!",
+        ],
         "submit"                => "Şifremi gönder",
         "title"                 => "Şifremi unuttum",
     ],

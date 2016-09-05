@@ -53,7 +53,7 @@ class Article extends SluggableModel
      */
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -65,27 +65,6 @@ class Article extends SluggableModel
     public function getPublishedAtAttribute($date)
     {
         return Carbon::parse($date)->format('Y-m-d');
-    }
-
-    /**
-     * Set article publish date
-     *
-     * @param $date
-     */
-    public function setPublishedAtAttribute($date)
-    {
-        $this->attributes['published_at'] = Carbon::parse($date);
-    }
-
-    /**
-     * Get the content as purified
-     *
-     * @param $content
-     * @return string
-     */
-    public function getContentAttribute($content)
-    {
-        return clean($content, 'youtube');
     }
 
     /**

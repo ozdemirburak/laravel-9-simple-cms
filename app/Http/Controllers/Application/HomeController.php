@@ -13,7 +13,7 @@ class HomeController extends ApplicationController
      */
     public function index()
     {
-        $articles = $this->language->articles()->published()->orderBy('published_at', 'desc')->paginate(5);
+        $articles = session('current_lang')->articles()->published()->orderBy('published_at', 'desc')->paginate(5);
         return view('application.home.index', compact('articles'));
     }
 }

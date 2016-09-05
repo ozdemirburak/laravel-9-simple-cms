@@ -83,6 +83,6 @@ class ArticleController extends AdminController
      */
     protected function getSelectList()
     {
-        return $this->language->categories->pluck('title', 'id')->all();
+        return session('current_lang')->categories->pluck('title', 'id')->all();
     }
 }

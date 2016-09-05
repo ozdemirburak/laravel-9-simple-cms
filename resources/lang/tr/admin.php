@@ -72,6 +72,7 @@ return [
             'chart_visitors'        => "Ziyaretci",
             'entrance_pages'        => "Giriş",
             'exit_pages'            => "Çıkış",
+            'invalid_setup'         => "Dashboard'a ulaşabilmek için lütfen .env dosyanızı düzenleyin (ANALYTICS_CONFIGURED).",
             'keywords'              => "Kelimeler",
             'os'                    => "OS",
             'page_visits'           => "Ortalama Gezilen Sayfa",
