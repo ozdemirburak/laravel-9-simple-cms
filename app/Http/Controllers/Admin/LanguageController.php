@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Base\Controllers\AdminController;
+use App\Base\Traits\LanguageChangeTrait;
 use App\Http\Controllers\Api\DataTables\LanguageDataTable;
 use App\Http\Requests\Admin\LanguageRequest;
 use App\Language;
-use Input;
-use Redirect;
 
 class LanguageController extends AdminController
 {
+    use LanguageChangeTrait;
+
     /**
      * Image column of the model
      *
@@ -83,16 +84,5 @@ class LanguageController extends AdminController
     public function destroy(Language $language)
     {
         return $this->destroyFlashRedirect($language);
-    }
-
-    /**
-     * Change language
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postChange()
-    {
-        session(['language' => Input::get('language')]);
-        return Redirect::back();
     }
 }

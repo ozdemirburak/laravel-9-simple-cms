@@ -1,6 +1,4 @@
 $(function() {
-    $('img').addClass('img-responsive');
-
     $('iframe[src*="youtube.com"]').each(function() {
         if (!$(this).hasClass('embed-responsive-item')) {
             $(this).wrap("<div class='row'><div class='col-sm-6 padding-left-0'><div class='embed-responsive embed-responsive-16by9'></div></div></div>");

@@ -22,6 +22,6 @@ class PagesForm extends AdminForm
             ->add('description', 'text', [
                 'label' => trans('admin.fields.page.description')
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

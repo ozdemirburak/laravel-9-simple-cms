@@ -11,4 +11,9 @@ $(function() {
     if( !$('input[type=date]').val() ) {
         $('input[type=date]').datepicker("setDate", new Date());
     }
+
+    $('img.chosen-one').click(function(){
+        $('input[name="language"]').val($(this).attr("alt"));
+        $('#anakin-skywalker').submit();
+    });
 });

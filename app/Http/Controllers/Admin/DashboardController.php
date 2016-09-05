@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Base\Controllers\AdminController;
+use Analytics;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use LaravelAnalytics;
+use Spatie\Analytics\Period;
 
 class DashboardController extends AdminController
 {
@@ -14,67 +16,62 @@ class DashboardController extends AdminController
      *
      * @var int
      */
-    private $period;
+    protected $period;
 
     /**
      * Total results
      *
      * @var int
      */
-    private $limit;
-
-    /**
-     * Start of the scope
-     *
-     * @var DateTime
-     */
-    private $start;
-
-    /**
-     * End of the scope
-     *
-     * @var static
-     */
-    private $end;
+    protected $limit;
 
     /**
      * Country variable for the regions distribution
      *
      * @var mixed
      */
-    private $country;
+    protected $country;
 
+    /**
+     * DashboardController constructor.
+     */
     public function __construct()
     {
-        $this->period = 30;
-        $this->limit = 16;
-        $this->end = Carbon::today();
-        $this->start = Carbon::today()->subDays($this->period);
-        $this->country = env('ANALYTICS_COUNTRY');
         parent::__construct();
+        $end = Carbon::now()->minute(0);
+        $this->limit = 16;
+        $this->period = Period::create($end->copy()->subDays(30), $end);
+        $this->country = env('ANALYTICS_COUNTRY');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getIndex()
     {
-        $statistics = [
-            'keywords' => LaravelAnalytics::getTopKeywords($this->period, $this->limit),
-            'referrers' => LaravelAnalytics::getTopReferrers($this->period, $this->limit),
-            'browsers' => LaravelAnalytics::getTopBrowsers($this->period, $this->limit),
-            'pages' => LaravelAnalytics::getMostVisitedPages($this->period, $this->limit),
-            'users' => LaravelAnalytics::getActiveUsers(),
-            'total_visits' => $this->getTotalVisits(),
-            'landings' => $this->getLandings(),
-            'exits' => $this->getExits(),
-            'times' => $this->getTimeOnPages(),
-            'sources' => $this->getSources(),
-            'ops' => $this->getOperatingSystems(),
-            'browsers' => $this->getBrowsers(),
-            'countries' => $this->getCountries(),
-            'visits' => $this->getDailyVisits(),
-            'regions' => $this->getRegions(),
-            'averages' => $this->getAverages()
-        ];
-        return view('admin.dashboard.index', compact('statistics'));
+        if (env('ANALYTICS_CONFIGURED') === false) {
+            $this->model = 'User';
+            return $this->redirectRoutePath('index', 'admin.fields.dashboard.invalid_setup');
+        } else {
+            $statistics = [
+                'referrers' => Analytics::fetchTopReferrers($this->period, $this->limit),
+                'browsers' => Analytics::fetchTopBrowsers($this->period, $this->limit),
+                'pages' => Analytics::fetchMostVisitedPages($this->period, $this->limit),
+                'total_visits' => $this->getTotalVisits(),
+                'landings' => $this->getLandings(),
+                'exits' => $this->getExits(),
+                'times' => $this->getTimeOnPages(),
+                'sources' => $this->getSources(),
+                'ops' => $this->getOperatingSystems(),
+                'browsers' => $this->getBrowsers(),
+                'countries' => $this->getCountries(),
+                'visits' => $this->getDailyVisits(),
+                'regions' => $this->getRegions(),
+                'keywords' => $this->getTopKeywords(),
+                'averages' => $this->getAverages()
+            ];
+            return view('admin.dashboard.index', compact('statistics'));
+        }
     }
 
     /**
@@ -84,9 +81,9 @@ class DashboardController extends AdminController
      * @param string $metrics
      * @return mixed
      */
-    private function query($options = [], $metrics = 'ga:visits')
+    protected function query($options = [], $metrics = 'ga:visits')
     {
-        return LaravelAnalytics::performQuery($this->start, $this->end, $metrics, $options)->rows;
+        return Analytics::performQuery($this->period, $metrics, $options)->rows;
     }
 
     /**
@@ -97,7 +94,7 @@ class DashboardController extends AdminController
      * @param int $offset
      * @return Collection
      */
-    private function makeCollection($data, $fields, $offset = 1)
+    protected function makeCollection($data, $fields, $offset = 1)
     {
         if (is_null($data)) {
             return new Collection([]);
@@ -116,10 +113,19 @@ class DashboardController extends AdminController
      */
     private function getTotalVisits()
     {
-        $options = [
-            'dimensions' => 'ga:year',
-        ];
+        $options = ['dimensions' => 'ga:year'];
         return $this->query($options)[0][1];
+    }
+
+    /**
+     * Total visits
+     *
+     * @return mixed
+     */
+    private function getTopKeywords()
+    {
+        $options = ['dimensions' => 'ga:keyword', 'sort' => '-ga:sessions', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options, 'ga:sessions'), ['0' => 'keyword', '1' => 'sessions']);
     }
 
     /**
@@ -129,13 +135,8 @@ class DashboardController extends AdminController
      */
     private function getLandings()
     {
-        $options = [
-            'dimensions' => 'ga:landingPagePath',
-            'sort' => '-ga:entrances',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options, 'ga:entrances');
-        return $this->makeCollection($data, ['0' => 'path', '1' => 'visits']);
+        $options = ['dimensions' => 'ga:landingPagePath', 'sort' => '-ga:entrances', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options, 'ga:entrances'), ['0' => 'path', '1' => 'visits']);
     }
 
     /**
@@ -145,13 +146,8 @@ class DashboardController extends AdminController
      */
     private function getExits()
     {
-        $options = [
-            'dimensions' => 'ga:exitPagePath',
-            'sort' => '-ga:exits',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options, 'ga:exits');
-        return $this->makeCollection($data, ['0' => 'path', '1' => 'visits']);
+        $options = ['dimensions' => 'ga:exitPagePath', 'sort' => '-ga:exits', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options, 'ga:exits'), ['0' => 'path', '1' => 'visits']);
     }
 
     /**
@@ -159,15 +155,10 @@ class DashboardController extends AdminController
      *
      * @return Collection
      */
-    public function getTimeOnPages()
+    private function getTimeOnPages()
     {
-        $options = [
-            'dimensions' => 'ga:pagePath',
-            'sort' => '-ga:timeOnPage',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options, 'ga:timeOnPage');
-        return $this->makeCollection($data, ['0' => 'path', '1' => 'time']);
+        $options = ['dimensions' => 'ga:pagePath', 'sort' => '-ga:timeOnPage', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options, 'ga:timeOnPage'), ['0' => 'path', '1' => 'time']);
     }
 
     /**
@@ -177,13 +168,8 @@ class DashboardController extends AdminController
      */
     private function getSources()
     {
-        $options = [
-            'dimensions' => 'ga:source, ga:medium',
-            'sort' => '-ga:visits',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options);
-        return $this->makeCollection($data, ['0' => 'path', '1' => 'visits'], 2);
+        $options = ['dimensions' => 'ga:source, ga:medium', 'sort' => '-ga:visits', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options), ['0' => 'path', '1' => 'visits'], 2);
     }
 
     /**
@@ -191,15 +177,10 @@ class DashboardController extends AdminController
      *
      * @return mixed
      */
-    public function getOperatingSystems()
+    private function getOperatingSystems()
     {
-        $options = [
-            'dimensions' => 'ga:operatingSystem',
-            'sort' => '-ga:visits',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options);
-        return $this->makeCollection($data, ['0' => 'os', '1' => 'visits']);
+        $options = ['dimensions' => 'ga:operatingSystem', 'sort' => '-ga:visits', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options), ['0' => 'os', '1' => 'visits']);
     }
 
     /**
@@ -207,30 +188,23 @@ class DashboardController extends AdminController
      *
      * @return mixed
      */
-    public function getBrowsers()
+    private function getBrowsers()
     {
-        $options = [
-            'dimensions' => 'ga:browser',
-            'sort' => '-ga:visits',
-            'max-results' => $this->limit
-        ];
-        $data = $this->query($options);
-        return $this->makeCollection($data, ['0' => 'browser', '1' => 'visits']);
+        $options = ['dimensions' => 'ga:browser', 'sort' => '-ga:visits', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options), ['0' => 'browser', '1' => 'visits']);
     }
 
     /**
      * Country distribution
      *
+     * @param array $visits
+     *
      * @return string
      */
-    private function getCountries()
+    private function getCountries($visits = [])
     {
-        $options = [
-            'dimensions' => 'ga:country',
-            'sort' => '-ga:visits'
-        ];
+        $options = ['dimensions' => 'ga:country', 'sort' => '-ga:visits'];
         $array = $this->query($options);
-        $visits = [];
         if (count($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k] = [$v[0], (int) $v[1]];
@@ -242,15 +216,14 @@ class DashboardController extends AdminController
     /**
      * Daily visits
      *
+     * @param array $visits
+     *
      * @return string
      */
-    private function getDailyVisits()
+    private function getDailyVisits($visits = [])
     {
-        $options = [
-            'dimensions' => 'ga:date'
-        ];
+        $options = ['dimensions' => 'ga:date'];
         $array = $this->query($options);
-        $visits = [];
         foreach ($array as $k => $v) {
             $visits[$k]['date']   = Carbon::parse($v['0'])->format('Y-m-d');
             $visits[$k]['visits'] = $v['1'];
@@ -261,9 +234,11 @@ class DashboardController extends AdminController
     /**
      * Region distribution for a specific country
      *
+     * @param array $visits
+     *
      * @return string
      */
-    private function getRegions()
+    private function getRegions($visits = [])
     {
         $options = [
             'dimensions' => 'ga:country, ga:region',
@@ -271,7 +246,6 @@ class DashboardController extends AdminController
             'filters' => 'ga:country==' . $this->country . ''
         ];
         $array = $this->query($options);
-        $visits = [];
         if (count($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k] = [str_replace(" Province", "", $v[1]), (int) $v[2]];
@@ -287,13 +261,11 @@ class DashboardController extends AdminController
      */
     private function getAverages()
     {
-        $options = [
-            'dimensions' => 'ga:pagePath'
-        ];
+        $options = ['dimensions' => 'ga:pagePath'];
         $array = $this->query($options, 'ga:avgTimeOnPage, ga:entranceBounceRate, ga:pageviewsPerVisit');
         $count = count($array);
         $average = ['time' => 0, 'bounce' => 0, 'visit' => 0];
-        if (count($array)) {
+        if ($count) {
             foreach ($array as $v) {
                 $average['time']   += $v['1'];
                 $average['bounce'] += $v['2'];

@@ -24,13 +24,6 @@ abstract class AdminController extends Controller
     protected $formPath = "";
 
     /**
-     * Current language
-     *
-     * @var mixed
-     */
-    protected $language;
-
-    /**
      * Upload path
      *
      * @var string
@@ -44,7 +37,6 @@ abstract class AdminController extends Controller
     {
         $this->model = $this->getModel();
         $this->formPath = $this->getFormPath();
-        $this->language = session('current_lang');
     }
 
     /**

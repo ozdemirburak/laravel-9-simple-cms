@@ -25,6 +25,6 @@ class LanguagesForm extends AdminForm
                 'label' => trans('admin.fields.language.flag'),
                 'attr' => ['class' => '']
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

@@ -11,7 +11,7 @@
             <i class="fa fa-sign-in"></i> {{ trans('auth.login.title') }}
         </div>
 
-        {!! Form::open(['method' => 'POST', 'route' => 'auth.login']) !!}
+        {!! Form::open(['method' => 'POST', 'route' => 'auth.login.post']) !!}
 
         <div class="body bg-gray-50">
             @include('errors.validation')
@@ -35,7 +35,7 @@
             <hr/>
             <div class="row">
                 <div class="col-xs-6">
-                    <a class="btn btn-link" href="{{ route('password.email') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
+                    <a class="btn btn-link" href="{{ route('password.reset') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
                 </div>
             </div>
         </div>

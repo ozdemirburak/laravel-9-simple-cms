@@ -18,7 +18,12 @@ return [
     ],
     "logout"                    => "Logout",
     "password" => [
-        "email_content"         => "Click to this link to reset your password:",
+        "email" => [
+            "action"            => "Reset Password",
+            "conclusion"        => "If you did not request a password reset, no further action is required.",
+            "content"           => "You are receiving this email because we received a password reset request for your account.",
+            "introduction"      => "Hello!"
+        ],
         "submit"                => "Send Password Reset Link",
         "title"                 => "Forgot Password"
     ],

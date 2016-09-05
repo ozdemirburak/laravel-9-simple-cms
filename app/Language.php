@@ -40,7 +40,7 @@ class Language extends Model
      */
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany(Category::class);
     }
 
     /**
@@ -48,7 +48,7 @@ class Language extends Model
      */
     public function pages()
     {
-        return $this->hasMany('App\Page');
+        return $this->hasMany(Page::class);
     }
 
     /**
@@ -56,6 +56,6 @@ class Language extends Model
      */
     public function articles()
     {
-        return $this->hasManyThrough('App\Article', 'App\Category');
+        return $this->hasManyThrough(Article::class, Category::class);
     }
 }

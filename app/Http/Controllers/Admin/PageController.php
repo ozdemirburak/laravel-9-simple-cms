@@ -16,8 +16,8 @@ class PageController extends AdminController
      */
     public function index()
     {
-        $pages = Page::whereLanguageId($this->language->id);
-        $pages = $pages->count() > 1 ? $this->language->pages->toHierarchy() : $pages->get();
+        $pages = Page::whereLanguageId(session('current_lang')->id);
+        $pages = $pages->count() > 1 ? session('current_lang')->pages->toHierarchy() : $pages->get();
         return $this->viewPath("index", $pages);
     }
 
