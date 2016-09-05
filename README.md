@@ -50,6 +50,7 @@ Install node and npm following one of the techniques explained within this [link
 
 Open [http://localhost:8000](http://localhost:8000) from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
 The application comes with default user with email address `admin@admin.com` and `123456`.
+
 -----
 <a name="item4"></a>
 ##Installation Guide:
