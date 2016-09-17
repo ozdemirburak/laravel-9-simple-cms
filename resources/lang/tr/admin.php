@@ -23,13 +23,14 @@ return [
         "fail"                      => "Oluşturma işlemi gerçekleştirilemedi.",
         "success"                   => "Oluşturma işlemi başarıyla gerçekleştirildi."
     ],
+    "csrf_error"                    => "Oturum süreniz dolduğu için isteğiniz işlenemedi, lütfen formu tekrar doldurunuz.",
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "  _TOTAL_ Kayıttan _START_ - _END_ Arası Kayıtlar",
         "sInfoEmpty"                => "Kayıt Yok",
         "sInfoFiltered"             => "( _MAX_ Kayıt İçerisinden Bulunan)",
         "sInfoPostFix"              => "",
         "sLengthMenu"               => "Sayfada _MENU_ Kayıt Göster",
-        "sProcessing"               => "İşleniyor...",
+        "sProcessing"               => "<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>",
         "sSearch"                   => "Bul:",
         "sUrl"                      => "",
         "sZeroRecords"              => "Eşleşen Kayıt Bulunmadı",
@@ -52,13 +53,14 @@ return [
             "category_id"           => "Kategori",
             "content"               => "İçerik",
             "description"           => "Tanımı",
-            "title"                 => "Başlık"
+            "title"                 => "Makale Başlığı"
         ],
         "category" => [
+            "articles"              => "Makale Sayısı",
             "color"                 => "Rengi",
             "description"           => "Tanımı",
             "language_id"           => "Dili",
-            "title"                 => "Başlık"
+            "title"                 => "Kategori Başlığı"
         ],
         "created_at"                => "Oluşturulma",
         "dashboard" => [
@@ -70,6 +72,7 @@ return [
             'chart_visitors'        => "Ziyaretci",
             'entrance_pages'        => "Giriş",
             'exit_pages'            => "Çıkış",
+            'invalid_setup'         => "Dashboard'a ulaşabilmek için lütfen .env dosyanızı düzenleyin (ANALYTICS_CONFIGURED).",
             'keywords'              => "Kelimeler",
             'os'                    => "OS",
             'page_visits'           => "Ortalama Gezilen Sayfa",
@@ -90,6 +93,7 @@ return [
             "site_title"            => "Site Başlığı",
             "title"                 => "Adı"
         ],
+        "no"                        => "Hayır",
         "page" => [
             "content"               => "İçerik",
             "description"           => "Tanımı",
@@ -101,7 +105,7 @@ return [
         "reset"                     => "Reset",
         "save"                      => "Kaydet",
         "setting" => [
-            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXXXXX-YYYY )",
             "disqus_shortname"      => "Disqus Shortname",
             "email"                 => "Email",
             "facebook"              => "Facebook",
@@ -119,7 +123,8 @@ return [
             "password"              => "Şifre",
             "password_confirmation" => "Şifre Tekrarı",
             "picture"               => "Fotoğraf"
-        ]
+        ],
+        "yes"                       => "Evet"
     ],
     "language" => [
         "create"                    => "Dil oluştur",

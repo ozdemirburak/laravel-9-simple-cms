@@ -1,0 +1,39 @@
+.bg-auth {
+  background-color: @base-color;
+  color: @white;
+  font-weight: bold;
+  &:hover {
+    color: saturate(@white, 25%);
+  }
+}
+
+.bg-dark-blue-gradient{
+  .gradient ('085988', '4f90a9');
+}
+
+.bg-black-50 {
+  background-color: @black;
+}
+
+.bg-gray-50 {
+  background-color: @gray-lighter !important;
+  color: @gray-darker;
+}
+
+.bg-gray-white .box-header {
+  color: @white;
+}
+
+.bg-blue-special {
+  background-color: @blue-lighter;
+}
+
+.bg-gray-white {
+  background-color: @gray-lighter;
+  border-top: medium none;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bg-gray-white .box-header {
+  background: @base-color none repeat scroll 0 0;
+}

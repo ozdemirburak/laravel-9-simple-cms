@@ -1,36 +1,19 @@
-@import "AdminLTE";
-@import "font-awesome";
-@import "datepicker3";
+@import "../vendor/admin-lte/build/less/AdminLTE";
+@import "../vendor/admin-lte/build/less/skins/skin-blue";
+@import "../vendor/font-awesome/less/font-awesome";
+@import "../vendor/bootstrap-datepicker/less/datepicker3";
+@import "admin/variables";
+@import "admin/functions";
+@import "admin/items";
+@import "admin/overrides";
+@import "admin/backgrounds";
+@import "admin/login-box";
+@import "admin/table-buttons";
 
-.gradient (@start, @stop) {
-  background: ~"#@{start}";
-  background: ~"-moz-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
-  background: ~"-webkit-gradient(linear, left top, left bottom, color-stop(0%,#@{start}), color-stop(100%,#@{stop}))";
-  background: ~"-webkit-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
-  background: ~"-o-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
-  background: ~"-ms-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
-  background: ~"linear-gradient(to bottom, #@{start} 0%, #@{stop} 100%)";
-  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#00@{start}', endColorstr='#00@{stop}', GradientType=0 )";
-  color: #fff;
-};
-
-@auth_color: #3c8dbc;
-
-.bg-auth {
-  background-color: @auth_color;
-  color: white;
-  font-weight: bold;
-  &:hover {
-    color: saturate(white,25%);
-  }
-}
-
-.bg-dark-blue-gradient{
-  .gradient ('085988', '4f90a9');
-}
-
-.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
-  height: 190px;
+.box-special {
+  background: @gray-lighter none repeat scroll 0 0;
+  margin: 150px auto;
+  text-align: center;
 }
 
 .validation {
@@ -43,89 +26,6 @@
   }
 }
 
-.bg-black-50 {
-  background-color: #222222;
-}
-
-.bg-gray-50 {
-  background-color: #eaeaec !important;
-  color: #444;
-}
-
-.login-box {
-  .header {
-    background: none repeat scroll 0 0 @auth_color;
-    border-radius: 4px 4px 0 0;
-    box-shadow: 0 -3px 0 rgba(0, 0, 0, 0.2) inset;
-    color: #fff;
-    font-size: 26px;
-    font-weight: 300;
-    padding: 20px 10px;
-    text-align: center;
-  }
-  .body {
-    background: none repeat scroll 0 0 #fff;
-    color: #444;
-    padding: 10px 20px;
-    .fa {
-      margin-top: 10px;
-    }
-  }
-  .footer {
-    background: none repeat scroll 0 0 #fff;
-    color: #444;
-    padding: 10px 20px;
-    border-radius: 0 0 4px 4px;
-    a {
-      padding-left: 0;
-    }
-  }
-}
-
-.dataTables_wrapper {
-  label {
-    font-weight: normal;
-  }
-  input[type="text"] {
-    width: 16em;
-  }
-  .destroy {
-    font-family: FontAwesome, 'Source Sans Pro';
-  }
-}
-
-table.table {
-  thead {
-    @font_size: 10px;
-    @margin_left: 5px;
-    .sorting_asc::after {
-      font-size: @font_size;
-      margin-left: @margin_left;
-    }
-    .sorting_desc::after {
-      font-size: @font_size;
-      margin-left: @margin_left;
-    }
-    .sorting::after {
-      font-size: @font_size;
-      margin-left: @margin_left;
-    }
-  }
-  tbody {
-    tr:nth-of-type(2n+1) {
-      background-color: #f4f4f4;
-    }
-  }
-}
-
-form {
-  .has-error {
-    .text-danger {
-      margin-top: 15px;
-    }
-  }
-}
-
 .uploaded-file {
   margin-top: -60px;
   float: right;
@@ -133,15 +33,15 @@ form {
 
 .category {
   margin-top: 25px;
-  a{
-    color: #fff;
+  a {
+    color: @white;
     padding: 2px 1em;
   }
 }
 
 .post-title {
   a {
-    color: #767676;
+    color: @gray-lighter;
   }
 }
 
@@ -163,130 +63,8 @@ ul.languages {
   opacity: 0.8;
 }
 
-.ol-buttons {
-  float: right;
-  margin-top: 8px;
-  .list-inline {
-    li {
-      margin-top: 0;
-      margin-right: 5px;
-      font-weight: 400;
-    }
-  }
-}
-
-.inline-edit {
-  color: #1c6d23;
-  margin-right: 10px;
-}
-.inline-edit:hover {
-  color: #2fad38;
-}
-
-.inline-show {
-  color: #013461;
-  margin-right: 10px;
-}
-
-.inline-show:hover {
-  color: #015eb1;
-}
-
-.inline-delete {
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: medium none;
-  color: #bc0000;
-  font-family: FontAwesome,"Source Sans Pro";
-}
-
-.inline-delete:hover {
-  color: #f50000;
-}
-
 .nav-tabs-custom ul li a {
-  color: #707070;
-}
-
-.item-list {
-  list-style: outside none none;
-  margin: 0;
-  padding: 0;
-  li{
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #fff;
-    border-color: #ddd;
-    border-image: none;
-    border-style: solid;
-    border-width: 1px 1px 1px 3px;
-    margin-top: -1px;
-    padding: 9px;
-    position: relative;
-    label{
-      font-size: 13px;
-    }
-    .selected {
-      background-color: #f4f9fc;
-      color: #8090a0;
-      label, .lbl{
-        color: #8090a0;
-        text-decoration: line-through;
-        .inline{
-          display: inline-block;
-        }
-      }
-    }
-  }
-  li:nth-child(1) {
-    border-left-color: #80f31f;
-  }
-  li:nth-child(2) {
-    border-left-color: #a5de0b;
-  }
-  li:nth-child(3) {
-    border-left-color: #c7c101;
-  }
-  li:nth-child(4) {
-    border-left-color: #e39e03;
-  }
-  li:nth-child(5) {
-    border-left-color: #f6780f;
-  }
-  li:nth-child(6) {
-    border-left-color: #fe5326;
-  }
-  li:nth-child(7) {
-    border-left-color: #fb3244;
-  }
-  li:nth-child(8) {
-    border-left-color: #ed1868;
-  }
-  li:nth-child(9) {
-    border-left-color: #b601b3;
-  }
-  li:nth-child(10) {
-    border-left-color: #9106d3;
-  }
-  li:nth-child(11) {
-    border-left-color: #6b16ec;
-  }
-  li:nth-child(12) {
-    border-left-color: #472ffa;
-  }
-  li:nth-child(13) {
-    border-left-color: #2850fe;
-  }
-  li:nth-child(14) {
-    border-left-color: #1175f7;
-  }
-  li:nth-child(15) {
-    border-left-color: #039be5;
-  }
-  li:nth-child(16) {
-    border-left-color: #01beca;
-  }
+  color: @gray-darker;
 }
 
 .right-charts {
@@ -297,35 +75,6 @@ ul.languages {
   height: 700px;
 }
 
-.box-special {
-  background: #f9f9f9 none repeat scroll 0 0;
-  margin: 150px auto;
-  text-align: center;
-}
-
-.bg-gray-white .box-header {
-  color: #fff;
-}
-
-.bg-blue-special {
-  background-color: #55a9bc;
-}
-
-.bg-gray-white {
-  background-color: #f9f9f9;
-  border-top: medium none;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
-}
-
-.bg-gray-white .box-header {
-  background: #3c8dbc none repeat scroll 0 0;
-}
-
 .user-image {
   max-height: 150px;
-}
-
-hr {
-  margin-bottom: 0;
-  margin-top: 10px;
 }

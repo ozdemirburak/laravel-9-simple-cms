@@ -1,0 +1,11 @@
+.gradient (@start, @stop) {
+  background: ~"#@{start}";
+  background: ~"-moz-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
+  background: ~"-webkit-gradient(linear, left top, left bottom, color-stop(0%,#@{start}), color-stop(100%,#@{stop}))";
+  background: ~"-webkit-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
+  background: ~"-o-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
+  background: ~"-ms-linear-gradient(top, #@{start} 0%, #@{stop} 100%)";
+  background: ~"linear-gradient(to bottom, #@{start} 0%, #@{stop} 100%)";
+  filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr='#00@{start}', endColorstr='#00@{stop}', GradientType=0 )";
+  color: #fff;
+};

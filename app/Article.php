@@ -2,10 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Base\SluggableModel;
 use Carbon\Carbon;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
 
 /**
  * App\Article
@@ -32,11 +30,10 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  * @method static \App\Article published()
+ * @property integer $read_count
  */
-class Article extends Model implements SluggableInterface
+class Article extends SluggableModel
 {
-    use SluggableTrait;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -52,22 +49,11 @@ class Article extends Model implements SluggableInterface
     protected $dates = ['published_at'];
 
     /**
-     * Create slug from title using 3rd party trait
-     *
-     * @var array
-     */
-    protected $sluggable = array(
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
-    );
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -82,43 +68,12 @@ class Article extends Model implements SluggableInterface
     }
 
     /**
-     * Set article publish date
-     *
-     * @param $date
-     */
-    public function setPublishedAtAttribute($date)
-    {
-        $this->attributes['published_at'] = Carbon::parse($date);
-    }
-
-    /**
-     * Get the content as purified
-     *
-     * @param $content
-     * @return string
-     */
-    public function getContentAttribute($content)
-    {
-        return clean($content, 'youtube');
-    }
-
-    /**
-     * Set the slug according to Turkish language (Ö => o and Ü => u) instead of German (Ö => oe and Ü => ue)
-     *
-     * @param $slug
-     */
-    public function setSlugAttribute($slug)
-    {
-        $this->attributes['slug'] = str_replace(["oe", "ue"], ["o", "u"], $slug);
-    }
-
-    /**
      * Scope queries to articles that are published
      *
      * @param $query
      */
     public function scopePublished($query)
     {
-        $query->where('published_at', '<=', Carbon::now());
+        return $query->where('published_at', '<=', Carbon::now());
     }
 }

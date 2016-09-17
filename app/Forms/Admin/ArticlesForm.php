@@ -25,6 +25,6 @@ class ArticlesForm extends AdminForm
             ->add('description', 'text', [
                 'label' => trans('admin.fields.article.description')
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

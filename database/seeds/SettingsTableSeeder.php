@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Setting;
 
-class SettingTableSeeder extends Seeder
+class SettingsTableSeeder extends Seeder
 {
     public function run()
     {

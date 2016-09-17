@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware\Custom;
 
-use Session;
-use App\Language;
-use Closure;
 use App;
+use App\Language;
 use Carbon\Carbon;
+use Closure;
 use Config;
+use Session;
 
 class Locale
 {

@@ -28,6 +28,6 @@ class SettingsForm extends AdminForm
                 'label' => trans('admin.fields.setting.logo'),
                 'attr' => ['class' => '']
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }

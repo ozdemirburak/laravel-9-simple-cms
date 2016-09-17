@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Base\Auth\ResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
 
 /**
  * App\User
@@ -36,9 +33,10 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIpAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePicture($value)
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+
+class User extends Authenticatable
 {
-    use Authenticatable, CanResetPassword;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -68,29 +66,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] =  Hash::make($password);
+        $this->attributes['password'] = Hash::make($password);
     }
 
     /**
-     * Set the ip address attribute.
+     * @param $picture
      *
-     * @param $ip
      * @return string
      */
-    public function setIpAddressAttribute($ip)
+    public function getPictureAttribute($picture)
     {
-        $this->attributes['ip_address'] = inet_pton($ip);
+        return !empty($picture) ? asset($picture) : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png';
     }
 
-
     /**
-     * Get the ip address attribute.
+     * Send the password reset notification.
      *
-     * @param $ip
-     * @return string
+     * @param  string  $token
+     * @return void
      */
-    public function getIpAddressAttribute($ip)
+    public function sendPasswordResetNotification($token)
     {
-        return $ip ? inet_ntop($ip) : "";
+        $this->notify(new ResetPassword($token));
     }
 }

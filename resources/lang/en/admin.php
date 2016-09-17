@@ -23,13 +23,14 @@ return [
         "fail"                      => "Create operation on resource has failed.",
         "success"                   => "Resource has been created succesfully."
     ],
+    "csrf_error"                    => "Seems like you couldn't submit the form for a longtime. Please try again.",
     "datatables" => [               // DataTables, files can be found @ https://datatables.net/plug-ins/i18n/
         "sInfo"                     => "Showing _START_ to _END_ of _TOTAL_ entries",
         "sInfoEmpty"                => "Showing 0 to 0 of 0 entries",
         "sInfoFiltered"             => "(filtered from _MAX_ total entries)",
         "sInfoPostFix"              => "",
         "sLengthMenu"               => "Show _MENU_ entries",
-        "sProcessing"               => "Processing...",
+        "sProcessing"               => "<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>",
         "sSearch"                   => "Search:",
         "sUrl"                      => "",
         "sZeroRecords"              => "No matching records found",
@@ -52,13 +53,14 @@ return [
             "category_id"           => "Category",
             "content"               => "Content",
             "description"           => "Description",
-            "title"                 => "Title"
+            "title"                 => "Article Title"
         ],
         "category" => [
+            "articles"              => "Article Count",
             "color"                 => "Color",
             "description"           => "Description",
             "language_id"           => "Language",
-            "title"                 => "Title"
+            "title"                 => "Category Title"
         ],
         "created_at"                => "Created at",
         "dashboard" => [
@@ -70,6 +72,7 @@ return [
             'chart_visitors'        => "Visitor",
             'entrance_pages'        => "Entrance",
             'exit_pages'            => "Exit",
+            'invalid_setup'         => "Please configure your Google Analytics setup defined in your .env file to see the dashboard (ANALYTICS_CONFIGURED).",
             'keywords'              => "Keywords",
             'os'                    => "OS",
             'page_visits'           => "Average page visits",
@@ -90,6 +93,7 @@ return [
             "site_title"            => "Site Title",
             "title"                 => "Title"
         ],
+        "no"                        => "No",
         "page" => [
             "content"               => "Content",
             "description"           => "Description",
@@ -101,7 +105,7 @@ return [
         "reset"                     => "Reset",
         "save"                      => "Save",
         "setting" => [
-            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXX-YY )",
+            "analytics_id"          => "Analytics ID ( Format: UA-XXXXXXXXX-YYYY )",
             "disqus_shortname"      => "Disqus Shortname",
             "email"                 => "Email",
             "facebook"              => "Facebook",
@@ -119,7 +123,8 @@ return [
             "password"              => "Password",
             "password_confirmation" => "Password Confirmation",
             "picture"               => "Avatar"
-        ]
+        ],
+        "yes"                       => "Yes"
     ],
     "language" => [
         "create"                    => "Create language",

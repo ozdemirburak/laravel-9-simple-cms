@@ -1,11 +1,10 @@
 # Laravel 5 Simple CMS
-Laravel 5.2 content management system for starters. For 5.1, see the 5.1 branch.
+Laravel 5.3 content management system for starters. For 5.1 and 5.2 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ##Table of Contents
 
 * [Features](#item1)
-* [Requirements](#item2)
 * [Quick Start](#item3)
 * [Installation Guide](#item4)
 * [User Guide](#item5)
@@ -29,29 +28,20 @@ Laravel 5.2 content management system for starters. For 5.1, see the 5.1 branch.
     * Multi-language support
 
 -----
-<a name="item2"></a>
-##Requirements
-	PHP >= 5.5.9
-	MCrypt PHP Extension
-	Database
-
------
 <a name="item3"></a>
 ##Quick Start:
 
-    $ git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY
-    $ cd CUSTOM_DIRECTORY
-    $ curl -s https://getcomposer.org/installer | php
-    $ php composer.phar install
-    $ mv .env.example .env
+    $ git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY && cd CUSTOM_DIRECTORY
+    $ composer install
 
 Create a database and configure the `.env` file.
 
     $ php artisan key:generate
     $ php artisan migrate
     $ php artisan db:seed
-    $ curl -sL https://deb.nodesource.com/setup | sudo bash -
-    $ sudo apt-get install -y nodejs
+
+Install node and npm following one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
+    
     $ npm install --global gulp bower
     $ npm install
     $ bower install
@@ -59,13 +49,7 @@ Create a database and configure the `.env` file.
     $ php artisan serve
 
 Open [http://localhost:8000](http://localhost:8000) from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
-The application comes with default user with email address `admin@admin.com` and `123456`. If you don't configure your `.env` file as expected, such as if you don't locate a `.p12` file that is needed for analytics data parsing,
-then upon login, just hit [http://localhost:8000/admin/user](http://localhost:8000/admin/user) to see the features starting from the users part as you will get an error which is Can't find .p12 certificate.
-
-**Attention #1 :** If you have Xdebug installed and get an error `Maximum function nesting level of '100' reached, aborting!`, you need to increase the value of `xdebug.max_nesting_level` in your php.ini. 
-See [this Stack Overflow question](https://stackoverflow.com/questions/8656089/solution-for-fatal-error-maximum-function-nesting-level-of-100-reached-abor) for further information.
-
-**Attention #2 :** If HTMLPurifier returns you an error about file permissions, or if purified content can't be posted, fix file permissions with calling `chmod 775 -R storage/purifier` then `chmod 775 -R vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer`.
+The application comes with default user with email address `admin@admin.com` and `123456`.
 
 -----
 <a name="item4"></a>
@@ -90,7 +74,9 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 
 If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`.
 
-As this project relies on bower and gulp heavily, you need to install them. To install node and npm, `curl -sL https://deb.nodesource.com/setup | sudo bash -` and `sudo apt-get install -y nodejs`. Then `npm install --global gulp bower` to install gulp and bower globally. Finally, to install Laravel project dependencies, run `npm install`.
+As this project relies on bower and gulp heavily, you need to install them. 
+To install node and npm follow one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
+Then `npm install --global gulp bower` to install gulp and bower globally. Finally, to install Laravel project dependencies, run `npm install`.
 
 After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
 
@@ -103,8 +89,6 @@ Finally, to generate a unique application key, run `php artisan key:generate`.
 <a name="step3"></a>
 ### Step 3: Create database
 
-Create a database with `utf8_unicode_ci` preferably or any utf8 collation you wish to make the application work as expected.
-
 -----
 <a name="step4"></a>
 ### Step 4: Set Configuration
@@ -113,9 +97,9 @@ Open your `.env` file and change the fields corresponding to your own configurat
 
 All variables with `DB_` prefixes relates to your database configuration.
 
-For the mail configuration, this application uses Gmail as a mail server. To configure it correctly, you need to change the `MAIL_USERNAME` variable as your Gmail username without `@gmail.com` and password as your Gmail password, `MAIL_FROM_ADDRESS` is your Gmail account with `@gmail.com` and `MAIL_FROM_NAME` is your name that is registered to that Gmail account.
+If you want to use the Gmail client to send emails, you need to change the `MAIL_USERNAME` variable as your Gmail username without `@gmail.com` and password as your Gmail password, `MAIL_FROM_ADDRESS` is your Gmail account with `@gmail.com` and `MAIL_FROM_NAME` is your name that is registered to that Gmail account.
 
-To use the Analytics API, you need to create a project from <a target="_blank" href="https://code.google.com/apis/console/">https://code.google.com/apis/console/</a>, then you need to give a name to it. After creating a new project, from the left sidebar, click to `APIs` from `APIs & Auth` section. From the applications list, click to `Analytics API` and hit `Enable API`. After that, again from the left sidebar, click to `Credentials` and hit `Create new Client ID`. After you hit that button, you will be seeing a modal, select the `Server` option from the options list. After creating that, it will give you the `Client ID` and `email address` that you need within the `.env` file. After that, you need to hit `Generate new P12 key` to complete the api creation. Download the P12 key and store it within your application's `storage/analytics` folder. Finally, from <a target="_blank" href="https://www.google.com/analytics">https://www.google.com/analytics</a> create new account and from the Admin section's subsection User Management, add the email address that was previously created with read and analyze permission. To sum up, `ANALYTICS_SITE_ID` is the id of the project that you create from Google Analytics user interface. If you can't find that, its the part that comes after `p` in the link in your browser when you are in the Admin section of that project. The link looks like this: `https://www.google.com/analytics/web/management/Settings/a***w****pYOUR_SITE_ID_IS_HERE`. `ANALYTICS_CLIENT_ID` and `ANALYTICS_SERVICE_EMAIL` are the ones that you previously created. The filename is your `P12` that you previously downloaded, the `.p12` suffix is not needed, for instance if you have downloaded `SOMETHING-*****.p12` file, then you need to write `SOMETHING-*****` for the `ANALYTICS_FILENAME` variable. Finally, for the `ANALYTICS_COUNTRY` and `ANALYTICS_COUNTRY_CODE` define your custom country and its short code using the same structure within the example, short code must be upper cased and country name must be camel cased.
+To use the Analytics API, follow the instructions explained in detail[here](https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics).
 
 -----
 <a name="step5"></a>
@@ -149,8 +133,6 @@ Lets assume we want to create a new resource for fruits where we'd like to manag
     $ php artisan migrate
 
 This will create everything that we need to manage our Fruits.
-
-**Attention:** The schema migration above may create two migrations, one by the command itself, one by the creating the model. So, before making the migration, you should check out the probable duplicates.
 
 Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first.
 
@@ -188,25 +170,15 @@ After finishing the language parts, check the Fruit model, which is located in `
 ```php
 <?php namespace App;
 
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
-use Illuminate\Database\Eloquent\Model;
+use App\Base\SluggableModel;
 
-class Fruit extends Model implements SluggableInterface {
-
-    use SluggableTrait;
-
-    protected $sluggable = array(
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
-    );
+class Fruit extends SluggableModel {
 
     protected $fillable = ['content', 'language_id', 'title'];
 
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }
 ```
@@ -216,7 +188,7 @@ Hence add the relation to Language model that references our fruits.
 ```php
 public function fruits()
 {
-    return $this->hasMany('App\Fruit');
+    return $this->hasMany(Fruit::class);
 }
 ```
 
@@ -232,6 +204,8 @@ use App\Fruit;
 
 class FruitDataTable extends DataTableController
 {
+    protected $model = Fruit::class;
+
     protected $columns = ['title'];
     
     protected $common_columns = ['created_at', 'updated_at'];
@@ -300,12 +274,6 @@ namespace App\Http\Requests\Admin;
 use App\Http\Requests\Request;
 
 class FruitRequest extends Request {
-
-    public function authorize()
-    {
-        return true;
-    }
-
     public function rules()
     {
         return [
@@ -341,7 +309,7 @@ class FruitsForm extends AdminForm
             ->add('content', 'textarea', [
                 'label' => trans('admin.fields.fruit.content')
             ]);
-        parent::buildForm();
+        $this->addButtons();
     }
 }
 ```
@@ -382,34 +350,30 @@ Finally, create the fruits folder within `resources/views/admin` and create the 
 @endsection
 ```
 
-Add the fruit routes, to `routes.php` file.
+Add the fruit routes, to `routes/admin.php` file.
 
 ```php
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
-    *
-    *
-    Route::resource('fruit', 'FruitController');
-});
+Route::resource('fruit', 'FruitController');
 ```
 
 Open the `RouteServiceProvider.php` file located in `Providers` folder and bind the fruit model.
 
 ```php
-$router->model('fruit', 'App\Fruit');
+Route::model('fruit', \App\Fruit::class);
 ```
 
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
 
 ```php  
-$fruits = $menu->add(trans('admin.menu.fruit.root'), '#')
+$fruits = $menu->add($this->translate('fruit.root'), '#')
     ->icon('apple')
     ->prependIcon();
 
-$fruits->add(trans('admin.menu.fruit.add'), ['route' => 'admin.fruit.create'])
+$fruits->add($this->translate('fruit.add'), ['route' => 'admin.fruit.create'])
     ->icon('circle-o')
     ->prependIcon();
 
-$fruits->add(trans('admin.menu.fruit.all'), ['route' => 'admin.fruit.index'])
+$fruits->add($this->translate('fruit.all'), ['route' => 'admin.fruit.index'])
     ->icon('circle-o')
     ->prependIcon();
 ```

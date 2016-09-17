@@ -11,7 +11,18 @@ abstract class DataTableController extends DataTable
      *
      * @var array
      */
-    protected $parameters = ['dom' => 'Bfrtip', 'buttons' => ['csv', 'excel', 'pdf']];
+    protected $parameters = [
+        'dom' => 'Bfrtip',
+        'buttons' => ['csv', 'excel', 'pdf'],
+        'columnDefs' => [['defaultContent' => '-', 'targets' => '_all']]
+    ];
+
+    /**
+     * Model that is used to generate this DataTable
+     *
+     * @var string
+     */
+    protected $model = "";
 
     /**
      * Columns to show
@@ -28,11 +39,45 @@ abstract class DataTableController extends DataTable
     protected $image_columns =  [];
 
     /**
-     * Columns with pluck, relation key, desired relation property
+     * Properties of the relationships that are loaded via eager loading
+     * For instance let Article has a Category and we want to show the Category title within the Article Datatable
+     * You can load the article that belongs to category within query function like:
+     *
+     * public function query()
+     * {
+     *      $articles = Article::with('category');
+     *      return $this->applyScopes($articles);
+     * }
+     *
+     * $eager_columns = ['category' => 'title'];
+     *
+     * Another example, if there are two relationships loaded via eager loading
+     *
+     * public function query()
+     * {
+     *      $comments = Comment::with('category', 'article');
+     *      return $this->applyScopes($articles);
+     * }
+     *
+     * $eager_columns = ['category' => 'title', 'article' => 'title'];
      *
      * @var array
      */
-    protected $pluck_columns =  [];
+    protected $eager_columns =  [];
+
+    /**
+     * Boolean columns for translation, show meaningful text instead of 1/true or 0/false
+     *
+     * @var array
+     */
+    protected $boolean_columns =  [];
+
+    /**
+     * Relations count columns, show the number of related models
+     *
+     * @var array
+     */
+    protected $count_columns =  [];
 
     /**
      * Show the action buttons, show, edit and delete
@@ -51,51 +96,31 @@ abstract class DataTableController extends DataTable
     protected $common_columns = ['created_at', 'updated_at'];
 
     /**
-     * Model name
-     *
-     * @var string
-     */
-    protected $model = "";
-
-    /**
      * Display ajax response.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function ajax()
     {
-        $model = $this->getModelName();
-        $datatables = $this->datatables->eloquent($this->query());
-        foreach ($this->pluck_columns as $key => $value) {
-            $datatables = $datatables->editColumn($key, function ($model) use ($key, $value) {
-                if (array_key_exists(0, $value) && array_key_exists(1, $value)) {
-                    return $model[$value[0]][$value[1]];
-                }
-                return $model->$key;
+        list($model, $datatables) = $this->getAjaxParameters();
+        collect($this->image_columns)->each(function ($image_column) use (&$datatables) {
+            return $datatables->editColumn($image_column, function ($model) use ($image_column) {
+                return $this->wrapImage($model, $image_column);
             });
-        }
-        foreach ($this->image_columns as $image_column) {
-            $datatables = $datatables->editColumn($image_column, function ($model) use ($image_column) {
-                return "<a target='_blank' href='{$model->$image_column}'>
-                            <img style='max-height:50px' class='img-responsive' src='{$model->$image_column}'/>
-                        </a>";
+        })->recollect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
+            return $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
+                return $model->$boolean_column == true ? trans("admin.fields.yes") : trans("admin.fields.no");
             });
-        }
-        if ($this->ops === true) {
-            $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
-                return get_ops($model, $data->id);
+        })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
+            return $datatables->editColumn(join(".", [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
+                return $model->$relation->$eager_column;
             });
-        }
-        return $datatables->make(true);
-    }
-
-    /**
-     * Get the query object to be processed by datatables.
-     *
-     * @return \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder
-     */
-    public function query()
-    {
+        })->recollect($this->count_columns)->each(function ($count_column) use (&$datatables) {
+            return $datatables->editColumn($count_column, function ($model) use ($count_column) {
+                return count($model->$count_column);
+            });
+        });
+        return $this->pushOps($datatables, $model)->make(true);
     }
 
     /**
@@ -111,45 +136,141 @@ abstract class DataTableController extends DataTable
     }
 
     /**
-     * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "DataTable" out
-     *
-     * @return string
+     * @return array
      */
-    private function getModelName()
+    protected function getAjaxParameters()
     {
-        return strtolower(
-            empty($this->model) ?
-            explode('DataTable', substr(strrchr(get_class($this), '\\'), 1))[0]  :
-            $this->model
-        );
+        return [$this->getModelName(), $this->datatables->eloquent($this->query())];
     }
 
     /**
-     * Translate column names
+     * Translate and edit column names
+     *
+     * Countable columns which are the count of a relation should not have order and search options thus they
+     * should get merged lastly, to make them searchable and orderable, you need to join through their table.
+     *
+     * @param array $result
      *
      * @return array
      */
-    protected function getColumns()
+    protected function getColumns($result = [])
     {
-        $model = $this->getModelName();
-        $columns = [];
-        $base_columns = array_merge($this->image_columns, $this->columns);
-        foreach (array_merge($base_columns, array_keys($this->pluck_columns)) as $column) {
-            $title = trans('admin.fields.' . $model . '.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
-        }
-        foreach ($this->common_columns as $column) {
-            $title = trans('admin.fields.' . $column);
-            array_push($columns, ['data' => $column, 'name' => $column, 'title' => $title]);
-        }
-        if ($this->ops === true) {
-            $title = trans('admin.ops.name');
-            array_push($columns, [
-                'data' => 'ops', 'name' => 'ops', 'title' => $title,
-                'orderable' => false, 'searchable' => false
+        list($columns, $countColumnsPosition, $model, $table) = $this->getColumnParameters();
+        collect($columns)->each(function ($column, $key) use ($model, $table, $countColumnsPosition, &$result) {
+            $orderAndSearch = $key < $countColumnsPosition ? true : false;
+            $this->pushColumns($result, [
+                'data' => $column,
+                'name' => join([$table, $column], "."),
+                'title' => trans('admin.fields.' . join([$model, $column], "."))
+            ], $orderAndSearch);
+        })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
+            $string = join([$key, $column], ".");
+            $this->pushColumns($result, [
+                'data' => $string,
+                'name' => $string,
+                'title' => trans('admin.fields.' . $string),
             ]);
+        })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
+            $string = join([$table, $column], ".");
+            $this->pushColumns($result, [
+                'data' => $column,
+                'name' => $string,
+                'title' => trans('admin.fields.' . $column),
+            ]);
+        });
+        return $this->pushOps($result);
+    }
+
+    /**
+     * @param      $result
+     * @param      $data
+     * @param bool $orderAndSearch
+     *
+     * @return int
+     */
+    protected function pushColumns(&$result, $data, $orderAndSearch = true)
+    {
+        return array_push($result, array_merge($data, [
+            'orderable' => $orderAndSearch,
+            'searchable' => $orderAndSearch
+        ]));
+    }
+
+    /**
+     * @param        $result
+     *
+     * @param string $model
+     *
+     * @return mixed
+     */
+    protected function pushOps($result, $model = "")
+    {
+        if ($this->ops === true) {
+            if (empty($model)) {
+                $this->pushColumns($result, [
+                    'data' => 'ops',
+                    'name' => 'ops',
+                    'title' => trans('admin.ops.name')
+                ], false);
+            } else {
+                $result = $result->addColumn('ops', function ($data) use ($model) {
+                    return get_ops($model, $data->id);
+                });
+            }
         }
-        return $columns;
+        return $result;
+    }
+
+    /**
+     * Get the columns that are being translated, model and table
+     *
+     * @return array
+     */
+    protected function getColumnParameters()
+    {
+        $columns = array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns);
+        return [
+            $columns,
+            count($columns) - count($this->count_columns),
+            $this->getModelName(),
+            $this->getTableName()
+        ];
+    }
+
+    /**
+     * Get the table name of the model
+     *
+     * @return string
+     */
+    protected function getTableName()
+    {
+        return ((new $this->model)->getTable());
+    }
+
+    /**
+     * Get model name
+     *
+     * @return string
+     */
+    protected function getModelName()
+    {
+        return snake_case(class_basename($this->model));
+    }
+
+    /**
+     * Show image instead of url for the image columns
+     *
+     * @param $model
+     * @param $image_column
+     *
+     * @return string
+     */
+    protected function wrapImage($model, $image_column)
+    {
+        $url = asset($model->$image_column);
+        return "<a target='_blank' href='{$url}'>
+                    <img style='max-height:50px' class='img-responsive' src='{$url}'/>
+               </a>";
     }
 
     /**

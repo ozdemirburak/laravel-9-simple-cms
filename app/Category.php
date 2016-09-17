@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Cviebrock\EloquentSluggable\SluggableInterface;
-use Cviebrock\EloquentSluggable\SluggableTrait;
+use App\Base\SluggableModel;
 
 /**
  * App\Category
@@ -28,21 +26,8 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Article[] $articles
  */
-class Category extends Model implements SluggableInterface
+class Category extends SluggableModel
 {
-    use SluggableTrait;
-
-    /**
-     * Create slug from title using 3rd party trait
-     *
-     * @var array
-     */
-    protected $sluggable = array(
-        'build_from' => 'title',
-        'save_to'    => 'slug',
-        'on_update'  => true
-    );
-
     /**
      * The attributes that are mass assignable.
      *
@@ -55,7 +40,7 @@ class Category extends Model implements SluggableInterface
      */
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 
     /**
@@ -63,6 +48,6 @@ class Category extends Model implements SluggableInterface
      */
     public function articles()
     {
-        return $this->hasMany('App\Article');
+        return $this->hasMany(Article::class);
     }
 }
