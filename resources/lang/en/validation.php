@@ -34,9 +34,11 @@ return [
     'different'            => 'The :attribute and :other must be different.',
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
+    'dimensions'           => 'The :attribute has invalid image dimensions.',
     'distinct'             => 'The :attribute field has a duplicate value.',
     'email'                => 'The :attribute must be a valid email address.',
     'exists'               => 'The selected :attribute is invalid.',
+    'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field is required.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
@@ -51,6 +53,7 @@ return [
         'array'   => 'The :attribute may not have more than :max items.',
     ],
     'mimes'                => 'The :attribute must be a file of type: :values.',
+    'mimetypes'            => 'The :attribute must be a file of type: :values.',
     'min'                  => [
         'numeric' => 'The :attribute must be at least :min.',
         'file'    => 'The :attribute must be at least :min kilobytes.',
@@ -78,6 +81,7 @@ return [
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
+    'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
     /*
@@ -108,6 +112,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'category_id'       => trans('admin.fields.article.category_id'),
+        'code'              => trans('admin.fields.language.code'),
+        'color'             => trans('admin.fields.category.color'),
+        'content'           => trans('admin.fields.article.content'),
+        'description'       => trans('admin.fields.article.description'),
+        'email'             => trans('admin.fields.user.email'),
+        'facebook'          => trans('admin.fields.setting.facebook'),
+        'flag'              => trans('admin.fields.language.flag'),
+        'language_id'       => trans('admin.fields.category.language_id'),
+        'logo'              => trans('admin.fields.setting.logo'),
+        'name'              => trans('admin.fields.user.name'),
+        'password'          => trans('admin.fields.user.password'),
+        'picture'           => trans('admin.fields.user.picture'),
+        'published_at'      => trans('admin.fields.article.published_at'),
+        'site_description'  => trans('admin.fields.language.site_description'),
+        'site_title'        => trans('admin.fields.language.site_title'),
+        'title'             => trans('admin.fields.article.title'),
+        'twitter'           => trans('admin.fields.setting.twitter')
+    ],
 
 ];

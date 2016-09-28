@@ -15,8 +15,8 @@ class AddColumnsToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->timestamp('logged_in_at')->nullable();
             $table->timestamp('logged_out_at')->nullable();
-            $table->string('ip_address', 45)->index();
-            $table->string('picture');
+            $table->string('ip_address', 45)->nullable()->index();
+            $table->string('picture')->nullable();
         });
     }
 

@@ -14,12 +14,12 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->tinyInteger('id')->unique();
-            $table->string('logo');
-            $table->string('email');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('disqus_shortname');
-            $table->string('analytics_id');
+            $table->string('logo')->nullable();
+            $table->string('email')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('disqus_shortname')->nullable();
+            $table->string('analytics_id')->nullable();
             $table->timestamps();
         });
     }
