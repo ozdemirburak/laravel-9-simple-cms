@@ -1,5 +1,6 @@
 # Laravel 5 Simple CMS
-Laravel 5.3 content management system for starters. For 5.1 and 5.2 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
+Laravel 5.3 content management system for starters. 
+For 5.1 and 5.2 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ##Table of Contents
@@ -40,7 +41,8 @@ Create a database and configure the `.env` file.
     $ php artisan migrate
     $ php artisan db:seed
 
-Install node and npm following one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
+Install node and npm following one of the techniques explained within 
+this [link](https://gist.github.com/isaacs/579814).
     
     $ npm install --global gulp bower
     $ npm install
@@ -48,7 +50,9 @@ Install node and npm following one of the techniques explained within this [link
     $ gulp --production
     $ php artisan serve
 
-Open [http://localhost:8000](http://localhost:8000) from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
+Open [http://localhost:8000](http://localhost:8000) from your browser. 
+To access the admin panel, hit the link 
+[http://localhost:8000/admin](http://localhost:8000/admin) from your browser.
 The application comes with default user with email address `admin@admin.com` and `123456`.
 
 -----
@@ -72,15 +76,20 @@ Either Clone the repository using git clone: `git clone https://github.com/ozdem
 <a name="step2"></a>
 ### Step 2: Install Dependencies
 
-If you have downloaded the repository using git clone, then change your directory to that folder: `cd CUSTOM_DIRECTORY` or if you have installed the file via zip, then within that folder, open your terminal. To install the composer dependencies you need to have composer installed, if you don't have composer, install it first `curl -s https://getcomposer.org/installer | php` then `php composer.phar install` or if you have composer installed and globally, then just run `composer install`.
+To install the composer dependencies you need to have composer installed, 
+if you don't have composer installed, then [follow these instructions](https://getcomposer.org/download/). Then run,
+`composer install` within your `CUSTOM_DIRECTORY`.
 
 As this project relies on bower and gulp heavily, you need to install them. 
 To install node and npm follow one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
-Then `npm install --global gulp bower` to install gulp and bower globally. Finally, to install Laravel project dependencies, run `npm install`.
+Then `npm install --global gulp bower` to install gulp and bower globally. 
+Finally, to install Laravel project dependencies, run `npm install`.
 
-After installing node modules, install javascript and style based dependencies run `bower install`, to combine the javascript and style files run `gulp --production`.
+After installing node modules, install javascript and style based dependencies run `bower install`, 
+to combine the javascript and style files run `gulp`.
 
-Rename your `.env.example` file as `.env` and change the variables as your own. If you have any variables with any spaces, double quote them, for instance, if you have a variable that equals to John Doe,
+Rename your `.env.example` file as `.env` and change the variables as your own. If you have any variables with
+ any spaces, double quote them, for instance, if you have a variable that equals to John Doe,
 use "John Doe" instead.
 
 Finally, to generate a unique application key, run `php artisan key:generate`.
@@ -97,21 +106,26 @@ Open your `.env` file and change the fields corresponding to your own configurat
 
 All variables with `DB_` prefixes relates to your database configuration.
 
-If you want to use the Gmail client to send emails, you need to change the `MAIL_USERNAME` variable as your Gmail username without `@gmail.com` and password as your Gmail password, `MAIL_FROM_ADDRESS` is your Gmail account with `@gmail.com` and `MAIL_FROM_NAME` is your name that is registered to that Gmail account.
+If you want to use the Gmail client to send emails, you need to change the `MAIL_USERNAME` variable as your 
+Gmail username without `@gmail.com` and password as your Gmail password, `MAIL_FROM_ADDRESS` is your 
+Gmail account with `@gmail.com` and `MAIL_FROM_NAME` is your name that is registered to that Gmail account.
 
-To use the Analytics API, follow the instructions explained in detail[here](https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics).
+To use the Analytics API, follow the instructions explained in detail [here](https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics).
 
 -----
 <a name="step5"></a>
 ### Step 5: Migrate and Seed
 
-To migrate the database tables, run `php artisan migrate` and to seed the database with some data, run `php artisan db:seed`.
+To migrate the database tables, run `php artisan migrate` and to seed the database with some data, 
+run `php artisan db:seed`.
 
 -----
 <a name="step6"></a>
 ### Step 6: Serve
 
-To serve the application, you can use `php artisan serve`, then open <a href="http://localhost:8000">http://localhost:8000</a> from your browser. To access the admin panel, hit the link <a href="http://localhost:8000/admin">http://localhost:8000/admin</a> from your browser. The application comes with default user with email address `admin@admin.com` and `123456`.
+To serve the application, you can use `php artisan serve`, then open [http://localhost:8000](http://localhost:8000) 
+from your browser. To access the admin panel, hit the link [http://localhost:8000/admin](http://localhost:8000/admin) 
+from your browser. The application comes with default user with email address `admin@admin.com` and `123456`.
 
 -----
 <a name="item5"></a>
@@ -124,7 +138,8 @@ To serve the application, you can use `php artisan serve`, then open <a href="ht
 <a name="u1"></a>
 ### How to Create a New Resource
 
-Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, from our admin panel where will provide its' title and content.
+Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, 
+from our admin panel where will provide its' title and content.
 
     $ php artisan make:controller Admin/FruitController
     $ php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
@@ -165,7 +180,8 @@ Finally for the breadcrumbs generation add the `fruit` translations like below.
 ],
 ```
 
-After finishing the language parts, check the Fruit model, which is located in `app` folder as `Fruit.php`. As we are using slugs, configure the model as below.
+After finishing the language parts, check the Fruit model, which is located in `app` folder as `Fruit.php`. 
+As we are using slugs, configure the model as below.
 
 ```php
 <?php namespace App;
@@ -264,7 +280,8 @@ class FruitController extends AdminController
 }
 ```
 
-Open your `FruitRequest.php` file within `Requests/Admin` folder and configure it as below or how you wish, put some validation.
+Open your `FruitRequest.php` file within `Requests/Admin` folder and configure it as below or how you wish, 
+put some validation.
 
 ```php
 <?php 
@@ -362,7 +379,8 @@ Open the `RouteServiceProvider.php` file located in `Providers` folder and bind 
 Route::model('fruit', \App\Fruit::class);
 ```
 
-Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` folder and configure it as below.
+Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` 
+folder and configure it as below.
 
 ```php  
 $fruits = $menu->add($this->translate('fruit.root'), '#')
@@ -405,7 +423,8 @@ You can check it on: [http://burakozdemir.co.uk/article/deploying-laravel-projec
 <a name="item7"></a>
 ## Türkçe
 
-Kendi blogumda detaylı olarak bu uygulamayı kurulumundan, sunucuya aktarımına kadar, baştan sona nasıl geliştirdiğimi detaylı olarak anlattım, alttaki linklerden sırasıyla bunlara ulaşabilirsiniz.
+Kendi blogumda detaylı olarak bu uygulamayı kurulumundan, sunucuya aktarımına kadar, baştan sona nasıl geliştirdiğimi 
+detaylı olarak anlattım, alttaki linklerden sırasıyla bunlara ulaşabilirsiniz.
 
 1. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-kurulum">Laravel 5 ile CMS - Kurulum</a>
 2. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-migration-seed-middleware-elixir-bower-gulp-blade">Laravel 5 ile CMS - Migration, Seed, Middleware, Elixir, Bower, Gulp, Blade</a>
