@@ -7,6 +7,7 @@
     <meta name="_token" content="{{ csrf_token() }}" />
     <title> {{  trans(Route::getCurrentRoute()->getName()) . ' | ' .  trans('admin.title')  }} </title>
     <link rel="stylesheet" type="text/css" href="{{ url( elixir('css/admin.css') ) }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
