@@ -173,7 +173,7 @@
 
 
     <script src="{{ asset('js/raphael.js') }}" type="text/javascript"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
 
         $(function() {
@@ -191,9 +191,9 @@
             });
         });
 
-        google.load("visualization", "1", {packages:["geochart"]});
-        google.setOnLoadCallback(drawRegionsMap);
-        google.setOnLoadCallback(drawLocalRegionsMap);
+        google.charts.load("visualization", "1", {packages:["geochart"], mapsApiKey: '{{ env('GOOGLE_MAPS_API_KEY') }}'});
+        google.charts.setOnLoadCallback(drawRegionsMap);
+        google.charts.setOnLoadCallback(drawLocalRegionsMap);
 
         function drawRegionsMap() {
             var data = new google.visualization.DataTable();
