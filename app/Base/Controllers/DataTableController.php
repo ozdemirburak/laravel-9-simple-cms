@@ -114,7 +114,7 @@ abstract class DataTableController extends DataTable
             });
         })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
             return $datatables->editColumn(join(".", [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
-                return $model->$relation->$eager_column;
+                return !empty($model->$relation->$eager_column) ? $model->$relation->$eager_column : '';
             });
         })->recollect($this->count_columns)->each(function ($count_column) use (&$datatables) {
             return $datatables->editColumn($count_column, function ($model) use ($count_column) {
