@@ -71,9 +71,8 @@ class Handler extends ExceptionHandler
         return $e instanceof ValidationException || class_basename($e->getFile()) === 'FormRequest.php';
     }
 
-    protected function isAuthenticationException(Exception $exception)
+    protected function isAuthenticationException(Exception $e)
     {
-        return $exception instanceof AuthenticationException;
+        return $e instanceof AuthenticationException;
     }
 }
-
