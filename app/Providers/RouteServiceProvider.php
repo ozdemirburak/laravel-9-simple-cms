@@ -47,11 +47,11 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
         Route::model('article', Article::class);
         Route::bind('article_slug', function ($slug) {
-            return Article::findBySlugOrFail($slug);
+            return Article::with('category')->where('slug', '=', $slug)->firstOrFail();
         });
         Route::model('category', Category::class);
         Route::bind('category_slug', function ($slug) {
-            return Category::findBySlugOrFail($slug);
+            return Category::with('articles')->where('slug', '=', $slug)->firstOrFail();
         });
         Route::model('language', Language::class);
         Route::model('page', Page::class);
