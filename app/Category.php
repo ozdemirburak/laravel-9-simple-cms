@@ -50,4 +50,20 @@ class Category extends SluggableModel
     {
         return $this->hasMany(Article::class);
     }
+
+    /**
+     * @return mixed
+     */
+    public function paginatedArticles()
+    {
+        return $this->articles()->published()->orderBy('published_at', 'desc');
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkAttribute()
+    {
+        return route('category', ['category_slug' => $this->slug]);
+    }
 }

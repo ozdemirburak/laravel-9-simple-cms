@@ -120,4 +120,3 @@ class AppServiceProvider extends ServiceProvider
         return explode(', ', str_replace($replace, '', $argumentString));
     }
 }
-

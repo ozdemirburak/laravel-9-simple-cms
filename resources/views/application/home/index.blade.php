@@ -9,7 +9,7 @@
             <article class="post">
                 <header class="post-header">
                     <div class="post-category">
-                        <a style="background-color: {{ $article->category->color }}" href="{{ route('category', ['category_slug' => $article->category->slug])  }}">{{ $article->category->title }}</a>
+                        <a style="background-color: {{ isset($category) ? $category->color : $article->category->color }}" href="{{ isset($category) ? $category->link : $article->category->link }}">{{ isset($category) ? $category->title : $article->category->title }}</a>
                     </div>
                     <div class="post-title">
                         <h2>
@@ -26,7 +26,7 @@
                         {{ $article->published_at }}
                     </div>
                     <div class="pull-right">
-                        <a class="btn post-btn btn-sm" href="{{ route('article', ['article_slug' => $article->slug])  }}">{{ trans('application.read_more') }}</a>
+                        <a class="btn post-btn btn-sm" href="{{ $article->link }}">{{ trans('application.read_more') }}</a>
                     </div>
                 </footer>
             </article>

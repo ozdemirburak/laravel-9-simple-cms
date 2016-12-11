@@ -68,6 +68,14 @@ class Article extends SluggableModel
     }
 
     /**
+     * @return string
+     */
+    public function getLinkAttribute()
+    {
+        return route('article', ['article_slug' => $this->slug]);
+    }
+
+    /**
      * Scope queries to articles that are published
      *
      * @param $query
