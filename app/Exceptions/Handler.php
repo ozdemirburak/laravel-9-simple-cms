@@ -27,12 +27,12 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception  $e
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Exception $e)
     {
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
@@ -44,6 +44,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if (!config('app.debug') && !$this->isAuthenticationException($exception) && !$this->isHttpException($exception) && !$this->isValidationException($exception)) {
+            return response()->view('errors.500', [], 500);
+        }
         return parent::render($request, $exception);
     }
 
@@ -62,4 +65,15 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest(route('auth.login'));
     }
+
+    protected function isValidationException(Exception $e)
+    {
+        return $e instanceof ValidationException || class_basename($e->getFile()) === 'FormRequest.php';
+    }
+
+    protected function isAuthenticationException(Exception $exception)
+    {
+        return $exception instanceof AuthenticationException;
+    }
 }
+
