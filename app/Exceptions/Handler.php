@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -68,11 +67,11 @@ class Handler extends ExceptionHandler
 
     protected function isValidationException(Exception $e)
     {
-        return $e instanceof ValidationException || class_basename($e->getFile()) === 'FormRequest.php';
+        return $e instanceof \Illuminate\Validation\ValidationException;
     }
 
     protected function isAuthenticationException(Exception $e)
     {
-        return $e instanceof AuthenticationException;
+        return $e instanceof \Illuminate\Auth\AuthenticationException;
     }
 }
