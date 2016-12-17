@@ -224,9 +224,11 @@ class DashboardController extends AdminController
     {
         $options = ['dimensions' => 'ga:date'];
         $array = $this->query($options);
-        foreach ($array as $k => $v) {
-            $visits[$k]['date']   = Carbon::parse($v['0'])->format('Y-m-d');
-            $visits[$k]['visits'] = $v['1'];
+        if (count($array)) {
+            foreach ($array as $k => $v) {
+                $visits[$k]['date'] = Carbon::parse($v['0'])->format('Y-m-d');
+                $visits[$k]['visits'] = $v['1'];
+            }
         }
         return json_encode($visits);
     }
