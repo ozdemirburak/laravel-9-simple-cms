@@ -3,9 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -16,10 +20,10 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         AuthenticationException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class,
-        \Symfony\Component\HttpKernel\Exception\HttpException::class,
-        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
-        \Illuminate\Session\TokenMismatchException::class,
+        AuthorizationException::class,
+        HttpException::class,
+        ModelNotFoundException::class,
+        TokenMismatchException::class,
         ValidationException::class,
     ];
 
@@ -45,7 +49,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (!config('app.debug') && !$this->isAuthenticationException($exception) && !$this->isHttpException($exception) && !$this->isValidationException($exception)) {
+        if (!config('app.debug') && !$this->dontReportException($exception)) {
             return response()->view('errors.500', [], 500);
         }
         return parent::render($request, $exception);
@@ -72,19 +76,14 @@ class Handler extends ExceptionHandler
      *
      * @return bool
      */
-    protected function isValidationException(Exception $e)
+    protected function dontReportException(Exception $e)
     {
-        return $e instanceof ValidationException;
-    }
-
-    /**
-     * @param \Exception $e
-     *
-     * @return bool
-     */
-    protected function isAuthenticationException(Exception $e)
-    {
-        return $e instanceof AuthenticationException;
+        foreach ($this->dontReport as $dontReport) {
+            if ($e instanceof $dontReport) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
