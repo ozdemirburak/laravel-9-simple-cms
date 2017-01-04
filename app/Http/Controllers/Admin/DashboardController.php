@@ -114,7 +114,8 @@ class DashboardController extends AdminController
     private function getTotalVisits()
     {
         $options = ['dimensions' => 'ga:year'];
-        return $this->query($options)[0][1];
+        $result = $this->query($options);
+        return array_sum(array_column($result, 1));
     }
 
     /**
