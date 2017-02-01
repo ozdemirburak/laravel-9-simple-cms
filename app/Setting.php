@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereAnalyticsId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Setting whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Setting extends Model
 {

@@ -31,6 +31,10 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\Article whereUpdatedAt($value)
  * @method static \App\Article published()
  * @property integer $read_count
+ * @property-read string $link
+ * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
+ * @method static \Illuminate\Database\Query\Builder|\App\Article whereReadCount($value)
+ * @mixin \Eloquent
  */
 class Article extends SluggableModel
 {
