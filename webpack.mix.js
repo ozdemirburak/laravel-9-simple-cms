@@ -1,4 +1,4 @@
-var mix             =  require('laravel-mix'),
+var mix             = require('laravel-mix'),
   copyWebpackPlugin = require('copy-webpack-plugin'),
   assetsDir         = 'resources/assets/',
   nodeDir           = 'node_modules/',
