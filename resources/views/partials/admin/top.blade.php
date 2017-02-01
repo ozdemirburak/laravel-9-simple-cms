@@ -1,3 +1,5 @@
+@php $currentUser = Auth::user() @endphp
+
 <header class="main-header">
     <a href="{{ route('admin.root') }}" class="logo"> {{ trans('admin.title')  }}</a>
     <nav class="navbar navbar-static-top" role="navigation">
@@ -8,22 +10,26 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="user-image img-circle" src="{{ Auth::user()->picture }}" alt="{{ Auth::user()->name }}" />
-                        <span class="hidden-xs">{{ Auth::user()->name  }}</span>
+                        <img class="user-image img-circle" src="{{ $currentUser->picture }}" alt="{{ $currentUser->name }}" />
+                        <span class="hidden-xs">{{ $currentUser->name  }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img class="img-circle" src="{{ Auth::user()->picture }}" alt="{{ Auth::user()->name }}" />
-                            <p>{{ Auth::user()->name  }}</p>
-                            @include('partials.common.languages', ['languages' => Config::get('languages'), 'route' => 'admin.language.change' ])
+                            <img class="img-circle" src="{{ $currentUser->picture }}" alt="{{ $currentUser->name }}" />
+                            <p>{{ $currentUser->name  }}</p>
+                            @include('partials.common.languages', ['languages' => config('languages'), 'route' => 'admin.language.change' ])
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('root')  }}" class="btn btn-default btn-flat"><i class="fa fa-globe"></i> {{ trans('application.home') }}</a>
+                                <a href="{{ route('root')  }}" class="btn btn-default btn-flat">
+                                    @fa('globe') {{ trans('application.home') }}
+                                </a>
                             </div>
                             <div class="pull-right">
                                 {!! Form::open(['method' => 'POST', 'route' => 'auth.logout']) !!}
-                                    <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> {{ trans('auth.logout') }}</button>
+                                    <button type="submit" class="btn btn-default btn-flat">
+                                        @fa('sign-out') {{ trans('auth.logout') }}
+                                    </button>
                                 {!! Form::close() !!}
                             </div>
                         </li>

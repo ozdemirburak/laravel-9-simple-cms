@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Base\SluggableModel
  *
- * @property-write mixed $slug
  * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel whereSlug($slug)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
  */
 class SluggableModel extends Model
 {
@@ -25,7 +25,8 @@ class SluggableModel extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source'   => 'title',
+                'onUpdate' => true
             ]
         ];
     }

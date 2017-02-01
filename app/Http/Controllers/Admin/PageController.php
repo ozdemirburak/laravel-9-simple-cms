@@ -18,7 +18,7 @@ class PageController extends AdminController
     {
         $pages = Page::whereLanguageId(session('current_lang')->id);
         $pages = $pages->count() > 1 ? session('current_lang')->pages->toHierarchy() : $pages->get();
-        return $this->viewPath("index", $pages);
+        return $this->viewPath('index', $pages);
     }
 
     /**
@@ -40,7 +40,7 @@ class PageController extends AdminController
      */
     public function show(Page $page)
     {
-        return $this->viewPath("show", $page);
+        return $this->viewPath('show', $page);
     }
 
     /**
@@ -85,8 +85,7 @@ class PageController extends AdminController
     public function postOrder(Request $request)
     {
         if ($request->ajax()) {
-            $pages = json_decode($request->getContent());
-            foreach ($pages as $p) {
+            foreach (json_decode($request->getContent()) as $p) {
                 $page = Page::findOrFail($p->id);
                 $page->lft = $p->lft;
                 $page->rgt = $p->rgt;

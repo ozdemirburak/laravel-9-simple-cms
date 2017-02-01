@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class ArticleControllerTest extends TestCase
 {
     /**

@@ -15,7 +15,7 @@ class UserController extends AdminController
      *
      * @var string
      */
-    private $imageColumn = "picture";
+    private $imageColumn = 'picture';
 
     /**
      * Display a listing of the users.
@@ -47,7 +47,7 @@ class UserController extends AdminController
      */
     public function show(User $user)
     {
-        return $this->viewPath("show", $user);
+        return $this->viewPath('show', $user);
     }
 
     /**
@@ -81,10 +81,10 @@ class UserController extends AdminController
      */
     public function destroy(User $user)
     {
-        if ($user->id != Auth::user()->id) {
+        if ($user->id !== Auth::user()->id) {
             return $this->destroyFlashRedirect($user);
         } else {
-            return $this->redirectRoutePath("index", "admin.delete.self");
+            return $this->redirectRoutePath('index', 'admin.delete.self');
         }
     }
 }

@@ -2,39 +2,54 @@
 
 namespace App\Base\Controllers;
 
-use App\Language;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Request;
+use App\Language;
 use FormBuilder;
-use Laracasts\Flash\Flash;
+use Illuminate\Http\UploadedFile;
+use Storage;
 
 abstract class AdminController extends Controller
 {
+    /**
+     * Subdirectory
+     *
+     * @var string
+     */
+    protected $subdirectory = '';
+
     /**
      * Model name
      *
      * @var string
      */
-    protected $model = "";
+    protected $model = '';
 
     /**
      * Form class path
      *
      * @var string
      */
-    protected $formPath = "";
+    protected $formPath = '';
 
     /**
      * Upload path
      *
      * @var string
      */
-    protected $uploadPath = "uploads";
+    protected $uploadPath = 'uploads';
+
+    /**
+     * @var bool
+     */
+    protected $withSubdirectory = false;
 
     /**
      * AdminController constructor.
      */
     public function __construct()
     {
+        $this->subdirectory = $this->getSubdirectory();
         $this->model = $this->getModel();
         $this->formPath = $this->getFormPath();
     }
@@ -59,13 +74,13 @@ abstract class AdminController extends Controller
     public function getForm($object = null)
     {
         if ($object) {
-            $url =  $this->urlRoutePath("update", $object);
+            $url =  $this->urlRoutePath('update', $object);
             $method = 'PATCH';
-            $path = $this->viewPath("edit");
+            $path = $this->viewPath('edit');
         } else {
-            $url =  $this->urlRoutePath("store", $object);
+            $url =  $this->urlRoutePath('store', $object);
             $method = 'POST';
-            $path = $this->viewPath("create");
+            $path = $this->viewPath('create');
         }
         $form = $this->createForm($url, $method, $object);
         return view($path, compact('form', 'object'));
@@ -80,10 +95,10 @@ abstract class AdminController extends Controller
      * @param string $path
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function createFlashRedirect($class, $request, $imageColumn = false, $path = "index")
+    public function createFlashRedirect($class, $request, $imageColumn = false, $path = 'index')
     {
         $model = $class::create($this->getData($request, $imageColumn));
-        $model->id ? Flash::success(trans('admin.create.success')) : Flash::error(trans('admin.create.fail'));
+        $model->id ? flash(trans('admin.create.success'), 'success') : flash(trans('admin.create.fail'), 'error');
         return $this->redirectRoutePath($path);
     }
 
@@ -96,10 +111,10 @@ abstract class AdminController extends Controller
      * @param string $path
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function saveFlashRedirect($model, $request, $imageColumn = false, $path = "index")
+    public function saveFlashRedirect($model, $request, $imageColumn = false, $path = 'index')
     {
         $model->fill($this->getData($request, $imageColumn));
-        $model->save() ? Flash::success(trans('admin.update.success')) : Flash::error(trans('admin.update.fail'));
+        $model->save() ? flash(trans('admin.update.success'), 'success') : flash(trans('admin.update.fail'), 'error');
         return $this->redirectRoutePath($path);
     }
 
@@ -110,11 +125,9 @@ abstract class AdminController extends Controller
      * @param string $path
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroyFlashRedirect($model, $path = "index")
+    public function destroyFlashRedirect($model, $path = 'index')
     {
-        $model->delete() ?
-            Flash::success(trans('admin.delete.success')) :
-            Flash::error(trans('admin.delete.fail'));
+        $model->delete() ? flash(trans('admin.delete.success'), 'success') : flash(trans('admin.delete.fail'), 'error');
         return $this->redirectRoutePath($path);
     }
 
@@ -125,10 +138,10 @@ abstract class AdminController extends Controller
      * @param null $error
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function redirectRoutePath($path = "index", $error = null)
+    public function redirectRoutePath($path = 'index', $error = null)
     {
         if ($error) {
-            Flash::error(trans($error));
+            flash(trans($error), 'error');
         }
         return redirect($this->urlRoutePath($path));
     }
@@ -139,7 +152,7 @@ abstract class AdminController extends Controller
      * @param string $path
      * @return string
      */
-    public function routePath($path = "index")
+    public function routePath($path = 'index')
     {
         return 'admin.' . snake_case($this->model) . '.' . $path;
     }
@@ -152,9 +165,13 @@ abstract class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function viewPath($path = "index", $object = false)
+    public function viewPath($path = 'index', $object = false)
     {
-        $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
+        if ($this->withSubdirectory !== false) {
+            $path = 'admin.' . $this->subdirectory .  '.' . str_plural(snake_case($this->model))  . '.' . $path;
+        } else {
+            $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
+        }
         if ($object !== false) {
             return view($path, compact('object'));
         } else {
@@ -176,17 +193,17 @@ abstract class AdminController extends Controller
             'method' => $method,
             'url' => $url,
             'model' => $model
-        ], $this->getSelectList());
+        ], $this->getSelectList($model));
     }
 
     /**
      * Get data, if image column is passed, upload it
      *
-     * @param $request
-     * @param $imageColumn
+     * @param  Request $request
+     * @param  $imageColumn
      * @return mixed
      */
-    protected function getData($request, $imageColumn)
+    protected function getData(Request $request, $imageColumn)
     {
         return $imageColumn === false ? $request->all() : $this->uploadImage($request, $imageColumn);
     }
@@ -194,32 +211,40 @@ abstract class AdminController extends Controller
     /**
      * Upload the image and return the data
      *
-     * @param $request
-     * @param string $field
+     * @param  Request $request
+     * @param  string $field
      * @return mixed
      */
-    protected function uploadImage($request, $field)
+    protected function uploadImage(Request $request, $field)
     {
         $data = $request->except($field);
         if ($file = $request->file($field)) {
-            $fileName = rename_file($file->getClientOriginalName(), $file->getClientOriginalExtension());
-            $path = $this->getUploadPath($field);
-            $file->move(public_path($path), $fileName);
-            $data[$field] = $path . $fileName;
+            $data[$field] = $this->uploadAndGetPath($file);
         }
         return $data;
     }
 
     /**
-     * Return upload path
-     *
-     * @param $field
+     * @param $file
      *
      * @return string
      */
-    protected function getUploadPath($field)
+    protected function uploadAndGetPath(UploadedFile $file)
     {
-        return $this->uploadPath . "/" . str_plural($field);
+        $subfolder = str_plural(mb_strtolower($this->model));
+        $path = Storage::disk('uploads')->putFile($subfolder, $file);
+        $fullPath = Storage::disk('uploads')->getAdapter()->applyPathPrefix($path);
+        return str_replace(public_path(), '', $fullPath);
+    }
+
+    /**
+     * Return upload path
+     *
+     * @return string
+     */
+    protected function getUploadPath()
+    {
+        return implode(DIRECTORY_SEPARATOR, [$this->uploadPath, str_plural(strtolower($this->getModel()))]);
     }
 
     /**
@@ -229,7 +254,7 @@ abstract class AdminController extends Controller
      * @param bool|false $model
      * @return string
      */
-    protected function urlRoutePath($path = "index", $model = false)
+    protected function urlRoutePath($path = 'index', $model = false)
     {
         if ($model) {
             return route($this->routePath($path), ['id' => $model->id]);
@@ -239,7 +264,23 @@ abstract class AdminController extends Controller
     }
 
     /**
-     * Get select list for languages
+     * Returns fully class name for form
+     *
+     * @return string
+     */
+    protected function getFormPath()
+    {
+        $subdirectory = title_case($this->subdirectory);
+        $model =  title_case(str_plural($this->model));
+        if ($this->withSubdirectory !== false) {
+            return 'App\Forms\Admin\\' . $subdirectory . '\\' . $model . 'Form';
+        } else {
+            return 'App\Forms\Admin\\' . $model . 'Form';
+        }
+    }
+
+    /**
+     * Get select list
      *
      * @return mixed
      */
@@ -261,13 +302,14 @@ abstract class AdminController extends Controller
     }
 
     /**
-     * Returns fully class name for form
+     * Get models subdirectory name, for instance: Single or Admin
      *
      * @return string
      */
-    protected function getFormPath()
+    protected function getSubdirectory()
     {
-        $model =  title_case(str_plural($this->model));
-        return 'App\Forms\Admin\\' . $model . 'Form';
+        return empty($this->subdirectory) ?
+            strtolower(array_reverse(explode('\\', get_class($this)))[1])  :
+            $this->subdirectory;
     }
 }

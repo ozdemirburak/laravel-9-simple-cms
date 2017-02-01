@@ -2,7 +2,7 @@
     <div class="dd">
         <ol class="dd-list">
             @foreach($object as $node)
-                {!! renderNode($node, $resource) !!}
+                @include('partials.admin.node', compact('resource', 'node'))
             @endforeach
         </ol>
     </div>
@@ -12,9 +12,9 @@
                 callback: function(){
                     $.ajax({
                         type: 'POST',
-                        url: '{{ !isset($path) ? route('admin.'. $resource .'.order') : $path }}',
+                        url: '{{ isset($path) ? $path : route('admin.'. $resource .'.order') }}',
                         data: JSON.stringify($('.dd').nestable('asNestedSet')),
-                        contentType: "json",
+                        contentType: 'json',
                         headers: {
                             'X-CSRF-Token': $('meta[name="_token"]').attr('content')
                         },

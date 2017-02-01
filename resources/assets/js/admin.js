@@ -1,19 +1,23 @@
 $(function() {
-    $('input[type=date]').datepicker({
-        format: 'yyyy-mm-dd',
-        todayHighlight: true
-    });
 
-    $('#color').colorpicker().on('changeColor.colorpicker', function(event){
-        $(this).css('background-color', event.color.toHex());
-    });
+  $('.datepicker').datetimepicker({
+    format: 'YYYY-MM-DD',
+    locale: 'tr',
+    defaultDate: new Date(),
+  });
 
-    if( !$('input[type=date]').val() ) {
-        $('input[type=date]').datepicker("setDate", new Date());
-    }
+  $("select").select2();
 
-    $('img.chosen-one').click(function(){
-        $('input[name="language"]').val($(this).attr("alt"));
-        $('#anakin-skywalker').submit();
-    });
+  $('#color').colorpicker().on('changeColor.colorpicker', function(event){
+    $(this).css('background-color', event.color.toHex());
+  });
+
+  $('#flash-overlay-modal').modal();
+  $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+
+  $('.chosen-one').click(function(){
+    $('input[name="language"]').val($(this).data("code"));
+    $('#anakin-skywalker').submit();
+  });
+
 });

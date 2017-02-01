@@ -39,7 +39,7 @@ class ArticleController extends AdminController
      */
     public function show(Article $article)
     {
-        return $this->viewPath("show", $article);
+        return $this->viewPath('show', $article);
     }
 
     /**

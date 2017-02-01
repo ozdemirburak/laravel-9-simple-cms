@@ -1,7 +1,7 @@
-@unless (trim($file) === "")
+@if (!empty(trim($file)))
     <div class="uploaded-file">
         <a title="{{ trans('admin.fields.uploaded')  }}" href="{{ asset($file) }}" target="_blank">
-            <i class="fa fa-4x fa-file"></i>
+            @fa('file', '4x')
         </a>
     </div>
 @endunless

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class DashboardControllerTest extends TestCase
 {
     /**

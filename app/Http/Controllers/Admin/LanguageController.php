@@ -17,7 +17,7 @@ class LanguageController extends AdminController
      *
      * @var string
      */
-    private $imageColumn = "flag";
+    private $imageColumn = 'flag';
 
     /**
      * Display a listing of the languages.

@@ -4,5 +4,5 @@
 @section('description'){{ getDescription($category) }}@endsection
 
 @section('content')
-    @include('application.home.index', ['category' => $category])
+    @include('partials.application.articles')
 @endsection

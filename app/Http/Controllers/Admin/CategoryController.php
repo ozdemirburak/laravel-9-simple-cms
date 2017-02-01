@@ -39,7 +39,7 @@ class CategoryController extends AdminController
      */
     public function show(Category $category)
     {
-        return $this->viewPath("show", $category);
+        return $this->viewPath('show', $category);
     }
 
     /**

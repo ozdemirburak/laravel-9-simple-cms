@@ -14,14 +14,14 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('read_count')->default(0)->index();
             $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->string('slug')->index();
+            $table->date('published_at')->index();
             $table->string('title');
-            $table->string('slug')->unique();
             $table->text('content');
-            $table->date('published_at');
             $table->string('description');
-            $table->integer('read_count')->default(0);
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('articles');
+        Schema::dropIfExists('articles');
     }
 }
