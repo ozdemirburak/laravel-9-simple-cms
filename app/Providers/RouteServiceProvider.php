@@ -45,21 +45,37 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        $this->bootRouteModelBinders();
+        $this->bootRouteParameterBinders();
+    }
+
+    /**
+     * @return void
+     */
+    private function bootRouteModelBinders()
+    {
         Route::model('article', Article::class);
-        Route::bind('article_slug', function ($slug) {
-            return Article::with('category')->where('slug', '=', $slug)->firstOrFail();
-        });
         Route::model('category', Category::class);
-        Route::bind('category_slug', function ($slug) {
-            return Category::with('articles')->where('slug', '=', $slug)->firstOrFail();
-        });
         Route::model('language', Language::class);
         Route::model('page', Page::class);
-        Route::bind('page_slug', function ($slug) {
-            return Page::findBySlugOrFail($slug);
-        });
         Route::model('setting', Setting::class);
         Route::model('user', User::class);
+    }
+
+    /**
+     * @return void
+     */
+    private function bootRouteParameterBinders()
+    {
+        Route::bind('articleSlug', function ($slug) {
+            return Article::with('category')->where('slug', '=', $slug)->firstOrFail();
+        });
+        Route::bind('categorySlug', function ($slug) {
+            return Category::with('articles')->where('slug', '=', $slug)->firstOrFail();
+        });
+        Route::bind('pageSlug', function ($slug) {
+            return Page::findBySlugOrFail($slug);
+        });
     }
 
     /**
@@ -83,19 +99,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/web.php');
-        });
-        Route::group([
-            'prefix' => 'auth',
-            'middleware' => 'web',
-            'namespace' => $this->authNamespace,
-        ], function ($router) {
-            require base_path('routes/auth.php');
-        });
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+        Route::middleware('web')
+            ->namespace($this->authNamespace)
+            ->prefix('auth')
+            ->group(base_path('routes/auth.php'));
     }
 
     /**
@@ -107,13 +117,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->apiNamespace,
-            'prefix' => 'api',
-        ], function ($router) {
-            require base_path('routes/api.php');
-        });
+        Route::middleware('api')
+            ->as('api.')
+            ->namespace($this->apiNamespace)
+            ->prefix('api')
+            ->group(base_path('routes/api.php'));
     }
 
     /**
@@ -125,13 +133,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapAdminRoutes()
     {
-        Route::group([
-            'as' => 'admin.',
-            'middleware' => 'admin',
-            'namespace' => $this->adminNamespace,
-            'prefix' => 'admin',
-        ], function ($router) {
-            require base_path('routes/admin.php');
-        });
+        Route::middleware('admin')
+            ->as('admin.')
+            ->namespace($this->adminNamespace)
+            ->prefix('admin')
+            ->group(base_path('routes/admin.php'));
     }
 }

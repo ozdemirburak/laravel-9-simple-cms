@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
-    <link rel="stylesheet" type="text/css" href="{{ url( elixir('css/admin.css') ) }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('dist/css/admin.css') }}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,6 +18,6 @@
 <div class="wrapper">
     @yield('content')
 </div>
-<script src="{{ url( elixir('js/admin.js') ) }}" type="text/javascript"></script>
+<script src="{{ asset('dist/js/admin.js') }}" type="text/javascript"></script>
 </body>
 </html>

@@ -57,6 +57,16 @@ class Article extends SluggableModel
     }
 
     /**
+     * Scope queries to articles that are published
+     *
+     * @param $query
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', Carbon::now());
+    }
+
+    /**
      * Get the published_at attribute.
      *
      * @param  $date
@@ -72,16 +82,6 @@ class Article extends SluggableModel
      */
     public function getLinkAttribute()
     {
-        return route('article', ['article_slug' => $this->slug]);
-    }
-
-    /**
-     * Scope queries to articles that are published
-     *
-     * @param $query
-     */
-    public function scopePublished($query)
-    {
-        return $query->where('published_at', '<=', Carbon::now());
+        return route('article', ['articleSlug' => $this->slug]);
     }
 }

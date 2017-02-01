@@ -13,7 +13,7 @@ class SettingController extends AdminController
      *
      * @var string
      */
-    private $imageColumn = "logo";
+    private $imageColumn = 'logo';
 
     /**
      * Show the form for editing the settings.

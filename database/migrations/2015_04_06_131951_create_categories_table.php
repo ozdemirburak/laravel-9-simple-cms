@@ -15,11 +15,11 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('language_id');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->string('slug')->index();
             $table->string('title');
-            $table->string('slug')->unique();
             $table->string('description');
             $table->string('color');
+            $table->foreign('language_id')->references('id')->on('languages');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('categories');
+        Schema::dropIfExists('categories');
     }
 }

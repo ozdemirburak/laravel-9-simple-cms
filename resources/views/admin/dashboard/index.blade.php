@@ -3,14 +3,18 @@
 @section('content')
     <section class="content">
         <div class="row">
-            {!! dashboard_box("bg-aqua", "user-plus",
-                trans('admin.fields.dashboard.total_visits'), $statistics['total_visits']) !!}
-            {!! dashboard_box("bg-green", "user-times",
-                trans('admin.fields.dashboard.bounce_rate'), $statistics['averages']['bounce'] . "%") !!}
-            {!! dashboard_box("bg-yellow", "clock-o",
-                trans('admin.fields.dashboard.average_time'), formatMilliseconds($statistics['averages']['time'])) !!}
-            {!! dashboard_box("bg-red", "exchange",
-                trans('admin.fields.dashboard.page_visits'),  $statistics['averages']['visit']) !!}
+            @include('partials.admin.dashboard_box',
+                ['bg' => 'aqua', 'icon' => 'user-plus', 'field' => 'total_visits', 'value' => $statistics['total_visits']]
+            )
+            @include('partials.admin.dashboard_box',
+                ['bg' => 'green', 'icon' => 'user-times', 'field' => 'bounce_rate', 'value' => $statistics['averages']['bounce'] . '%']
+            )
+            @include('partials.admin.dashboard_box',
+                ['bg' => 'yellow', 'icon' => 'clock-o', 'field' => 'average_time', 'value' => gmdate('H:i:s', $statistics['averages']['session'])]
+            )
+            @include('partials.admin.dashboard_box',
+                ['bg' => 'red', 'icon' => 'exchange', 'field' => 'page_visits', 'value' => $statistics['averages']['visit']]
+            )
         </div>
         <div class="row">
             <div class="col-md-8">
@@ -18,42 +22,42 @@
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#pages" data-toggle="tab">
-                                <i class="fa fa-file"></i> {{ trans('admin.fields.dashboard.pages') }}
+                                @fa('file') {{ trans('admin.fields.dashboard.pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#keywords" data-toggle="tab">
-                                <i class="fa fa-key"></i> {{ trans('admin.fields.dashboard.keywords') }}
+                                @fa('key') {{ trans('admin.fields.dashboard.keywords') }}
                             </a>
                         </li>
                         <li>
                             <a href="#entrance-pages" data-toggle="tab">
-                                <i class="fa fa-building-o"></i> {{  trans('admin.fields.dashboard.entrance_pages') }}
+                                @fa('building-o') {{  trans('admin.fields.dashboard.entrance_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#exit-pages" data-toggle="tab">
-                                <i class="fa fa-power-off"></i> {{ trans('admin.fields.dashboard.exit_pages') }}
+                                @fa('power-off') {{ trans('admin.fields.dashboard.exit_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#time-pages" data-toggle="tab">
-                                <i class="fa fa-clock-o"></i> {{ trans('admin.fields.dashboard.time_pages') }}
+                                @fa('clock-o') {{ trans('admin.fields.dashboard.time_pages') }}
                             </a>
                         </li>
                         <li>
                             <a href="#traffic-sources" data-toggle="tab">
-                                <i class="fa fa-lightbulb-o"></i> {{ trans('admin.fields.dashboard.traffic_sources') }}
+                                @fa('lightbulb-o') {{ trans('admin.fields.dashboard.traffic_sources') }}
                             </a>
                         </li>
                         <li>
                             <a href="#browsers" data-toggle="tab">
-                                <i class="fa fa-android"></i> {{ trans('admin.fields.dashboard.browsers') }}
+                                @fa('android') {{ trans('admin.fields.dashboard.browsers') }}
                             </a>
                         </li>
                         <li>
                             <a href="#os" data-toggle="tab">
-                                <i class="fa fa-linux"></i> {{ trans('admin.fields.dashboard.os') }}
+                                @fa('linux') {{ trans('admin.fields.dashboard.os') }}
                             </a>
                         </li>
                     </ul>
@@ -136,7 +140,7 @@
             <div class="col-md-4">
                 <div class="box box-solid bg-dark-blue-gradient">
                     <div class="box-header">
-                        <i class="fa fa-th"></i>
+                        @fa('th')
                         <h3 class="box-title">{{ trans('admin.fields.dashboard.visits') }}</h3>
                     </div>
                     <div class="box-body border-radius-none">
@@ -145,7 +149,7 @@
                 </div>
                 <div class="box box-solid bg-blue-special">
                     <div class="box-header">
-                        <i class="fa fa-location-arrow"></i>
+                        @fa('location-arrow')
                         <h3 class="box-title">{{ trans('admin.fields.dashboard.region_visitors') }}</h3>
                     </div>
                     <div class="box-body">
@@ -159,7 +163,7 @@
             <div class="col-xs-12">
                 <div class="box bg-gray-white">
                     <div class="box-header">
-                        <i class="fa fa-globe"></i>
+                        @fa('globe')
                         <h3 class="box-title">{{ trans('admin.fields.dashboard.world_visitors') }}</h3>
                     </div>
                     <div class="box-body">
@@ -171,8 +175,6 @@
 
     </section>
 
-
-    <script src="{{ asset('js/raphael.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
 

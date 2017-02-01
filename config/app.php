@@ -166,8 +166,8 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
@@ -189,6 +189,8 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Watson\Sitemap\SitemapServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class
     ],
 
     /*
@@ -211,7 +213,8 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
-	'Bus' => Illuminate\Support\Facades\Bus::class,
+        'Bus' => Illuminate\Support\Facades\Bus::class,
+        'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
@@ -249,8 +252,9 @@ return [
         'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
         'HTML'              => Collective\Html\HtmlFacade::class,
         'Menu'              => Caffeinated\Menus\Facades\Menu::class,
-        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
+        'Analytics'         => Spatie\Analytics\AnalyticsFacade::class,
         'Datatables'        => Yajra\Datatables\Datatables::class,
+        'Sitemap'           => Watson\Sitemap\Facades\Sitemap::class
     ],
 
 ];

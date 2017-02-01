@@ -1,7 +1,13 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+class TestCase extends BaseTestCase
 {
+    use CreatesApplication;
+
     /**
      * The base URL to use while testing the application.
      *
@@ -9,26 +15,20 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
+    /**
+     * @var \App\User
+     */
     protected $user;
 
     /**
-     * Creates the application.
+     * @param null $user
      *
-     * @return \Illuminate\Foundation\Application
+     * @return $this
      */
-    public function createApplication()
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
-    }
-
     public function signIn($user = null)
     {
         if (!$user) {
-            $user = factory(App\User::class)->make([
+            $user = factory(\App\User::class)->make([
                 'email' => 'test@user.com',
                 'name' => 'user',
                 'password' => bcrypt('123456'),

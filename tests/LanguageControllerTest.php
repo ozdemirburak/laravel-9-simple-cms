@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class LanguageControllerTest extends TestCase
 {
     /**

@@ -9,8 +9,9 @@ class ArticlesForm extends AdminForm
     public function buildForm()
     {
         $this
-            ->add('published_at', 'date', [
-                'label' => trans('admin.fields.published_at')
+            ->add('published_at', 'text', [
+                'label' => trans('admin.fields.published_at'),
+                'attr' => ['class' => 'form-control datepicker']
             ])
             ->add('title', 'text', [
                 'label' => trans('admin.fields.article.title')

@@ -23,7 +23,7 @@ abstract class DataTableController extends DataTable
      *
      * @var string
      */
-    protected $model = "";
+    protected $model = '';
 
     /**
      * Columns to show
@@ -110,10 +110,10 @@ abstract class DataTableController extends DataTable
             });
         })->recollect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
             return $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
-                return $model->$boolean_column == true ? trans("admin.fields.yes") : trans("admin.fields.no");
+                return $model->$boolean_column == true ? trans('admin.fields.yes') : trans('admin.fields.no');
             });
         })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
-            return $datatables->editColumn(join(".", [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
+            return $datatables->editColumn(implode('.', [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
                 return !empty($model->$relation->$eager_column) ? $model->$relation->$eager_column : '';
             });
         })->recollect($this->count_columns)->each(function ($count_column) use (&$datatables) {
@@ -154,25 +154,25 @@ abstract class DataTableController extends DataTable
      *
      * @return array
      */
-    protected function getColumns($result = [])
+    protected function getColumns(array $result = [])
     {
         list($columns, $countColumnsPosition, $model, $table) = $this->getColumnParameters();
         collect($columns)->each(function ($column, $key) use ($model, $table, $countColumnsPosition, &$result) {
-            $orderAndSearch = $key < $countColumnsPosition ? true : false;
+            $orderAndSearch = $key < $countColumnsPosition;
             $this->pushColumns($result, [
                 'data' => $column,
-                'name' => join([$table, $column], "."),
-                'title' => trans('admin.fields.' . join([$model, $column], "."))
+                'name' => implode([$table, $column], '.'),
+                'title' => trans('admin.fields.' . implode([$model, $column], '.'))
             ], $orderAndSearch);
         })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
-            $string = join([$key, $column], ".");
+            $string = implode([$key, $column], '.');
             $this->pushColumns($result, [
                 'data' => $string,
                 'name' => $string,
                 'title' => trans('admin.fields.' . $string),
             ]);
         })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
-            $string = join([$table, $column], ".");
+            $string = implode([$table, $column], '.');
             $this->pushColumns($result, [
                 'data' => $column,
                 'name' => $string,
@@ -183,18 +183,19 @@ abstract class DataTableController extends DataTable
     }
 
     /**
-     * @param      $result
-     * @param      $data
-     * @param bool $orderAndSearch
+     * @param array $result
+     * @param mixed $data
+     * @param bool  $orderAndSearch
      *
-     * @return int
+     * @return array
      */
     protected function pushColumns(&$result, $data, $orderAndSearch = true)
     {
-        return array_push($result, array_merge($data, [
+        $result[] = array_merge($data, [
             'orderable' => $orderAndSearch,
             'searchable' => $orderAndSearch
-        ]));
+        ]);
+        return $result;
     }
 
     /**
@@ -215,7 +216,7 @@ abstract class DataTableController extends DataTable
                 ], false);
             } else {
                 $result = $result->addColumn('ops', function ($data) use ($model) {
-                    return get_ops($model, $data->id);
+                    return view('partials.admin.ops', ['resource' => $model, 'id' => $data->id]);
                 });
             }
         }
@@ -245,7 +246,7 @@ abstract class DataTableController extends DataTable
      */
     protected function getTableName()
     {
-        return ((new $this->model)->getTable());
+        return (new $this->model)->getTable();
     }
 
     /**

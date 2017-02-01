@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware\Custom;
 
+use App\Language;
+use App\Setting;
 use Closure;
 use Config;
-use App\Setting;
 
 class SetConfiguration
 {
@@ -22,7 +23,7 @@ class SetConfiguration
      */
     public function handle($request, Closure $next)
     {
-        Config::set(['settings' => Setting::firstOrFail()]);
+        Config::set(['settings' => Setting::firstOrFail(), 'languages' => Language::all()]);
         return $next($request);
     }
 }

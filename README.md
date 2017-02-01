@@ -1,6 +1,6 @@
 # Laravel 5 Simple CMS
-Laravel 5.3 content management system for starters. 
-For 5.1 and 5.2 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
+Laravel 5.4 content management system for starters. 
+For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ##Table of Contents
@@ -44,10 +44,8 @@ Create a database and configure the `.env` file.
 Install node and npm following one of the techniques explained within 
 this [link](https://gist.github.com/isaacs/579814).
     
-    $ npm install --global gulp bower
     $ npm install
-    $ bower install
-    $ gulp --production
+    $ npm run production
     $ php artisan serve
 
 Open [http://localhost:8000](http://localhost:8000) from your browser. 
@@ -80,13 +78,9 @@ To install the composer dependencies you need to have composer installed,
 if you don't have composer installed, then [follow these instructions](https://getcomposer.org/download/). Then run,
 `composer install` within your `CUSTOM_DIRECTORY`.
 
-As this project relies on bower and gulp heavily, you need to install them. 
 To install node and npm follow one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
-Then `npm install --global gulp bower` to install gulp and bower globally. 
-Finally, to install Laravel project dependencies, run `npm install`.
-
-After installing node modules, install javascript and style based dependencies run `bower install`, 
-to combine the javascript and style files run `gulp`.
+Then, to install Laravel project dependencies, run `npm install`. Finally to combine the javascript and style files run 
+`npm run dev`.
 
 Rename your `.env.example` file as `.env` and change the variables as your own. If you have any variables with
  any spaces, double quote them, for instance, if you have a variable that equals to John Doe,

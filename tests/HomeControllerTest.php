@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HomeControllerTest extends TestCase
@@ -12,7 +14,7 @@ class HomeControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->articles = factory(App\Article::class)->make([
+        $this->articles = factory(\App\Article::class)->make([
             'category_id' => 1,
             'content' => 'Some content',
             'description' => 'A description',

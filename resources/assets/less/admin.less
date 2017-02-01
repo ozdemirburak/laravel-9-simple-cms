@@ -1,7 +1,14 @@
-@import "../vendor/admin-lte/build/less/AdminLTE";
-@import "../vendor/admin-lte/build/less/skins/skin-blue";
-@import "../vendor/font-awesome/less/font-awesome";
-@import "../vendor/bootstrap-datepicker/less/datepicker3";
+@import "../../../node_modules/bootstrap/less/bootstrap";
+@import "../../../node_modules/font-awesome/less/font-awesome";
+@import "../../../node_modules/admin-lte/dist/css/AdminLTE.min.css";
+@import "../../../node_modules/admin-lte/dist/css/skins/_all-skins.min.css";
+@import "../../../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css";
+@import "../../../node_modules/datatables.net-bs/css/dataTables.bootstrap.css";
+@import "../../../node_modules/morris.js/morris.css";
+@import "../../../node_modules/select2/dist/css/select2.min.css";
+@import "../../../node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css";
+@import "../../../node_modules/nestable-fork/dist/jquery.nestable.min.css";
+@import "../../../resources/assets/other/datatables/buttons.css";
 @import "admin/variables";
 @import "admin/functions";
 @import "admin/items";
@@ -14,6 +21,10 @@
   background: @gray-lighter none repeat scroll 0 0;
   margin: 150px auto;
   text-align: center;
+}
+
+.form-control {
+  color: @black;
 }
 
 .validation {

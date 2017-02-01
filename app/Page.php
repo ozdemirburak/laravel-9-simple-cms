@@ -71,4 +71,12 @@ class Page extends Node
     {
         return $this->belongsTo(Language::class);
     }
+
+    /**
+     * @return string
+     */
+    public function getLinkAttribute()
+    {
+        return route('page', ['pageSlug' => $this->slug]);
+    }
 }

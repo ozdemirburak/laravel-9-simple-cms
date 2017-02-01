@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Base\Controllers\AdminController;
 use Analytics;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Spatie\Analytics\Period;
@@ -96,7 +95,7 @@ class DashboardController extends AdminController
      */
     protected function makeCollection($data, $fields, $offset = 1)
     {
-        if (is_null($data)) {
+        if ($data === null) {
             return new Collection([]);
         } else {
             foreach ($data as $pageRow) {
@@ -113,8 +112,7 @@ class DashboardController extends AdminController
      */
     private function getTotalVisits()
     {
-        $options = ['dimensions' => 'ga:year'];
-        $result = $this->query($options);
+        $result = $this->query(['dimensions' => 'ga:year']);
         return array_sum(array_column($result, 1));
     }
 
@@ -202,10 +200,9 @@ class DashboardController extends AdminController
      *
      * @return string
      */
-    private function getCountries($visits = [])
+    private function getCountries(array $visits = [])
     {
-        $options = ['dimensions' => 'ga:country', 'sort' => '-ga:visits'];
-        $array = $this->query($options);
+        $array = $this->query(['dimensions' => 'ga:country', 'sort' => '-ga:visits']);
         if (count($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k] = [$v[0], (int) $v[1]];
@@ -221,10 +218,9 @@ class DashboardController extends AdminController
      *
      * @return string
      */
-    private function getDailyVisits($visits = [])
+    private function getDailyVisits(array $visits = [])
     {
-        $options = ['dimensions' => 'ga:date'];
-        $array = $this->query($options);
+        $array = $this->query(['dimensions' => 'ga:date']);
         if (count($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k]['date'] = Carbon::parse($v['0'])->format('Y-m-d');
@@ -241,7 +237,7 @@ class DashboardController extends AdminController
      *
      * @return string
      */
-    private function getRegions($visits = [])
+    private function getRegions(array $visits = [])
     {
         $options = [
             'dimensions' => 'ga:country, ga:region',
@@ -251,7 +247,7 @@ class DashboardController extends AdminController
         $array = $this->query($options);
         if (count($array)) {
             foreach ($array as $k => $v) {
-                $visits[$k] = [str_replace(" Province", "", $v[1]), (int) $v[2]];
+                $visits[$k] = [str_replace(' Province', '', $v[1]), (int) $v[2]];
             }
         }
         return json_encode($visits);
@@ -264,20 +260,7 @@ class DashboardController extends AdminController
      */
     private function getAverages()
     {
-        $options = ['dimensions' => 'ga:pagePath'];
-        $array = $this->query($options, 'ga:avgTimeOnPage, ga:entranceBounceRate, ga:pageviewsPerVisit');
-        $count = count($array);
-        $average = ['time' => 0, 'bounce' => 0, 'visit' => 0];
-        if ($count) {
-            foreach ($array as $v) {
-                $average['time']   += $v['1'];
-                $average['bounce'] += $v['2'];
-                $average['visit']  += $v['3'];
-            }
-            $average['time']   = ($average['time'] ? floor($average['time'] / $count) : 0);
-            $average['bounce'] = ($average['bounce'] ? round($average['bounce'] / $count, 2) : 0);
-            $average['visit']  = ($average['visit'] ? round($average['visit'] / $count, 2) : 0);
-        }
-        return $average;
+        $collection = collect($this->query(['dimensions' => 'ga:pagePath'], 'ga:avgSessionDuration, ga:entranceBounceRate, ga:pageviewsPerVisit'));
+        return ['session' => round($collection->avg(1), 2), 'bounce' => round($collection->avg(2), 2), 'visit' => round($collection->avg(3), 2)];
     }
 }

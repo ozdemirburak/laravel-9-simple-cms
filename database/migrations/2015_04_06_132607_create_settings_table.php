@@ -13,7 +13,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->tinyInteger('id')->unique();
+            $table->unsignedTinyInteger('id')->unique();
             $table->string('logo')->nullable();
             $table->string('email')->nullable();
             $table->string('facebook')->nullable();
@@ -31,6 +31,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('settings');
+        Schema::dropIfExists('settings');
     }
 }

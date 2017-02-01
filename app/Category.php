@@ -64,6 +64,6 @@ class Category extends SluggableModel
      */
     public function getLinkAttribute()
     {
-        return route('category', ['category_slug' => $this->slug]);
+        return route('category', ['categorySlug' => $this->slug]);
     }
 }
