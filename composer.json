@@ -18,8 +18,7 @@
 		"yajra/laravel-datatables-oracle": "~6.24",
 		"predis/predis": "~1.1",
 		"watson/sitemap": "~2.0",
-		"spatie/laravel-backup": "~3.10",
-		"jaybizzle/laravel-crawler-detect": "~1.1"
+		"spatie/laravel-backup": "~3.10"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "~1.4",

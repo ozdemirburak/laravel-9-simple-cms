@@ -17,7 +17,7 @@ class SiteMapController extends ApplicationController
      *
      * @return Response
      */
-    public function getSiteMap()
+    public function index()
     {
         Sitemap::addTag(route('root'), Carbon::now()->toDateTimeString(), 'daily', '1.0');
         Language::with('articles', 'categories', 'pages')->get()->each(function ($language) {
