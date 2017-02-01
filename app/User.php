@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Hash;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereLoggedOutAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereIpAddress($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User wherePicture($value)
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @mixin \Eloquent
  */
 
 class User extends Authenticatable

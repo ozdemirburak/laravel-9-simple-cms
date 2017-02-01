@@ -25,6 +25,9 @@ use App\Base\SluggableModel;
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Category whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Article[] $articles
+ * @property-read string $link
+ * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
+ * @mixin \Eloquent
  */
 class Category extends SluggableModel
 {

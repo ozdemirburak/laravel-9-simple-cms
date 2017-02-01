@@ -41,6 +41,9 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
  * @method static \Baum\Node withoutSelf()
  * @method static \Baum\Node withoutRoot()
  * @method static \Baum\Node limitDepth($limit)
+ * @property-read string $link
+ * @method static \Illuminate\Database\Query\Builder|\App\Page findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
+ * @mixin \Eloquent
  */
 
 class Page extends Node

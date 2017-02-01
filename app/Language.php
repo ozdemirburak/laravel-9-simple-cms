@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereSiteDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Language whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Article[] $articles
+ * @mixin \Eloquent
  */
 class Language extends Model
 {
