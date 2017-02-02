@@ -102,7 +102,7 @@
                             <ul class="item-list">
                                 @foreach($statistics['times'] as $p)
                                 <li>
-                                    {{ $p['path'] }}<span class="pull-right"> {{ formatMilliseconds($p['time']) }}</span>
+                                    {{ $p['path'] }}<span class="pull-right"> {{ gmdate('H:i:s', $p['time']) }}</span>
                                 </li>
                                 @endforeach
                             </ul>
