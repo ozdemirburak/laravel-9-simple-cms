@@ -19,9 +19,6 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\Logout::class => [
             \App\Listeners\SetUserLogoutCredentials::class,
         ],
-        \App\Events\ArticleWasViewed::class => [
-            \App\Listeners\IncrementArticleViews::class,
-        ],
     ];
 
     /**
