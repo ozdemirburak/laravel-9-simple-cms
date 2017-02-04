@@ -31,7 +31,7 @@ class ArticleDataTable extends DataTableController
      *
      * @var array
      */
-    protected $common_columns = ['read_count', 'published_at', 'created_at', 'updated_at'];
+    protected $common_columns = ['published_at', 'created_at', 'updated_at'];
 
     /**
      * Get the query object to be processed by datatables.
