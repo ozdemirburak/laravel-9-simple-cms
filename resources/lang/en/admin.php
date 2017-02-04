@@ -102,7 +102,6 @@ return [
             'title'                 => 'Title',
         ],
         'published_at'              => 'Published at',
-        'read_count'                => 'Read Count',
         'reset'                     => 'Reset',
         'save'                      => 'Save',
         'setting' => [

@@ -102,7 +102,6 @@ return [
             'title'                 => 'Başlık'
         ],
         'published_at'              => 'Yayınlanma Tarihi',
-        'read_count'                => 'Okunma Sayısı',
         'reset'                     => 'Reset',
         'save'                      => 'Kaydet',
         'setting' => [
