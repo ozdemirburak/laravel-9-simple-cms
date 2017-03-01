@@ -181,6 +181,7 @@ return [
          * Third Party Stuff
          */
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Caffeinated\Menus\MenusServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -188,9 +189,10 @@ return [
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
+        Yajra\Datatables\ButtonsServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Watson\Sitemap\SitemapServiceProvider::class,
-        Spatie\Backup\BackupServiceProvider::class
+        Watson\Sitemap\SitemapServiceProvider::class
     ],
 
     /*
@@ -246,15 +248,17 @@ return [
         /*
          * Custom Third Party Aliases...
          */
-        'Input'             => Illuminate\Support\Facades\Input::class,
+        'Analytics'         => Spatie\Analytics\AnalyticsFacade::class,
+        'Datatables'        => Yajra\Datatables\Datatables::class,
         'Flash'             => Laracasts\Flash\Flash::class,
         'Form'              => Collective\Html\FormFacade::class,
         'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
         'HTML'              => Collective\Html\HtmlFacade::class,
+        'Input'             => Illuminate\Support\Facades\Input::class,
         'Menu'              => Caffeinated\Menus\Facades\Menu::class,
-        'Analytics'         => Spatie\Analytics\AnalyticsFacade::class,
-        'Datatables'        => Yajra\Datatables\Datatables::class,
-        'Sitemap'           => Watson\Sitemap\Facades\Sitemap::class
+        'PDF'               => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'Sitemap'           => Watson\Sitemap\Facades\Sitemap::class,
+        'SnappyImage'       => Barryvdh\Snappy\Facades\SnappyImage::class
     ],
 
 ];
