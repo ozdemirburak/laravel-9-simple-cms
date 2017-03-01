@@ -97,6 +97,15 @@ abstract class DataTableController extends DataTable
     protected $common_columns = ['created_at', 'updated_at'];
 
     /**
+     * Laravel DataTables escapes all output by default.
+     *
+     * Define all the fields that should not be escaped but ops as ops is already included if set true like above
+     *
+     * @var array
+     */
+    protected $raw_columns = [];
+
+    /**
      * Display ajax response.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -121,7 +130,8 @@ abstract class DataTableController extends DataTable
                 return count($model->$count_column);
             });
         });
-        return $this->pushOps($datatables, $model)->make(true);
+        $datatables = $this->setRawColumns($this->pushOps($datatables, $model));
+        return $datatables->make(true);
     }
 
     /**
@@ -199,28 +209,28 @@ abstract class DataTableController extends DataTable
     }
 
     /**
-     * @param        $result
-     *
+     * @param        $datatables
      * @param string $model
      *
      * @return mixed
      */
-    protected function pushOps($result, $model = "")
+    protected function pushOps($datatables, $model = "")
     {
         if ($this->ops === true) {
             if (empty($model)) {
-                $this->pushColumns($result, [
+                $this->pushColumns($datatables, [
                     'data' => 'ops',
                     'name' => 'ops',
                     'title' => trans('admin.ops.name')
                 ], false);
             } else {
-                $result = $result->addColumn('ops', function ($data) use ($model) {
+                $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
                     return view('partials.admin.ops', ['resource' => $model, 'id' => $data->id]);
                 });
             }
+            $this->raw_columns[] = 'ops';
         }
-        return $result;
+        return $datatables;
     }
 
     /**
@@ -283,5 +293,15 @@ abstract class DataTableController extends DataTable
     protected function getParameters()
     {
         return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
+    }
+
+    /**
+     * @param $datatables
+     *
+     * @return mixed
+     */
+    protected function setRawColumns($datatables)
+    {
+        return $datatables->rawColumns(array_merge($this->raw_columns, $this->image_columns));
     }
 }

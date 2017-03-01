@@ -1,99 +1,115 @@
 (function ($, DataTable) {
-    "use strict";
+  "use strict";
 
-    var _buildUrl = function(dt, action) {
-        var url = dt.ajax.url() || '';
-        var params = dt.ajax.params();
-        params.action = action;
+  var _buildUrl = function(dt, action) {
+    var url = dt.ajax.url() || '';
+    var params = dt.ajax.params();
+    params.action = action;
 
-        return url + '?' + $.param(params);
-    };
+    if (url.indexOf("?")) {
+      return url + '&' + $.param(params);
+    }
 
-    DataTable.ext.buttons.excel = {
-        className: 'buttons-excel',
+    return url + '?' + $.param(params);
+  };
 
-        text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel');
-        },
+  DataTable.ext.buttons.excel = {
+    className: 'buttons-excel',
 
-        action: function (e, dt, button, config) {
-            var url = _buildUrl(dt, 'excel');
-            window.location = url;
-        }
-    };
+    text: function (dt) {
+      return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel');
+    },
 
-    DataTable.ext.buttons.csv = {
-        className: 'buttons-csv',
+    action: function (e, dt, button, config) {
+      var url = _buildUrl(dt, 'excel');
+      window.location = url;
+    }
+  };
 
-        text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV');
-        },
+  DataTable.ext.buttons.export = {
+    extend: 'collection',
 
-        action: function (e, dt, button, config) {
-            var url = _buildUrl(dt, 'csv');
-            window.location = url;
-        }
-    };
+    className: 'buttons-export',
 
-    DataTable.ext.buttons.pdf = {
-        className: 'buttons-pdf',
+    text: function (dt) {
+      return '<i class="fa fa-download"></i> ' + dt.i18n('buttons.export', 'Export') + '&nbsp;<span class="caret"/>';
+    },
 
-        text: function (dt) {
-            return '<i class="fa fa-file-pdf-o"></i> ' + dt.i18n('buttons.pdf', 'PDF');
-        },
+    buttons: ['csv', 'excel', 'pdf']
+  };
 
-        action: function (e, dt, button, config) {
-            var url = _buildUrl(dt, 'pdf');
-            window.location = url;
-        }
-    };
+  DataTable.ext.buttons.csv = {
+    className: 'buttons-csv',
 
-    DataTable.ext.buttons.print = {
-        className: 'buttons-print',
+    text: function (dt) {
+      return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV');
+    },
 
-        text: function (dt) {
-            return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Print');
-        },
+    action: function (e, dt, button, config) {
+      var url = _buildUrl(dt, 'csv');
+      window.location = url;
+    }
+  };
 
-        action: function (e, dt, button, config) {
-            var url = _buildUrl(dt, 'print');
-            window.location = url;
-        }
-    };
+  DataTable.ext.buttons.pdf = {
+    className: 'buttons-pdf',
 
-    DataTable.ext.buttons.reset = {
-        className: 'buttons-reset',
+    text: function (dt) {
+      return '<i class="fa fa-file-pdf-o"></i> ' + dt.i18n('buttons.pdf', 'PDF');
+    },
 
-        text: function (dt) {
-            return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Reset');
-        },
+    action: function (e, dt, button, config) {
+      var url = _buildUrl(dt, 'pdf');
+      window.location = url;
+    }
+  };
 
-        action: function (e, dt, button, config) {
-            dt.search('').draw();
-        }
-    };
+  DataTable.ext.buttons.print = {
+    className: 'buttons-print',
 
-    DataTable.ext.buttons.reload = {
-        className: 'buttons-reload',
+    text: function (dt) {
+      return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Print');
+    },
 
-        text: function (dt) {
-            return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', 'Reload');
-        },
+    action: function (e, dt, button, config) {
+      var url = _buildUrl(dt, 'print');
+      window.location = url;
+    }
+  };
 
-        action: function (e, dt, button, config) {
-            dt.draw(false);
-        }
-    };
+  DataTable.ext.buttons.reset = {
+    className: 'buttons-reset',
 
-    DataTable.ext.buttons.create = {
-        className: 'buttons-create',
+    text: function (dt) {
+      return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Reset');
+    },
 
-        text: function (dt) {
-            return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');
-        },
+    action: function (e, dt, button, config) {
+      dt.search('').draw();
+    }
+  };
 
-        action: function (e, dt, button, config) {
-            window.location = window.location.href.replace(/\/+$/, "") + '/create';
-        }
-    };
+  DataTable.ext.buttons.reload = {
+    className: 'buttons-reload',
+
+    text: function (dt) {
+      return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', 'Reload');
+    },
+
+    action: function (e, dt, button, config) {
+      dt.draw(false);
+    }
+  };
+
+  DataTable.ext.buttons.create = {
+    className: 'buttons-create',
+
+    text: function (dt) {
+      return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');
+    },
+
+    action: function (e, dt, button, config) {
+      window.location = window.location.href.replace(/\/+$/, "") + '/create';
+    }
+  };
 })(jQuery, jQuery.fn.dataTable);
