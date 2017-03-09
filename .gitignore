@@ -10,8 +10,10 @@ npm-debug.log
 public/dist
 public/fonts
 public/img
+public/images
 public/uploads
 public/packages
+public/mix-manifest.json
 public/storage
 public/*.jpg
 public/*.gif

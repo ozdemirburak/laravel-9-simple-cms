@@ -2,12 +2,12 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use App\User;
+use Illuminate\Contracts\Console\Kernel;
+use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
-
     /**
      * The base URL to use while testing the application.
      *
@@ -28,18 +28,26 @@ class TestCase extends BaseTestCase
     public function signIn($user = null)
     {
         if (!$user) {
-            $user = factory(\App\User::class)->make([
+            $user = factory(User::class)->make([
                 'email' => 'test@user.com',
                 'name' => 'user',
                 'password' => bcrypt('123456'),
                 'picture' => null,
             ]);
         }
-
-        $this->user = $user;
-
-        $this->actingAs($this->user);
-
+        $this->actingAs($this->user = $user);
         return $this;
+    }
+
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../bootstrap/app.php';
+        $app->make(Kernel::class)->bootstrap();
+        return $app;
     }
 }

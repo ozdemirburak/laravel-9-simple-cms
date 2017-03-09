@@ -11,8 +11,8 @@
 		"baum/baum": "~1.1",
 		"caffeinated/menus": "~3.0",
 		"cviebrock/eloquent-sluggable": "~4.2",
-		"h4cc/wkhtmltopdf-amd64": "~0.12",
 		"h4cc/wkhtmltoimage-amd64": "~0.12",
+		"h4cc/wkhtmltopdf-amd64": "~0.12",
 		"kris/laravel-form-builder": "~1.11.0",
 		"laracasts/flash": "~2.0",
 		"laravel/framework": "5.4.*",
@@ -25,13 +25,14 @@
 		"yajra/laravel-datatables-oracle": "~7.3"
 	},
 	"require-dev": {
-		"fzaninotto/faker": "~1.4",
-		"mockery/mockery": "~0.9",
-		"phpunit/phpunit": "~5.7",
-		"doctrine/dbal": "~2.5",
-		"barryvdh/laravel-ide-helper": "~2.0",
 		"barryvdh/laravel-debugbar": "~2.0",
-		"laracasts/generators": "dev-master"
+		"barryvdh/laravel-ide-helper": "~2.0",
+		"doctrine/dbal": "~2.5",
+		"fzaninotto/faker": "~1.4",
+		"laracasts/generators": "dev-master",
+		"laravel/browser-kit-testing": "^1.0",
+		"mockery/mockery": "~0.9",
+		"phpunit/phpunit": "~5.7"
 	},
 	"autoload": {
 		"classmap": [
