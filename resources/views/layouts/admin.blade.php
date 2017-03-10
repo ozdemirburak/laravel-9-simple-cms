@@ -15,7 +15,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="{{ asset('dist/js/admin.js') }}" type="text/javascript"></script>
+    <script src="{{ mix('dist/js/admin.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.4.0/js/bootstrap-colorpicker.min.js" type="text/javascript"></script>
 </head>
 <body class="skin-blue">
