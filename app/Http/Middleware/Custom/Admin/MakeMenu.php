@@ -37,13 +37,13 @@ class MakeMenu
     {
         Menu::make('admin', function ($menu) {
             $this->menu = $menu;
-            $menu->add($this->translate('dashboard'), ['route' => $this->implode('root')])->icon('dashboard')->prependIcon();
+            $menu->add($this->translate('dashboard', 'index'), ['route' => $this->implode('root')])->icon('dashboard')->prependIcon();
             $this->add('language', 'flag');
             $this->add('page', 'folder');
             $this->add('category', 'book');
             $this->add('article', 'edit');
             $this->add('user', 'users');
-            $menu->add($this->translate('setting'), ['route' => $this->implode('setting', 'index')])->icon('gears')->prependIcon();
+            $menu->add($this->translate('setting', 'index'), ['route' => $this->implode('setting', 'index')])->icon('gears')->prependIcon();
         });
     }
 
@@ -53,11 +53,11 @@ class MakeMenu
      */
     protected function add($model, $icon)
     {
-        $object = $this->menu->add($this->translate($model, 'root'), '#')
+        $object = $this->menu->add($this->translate($model, 'index'), '#')
             ->icon($icon)
             ->prependIcon();
 
-        $object->add($this->translate($model, 'add'), ['route' => $this->implode($model, 'create')])
+        $object->add($this->translate($model, 'create'), ['route' => $this->implode($model, 'create')])
             ->icon($this->circle)
             ->prependIcon();
 
