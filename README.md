@@ -32,20 +32,30 @@ For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/larave
 <a name="item3"></a>
 ##Quick Start:
 
+Clone this repository and install the dependencies.
+
     $ git clone https://github.com/ozdemirburak/laravel-5-simple-cms.git CUSTOM_DIRECTORY && cd CUSTOM_DIRECTORY
     $ composer install
+    
+Rename the `.env.example` to `.env`, then create a database and edit the `.env` file.
 
-Create a database and configure the `.env` file.
+    $ mv .env.example .env
+    $ vi .env
+
+Generate an application key and migrate the tables, then seed.
 
     $ php artisan key:generate
     $ php artisan migrate
     $ php artisan db:seed
 
 Install node and npm following one of the techniques explained within 
-this [link](https://gist.github.com/isaacs/579814).
+this [link](https://gist.github.com/isaacs/579814) to create and compile the assets of the application.
     
     $ npm install
     $ npm run production
+
+Finally, serve the application.
+
     $ php artisan serve
 
 Open [http://localhost:8000](http://localhost:8000) from your browser. 
@@ -143,36 +153,22 @@ from our admin panel where will provide its' title and content.
 
 This will create everything that we need to manage our Fruits.
 
-Afterwards, check your `resources/lang` folders' `admin.php` files, for the `/en` folder's `admin.php` file add the menu translations to `menu` array first.
+Afterwards, edit the `resources/lang/LANGUAGE_CODE/resources.php` file and add the translation strings for the newly created resource.
 
 ```php
-"fruit" => [
-    "add"        => "Add a Fruit",
-    "all"        => "All Fruits",
-    "root"       => "Fruits"
+'fruit' => [
+    'all'    => 'All Fruits',
+    'create' => 'Create a Fruit',
+    'edit'   => 'Edit a Fruit',
+    'fields' => [
+      'content'     => 'Content',
+      'language_id' => 'Language'
+      'title'       => 'Title'
+    ],
+    'index'  => 'Fruits',
+    'show'   => 'Show a Fruit'
 ],
  ```
-
-Then to the `fields` array, add the translations for the form that will be generated for it again.
-
-```php
-"fruit" => [
-    "content"     => "Content",
-    "language_id" => "Language"
-    "title"       => "Title"
-],
-```  
-
-Finally for the breadcrumbs generation add the `fruit` translations like below.
-
-```php
-"fruit" => [
-    "create"       => "Create fruit",
-    "edit"         => "Edit fruit",
-    "index"        => "Fruits",
-    "show"         => "Show fruit"
-],
-```
 
 After finishing the language parts, check the Fruit model, which is located in `app` folder as `Fruit.php`. 
 As we are using slugs, configure the model as below.
@@ -218,8 +214,6 @@ class FruitDataTable extends DataTableController
 
     protected $columns = ['title'];
     
-    protected $common_columns = ['created_at', 'updated_at'];
-    
     public function query()
     {
         $fruits = Fruit::whereLanguageId(session('current_lang')->id);
@@ -254,7 +248,7 @@ class FruitController extends AdminController
 
     public function show(Fruit $fruit)
     {
-        return $this->viewPath("show", $fruit);
+        return $this->viewPath('show', $fruit);
     }
 
     public function edit(Fruit $fruit)
@@ -288,9 +282,9 @@ class FruitRequest extends Request {
     public function rules()
     {
         return [
-            'content' => 'required',
+            'content'     => 'required',
             'language_id' => 'required|integer',
-            'title' => 'required|min:3'
+            'title'       => 'required|min:3'
         ];
     }
 }
@@ -374,20 +368,10 @@ Route::model('fruit', \App\Fruit::class);
 ```
 
 Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` 
-folder and configure it as below.
+folder and the line below to the `makeAdminMenu` function.
 
 ```php  
-$fruits = $menu->add($this->translate('fruit.root'), '#')
-    ->icon('apple')
-    ->prependIcon();
-
-$fruits->add($this->translate('fruit.add'), ['route' => 'admin.fruit.create'])
-    ->icon('circle-o')
-    ->prependIcon();
-
-$fruits->add($this->translate('fruit.all'), ['route' => 'admin.fruit.index'])
-    ->icon('circle-o')
-    ->prependIcon();
+$this->add('fruit', 'apple');
 ```
 
 Now you have your fruit resource that can be manageable within your admin panel.
