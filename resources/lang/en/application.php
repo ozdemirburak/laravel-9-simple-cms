@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    "home"          => "Home",
-    "read_more"     => "Read More"
+    'home'          => 'Home',
+    'read_more'     => 'Read More'
 
 ];

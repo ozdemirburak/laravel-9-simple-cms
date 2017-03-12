@@ -17,7 +17,7 @@
     <ol class="breadcrumb">
         <li>
             <a href="{{ route('admin.root') }}">
-                @fa('dashboard') {{ trans('admin.menu.dashboard') }}
+                @fa('dashboard') {{ trans('admin.menu.dashboard.index') }}
             </a>
         </li>
         @if (strpos($route, 'root')  === false)

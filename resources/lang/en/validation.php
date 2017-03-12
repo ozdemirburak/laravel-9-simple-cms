@@ -114,25 +114,6 @@ return [
     |
     */
 
-    'attributes' => [
-        'category_id'       => trans('admin.fields.article.category_id'),
-        'code'              => trans('admin.fields.language.code'),
-        'color'             => trans('admin.fields.category.color'),
-        'content'           => trans('admin.fields.article.content'),
-        'description'       => trans('admin.fields.article.description'),
-        'email'             => trans('admin.fields.user.email'),
-        'facebook'          => trans('admin.fields.setting.facebook'),
-        'flag'              => trans('admin.fields.language.flag'),
-        'language_id'       => trans('admin.fields.category.language_id'),
-        'logo'              => trans('admin.fields.setting.logo'),
-        'name'              => trans('admin.fields.user.name'),
-        'password'          => trans('admin.fields.user.password'),
-        'picture'           => trans('admin.fields.user.picture'),
-        'published_at'      => trans('admin.fields.article.published_at'),
-        'site_description'  => trans('admin.fields.language.site_description'),
-        'site_title'        => trans('admin.fields.language.site_title'),
-        'title'             => trans('admin.fields.article.title'),
-        'twitter'           => trans('admin.fields.setting.twitter')
-    ],
+    'attributes' => getValidationAttributes()
 
 ];
