@@ -42,6 +42,7 @@ mix.webpackConfig({
 
 mix
   .copy(nodeDir   + 'font-awesome/fonts', publicDir + 'fonts')
+  .copy(nodeDir   + 'bootstrap/fonts', publicDir + 'fonts')
   .less(assetsDir + 'less/admin.less', distDir + 'css/admin.css').version()
   .less(assetsDir + 'less/application.less', distDir + 'css/application.css').version()
   .combine(adminJs, distDir + 'js/admin.js')
