@@ -12,8 +12,10 @@ if (!function_exists('createTranslation')) {
     function createTranslation(array $resources, array $translation)
     {
         foreach ($resources as $resource => $values) {
-            $translation['fields'][$resource] = $values['fields'];
-            unset($values['fields']);
+            if (isset($values['fields'])) {
+                $translation['fields'][$resource] = $values['fields'];
+                unset($values['fields']);
+            }
             $translation['menu'][$resource] = $values;
             $translation[$resource] = $values;
         }
