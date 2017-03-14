@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\DataTables;
 
 use App\Base\Controllers\DataTableController;
 use App\Category;
+use DB;
 
 class CategoryDataTable extends DataTableController
 {
@@ -24,7 +25,7 @@ class CategoryDataTable extends DataTableController
      *
      * @var array
      */
-    protected $count_columns = ['articles'];
+    protected $count_join_columns = ['article_count'];
 
     /**
      * Get the query object to be processed by datatables.
@@ -33,7 +34,9 @@ class CategoryDataTable extends DataTableController
      */
     public function query()
     {
-        $categories = Category::with('articles')->whereLanguageId(session('current_lang')->id);
+        $categories = Category::leftJoin('articles', 'categories.id', '=', 'articles.id')
+            ->select(DB::raw('categories.*, count(articles.id) as article_count'))
+            ->groupBy('categories.id')->whereLanguageId(session('current_lang')->id);
         return $this->applyScopes($categories);
     }
 }

@@ -26,11 +26,11 @@ return [
         'create' => 'Create category',
         'edit'   => 'Edit category',
         'fields' => [
-            'articles'    => 'Article Count',
-            'color'       => 'Color',
-            'description' => 'Description',
-            'language_id' => 'Language',
-            'title'       => 'Category Title'
+            'article_count' => 'Article Count',
+            'color'         => 'Color',
+            'description'   => 'Description',
+            'language_id'   => 'Language',
+            'title'         => 'Category Title'
         ],
         'index'  => 'Categories',
         'show'   => 'Show category'
