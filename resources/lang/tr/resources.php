@@ -26,11 +26,11 @@ return [
         'create' => 'Kategori oluştur',
         'edit'   => 'Kategori düzenle',
         'fields' => [
-            'articles'    => 'Makale Sayısı',
-            'color'       => 'Rengi',
-            'description' => 'Tanımı',
-            'language_id' => 'Dili',
-            'title'       => 'Kategori Başlığı'
+            'article_count' => 'Makale Sayısı',
+            'color'         => 'Rengi',
+            'description'   => 'Tanımı',
+            'language_id'   => 'Dili',
+            'title'         => 'Kategori Başlığı'
         ],
         'index'  => 'Kategoriler',
         'show'   => 'Kategori göster'

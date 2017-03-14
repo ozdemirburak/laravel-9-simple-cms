@@ -33,11 +33,18 @@ abstract class DataTableController extends DataTable
     protected $columns =  [];
 
     /**
-     * Image columns to show within image tag
+     * Image columns to show the value wrapped in img tag, in other words, show image instead of a column value
      *
      * @var array
      */
     protected $image_columns =  [];
+
+    /**
+     * Boolean columns for translation, show meaningful text instead of 1/true or 0/false
+     *
+     * @var array
+     */
+    protected $boolean_columns =  [];
 
     /**
      * Properties of the relationships that are loaded via eager loading
@@ -67,21 +74,40 @@ abstract class DataTableController extends DataTable
     protected $eager_columns =  [];
 
     /**
-     * Boolean columns for translation, show meaningful text instead of 1/true or 0/false
+     * Relations count columns, show the number of related models. Ordering is not allowed.
      *
-     * @var array
-     */
-    protected $boolean_columns =  [];
-
-    /**
-     * Relations count columns, show the number of related models
+     * Example:
+     *
+     * protected $count_columns = ['books'];
+     *
+     * $languages = Language::with('books');
+     * return $this->applyScopes($languages);
      *
      * @var array
      */
     protected $count_columns =  [];
 
     /**
-     * Show the action buttons, show, edit and delete
+     * Relations count columns, show the number of related models. Ordering is allowed.
+     *
+     * Example:
+     *
+     * protected $count_join_columns = ['book_count'];
+     *
+     * $languages = Language::leftJoin('books', 'languages.id', '=', 'books.id')
+     *    ->select(DB::raw('languages.*, count(books.id) as book_count'))
+     *    ->groupBy('languages.id');
+     * return $this->applyScopes($languages);
+     *
+     * @var array
+     */
+    protected $count_join_columns = [];
+
+    /**
+     * Show the action buttons, show, edit and delete.
+     *
+     * Of course, you need to set this to false, if there exists a model with datatable but is not a resource.
+     * In other words, set this to false, if the model does not have show/delete/edit routes.
      *
      * @var bool
      */
@@ -119,7 +145,7 @@ abstract class DataTableController extends DataTable
             });
         })->recollect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
             return $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
-                return $model->$boolean_column == true ? trans('admin.fields.yes') : trans('admin.fields.no');
+                return $model->$boolean_column ? trans('admin.fields.yes') : trans('admin.fields.no');
             });
         })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
             return $datatables->editColumn(implode('.', [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
@@ -173,7 +199,7 @@ abstract class DataTableController extends DataTable
                 'data' => $column,
                 'name' => implode([$table, $column], '.'),
                 'title' => trans('admin.fields.' . implode([$model, $column], '.'))
-            ], $orderAndSearch);
+            ], $orderAndSearch, $orderAndSearch);
         })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
             $string = implode([$key, $column], '.');
             $this->pushColumns($result, [
@@ -181,6 +207,12 @@ abstract class DataTableController extends DataTable
                 'name' => $string,
                 'title' => trans('admin.fields.' . $string),
             ]);
+        })->recollect($this->count_join_columns)->each(function ($column) use (&$result, $model) {
+            $this->pushColumns($result, [
+                'data' => $column,
+                'name' => $column,
+                'title' => trans('admin.fields.' . implode([$model, $column], '.')),
+            ], true, false);
         })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
             $string = implode([$table, $column], '.');
             $this->pushColumns($result, [
@@ -195,15 +227,16 @@ abstract class DataTableController extends DataTable
     /**
      * @param array $result
      * @param mixed $data
-     * @param bool  $orderAndSearch
+     * @param bool  $order
+     * @param bool  $search
      *
      * @return array
      */
-    protected function pushColumns(&$result, $data, $orderAndSearch = true)
+    protected function pushColumns(&$result, $data, $order = true, $search = true)
     {
         $result[] = array_merge($data, [
-            'orderable' => $orderAndSearch,
-            'searchable' => $orderAndSearch
+            'orderable'  => $order,
+            'searchable' => $search
         ]);
         return $result;
     }
@@ -222,7 +255,7 @@ abstract class DataTableController extends DataTable
                     'data' => 'ops',
                     'name' => 'ops',
                     'title' => trans('admin.ops.name')
-                ], false);
+                ], false, false);
             } else {
                 $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
                     return view('partials.admin.ops', ['resource' => $model, 'id' => $data->id]);
