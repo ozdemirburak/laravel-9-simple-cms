@@ -99,20 +99,21 @@ if (!function_exists('getNWords')) {
     /**
      * Limit content with number of words
      *
-     * @param      $string
-     * @param      $n
-     * @param bool $withDots
+     * @param string $string
+     * @param int    $n
+     * @param bool   $withDots
      *
-     * @return array|string
+     * @return string
      */
-    function getNWords($string, $n, $withDots = true)
+    function getNWords($string, $n = 5, $withDots = true)
     {
         $excerpt = explode(' ', $string, $n + 1);
-        if (count($excerpt) >= $n) {
+        $wordCount = count($excerpt);
+        if ($wordCount >= $n) {
             array_pop($excerpt);
         }
         $excerpt = implode(' ', $excerpt);
-        if ($withDots) {
+        if ($withDots && $wordCount >= $n) {
             $excerpt .= ' ...';
         }
         return $excerpt;
