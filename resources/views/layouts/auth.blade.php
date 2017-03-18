@@ -18,6 +18,7 @@
 <div class="wrapper">
     @yield('content')
 </div>
-<script src="{{ asset('dist/js/admin.js') }}" type="text/javascript"></script>
+<script src="{{ mix('dist/js/admin.js') }}" type="text/javascript"></script>
 </body>
 </html>
+
