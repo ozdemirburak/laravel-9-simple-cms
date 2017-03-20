@@ -3,7 +3,7 @@ Laravel 5.4 content management system for starters.
 For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
-##Table of Contents
+## Table of Contents
 
 * [Features](#item1)
 * [Quick Start](#item3)
@@ -15,7 +15,7 @@ For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/larave
 
 -----
 <a name="item1"></a>
-##Features:
+## Features:
 * Admin Panel
     * Based on AdminLTE theme
     * Statistics fetched by Google Analytics API integrated dashboard
@@ -30,7 +30,7 @@ For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/larave
 
 -----
 <a name="item3"></a>
-##Quick Start:
+## Quick Start:
 
 Clone this repository and install the dependencies.
 
@@ -65,7 +65,7 @@ The application comes with default user with email address `admin@admin.com` and
 
 -----
 <a name="item4"></a>
-##Installation Guide:
+## Installation Guide:
 
 * [Step 1: Download the Repository](#step1)
 * [Step 2: Install Dependencies](#step2)
