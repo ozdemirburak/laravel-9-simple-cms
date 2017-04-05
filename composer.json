@@ -22,7 +22,7 @@
 		"spatie/laravel-backup": "~3.10",
 		"watson/sitemap": "~2.0",
 		"yajra/laravel-datatables-buttons": "~1.1",
-		"yajra/laravel-datatables-oracle": "~7.3"
+		"yajra/laravel-datatables-oracle": "7.0.x-dev"
 	},
 	"require-dev": {
 		"barryvdh/laravel-debugbar": "~2.0",
