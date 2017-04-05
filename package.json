@@ -19,7 +19,7 @@
   "dependencies": {
     "admin-lte": "~2.3.11",
     "bootstrap": "~3.3.7",
-    "copy-webpack-plugin": "^4.0.1",
+    "copy-webpack-plugin": "~4.0.1",
     "datatables.net": "~2.1.1",
     "datatables.net-bs": "~2.1.1",
     "datatables.net-buttons": "~1.2.4",
@@ -33,7 +33,7 @@
     "raphael": "~2.2",
     "select2": "~4.0.2",
     "select2-bootstrap-theme": "~0.1.0-beta.4",
-    "tinymce": "~4.2",
+    "tinymce": "~4.5",
     "webfontloader": "~1.6"
   }
 }
