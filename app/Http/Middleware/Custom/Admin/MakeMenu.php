@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Custom\Admin;
 
+use Caffeinated\Menus\Builder;
 use Closure;
 use Menu;
 
@@ -13,7 +14,7 @@ class MakeMenu
     protected $circle = 'circle-o';
 
     /**
-     * @var \Caffeinated\Menus\Facades\Menu
+     * @var Builder
      */
     protected $menu;
 
@@ -35,7 +36,7 @@ class MakeMenu
      */
     protected function makeAdminMenu()
     {
-        Menu::make('admin', function ($menu) {
+        Menu::make('admin', function (Builder $menu) {
             $this->menu = $menu;
             $menu->add($this->translate('dashboard', 'index'), ['route' => $this->implode('root')])->icon('dashboard')->prependIcon();
             $this->add('language', 'flag');
