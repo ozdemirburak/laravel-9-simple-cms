@@ -1,13 +1,14 @@
 <?php
 
 return [
+
     /*
      * The view id of which you want to display data.
      */
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
     /*
-     * Path to the json file with service account credentials. Take a look at the README of this package
+     * Path to the client secret json file. Take a look at the README of this package
      * to learn how to get this file.
      */
     'service_account_credentials_json' => base_path(env('ANALYTICS_CREDENTIAL_PATH')),
@@ -19,7 +20,13 @@ return [
     'cache_lifetime_in_minutes' => 60,
 
     /*
-     * The directory where the underlying Google_Client will store it's cache files.
+     * Here you may configure the "store" that the underlying Google_Client will
+     * use to store it's data.  You may also add extra parameters that will
+     * be passed on setCacheConfig (see docs for google-api-php-client).
+     *
+     * Optional parameters: "lifetime", "prefix"
      */
-    'cache_location' => storage_path('app/laravel-google-analytics/google-cache/')
+    'cache' => [
+        'store' => 'file',
+    ],
 ];

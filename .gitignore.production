@@ -2,6 +2,8 @@
 .phpstorm.meta.php
 composer.lock
 node_modules
+npm-debug.log
 resources/assets/vendor
 vendor
+yarn-error.log
 _ide_helper.php

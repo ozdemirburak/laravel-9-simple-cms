@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Generator as Faker;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,7 +13,7 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -22,7 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+$factory->define(App\Category::class, function (Faker $faker) {
     return [
         'color' => $faker->hexColor,
         'description' => $faker->sentence(5),
@@ -31,7 +33,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Article::class, function (Faker\Generator $faker) {
+$factory->define(App\Article::class, function (Faker $faker) {
     return [
         'category_id' => $faker->numberBetween(1, 5),
         'content' => implode('<br/><br/>', $faker->paragraphs(8)),

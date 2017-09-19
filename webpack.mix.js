@@ -1,7 +1,5 @@
 var mix             = require('laravel-mix'),
-  copyWebpackPlugin = require('copy-webpack-plugin'),
   assetsDir         = 'resources/assets/',
-  composerDir       = 'vendor/',
   nodeDir           = 'node_modules/',
   publicDir         = 'public/',
   distDir           = 'public/dist/',
@@ -20,7 +18,7 @@ var mix             = require('laravel-mix'),
     nodeDir     + 'admin-lte/dist/js/app.min.js',
     nodeDir     + 'raphael/raphael.min.js',
     nodeDir     + 'nestable-fork/dist/jquery.nestable.min.js',
-    composerDir + 'yajra/laravel-datatables-buttons/src/resources/assets/buttons.server-side.js',
+    publicDir   + 'vendor/datatables/buttons.server-side.js',
     assetsDir   + 'js/admin.js'
   ],
   applicationJs = [
@@ -28,19 +26,8 @@ var mix             = require('laravel-mix'),
     nodeDir   + 'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
   ];
 
-// If you try to do it with the Laravel Mix's copy function then,
-// you will end up with all tinymce files stored within a folder where plugins will fail
-// https://stackoverflow.com/questions/30522896/how-to-shim-tinymce-in-webpack
-mix.webpackConfig({
-  plugins: [
-    new copyWebpackPlugin([
-      { from: nodeDir    + 'tinymce', to: 'packages/tinymce' },
-      { from: assetsDir  + 'other/tinymce-localautosave', to: 'packages/tinymce/plugins/localautosave' },
-    ])
-  ]
-});
-
 mix
+  .copyDirectory(nodeDir + 'tinymce', publicDir + 'packages/tinymce')
   .copy(nodeDir   + 'font-awesome/fonts', publicDir + 'fonts')
   .copy(nodeDir   + 'bootstrap/fonts', publicDir + 'fonts')
   .less(assetsDir + 'less/admin.less', distDir + 'css/admin.css').version()

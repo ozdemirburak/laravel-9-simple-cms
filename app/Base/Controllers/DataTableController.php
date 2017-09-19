@@ -2,7 +2,8 @@
 
 namespace App\Base\Controllers;
 
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 abstract class DataTableController extends DataTable
 {
@@ -177,7 +178,7 @@ abstract class DataTableController extends DataTable
      */
     protected function getAjaxParameters()
     {
-        return [$this->getModelName(), $this->datatables->eloquent($this->query())];
+        return [$this->getModelName(), new EloquentDataTable($this->query())];
     }
 
     /**
