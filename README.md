@@ -1,6 +1,6 @@
 # Laravel 5 Simple CMS
-Laravel 5.4 content management system for starters. 
-For 5.1, 5.2 and 5.3 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
+Laravel 5.5 content management system for starters. 
+For 5.1, 5.2, 5.3, and 5.4 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ## Table of Contents
@@ -143,15 +143,43 @@ from your browser. The application comes with default user with email address `a
 ### How to Create a New Resource
 
 Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, 
-from our admin panel where will provide its' title and content.
+from our admin panel where will provide its title and content.
 
     $ php artisan make:controller Admin/FruitController
-    $ php artisan make:migration:schema create_fruits_table --schema="language_id:unsignedInteger:foreign, title:string, slug:string:unique, content:text"
+    $ php artisan make:migration create_fruits_table
     $ php artisan make:request Admin/FruitRequest
     $ php artisan make:form Forms/Admin/FruitsForm
     $ php artisan migrate
 
-This will create everything that we need to manage our Fruits.
+Edit the `database/migrations/****_create_fruits_table.php` migration file.
+
+```php
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFruitsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('fruits', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('language_id');
+            $table->string('slug')->index();
+            $table->string('title');
+            $table->text('content');
+            $table->foreign('language_id')->references('id')->on('languages');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('fruits');
+    }
+}
+```
 
 Afterwards, edit the `resources/lang/LANGUAGE_CODE/resources.php` file and add the translation strings for the newly created resource.
 

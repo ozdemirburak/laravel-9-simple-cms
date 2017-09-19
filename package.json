@@ -1,28 +1,31 @@
 {
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch-poll": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --watch-poll --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "npm run watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "devDependencies": {
-    "axios": "^0.15.3",
+    "axios": "^0.16.2",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^3.2.3",
+    "cross-env": "^5.0.1",
     "jquery": "^3.1.1",
-    "laravel-mix": "^0.8.1",
-    "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "laravel-mix": "^1.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "lodash": "^4.17.4"
   },
   "dependencies": {
     "admin-lte": "~2.3.11",
     "bootstrap": "~3.3.7",
-    "copy-webpack-plugin": "~4.0.1",
     "datatables.net": "~2.1.1",
     "datatables.net-bs": "~2.1.1",
     "datatables.net-buttons": "~1.2.4",
+    "datatables.net-buttons-bs": "^1.4.2",
     "eonasdan-bootstrap-datetimepicker": "~4.17.43",
     "font-awesome": "~4.7",
     "jquery": "~1.11.2",

@@ -22,17 +22,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('backup:clean')->daily()->at('23:01');
-        // $schedule->command('backup:run')->daily()->at('00:01');
+        // $schedule->command('inspire')->hourly();
     }
 
     /**
-     * Register the Closure based commands for the application.
+     * Register the commands for the application.
      *
      * @return void
      */
     protected function commands()
     {
+        $this->load(__DIR__.'/Commands');
         require base_path('routes/console.php');
     }
 }

@@ -189,9 +189,8 @@ return [
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
-        Spatie\Backup\BackupServiceProvider::class,
-        Yajra\Datatables\ButtonsServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        Yajra\DataTables\DatatablesServiceProvider::class,
         Watson\Sitemap\SitemapServiceProvider::class
     ],
 
@@ -215,8 +214,8 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
-        'Bus' => Illuminate\Support\Facades\Bus::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
+        'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
@@ -249,7 +248,7 @@ return [
          * Custom Third Party Aliases...
          */
         'Analytics'         => Spatie\Analytics\AnalyticsFacade::class,
-        'Datatables'        => Yajra\Datatables\Datatables::class,
+        'Datatables'        => Yajra\DataTables\Facades\DataTables::class,
         'Flash'             => Laracasts\Flash\Flash::class,
         'Form'              => Collective\Html\FormFacade::class,
         'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,

@@ -20,4 +20,5 @@ public/*.gif
 public/*.png
 storage/*.key
 vendor
+yarn-error.log
 _ide_helper.php
