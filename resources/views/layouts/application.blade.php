@@ -12,7 +12,7 @@
     <meta name="twitter:title" content="@yield('title')">
     <meta name="description" property="og:description" content="@yield('description')">
     <meta name="twitter:description" content="@yield('description')">
-    <link rel="stylesheet" type="text/css" href="{{ mix('dist/css/application.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/application.css')) }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,6 +29,6 @@
     </main>
 </div>
 @include('partials.application.footer')
-<script src="{{ mix('dist/js/application.js') }}" type="text/javascript"></script>
+<script src="{{ asset(mix('dist/js/application.js')) }}" type="text/javascript"></script>
 </body>
 </html>
