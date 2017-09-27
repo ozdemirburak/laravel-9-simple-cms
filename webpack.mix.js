@@ -1,8 +1,9 @@
-var mix             = require('laravel-mix'),
-  assetsDir         = 'resources/assets/',
-  nodeDir           = 'node_modules/',
-  publicDir         = 'public/',
-  distDir           = 'public/dist/',
+var mix       = require('laravel-mix'),
+  assetsDir   = 'resources/assets/',
+  nodeDir     = 'node_modules/',
+  publicDir   = 'public/',
+  distDir     = 'public/dist/',
+  composerDir = 'vendor/',
   adminJs = [
     nodeDir     + 'jquery/dist/jquery.min.js',
     nodeDir     + 'moment/moment.js',
@@ -19,7 +20,7 @@ var mix             = require('laravel-mix'),
     nodeDir     + 'admin-lte/dist/js/app.min.js',
     nodeDir     + 'raphael/raphael.min.js',
     nodeDir     + 'nestable-fork/dist/jquery.nestable.min.js',
-    publicDir   + 'vendor/datatables/buttons.server-side.js',
+    composerDir + 'yajra/laravel-datatables-buttons/src/resources/assets/buttons.server-side.js',
     assetsDir   + 'js/admin.js'
   ],
   applicationJs = [
