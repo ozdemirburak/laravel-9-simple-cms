@@ -29,7 +29,7 @@
     "eonasdan-bootstrap-datetimepicker": "~4.17.43",
     "font-awesome": "~4.7",
     "jquery": "~1.11.2",
-    "jquery-floating-social-share": "~1.8",
+    "jquery-floating-social-share": "~2.0",
     "moment": "~2.17.1",
     "morris.js": "~0.5",
     "nestable-fork": "~1.0",
