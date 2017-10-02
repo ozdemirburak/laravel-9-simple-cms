@@ -1,7 +1,3 @@
-window.$ = window.jQuery = require('jquery');
-
-require('bootstrap-sass');
-
 $(function() {
   $('iframe[src*="youtube.com"]').each(function() {
     if (!$(this).hasClass('embed-responsive-item')) {
@@ -10,8 +6,6 @@ $(function() {
     }
   });
 
-  var WebFont = require('webfontloader');
-
   WebFont.load({
     google: {
       families: ['Open+Sans:400,700:latin,latin-ext']
@@ -19,8 +13,7 @@ $(function() {
   });
 
   $("body").floatingSocialShare({
-    buttons: ["facebook", "twitter", "google-plus"],
-    text: ""
+    buttons: ["facebook", "twitter", "google-plus"]
   });
 
   $('.chosen-one').click(function(){

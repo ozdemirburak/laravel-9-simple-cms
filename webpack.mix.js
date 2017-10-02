@@ -24,8 +24,10 @@ var mix       = require('laravel-mix'),
     assetsDir   + 'js/admin.js'
   ],
   applicationJs = [
-    assetsDir + 'js/application.js',
+    nodeDir   + 'jquery/dist/jquery.min.js',
+    nodeDir   + 'webfontloader/webfontloader.js',
     nodeDir   + 'jquery-floating-social-share/dist/jquery.floating-social-share.min.js',
+    assetsDir + 'js/application.js'
   ];
 
 mix
@@ -35,7 +37,7 @@ mix
   .less(assetsDir + 'less/admin.less', distDir + 'css/admin.css')
   .less(assetsDir + 'less/application.less', distDir + 'css/application.css')
   .scripts(adminJs, distDir + 'js/admin.js')
-  .js(applicationJs, distDir +'js/application.js');
+  .scripts(applicationJs, distDir +'js/application.js');
 
 if (mix.inProduction()) {
   mix.version();
