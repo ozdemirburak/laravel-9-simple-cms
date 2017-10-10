@@ -4,7 +4,7 @@ namespace App\Forms\Admin;
 
 use App\Base\Forms\AdminForm;
 
-class CategoriesForm extends AdminForm
+class CategoryForm extends AdminForm
 {
     public function buildForm()
     {

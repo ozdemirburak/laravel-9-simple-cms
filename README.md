@@ -145,11 +145,7 @@ from your browser. The application comes with default user with email address `a
 Lets assume we want to create a new resource for fruits where we'd like to manage our fruits with multi-language support, 
 from our admin panel where will provide its title and content.
 
-    $ php artisan make:controller Admin/FruitController
-    $ php artisan make:migration create_fruits_table
-    $ php artisan make:request Admin/FruitRequest
-    $ php artisan make:form Forms/Admin/FruitsForm
-    $ php artisan migrate
+    $ php artisan cms:generate fruit
 
 Edit the `database/migrations/****_create_fruits_table.php` migration file.
 
@@ -180,6 +176,9 @@ class CreateFruitsTable extends Migration
     }
 }
 ```
+Then migrate it.
+
+    $ php artisan migrate
 
 Afterwards, edit the `resources/lang/LANGUAGE_CODE/resources.php` file and add the translation strings for the newly created resource.
 
@@ -226,7 +225,7 @@ public function fruits()
 }
 ```
 
-Create new FruitDataTable controller for datatables within Http/Controllers/Api/DataTables folder and edit it.
+Edit the FruitDataTable controller within the `Http/Controllers/Api/DataTables` folder.
 
 ```php
 <?php
@@ -347,42 +346,6 @@ class FruitsForm extends AdminForm
 }
 ```
 
-Finally, create the fruits folder within `resources/views/admin` and create the views.
-
-`create.blade.php` and `edit.blade.php` file as below:
-
-```php
-@extends('layouts.admin')
-
-@section('content')
-    {!! form($form) !!}
-@endsection
-```
-
-`index.blade.php` file as below:
-
-```php
-@extends('layouts.admin')
-
-@section('content')
-    @include('partials.admin.datatable', ['dataTable' => $dataTable, 'buttons' => true])
-@endsection
-```
-
-`show.blade.php` file as below:
-
-```php
-@extends('layouts.admin')
-@section('content')
-    <div class="col-xs-12 no-padding">
-        <div class="post-title pull-left">
-            <h1> {{ $object->title }} </h1>
-        </div>
-    </div>
-    <p>{!! $object->content !!}</p>
-@endsection
-```
-
 Add the fruit routes, to `routes/admin.php` file.
 
 ```php
@@ -432,12 +395,12 @@ You can check it on: [http://burakozdemir.co.uk/article/deploying-laravel-projec
 Kendi blogumda detaylı olarak bu uygulamayı kurulumundan, sunucuya aktarımına kadar, baştan sona nasıl geliştirdiğimi 
 detaylı olarak anlattım, alttaki linklerden sırasıyla bunlara ulaşabilirsiniz.
 
-1. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-kurulum">Laravel 5 ile CMS - Kurulum</a>
-2. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-migration-seed-middleware-elixir-bower-gulp-blade">Laravel 5 ile CMS - Migration, Seed, Middleware, Elixir, Bower, Gulp, Blade</a>
-3. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-controller-model-request-provider-form"> Laravel 5 ile CMS - Controller, Model, Request, Provider, Form</a>
-4. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-wysiwyg-filemanager-coklu-dil-google-analitik-api">Laravel 5 ile CMS - WYSIWYG Filemanager, Çoklu Dil, Google Analitik API</a>
-5. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-events-email-ve-frontend">Laravel 5 ile CMS - Events, Email ve Frontend</a>
-6. <a target="_blank" href="http://burakozdemir.co.uk/article/laravel-5-ile-cms-ftp-veya-ssh-ile-aktarim-deployment">Laravel 5 ile CMS - FTP veya SSH ile Aktarım (Deployment)</a>
+1. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-kurulum">Laravel 5 ile CMS - Kurulum</a>
+2. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-migration-seed-middleware-elixir-bower-gulp-blade">Laravel 5 ile CMS - Migration, Seed, Middleware, Elixir, Bower, Gulp, Blade</a>
+3. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-controller-model-request-provider-form"> Laravel 5 ile CMS - Controller, Model, Request, Provider, Form</a>
+4. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-wysiwyg-filemanager-coklu-dil-google-analitik-api">Laravel 5 ile CMS - WYSIWYG Filemanager, Çoklu Dil, Google Analitik API</a>
+5. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-events-email-ve-frontend">Laravel 5 ile CMS - Events, Email ve Frontend</a>
+6. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-ftp-veya-ssh-ile-aktarim-deployment">Laravel 5 ile CMS - FTP veya SSH ile Aktarım (Deployment)</a>
 
 -----
 
