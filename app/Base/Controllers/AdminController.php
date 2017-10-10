@@ -272,7 +272,7 @@ abstract class AdminController extends Controller
     protected function getFormPath()
     {
         $subdirectory = title_case($this->subdirectory);
-        $model =  title_case(str_plural($this->model));
+        $model =  title_case($this->model);
         if ($this->withSubdirectory !== false) {
             return 'App\Forms\Admin\\' . $subdirectory . '\\' . $model . 'Form';
         } else {
