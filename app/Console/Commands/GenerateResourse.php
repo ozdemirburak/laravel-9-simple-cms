@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use Artisan;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class GenerateResourse extends Command
 {
@@ -13,7 +15,7 @@ class GenerateResourse extends Command
      */
     protected $signature = 'simplecms:generate
                             {controllerName : The name of controller - singular},
-                            {tableName : The name of table - plural}';
+                            {table? : The name of table - plural}';
 
     /**
      * The console command description.
@@ -39,14 +41,14 @@ class GenerateResourse extends Command
      */
     public function handle()
     {
-        $table_name = strtolower($this->argument('tableName'));
-        $form_name = $this->argument('tableName');
+        $table_name = strtolower($this->argument('table') ??
+                      Str::snake(Str::plural($this->argument('controllerName'))));
+        $form_name = $table_name;
         $form_name[0]=strtoupper($form_name[0]);
-        shell_exec("/usr/bin/php artisan make:controller Admin/".$this->argument('controllerName').'Controller');
-        shell_exec("/usr/bin/php artisan make:migration create_".$table_name."_table");
-        shell_exec("/usr/bin/php artisan make:request Admin/".$this->argument('controllerName').'Request');
-        shell_exec("/usr/bin/php artisan make:form Forms/Admin/".$form_name.'Form');
-        shell_exec("/usr/bin/php artisan migrate");
+        Artisan::call("make:controller" , [ 'name' => "Admin/".$this->argument('controllerName').'Controller']);
+        Artisan::call("make:migration" , ['name' => "create_".$table_name."_table"]);
+        Artisan::call("make:request" , ['name' => "Admin/".$this->argument('controllerName').'Request']);
+        Artisan::call("make:form" , ['name' => "Forms/Admin/".$form_name.'Form']);
         $this->info("New resource generated successfully");
     }
 }
