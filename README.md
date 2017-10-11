@@ -372,7 +372,7 @@ Now you have your fruit resource that can be manageable within your admin panel.
 ### How to Deploy 
 
 I have showed all the required steps in detail for a deployment with Git and Capistrano from scratch on my blog.
-You can check it on: [http://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](http://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
+You can check it on: [https://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](https://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
 
 -----
 <a name="item6"></a>
