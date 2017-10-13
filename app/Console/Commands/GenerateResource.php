@@ -12,7 +12,7 @@ class GenerateResource extends Command
      *
      * @var string
      */
-    protected $signature = 'cms:generate {resource : The name of the resource - singular}';
+    protected $signature = 'cms:generate {resource : The name of the resource - singular} {--all : Generate all stuff} {--M|model : Generate model} {--c|controller : Generate controller} {--a|api : Generate API controller} {--m|migration : Generate migration} {--r|request : Generate request} {--f|form : Generate form} {--b|view : Generate views}';
 
     /**
      * The console command description.
@@ -29,14 +29,44 @@ class GenerateResource extends Command
     public function handle()
     {
         list($resource, $table) = [$r = ucfirst($this->argument('resource')), snake_case(str_plural($r))];
-        $this->call('make:model', ['name' => $resource]);
-        $this->call('make:controller', ['name' => 'Admin/'. $resource . 'Controller']);
-        $this->call('make:controller', ['name' => 'Api/DataTables/'. $resource . 'DataTable']);
-        $this->call('make:migration', ['name' => 'create_' . $table . '_table']);
-        $this->call('make:request', ['name' => 'Admin/' . $resource . 'Request']);
-        $this->call('make:form', ['name' => 'Forms/Admin/' . $resource . 'Form']);
-        $this->createDirectory($table);
-        $this->info('New resource generated successfully');
+
+        $options = collect($this->options())->only([
+            'model',
+            'migration',
+            'controller',
+            'api',
+            'request',
+            'form',
+            'view'
+        ])->all();
+
+        $generateAllStuff = in_array(true, $options, true) === false;
+
+        if ($generateAllStuff || $this->option('model')) {
+            $this->call('make:model', ['name' => $resource]);
+        }
+        if ($generateAllStuff || $this->option('controller')) {
+            $this->call('make:controller', ['name' => 'Admin/'. $resource . 'Controller']);
+        }
+        if ($generateAllStuff || $this->option('api')) {
+            $this->call('make:controller', ['name' => 'Api/DataTables/'. $resource . 'DataTable']);
+        }
+        if ($generateAllStuff || $this->option('migration')) {
+            $this->call('make:migration', ['name' => 'create_' . $table . '_table']);
+        }
+        if ($generateAllStuff || $this->option('request')) {
+            $this->call('make:request', ['name' => 'Admin/' . $resource . 'Request']);
+        }
+        if ($generateAllStuff || $this->option('form')) {
+            $this->call('make:form', ['name' => 'Forms/Admin/' . $resource . 'Form']);
+        }
+        if ($generateAllStuff || $this->option('view')) {
+            $this->createDirectory($table);
+            $this->info('Views created successfully.');
+        }
+        if ($generateAllStuff) {
+            $this->info('New resource generated successfully');
+        }
     }
 
     /**
