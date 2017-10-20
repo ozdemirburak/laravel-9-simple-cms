@@ -95,8 +95,8 @@ abstract class DataTableController extends DataTable
      *
      * protected $count_join_columns = ['book_count'];
      *
-     * $languages = Language::leftJoin('books', 'languages.id', '=', 'books.id')
-     *    ->select(DB::raw('languages.*, count(books.id) as book_count'))
+     * $languages = Language::leftJoin('books', 'languages.id', '=', 'books.language_id')
+     *    ->select(\DB::raw('languages.*, count(books.id) as book_count'))
      *    ->groupBy('languages.id');
      * return $this->applyScopes($languages);
      *
