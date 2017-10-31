@@ -100,11 +100,11 @@ Finally, to generate a unique application key, run `php artisan key:generate`.
 
 -----
 <a name="step3"></a>
-### Step 3: Create database
+### Step 3: Create the database
 
 -----
 <a name="step4"></a>
-### Step 4: Set Configuration
+### Step 4: Set up Configuration
 
 Open your `.env` file and change the fields corresponding to your own configurations.
 
