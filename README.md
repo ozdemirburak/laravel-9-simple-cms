@@ -232,7 +232,7 @@ Edit the FruitDataTable controller within the `Http/Controllers/Api/DataTables` 
 
 namespace App\Http\Controllers\Api\DataTables;
 
-use App\Http\Controllers\Api\DataTableController;
+use App\Base\Controllers\DataTableController;
 use App\Fruit;
 
 class FruitDataTable extends DataTableController
