@@ -224,3 +224,17 @@ if (!function_exists('formatNumber')) {
         return strpos($number, ',') !== false ? rtrim(rtrim($number, '0'), ',') : $number;
     }
 }
+
+if (!function_exists('slugify')) {
+    /**
+     * @param        $string
+     * @param string $separator
+     *
+     * @return string
+     */
+    function slugify($string, $separator = '-')
+    {
+        $slugify = new \Cocur\Slugify\Slugify(['rulesets' => ['default', 'turkish']]);
+        return $slugify->slugify($string, $separator);
+    }
+}

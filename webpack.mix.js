@@ -32,8 +32,6 @@ var mix       = require('laravel-mix'),
 
 mix
   .copyDirectory(nodeDir + 'tinymce', publicDir + 'packages/tinymce')
-  .copy(nodeDir   + 'font-awesome/fonts', publicDir + 'fonts')
-  .copy(nodeDir   + 'bootstrap/fonts', publicDir + 'fonts')
   .less(assetsDir + 'less/admin.less', distDir + 'css/admin.css')
   .less(assetsDir + 'less/application.less', distDir + 'css/application.css')
   .scripts(adminJs, distDir + 'js/admin.js')

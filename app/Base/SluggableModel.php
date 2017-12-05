@@ -2,7 +2,6 @@
 
 namespace App\Base;
 
-use App\Base\Traits\SluggableEngine;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SluggableModel extends Model
 {
-    use Sluggable, SluggableEngine, SluggableScopeHelpers;
+    use Sluggable, SluggableScopeHelpers;
 
     /**
      * @return array
@@ -29,5 +28,15 @@ class SluggableModel extends Model
                 'onUpdate' => true
             ]
         ];
+    }
+
+    /**
+     * @param \Cocur\Slugify\Slugify $engine
+     *
+     * @return \Cocur\Slugify\Slugify
+     */
+    public function customizeSlugEngine(Slugify $engine)
+    {
+        return $engine->activateRuleSet('turkish');
     }
 }
