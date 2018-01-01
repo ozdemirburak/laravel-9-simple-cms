@@ -1,4 +1,4 @@
-@if(count($articles))
+@if(!empty($articles))
     @foreach($articles as $article)
         <article class="post">
             <header class="post-header">
