@@ -46,8 +46,7 @@ class Kernel extends HttpKernel
         'admin' => [
             'web',
             'auth',
-            'throttle',
-            \App\Http\Middleware\Custom\Admin\MakeMenu::class
+            'throttle'
         ],
         'with_language' => [
             \App\Http\Middleware\Custom\Locale::class

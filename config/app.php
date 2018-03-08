@@ -104,24 +104,8 @@ return [
     */
 
     'key' => env('APP_KEY'),
+
     'cipher' => 'AES-256-CBC',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Logging Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the log settings for your application. Out of
-    | the box, Laravel uses the Monolog PHP logging library. This gives
-    | you a variety of powerful log handlers / formatters to utilize.
-    |
-    | Available Settings: "single", "daily", "syslog", "errorlog"
-    |
-    */
-
-    'log' => env('APP_LOG', 'single'),
-
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
     |--------------------------------------------------------------------------
@@ -183,7 +167,6 @@ return [
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
-        Caffeinated\Menus\MenusServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
@@ -254,7 +237,6 @@ return [
         'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
         'HTML'              => Collective\Html\HtmlFacade::class,
         'Input'             => Illuminate\Support\Facades\Input::class,
-        'Menu'              => Caffeinated\Menus\Facades\Menu::class,
         'PDF'               => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Sitemap'           => Watson\Sitemap\Facades\Sitemap::class,
         'SnappyImage'       => Barryvdh\Snappy\Facades\SnappyImage::class

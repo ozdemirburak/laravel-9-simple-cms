@@ -1,6 +1,6 @@
 # Laravel 5 Simple CMS
-Laravel 5.5 content management system for starters. 
-For 5.1, 5.2, 5.3, and 5.4 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
+Laravel 5.6 content management system for starters. 
+For 5.1, 5.2, 5.3, 5.4, and 5.5 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ## Table of Contents
@@ -90,7 +90,7 @@ if you don't have composer installed, then [follow these instructions](https://g
 
 To install node and npm follow one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
 Then, to install Laravel project dependencies, run `npm install`. Finally to combine the javascript and style files run 
-`npm run dev`.
+`npm run dev`. (Note that, on failure you may need to install some dependencies like `libpng16-16`).
 
 Rename your `.env.example` file as `.env` and change the variables as your own. If you have any variables with
  any spaces, double quote them, for instance, if you have a variable that equals to John Doe,
@@ -358,11 +358,10 @@ Open the `RouteServiceProvider.php` file located in `Providers` folder and bind 
 Route::model('fruit', \App\Fruit::class);
 ```
 
-Finally, add the Fruit resource to our menu. To do that, open the `MakeMenu` middleware located in `Http/Middleware` 
-folder and the line below to the `makeAdminMenu` function.
+Finally, add the Fruit resource to our menu. To do that, open the `resources/views/partials/admin/sidebar.blade.php` partial and add the line below.
 
 ```php  
-$this->add('fruit', 'apple');
+@include('partials.admin.nav.dropdown', ['resource' => 'fruit', 'icon' => 'apple'])
 ```
 
 Now you have your fruit resource that can be manageable within your admin panel.
@@ -407,6 +406,6 @@ detaylı olarak anlattım, alttaki linklerden sırasıyla bunlara ulaşabilirsin
 <a name="item8"></a>
 ## License
 
-This is free software distributed under the terms of the MIT license
+This is free software distributed under the terms of the MIT license.
 
 -----
