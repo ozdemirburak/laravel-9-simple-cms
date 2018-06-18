@@ -1,4 +1,4 @@
-@if(!empty($articles))
+@if($articles->isNotEmpty())
     @foreach($articles as $article)
         <article class="post">
             <header class="post-header">
