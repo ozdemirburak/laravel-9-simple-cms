@@ -371,7 +371,7 @@ Now you have your fruit resource that can be manageable within your admin panel.
 ### How to Deploy 
 
 I have showed all the required steps in detail for a deployment with Git and Capistrano from scratch on my blog.
-You can check it on: [https://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](https://burakozdemir.co.uk/article/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
+You can check it on: [https://ozdemirburak.com/a/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](https://ozdemirburak.com/a/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
 
 -----
 <a name="item6"></a>
@@ -394,12 +394,12 @@ You can check it on: [https://burakozdemir.co.uk/article/deploying-laravel-proje
 Kendi blogumda detaylı olarak bu uygulamayı kurulumundan, sunucuya aktarımına kadar, baştan sona nasıl geliştirdiğimi 
 detaylı olarak anlattım, alttaki linklerden sırasıyla bunlara ulaşabilirsiniz.
 
-1. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-kurulum">Laravel 5 ile CMS - Kurulum</a>
-2. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-migration-seed-middleware-elixir-bower-gulp-blade">Laravel 5 ile CMS - Migration, Seed, Middleware, Elixir, Bower, Gulp, Blade</a>
-3. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-controller-model-request-provider-form"> Laravel 5 ile CMS - Controller, Model, Request, Provider, Form</a>
-4. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-wysiwyg-filemanager-coklu-dil-google-analitik-api">Laravel 5 ile CMS - WYSIWYG Filemanager, Çoklu Dil, Google Analitik API</a>
-5. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-events-email-ve-frontend">Laravel 5 ile CMS - Events, Email ve Frontend</a>
-6. <a target="_blank" href="https://burakozdemir.co.uk/article/laravel-5-ile-cms-ftp-veya-ssh-ile-aktarim-deployment">Laravel 5 ile CMS - FTP veya SSH ile Aktarım (Deployment)</a>
+1. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-kurulum">Laravel 5 ile CMS - Kurulum</a>
+2. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-migration-seed-middleware-elixir-bower-gulp-blade">Laravel 5 ile CMS - Migration, Seed, Middleware, Elixir, Bower, Gulp, Blade</a>
+3. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-controller-model-request-provider-form"> Laravel 5 ile CMS - Controller, Model, Request, Provider, Form</a>
+4. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-wysiwyg-filemanager-coklu-dil-google-analitik-api">Laravel 5 ile CMS - WYSIWYG Filemanager, Çoklu Dil, Google Analitik API</a>
+5. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-events-email-ve-frontend">Laravel 5 ile CMS - Events, Email ve Frontend</a>
+6. <a target="_blank" href="https://ozdemirburak.com/a/laravel-5-ile-cms-ftp-veya-ssh-ile-aktarim-deployment">Laravel 5 ile CMS - FTP veya SSH ile Aktarım (Deployment)</a>
 
 -----
 
