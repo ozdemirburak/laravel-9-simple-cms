@@ -16,8 +16,7 @@ class UserRequest extends Request
         return [
             'email'     => 'required|email|max:255|unique:users,email,'.$this->segment(3),
             'name'      => 'required|string|max:255',
-            'password'  => 'sometimes|min:6|confirmed',
-            'picture'   => 'sometimes|max:2048|image'
+            'password'  => 'sometimes|min:6|confirmed'
         ];
     }
 }

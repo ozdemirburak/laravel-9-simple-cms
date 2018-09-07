@@ -1,5 +1,5 @@
-var mix       = require('laravel-mix'),
-  assetsDir   = 'resources/assets/',
+const mix       = require('laravel-mix'),
+  assetsDir   = 'resources/',
   nodeDir     = 'node_modules/',
   publicDir   = 'public/',
   distDir     = 'public/dist/',

@@ -2,40 +2,40 @@
 
 namespace App;
 
-use App\Base\Auth\ResetPassword;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * App\User
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $email
  * @property string $password
- * @property string $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
- * @property string $logged_in_at
- * @property string $logged_out_at
- * @property mixed $ip_address
+ * @property string|null $ip_address
  * @property string $picture
- * @method static \Illuminate\Database\Query\Builder|\App\User whereLoggedInAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereLoggedOutAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User whereIpAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\App\User wherePicture($value)
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $logged_in_at
+ * @property \Illuminate\Support\Carbon|null $logged_out_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLoggedInAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLoggedOutAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePicture($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -45,7 +45,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['email', 'name', 'password', 'picture'];
+    protected $fillable = ['email', 'name', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -66,29 +66,16 @@ class User extends Authenticatable
      *
      * @param $password
      */
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password): void
     {
         $this->attributes['password'] = Hash::make($password);
     }
 
     /**
-     * @param $picture
-     *
      * @return string
      */
-    public function getPictureAttribute($picture)
+    public function getPictureAttribute() : string
     {
-        return !empty($picture) ? asset($picture) : 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png';
-    }
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPassword($token));
+        return 'https://ssl.gstatic.com/accounts/ui/avatar_2x.png';
     }
 }

@@ -1,6 +1,6 @@
 # Laravel 5 Simple CMS
-Laravel 5.6 content management system for starters. 
-For 5.1, 5.2, 5.3, 5.4, and 5.5 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
+Laravel 5.7 content management system for starters.
+For 5.1, 5.2, 5.3, 5.4, 5.5, and 5.6 check the [releases](https://github.com/ozdemirburak/laravel-5-simple-cms/releases).
 
 -----
 ## Table of Contents
