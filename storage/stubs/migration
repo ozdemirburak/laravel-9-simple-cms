@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Create{{MODEL_NAME_PLURAL}}Table extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{MODEL_NAME_PLURAL_LOWERCASE}}', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('slug')->index();
+            $table->string('title');
+            $table->string('description');
+            $table->text('content');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{{MODEL_NAME_PLURAL_LOWERCASE}}');
+    }
+}

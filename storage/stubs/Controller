@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Base\Controllers\AdminController;
+use App\Http\Controllers\Admin\DataTables\{{MODEL_NAME}}DataTable;
+use App\Models\{{MODEL_NAME}};
+use Illuminate\Http\Request;
+
+class {{MODEL_NAME}}Controller extends AdminController
+{
+    /**
+     * @var array
+     */
+    protected $validation = ['title' => 'required|string|max:200', 'description' => 'required|string|max:160'];
+
+    /**
+     * @param \App\Http\Controllers\Admin\DataTables\{{MODEL_NAME}}DataTable $dataTable
+     *
+     * @return mixed
+     */
+    public function index({{MODEL_NAME}}DataTable $dataTable)
+    {
+        return $dataTable->render('admin.table', ['link' => route('admin.{{MODEL_NAME_SNAKECASE}}.create')]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function create()
+    {
+        return view('admin.forms.{{MODEL_NAME_SNAKECASE}}', $this->formVariables('{{MODEL_NAME_SNAKECASE}}', null));
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function store(Request $request)
+    {
+        return $this->createFlashRedirect({{MODEL_NAME}}::class, $request);
+    }
+
+    /**
+     * @param \App\Models\{{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}}
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function show({{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}})
+    {
+        return view('admin.show', ['object' => ${{MODEL_NAME_SNAKECASE}}]);
+    }
+
+    /**
+     * @param \App\Models\{{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}}
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function edit({{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}})
+    {
+        return view('admin.forms.{{MODEL_NAME_SNAKECASE}}', $this->formVariables('{{MODEL_NAME_SNAKECASE}}', ${{MODEL_NAME_SNAKECASE}}));
+    }
+
+    /**
+     * @param \App\Models\{{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}}
+     * @param \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function update({{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}}, Request $request)
+    {
+        return $this->saveFlashRedirect(${{MODEL_NAME_SNAKECASE}}, $request);
+    }
+
+    /**
+     * @param \App\Models\{{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}}
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function destroy({{MODEL_NAME}} ${{MODEL_NAME_SNAKECASE}})
+    {
+        return $this->destroyFlashRedirect(${{MODEL_NAME_SNAKECASE}});
+    }
+}

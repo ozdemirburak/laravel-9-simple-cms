@@ -1,5 +1,4 @@
-<li class="{{ str_contains(url()->current(), $href = (!empty($resource) ? route('admin.' . $resource . '.index') : $link)) ? 'active' : '' }}">
-    <a href="{{ $href}}">
-        <i class="fa fa-{{ $icon }}"></i>{{ !empty($resource) ? trans('admin.' . $resource . '.index') : $text }}
-    </a>
-</li>
+<a class="navbar-item" href="{{ !empty($resource) && empty($link) ? route('admin.' . $resource . '.index') : $link }}">
+    <span class="icon">{!! icon($icon) !!}</span>
+    <span>{{ !empty($resource) && empty($text) ? __('admin.' . $resource . '.index') : $text }}</span>
+</a>

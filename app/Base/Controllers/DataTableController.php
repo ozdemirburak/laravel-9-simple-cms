@@ -112,7 +112,7 @@ abstract class DataTableController extends DataTable
      *
      * @var bool
      */
-    protected $ops = true;
+    protected $ops = false;
 
     /**
      * Common columns such that used by more than one class, so that translation belongs to root, not to any model
@@ -137,24 +137,25 @@ abstract class DataTableController extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax(): \Illuminate\Http\JsonResponse
     {
-        list($model, $datatables) = $this->getAjaxParameters();
+        [$model, $datatables] = $this->getAjaxParameters();
         collect($this->image_columns)->each(function ($image_column) use (&$datatables) {
             return $datatables->editColumn($image_column, function ($model) use ($image_column) {
                 return $this->wrapImage($model, $image_column);
             });
         })->recollect($this->boolean_columns)->each(function ($boolean_column) use (&$datatables) {
             return $datatables->editColumn($boolean_column, function ($model) use ($boolean_column) {
-                return $model->$boolean_column ? trans('admin.fields.yes') : trans('admin.fields.no');
+                return $model->$boolean_column ? __('admin.fields.yes') : __('admin.fields.no');
             });
         })->recollect($this->eager_columns)->each(function ($eager_column, $relation) use (&$datatables) {
-            return $datatables->editColumn(implode('.', [$relation, $eager_column]), function ($model) use ($relation, $eager_column) {
+            $c = implode('.', [$relation, $eager_column]);
+            return $datatables->editColumn($c, function ($model) use ($relation, $eager_column) {
                 return !empty($model->$relation->$eager_column) ? $model->$relation->$eager_column : '';
             });
         })->recollect($this->count_columns)->each(function ($count_column) use (&$datatables) {
             return $datatables->editColumn($count_column, function ($model) use ($count_column) {
-                return count($model->$count_column);
+                return \count($model->$count_column);
             });
         });
         $datatables = $this->setRawColumns($this->pushOps($datatables, $model));
@@ -166,17 +167,15 @@ abstract class DataTableController extends DataTable
      *
      * @return \Yajra\Datatables\Html\Builder
      */
-    public function html()
+    public function html(): \Yajra\Datatables\Html\Builder
     {
-        return $this->builder()
-            ->columns($this->getColumns())
-            ->parameters($this->getParameters());
+        return $this->builder()->columns($this->getColumns())->parameters($this->getParameters());
     }
 
     /**
      * @return array
      */
-    protected function getAjaxParameters()
+    protected function getAjaxParameters(): array
     {
         return [$this->getModelName(), new EloquentDataTable($this->query())];
     }
@@ -191,35 +190,35 @@ abstract class DataTableController extends DataTable
      *
      * @return array
      */
-    protected function getColumns(array $result = [])
+    protected function getColumns(array $result = []): array
     {
-        list($columns, $countColumnsPosition, $model, $table) = $this->getColumnParameters();
+        [$columns, $countColumnsPosition, $model, $table] = $this->getColumnParameters();
         collect($columns)->each(function ($column, $key) use ($model, $table, $countColumnsPosition, &$result) {
             $orderAndSearch = $key < $countColumnsPosition;
             $this->pushColumns($result, [
                 'data' => $column,
                 'name' => implode([$table, $column], '.'),
-                'title' => trans('admin.fields.' . implode([$model, $column], '.'))
+                'title' => __('admin.fields.' . implode([$model, $column], '.'))
             ], $orderAndSearch, $orderAndSearch);
         })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
             $string = implode([$key, $column], '.');
             $this->pushColumns($result, [
-                'data' => $string,
-                'name' => $string,
-                'title' => trans('admin.fields.' . $string),
+                'data'  => $string,
+                'name'  => $string,
+                'title' => __('admin.fields.' . $string),
             ]);
         })->recollect($this->count_join_columns)->each(function ($column) use (&$result, $model) {
             $this->pushColumns($result, [
-                'data' => $column,
-                'name' => $column,
-                'title' => trans('admin.fields.' . implode([$model, $column], '.')),
+                'data'  => $column,
+                'name'  => $column,
+                'title' => __('admin.fields.' . implode([$model, $column], '.')),
             ], true, false);
         })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
             $string = implode([$table, $column], '.');
             $this->pushColumns($result, [
-                'data' => $column,
-                'name' => $string,
-                'title' => trans('admin.fields.' . $column),
+                'data'  => $column,
+                'name'  => $string,
+                'title' => __('admin.fields.' . $column),
             ]);
         });
         return $this->pushOps($result);
@@ -233,12 +232,9 @@ abstract class DataTableController extends DataTable
      *
      * @return array
      */
-    protected function pushColumns(&$result, $data, $order = true, $search = true)
+    protected function pushColumns(&$result, $data, $order = true, $search = true): array
     {
-        $result[] = array_merge($data, [
-            'orderable'  => $order,
-            'searchable' => $search
-        ]);
+        $result[] = array_merge($data, ['orderable' => $order, 'searchable' => $search]);
         return $result;
     }
 
@@ -248,14 +244,15 @@ abstract class DataTableController extends DataTable
      *
      * @return mixed
      */
-    protected function pushOps($datatables, $model = "")
+    protected function pushOps($datatables, $model = '')
     {
         if ($this->ops === true) {
             if (empty($model)) {
                 $this->pushColumns($datatables, [
-                    'data' => 'ops',
-                    'name' => 'ops',
-                    'title' => trans('admin.ops.name')
+                    'data'       => 'ops',
+                    'name'       => 'ops',
+                    'title'      => __('admin.ops.name'),
+                    'exportable' => false
                 ], false, false);
             } else {
                 $datatables = $datatables->addColumn('ops', function ($data) use ($model) {
@@ -272,12 +269,12 @@ abstract class DataTableController extends DataTable
      *
      * @return array
      */
-    protected function getColumnParameters()
+    protected function getColumnParameters(): array
     {
         $columns = array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns);
         return [
             $columns,
-            count($columns) - count($this->count_columns),
+            \count($columns) - \count($this->count_columns),
             $this->getModelName(),
             $this->getTableName()
         ];
@@ -288,7 +285,7 @@ abstract class DataTableController extends DataTable
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return (new $this->model)->getTable();
     }
@@ -298,7 +295,7 @@ abstract class DataTableController extends DataTable
      *
      * @return string
      */
-    protected function getModelName()
+    protected function getModelName(): string
     {
         return snake_case(class_basename($this->model));
     }
@@ -311,12 +308,10 @@ abstract class DataTableController extends DataTable
      *
      * @return string
      */
-    protected function wrapImage($model, $image_column)
+    protected function wrapImage($model, $image_column): string
     {
         $url = asset($model->$image_column);
-        return "<a target='_blank' href='{$url}'>
-                    <img style='max-height:50px' class='img-responsive' src='{$url}'/>
-               </a>";
+        return "<a target='_blank' href='{$url}'><img style='max-height:50px' src='{$url}'/></a>";
     }
 
     /**
@@ -324,9 +319,9 @@ abstract class DataTableController extends DataTable
      *
      * @return array
      */
-    protected function getParameters()
+    protected function getParameters(): array
     {
-        return array_merge($this->parameters, ['oLanguage' => trans('admin.datatables')]);
+        return array_merge($this->parameters, ['oLanguage' => __('admin.datatables')]);
     }
 
     /**

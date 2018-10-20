@@ -2,12 +2,10 @@
 
 namespace App\Providers;
 
-use App\Article;
-use App\Category;
-use App\Language;
-use App\Page;
-use App\Setting;
-use App\User;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\Page;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Route;
 
@@ -50,32 +48,37 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
+     * Do not remove GENERATOR_MODEL_BINDER if you want to use CMS generator properly
+     * Check the file app/Console/Commands/Cms/Resource.php
+     *
      * @return void
      */
     private function bootRouteModelBinders()
     {
         Route::model('article', Article::class);
-        Route::model('category', Category::class);
-        Route::model('language', Language::class);
         Route::model('page', Page::class);
-        Route::model('setting', Setting::class);
         Route::model('user', User::class);
+        /** GENERATOR_MODEL_BINDER **/
     }
 
     /**
+     * Do not remove GENERATOR_PARAMETER_BINDER if you want to use CMS generator properly
+     * Check the file app/Console/Commands/Cms/Resource.php
+     *
      * @return void
      */
     private function bootRouteParameterBinders()
     {
-        Route::bind('articleSlug', function ($slug) {
-            return Article::with('category')->where('slug', '=', $slug)->firstOrFail();
+        Route::bind('aSlug', function ($slug) {
+            return Article::with('category')->where('slug', $slug)->firstOrFail();
         });
-        Route::bind('categorySlug', function ($slug) {
-            return Category::with('articles')->where('slug', '=', $slug)->firstOrFail();
+        Route::bind('cSlug', function ($slug) {
+            return Category::with('articles')->where('slug', $slug)->firstOrFail();
         });
-        Route::bind('pageSlug', function ($slug) {
-            return Page::findBySlugOrFail($slug);
+        Route::bind('pSlug', function ($slug) {
+            return Page::with('parent')->where('slug', $slug)->firstOrFail();
         });
+        /** GENERATOR_PARAMETER_BINDER **/
     }
 
     /**

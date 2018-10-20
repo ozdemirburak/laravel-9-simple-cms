@@ -3,88 +3,92 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Base\Controllers\AdminController;
-use App\Http\Controllers\Api\DataTables\UserDataTable;
-use App\Http\Requests\Admin\UserRequest;
-use App\User;
-use Auth;
+use App\Http\Controllers\Admin\DataTables\UserDataTable;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends AdminController
 {
     /**
-     * Image column of the model
-     *
-     * @var string
+     * @var array
      */
-    private $imageColumn = 'picture';
+    protected $validation = [
+        'email'     => 'required|email|max:255|unique:users,email',
+        'password'  => 'required|min:6|confirmed'
+    ];
 
     /**
-     * Display a listing of the users.
+     * @param \App\Http\Controllers\Admin\DataTables\UserDataTable $dataTable
      *
-     * @param UserDataTable $dataTable
-     * @return Response
+     * @return mixed
      */
     public function index(UserDataTable $dataTable)
     {
-        return $dataTable->render($this->viewPath());
+        return $dataTable->render('admin.table', ['link' => route('admin.user.create')]);
     }
 
     /**
-     * Store a newly created user in storage
-     *
-     * @param UserRequest $request
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function store(UserRequest $request)
+    public function create()
     {
-        return $this->createFlashRedirect(User::class, $request, $this->imageColumn);
+        return view('admin.forms.user', $this->formVariables('user', null));
     }
 
     /**
-     * Display the specified user.
+     * @param \Illuminate\Http\Request $request
      *
-     * @param User $user
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function store(Request $request)
+    {
+        return $this->createFlashRedirect(User::class, $request);
+    }
+
+    /**
+     * @param \App\Models\User $user
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function show(User $user)
     {
-        return $this->viewPath('show', $user);
+        return view('admin.show', ['object' => $user]);
     }
 
     /**
-     * Show the form for editing the specified user.
+     * @param \App\Models\User $user
      *
-     * @param User $user
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function edit(User $user)
     {
-        return $this->getForm($user);
+        return view('admin.forms.user', $this->formVariables('user', $user));
     }
 
     /**
-     * Update the specified user in storage.
+     * @param \App\Models\User $user
+     * @param \Illuminate\Http\Request  $request
      *
-     * @param User $user
-     * @param UserRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function update(User $user, UserRequest $request)
-    {
-        return $this->saveFlashRedirect($user, $request, $this->imageColumn);
+    public function update(User $user, Request $request)
+    {;
+        return $this->saveFlashRedirect($user, $request);
     }
 
     /**
-     * Remove the specified user from storage.
+     * @param \App\Models\User $user
      *
-     * @param User $user
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
-        if ($user->id !== Auth::user()->id) {
+        if ($user->id !== auth()->user()->id) {
             return $this->destroyFlashRedirect($user);
-        } else {
-            return $this->redirectRoutePath('index', 'admin.delete.self');
         }
+        return $this->redirectRoutePath('index', 'admin.delete.self');
     }
 }

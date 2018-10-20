@@ -1,33 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
+    <meta name="rating" content="general">
+    <meta name="robots" content="@yield('robots')">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:title" content="@yield('title')">
+    <meta property="og:image" content="@yield('image')">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ Request::url() }}">
-    <meta name="twitter:url" content="{{ Request::url() }}">
-    <meta name="og:title" content="@yield('title')" >
-    <meta name="twitter:title" content="@yield('title')">
     <meta name="description" property="og:description" content="@yield('description')">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="@yield('title')">
     <meta name="twitter:description" content="@yield('description')">
+    <meta name="twitter:image" content="@yield('image')">
+    <meta name="twitter:url" content="{{ request()->url() }}">
+    <meta name="_token" content="{{ csrf_token() }}">
+    <meta itemprop="name" content="@yield('title')">
+    <meta itemprop="description" content="@yield('description')">
+    <meta itemprop="image" content="@yield('image')">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('i/icons/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('i/icons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('i/icons/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('i/icons/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ asset('i/icons/safari-pinned-tab.svg') }}" color="#336699">
+    <link rel="shortcut icon" href="{{ asset('i/icons/favicon.ico') }}">
+    <meta name="msapplication-TileColor" content="#336699">
+    <meta name="msapplication-config" content="{{ asset('i/icons/browserconfig.xml') }}">
+    <meta name="theme-color" content="#336699">
     <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/application.css')) }}">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    @hasSection('canonical')<link rel="canonical" href="@yield('canonical')">@endif
+    <script src="{{ asset(mix('dist/js/application.js')) }}"></script>
+    @if (config('settings.analytics_id') !== null)
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('settings.analytics_id') }}"></script>
+        <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ config('settings.analytics_id') }}');</script>
+    @endif
 </head>
 <body>
-@include('partials.application.top')
-<div class="container">
-    <main class="content">
-        @yield('content')
-    </main>
-</div>
+@include('partials.application.nav')
+@yield('content')
 @include('partials.application.footer')
-<script src="{{ asset(mix('dist/js/application.js')) }}" type="text/javascript"></script>
+@hasSection('scripts')@yield('scripts')@endif
 </body>
 </html>

@@ -3,10 +3,9 @@
 namespace App\Base\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Request;
-use App\Language;
-use FormBuilder;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Artisan;
 use Storage;
 
 abstract class AdminController extends Controller
@@ -26,23 +25,26 @@ abstract class AdminController extends Controller
     protected $model = '';
 
     /**
-     * Form class path
-     *
-     * @var string
-     */
-    protected $formPath = '';
-
-    /**
      * Upload path
      *
      * @var string
      */
-    protected $uploadPath = 'uploads';
+    protected $uploadPath = 'i/uploads';
 
     /**
      * @var bool
      */
     protected $withSubdirectory = false;
+
+    /**
+     * @var string
+     */
+    protected $flashKey = 'message';
+
+    /**
+     * @var array
+     */
+    protected $validation = [];
 
     /**
      * AdminController constructor.
@@ -51,83 +53,61 @@ abstract class AdminController extends Controller
     {
         $this->subdirectory = $this->getSubdirectory();
         $this->model = $this->getModel();
-        $this->formPath = $this->getFormPath();
-    }
-
-    /**
-     * Show the form for creating a new category.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
-        return $this->getForm();
-    }
-
-    /**
-     * Get form
-     *
-     * @param null $object
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function getForm($object = null)
-    {
-        if ($object) {
-            $url =  $this->urlRoutePath('update', $object);
-            $method = 'PATCH';
-            $path = $this->viewPath('edit');
-        } else {
-            $url =  $this->urlRoutePath('store', $object);
-            $method = 'POST';
-            $path = $this->viewPath('create');
-        }
-        $form = $this->createForm($url, $method, $object);
-        return view($path, compact('form', 'object'));
     }
 
     /**
      * Create, flash success or error then redirect
      *
-     * @param $class
-     * @param $request
+     * @param            $class
+     * @param            $request
      * @param bool|false $imageColumn
-     * @param string $path
+     * @param string     $path
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function createFlashRedirect($class, $request, $imageColumn = false, $path = 'index')
+    public function createFlashRedirect($class, Request $request, $imageColumn = false, $path = 'index')
     {
+        $this->validate($request, $this->validation);
         $model = $class::create($this->getData($request, $imageColumn));
-        $model->id ? flash(trans('admin.create.success'), 'success') : flash(trans('admin.create.fail'), 'error');
+        $this->flash('create', $model->id ? 'success' : 'error');
+        $this->resetCache();
         return $this->redirectRoutePath($path);
     }
 
     /**
      * Save, flash success or error then redirect
      *
-     * @param $model
-     * @param $request
+     * @param            $model
+     * @param            $request
      * @param bool|false $imageColumn
-     * @param string $path
+     * @param string     $path
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function saveFlashRedirect($model, $request, $imageColumn = false, $path = 'index')
     {
+        $this->validate($request, $this->validation);
         $model->fill($this->getData($request, $imageColumn));
-        $model->save() ? flash(trans('admin.update.success'), 'success') : flash(trans('admin.update.fail'), 'error');
+        $this->flash('update', $model->save() ? 'success' : 'error');
+        $this->resetCache();
         return $this->redirectRoutePath($path);
     }
 
     /**
      * Delete and flash success or fail then redirect to path
      *
-     * @param $model
+     * @param        $model
      * @param string $path
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroyFlashRedirect($model, $path = 'index')
     {
-        $model->delete() ? flash(trans('admin.delete.success'), 'success') : flash(trans('admin.delete.fail'), 'error');
+        $this->flash('delete', $model->delete() ? 'success' : 'error');
+        $this->resetCache();
         return $this->redirectRoutePath($path);
     }
 
@@ -141,7 +121,7 @@ abstract class AdminController extends Controller
     public function redirectRoutePath($path = 'index', $error = null)
     {
         if ($error) {
-            flash(trans($error), 'error');
+            session()->flash($this->flashKey, __($error));
         }
         return redirect($this->urlRoutePath($path));
     }
@@ -152,56 +132,16 @@ abstract class AdminController extends Controller
      * @param string $path
      * @return string
      */
-    public function routePath($path = 'index')
+    public function routePath($path = 'index'): string
     {
         return 'admin.' . snake_case($this->model) . '.' . $path;
     }
 
     /**
-     * Returns view path for the admin
+     * @param \Illuminate\Http\Request $request
+     * @param                          $imageColumn
      *
-     * @param string $path
-     * @param bool|false $object
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
-     */
-    public function viewPath($path = 'index', $object = false)
-    {
-        if ($this->withSubdirectory !== false) {
-            $path = 'admin.' . $this->subdirectory .  '.' . str_plural(snake_case($this->model))  . '.' . $path;
-        } else {
-            $path = 'admin.' . str_plural(snake_case($this->model))  . '.' . $path;
-        }
-        if ($object !== false) {
-            return view($path, compact('object'));
-        } else {
-            return $path;
-        }
-    }
-
-    /**
-     * Create form
-     *
-     * @param $url
-     * @param $method
-     * @param $model
-     * @return \Kris\LaravelFormBuilder\Form
-     */
-    protected function createForm($url, $method, $model)
-    {
-        return FormBuilder::create($this->formPath, [
-            'method' => $method,
-            'url' => $url,
-            'model' => $model
-        ], $this->getSelectList($model));
-    }
-
-    /**
-     * Get data, if image column is passed, upload it
-     *
-     * @param  Request $request
-     * @param  $imageColumn
-     * @return mixed
+     * @return array|mixed
      */
     protected function getData(Request $request, $imageColumn)
     {
@@ -229,12 +169,12 @@ abstract class AdminController extends Controller
      *
      * @return string
      */
-    protected function uploadAndGetPath(UploadedFile $file)
+    protected function uploadAndGetPath(UploadedFile $file): string
     {
         $subfolder = str_plural(mb_strtolower($this->model));
         $path = Storage::disk('uploads')->putFile($subfolder, $file);
         $fullPath = Storage::disk('uploads')->getAdapter()->applyPathPrefix($path);
-        list($host, $uploadPath) = explode('/public/', $fullPath);
+        [$host, $uploadPath] = explode('/public/', $fullPath);
         return $uploadPath;
     }
 
@@ -243,7 +183,7 @@ abstract class AdminController extends Controller
      *
      * @return string
      */
-    protected function getUploadPath()
+    protected function getUploadPath(): string
     {
         return implode(DIRECTORY_SEPARATOR, [$this->uploadPath, str_plural(strtolower($this->getModel()))]);
     }
@@ -255,39 +195,12 @@ abstract class AdminController extends Controller
      * @param bool|false $model
      * @return string
      */
-    protected function urlRoutePath($path = 'index', $model = false)
+    protected function urlRoutePath($path = 'index', $model = false): string
     {
         if ($model) {
             return route($this->routePath($path), ['id' => $model->id]);
-        } else {
-            return route($this->routePath($path));
         }
-    }
-
-    /**
-     * Returns fully class name for form
-     *
-     * @return string
-     */
-    protected function getFormPath()
-    {
-        $subdirectory = title_case($this->subdirectory);
-        $model =  title_case($this->model);
-        if ($this->withSubdirectory !== false) {
-            return 'App\Forms\Admin\\' . $subdirectory . '\\' . $model . 'Form';
-        } else {
-            return 'App\Forms\Admin\\' . $model . 'Form';
-        }
-    }
-
-    /**
-     * Get select list
-     *
-     * @return mixed
-     */
-    protected function getSelectList()
-    {
-        return Language::pluck('title', 'id')->all();
+        return route($this->routePath($path));
     }
 
     /**
@@ -307,10 +220,49 @@ abstract class AdminController extends Controller
      *
      * @return string
      */
-    protected function getSubdirectory()
+    protected function getSubdirectory(): string
     {
         return empty($this->subdirectory) ?
-            strtolower(array_reverse(explode('\\', get_class($this)))[1])  :
+            strtolower(array_reverse(explode('\\', \get_class($this)))[1])  :
             $this->subdirectory;
+    }
+
+    /**
+     * @param $operation
+     * @param $result
+     */
+    protected function flash($operation, $result): void
+    {
+        $this->flashRaw(__(implode('.', ['admin', $operation, $result])));
+    }
+
+    /**
+     * @param $message
+     */
+    protected function flashRaw($message): void
+    {
+        session()->flash($this->flashKey, $message);
+    }
+
+    /**
+     * @param       $resource
+     *
+     * @param null  $data
+     * @param array $merge
+     *
+     * @return array
+     */
+    protected function formVariables($resource, $data = null, array $merge = []): array
+    {
+        return array_merge(['resource' => $resource, $resource => $data], $merge);
+    }
+
+    /**
+     * @return bool
+     * @throws \Exception
+     */
+    protected function resetCache(): bool
+    {
+        return Artisan::call('cache:clear');
     }
 }

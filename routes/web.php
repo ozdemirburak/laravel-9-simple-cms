@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
-
-Route::get('article/{articleSlug}', ['as' => 'article', 'uses' => 'ArticleController@index']);
-Route::get('page/{pageSlug}', ['as' => 'page', 'uses' => 'PageController@index']);
-Route::get('category/{categorySlug}', ['as' => 'category', 'uses' => 'CategoryController@index']);
-Route::get('sitemap.xml', ['as' => 'sitemap', 'uses' => 'SiteMapController@index']);
-
-Route::post('language/change', ['as' => 'app.language.change' , 'uses' => 'LanguageController@postChange']);
+Route::get('/', ['as' => 'root', 'uses' => 'PageController@getIndex']);
+Route::get('a/{aSlug}', ['as' => 'article', 'uses' => 'PageController@getArticle']);
+Route::get('p/{pSlug}', ['as' => 'page', 'uses' => 'PageController@getPage']);
+Route::get('c/{cSlug}', ['as' => 'category', 'uses' => 'PageController@getCategory']);
+Route::get('sitemap.xml', ['as' => 'sitemap', 'uses' => 'PageController@getSitemap']);

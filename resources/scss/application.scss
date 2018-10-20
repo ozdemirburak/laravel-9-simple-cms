@@ -1,0 +1,15 @@
+@import "application/_variables";
+@import "../../node_modules/bulma/bulma";
+@import "application/_overrides";
+@import "application/utilities";
+
+iframe {
+  border: 0;
+}
+
+.turbolinks-progress-bar {
+  height: 2px;
+  background: $primary;
+  background: -webkit-linear-gradient(to right, $primary, darken($primary, 5%));
+  background: linear-gradient(to right, $primary, darken($primary, 5%));
+}

@@ -1,0 +1,38 @@
+////////////////////////////////////////////////
+// JOURNAL
+// Source: https://github.com/jenil/bulmaswatch/tree/gh-pages/journal
+////////////////////////////////////////////////
+$grey-darker:  #363636;
+$grey-dark:    #4a4a4a;
+$grey:         #7a7a7a;
+$grey-light:   #b5b5b5;
+$grey-lighter: #dbdbdb;
+
+$orange:       #F57A00;
+$yellow:       #F5E625;
+$green:        #22B24C;
+$turquoise:    #00ABA9;
+$purple:       #AA40FF;
+$red:          #FF2E12;
+
+$primary: #336699 !default;
+$blue: $primary;
+
+
+/*
+$primary: #EB6864 !default;
+$blue: #369;
+ */
+
+$danger: $orange;
+
+$family-heading: "News Cycle", "Arial Narrow Bold", sans-serif;
+
+$radius: 4px;
+
+$navbar-item-hover-color: $primary;
+$navbar-item-active-color: $primary;
+$navbar-dropdown-item-hover-color: $primary;
+$navbar-dropdown-item-active-color: $primary;
+
+$bulmaswatch-import-font: true !default;

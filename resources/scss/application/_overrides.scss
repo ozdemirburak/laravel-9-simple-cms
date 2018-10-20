@@ -1,0 +1,83 @@
+// Overrides
+// Source: https://github.com/jenil/bulmaswatch/tree/gh-pages/journal
+@if $bulmaswatch-import-font {
+  @import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
+}
+
+.navbar.is-light a.navbar-item:hover,
+.navbar.is-light a.navbar-item.is-active,
+.navbar.is-light .navbar-link:hover,
+.navbar.is-light .navbar-link.is-active {
+  color: $primary !important;
+  background-color: inherit;
+}
+
+.navbar.is-light .navbar-link:not(.is-arrowless)::after {
+  border-color: $blue;
+}
+
+@include tablet {
+  .navbar.is-light .navbar-dropdown {
+    background: whitesmoke;
+  }
+}
+
+@include mobile {
+  .navbar.is-light .navbar-menu {
+    background: whitesmoke;
+  }
+}
+
+.button,
+.input,
+.pagination-ellipsis,
+.pagination-link,
+.pagination-next,
+.pagination-previous,
+.select,
+.select select,
+.textarea,
+.control.has-icons-left .icon,
+.control.has-icons-right .icon {
+  height: 2.5em;
+}
+
+.button {
+  font-family: $family-heading;
+  font-weight: 700;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.card-header-title,
+.navbar-item,
+.navbar-link,
+.menu-label,
+.message-header,
+.modal-card-title,
+.panel-heading,
+.subtitle,
+.title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  font-family: $family-heading;
+}
+
+.notification {
+  @each $name, $pair in $colors {
+    $color: nth($pair, 1);
+    $color-invert: nth($pair, 2);
+
+    &.is-#{$name} {
+      a:not(.button) {
+        color: $color-invert;
+        text-decoration: underline;
+      }
+    }
+  }
+}

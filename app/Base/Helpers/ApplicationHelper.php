@@ -2,22 +2,19 @@
 
 if (!function_exists('getTitle')) {
     /**
-     * Render nodes for nested sets
-     *
-     * @param  mixed $object
-     * @param string $property
+     * @param null   $title
+     * @param string $separator
      *
      * @return string
      */
-    function getTitle($object = null, $property = 'title')
+    function getTitle($title = null, $separator = ' | ')
     {
-        if (is_object($object) && isset($object->$property)) {
-            return $object->$property . ' | ' .  session('current_lang')->site_title;
-        } elseif (is_string($object) && !empty($object)) {
-            return $object . ' | ' .  session('current_lang')->site_title;
+        if (is_string($title)) {
+            $title .= $separator .  config('settings.site_title');
         } else {
-            return session('current_lang')->site_title;
+            $title = config('settings.site_title');
         }
+        return strip_tags($title);
     }
 }
 
@@ -25,73 +22,34 @@ if (!function_exists('getDescription')) {
     /**
      * Render nodes for nested sets
      *
-     * @param  mixed $object
-     * @param string $property
+     * @param mixed $description
      *
      * @return string
      */
-    function getDescription($object = null, $property = 'description')
+    function getDescription($description = null)
     {
-        if (is_object($object) && isset($object->$property)) {
-            return $object->$property;
-        } elseif (is_string($object) && !empty($object)) {
-            return $object;
-        } else {
-            return session('current_lang')->site_description;
+        if (!is_string($description)) {
+            $description = config('settings.site_description');
         }
+        return strip_tags($description);
     }
 }
 
 if (!function_exists('getImage')) {
     /**
-     * Render nodes for nested sets
+     * Return Image
      *
      * @param mixed  $object
      * @param string $property
      *
      * @return string
      */
-    function getImage($object = null, $property = 'featured_image')
+    function getImage($object = null, $property = 'logo')
     {
         if (is_object($object) && isset($object->$property)) {
             return asset($object->$property);
-        } elseif (is_string($object) && !empty($object)) {
-            return $object;
-        } else {
-            return asset('files/share/default.png');
         }
-    }
-}
-
-
-if (!function_exists('getStringBetween')) {
-    /**
-     * Gets string between characters
-     *
-     * @param $string
-     * @param $from
-     * @param $to
-     *
-     * @return string
-     */
-    function getStringBetween($string, $from, $to)
-    {
-        $sub = substr($string, strpos($string, $from)+strlen($from), strlen($string));
-        return substr($sub, 0, strpos($sub, $to));
-    }
-}
-
-if (!function_exists('escapeAndTrim')) {
-    /**
-     * Escape HTML characters and trim the string
-     *
-     * @param $string
-     *
-     * @return mixed
-     */
-    function escapeAndTrim($string)
-    {
-        return trim(strip_tags($string));
+        return is_string($object) ? $object : asset('i/icons/android-chrome-512x512.png');
     }
 }
 
@@ -107,134 +65,99 @@ if (!function_exists('getNWords')) {
      */
     function getNWords($string, $n = 5, $withDots = true)
     {
-        $excerpt = explode(' ', $string, $n + 1);
+        $excerpt = explode(' ', strip_tags($string), $n + 1);
         $wordCount = count($excerpt);
         if ($wordCount >= $n) {
             array_pop($excerpt);
         }
         $excerpt = implode(' ', $excerpt);
         if ($withDots && $wordCount >= $n) {
-            $excerpt .= ' ...';
+            $excerpt .= '...';
         }
         return $excerpt;
     }
 }
 
-if (!function_exists('getNSentences')) {
+if (!function_exists('getFacebookShareLink')) {
     /**
-     * Get first n sentences
+     * Get Facebook share link
      *
-     * @param     $body
-     * @param int $sentencesToDisplay
-     *
-     * @return mixed|string
-     */
-    function getNSentences($body, $sentencesToDisplay = 2)
-    {
-        $nakedBody = preg_replace('/\s+/', ' ', strip_tags($body));
-        $sentences = preg_split('/(\.|\?|\!)(\s)/', $nakedBody);
-
-        if (count($sentences) <= $sentencesToDisplay) {
-            return $nakedBody;
-        }
-
-        $stopAt = 0;
-        foreach ($sentences as $i => $sentence) {
-            $stopAt += strlen($sentence);
-
-            if ($i >= $sentencesToDisplay - 1) {
-                break;
-            }
-        }
-
-        $stopAt += ($sentencesToDisplay * 2);
-        return trim(substr($nakedBody, 0, $stopAt));
-    }
-}
-
-if (!function_exists('mb_ucfirst')) {
-    /**
-     *
-     * @param $string
-     * @param $encoding
+     * @param $url
+     * @param $title
      *
      * @return string
      */
-    function mb_ucfirst($string, $encoding = 'utf8')
+    function getFacebookShareLink($url, $title)
     {
-        $stringLength = mb_strlen($string, $encoding);
-        $firstChar = mb_substr($string, 0, 1, $encoding);
-        $then = mb_substr($string, 1, $stringLength - 1, $encoding);
-        return mb_strtoupper($firstChar, $encoding) . $then;
+        return 'https://www.facebook.com/sharer/sharer.php?u=' . $url .'&t=' . rawurlencode($title);
     }
 }
 
-if (!function_exists('file_get_contents_utf8')) {
+if (!function_exists('getTwitterShareLink')) {
     /**
-     * @param $file
+     * Get Twitter share link
      *
-     * @return mixed|string
+     * @param $url
+     * @param $title
+     *
+     * @return string
      */
-    function file_get_contents_utf8($file)
+    function getTwitterShareLink($url, $title)
     {
-        $content = @file_get_contents($file);
-        return mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
+        return 'https://twitter.com/intent/tweet?text=' . rawurlencode(implode(' ', [$title, $url]));
     }
 }
 
-if (!function_exists('makeDirRecursive')) {
+if (!function_exists('getRobots')) {
     /**
-     * @param     $path
-     * @param int $mode
-     *
-     * @return bool
+     * @return string
      */
-    function makeDirRecursive($path, $mode = 0777)
+    function getRobots()
     {
-        return is_dir($path) || mkdir($path, $mode, true);
-    }
-}
-
-if (!function_exists('getActiveState')) {
-    /**
-     * @param $route
-     * @param $name
-     *
-     * @return bool
-     */
-    function getActiveState($route, $name)
-    {
-        if (str_contains($route, $name)) {
-            return 'active';
+        if (request()->get('PageSpeed') || strpos(url()->current(), env('APP_URL')) === false) {
+            return 'noindex,nofollow';
         }
-        return '';
+        return 'index,follow';
     }
 }
 
-if (!function_exists('formatNumber')) {
+if (!function_exists('getMenu')) {
     /**
-     * @param     $number
-     * @param int $zeroCount
-     *
-     * @return string
+     * @return mixed
+     * @throws \Exception
      */
-    function formatNumber($number, $zeroCount = 2)
+    function getMenu()
     {
-        $number = number_format($number, $zeroCount, ',', '.');
-        return strpos($number, ',') !== false ? rtrim(rtrim($number, '0'), ',') : $number;
+        return cache()->remember('menu', 60, function () {
+            return \App\Models\Page::where('parent_id', null)->with('children')->get();
+        });
     }
 }
 
-if (!function_exists('slugify')) {
+if (!function_exists('getFooterArticles')) {
     /**
-     * @param        $string
-     * @param string $separator
+     * @param int $limit
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    function getFooterArticles($limit = 3)
+    {
+        return cache()->remember('footer_articles', 60, function () use ($limit) {
+            return \App\Models\Article::published()->limit($limit)->get();
+        });
+    }
+}
+
+if (!function_exists('active')) {
+    /**
+     * @param object $object
+     * @param string $property
      *
      * @return string
      */
-    function slugify($string, $separator = '-')
+    function active($object, $property = 'slug')
     {
-        $slugify = new \Cocur\Slugify\Slugify(['rulesets' => ['default', 'turkish']]);
-        return $slugify->slugify($string, $separator);
+        return strpos(request()->url(), $object->$property) !== false ? 'is-active' : '';
     }
 }

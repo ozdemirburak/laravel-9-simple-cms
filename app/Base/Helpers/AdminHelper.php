@@ -43,3 +43,29 @@ if (!function_exists('getValidationAttributes')) {
         return $attributes;
     }
 }
+
+if (!function_exists('formatNumber')) {
+    /**
+     * @param     $number
+     * @param int $zeroCount
+     *
+     * @return string
+     */
+    function formatNumber($number, $zeroCount = 2)
+    {
+        $number = number_format($number, $zeroCount, ',', '.');
+        return strpos($number, ',') !== false ? rtrim(rtrim($number, '0'), ',') : $number;
+    }
+}
+
+if (!function_exists('icon')) {
+    /**
+     * @param string $icon
+     *
+     * @return string
+     */
+    function icon($icon)
+    {
+        return '<ion-icon name="' . $icon . '"></ion-icon>';
+    }
+}

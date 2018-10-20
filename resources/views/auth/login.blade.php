@@ -1,46 +1,48 @@
-@extends('layouts.auth')
-
-@section('title')
-    {{ trans('auth.login.title') }} | {{ trans('admin.title') }}
-@stop
+@extends('layouts.admin')
 
 @section('content')
-
-    <div class="login-box" id="login-box">
-        <div class="header">
-            <i class="fa fa-sign-in"></i> {{ trans('auth.login.title') }}
-        </div>
-
-        {!! Form::open(['method' => 'POST', 'route' => 'auth.login.post']) !!}
-
-        <div class="body bg-gray-50">
-            @include('errors.validation')
-            <div class="form-group has-feedback">
-                {!! Form::label('email', trans('auth.login.email')) !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
-                <i class="fa fa-envelope form-control-feedback"></i>
-            </div>
-            <div class="form-group has-feedback">
-                {!! Form::label('password', trans('auth.login.password')) !!}
-                {!! Form::password('password', ['class' => 'form-control']) !!}
-                <i class="fa fa-lock form-control-feedback"></i>
-            </div>
-            <div class="form-group">
-                {!! Form::checkbox('remember', '1', true) !!} {{ trans('auth.login.remember') }}
-            </div>
-        </div>
-
-        <div class="footer">
-            {!! Form::submit(trans('auth.login.submit'), ['class' => 'btn bg-auth btn-block btn-flat']) !!}
-            <hr/>
-            <div class="row">
-                <div class="col-xs-6">
-                    <a class="btn btn-link" href="{{ route('password.reset') }}"> <i class="fa fa-lock"></i> {{ trans('auth.login.forgot') }}</a>
+    <section class="hero is-light is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h3 class="title has-text-grey">{{ __('auth.login.submit') }}</h3>
+                    <div class="box">
+                        <figure class="avatar">
+                            <img alt="Avatar" src="{{ config('settings.login_image') }}">
+                        </figure>
+                        <form method="POST" action="{{ route('auth.login.post') }}">
+                            @include('partials.admin.errors')
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" value="{{ old('email') ?? '' }}" type="email" name="email" placeholder="{{ __('auth.login.email') }}" autofocus>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-large" type="password" name="password" placeholder="{{ __('auth.login.password') }}">
+                                </div>
+                            </div>
+                            @if (!empty(env('GOOGLE_NOCAPTCHA_SECRET')) && strpos(env('GOOGLE_NOCAPTCHA_SECRET'), 'google') === false)
+                                <div class="field has-addons has-addons-centered">
+                                    <div class="control">
+                                        {!! NoCaptcha::display() !!}
+                                        {!! NoCaptcha::renderJs() !!}
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="remember" value="1" checked> {{ __('auth.login.remember') }}
+                                </label>
+                            </div>
+                            <div class="control">
+                                <input type="hidden" name="_token" id="csrf-token" value="{{ csrf_token() }}" />
+                                <button type="submit" class="button is-info is-fullwidth is-large">{{ __('auth.login.submit') }}</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-
-        {!!  Form::close() !!}
-    </div>
-
+    </section>
 @endsection

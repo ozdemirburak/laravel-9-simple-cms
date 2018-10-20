@@ -12,7 +12,7 @@ class AdminTest extends TestCase
     public function testDashboard()
     {
         $this->signIn();
-        $this->visit('admin')->seePageIs(env('ANALYTICS_CONFIGURED') ? 'admin' : 'admin/user');
+        $this->visit('admin')->seePageIs(env('GOOGLE_ANALYTICS_CONFIGURED') ? 'admin' : 'admin/user');
     }
 
     /**
@@ -36,18 +36,18 @@ class AdminTest extends TestCase
     /**
      * @group admin-crud-tests
      */
-    public function testPagesCrud()
+    public function testCategoriesCrud()
     {
         $this->signIn();
-        $this->visit('admin')->click('All Pages')->seePageIs('admin/page');
+        $this->visit('admin')->click('All Categories')->seePageIs('admin/category');
     }
 
     /**
      * @group admin-crud-tests
      */
-    public function testLanguagesCrud()
+    public function testPagesCrud()
     {
         $this->signIn();
-        $this->visit('admin')->click('All Languages')->seePageIs('admin/language');
+        $this->visit('admin')->click('All Pages')->seePageIs('admin/page');
     }
 }

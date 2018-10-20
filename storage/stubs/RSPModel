@@ -1,0 +1,1 @@
+        Route::model('{{MODEL_NAME_SNAKECASE}}', \App\Models\{{MODEL_NAME}}::class);

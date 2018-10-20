@@ -1,0 +1,26 @@
+@mixin createButton($name, $color) {
+  .button-#{$name} {
+    background-color: whitesmoke;
+    color: $color;
+    border-color: $color;
+    .icon {
+      display: inline-block;
+      svg {
+        fill: $color;
+        margin-right: 0.1em;
+      }
+    }
+    &:hover {
+      color: whitesmoke;
+      background-color: $color;
+      .icon {
+        svg {
+          fill: whitesmoke;
+        }
+      }
+    }
+  }
+}
+
+@include createButton(twitter, #1DA1F2);
+@include createButton(facebook, #3B5998);

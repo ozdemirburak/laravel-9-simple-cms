@@ -2,7 +2,7 @@
 
 namespace App\Base;
 
-use Cocur\Slugify\Slugify;
+use App\Base\Traits\SluggableEngine;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -10,13 +10,18 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Base\SluggableModel
  *
- * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel whereSlug($slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Base\SluggableModel findSimilarSlugs($attribute, $config, $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Base\SluggableModel whereSlug($slug)
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Query\Builder|\App\Base\SluggableModel findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
  */
 class SluggableModel extends Model
 {
-    use Sluggable, SluggableScopeHelpers;
+    use Sluggable, SluggableEngine, SluggableScopeHelpers;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['created_at', 'id'];
 
     /**
      * @return array
@@ -29,15 +34,5 @@ class SluggableModel extends Model
                 'onUpdate' => true
             ]
         ];
-    }
-
-    /**
-     * @param \Cocur\Slugify\Slugify $engine
-     *
-     * @return \Cocur\Slugify\Slugify
-     */
-    public function customizeSlugEngine(Slugify $engine)
-    {
-        return $engine->activateRuleSet('turkish');
     }
 }

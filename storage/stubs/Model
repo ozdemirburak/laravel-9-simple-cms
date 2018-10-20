@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use App\Base\SluggableModel;
+
+class {{MODEL_NAME}} extends SluggableModel
+{
+    /**
+     * @return string
+     */
+    public function getLinkAttribute(): string
+    {
+        return route('{{MODEL_NAME_SNAKECASE}}', ['{{MODEL_NAME_SNAKECASE}}Slug' => $this->slug]);
+    }
+}

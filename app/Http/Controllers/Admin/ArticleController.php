@@ -2,74 +2,91 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Article;
 use App\Base\Controllers\AdminController;
-use App\Http\Controllers\Api\DataTables\ArticleDataTable;
-use App\Http\Requests\Admin\ArticleRequest;
+use App\Http\Controllers\Admin\DataTables\ArticleDataTable;
+use App\Models\Category;
+use App\Models\Article;
+use Illuminate\Http\Request;
 
 class ArticleController extends AdminController
 {
     /**
-     * Display a listing of the articles.
+     * @var array
+     */
+    protected $validation = [
+        'content'      => 'required|string',
+        'category_id'  => 'required|integer',
+        'description'  => 'required|string|max:200',
+        'published_at' => 'required|string',
+        'title'        => 'required|string|max:200'
+    ];
+
+    /**
+     * @param \App\Http\Controllers\Admin\DataTables\ArticleDataTable $dataTable
      *
-     * @param ArticleDataTable $dataTable
-     * @return Response
+     * @return mixed
      */
     public function index(ArticleDataTable $dataTable)
     {
-        return $dataTable->render($this->viewPath());
+        return $dataTable->render('admin.table', ['link' => route('admin.article.create')]);
     }
 
     /**
-     * Store a newly created article in storage
-     *
-     * @param ArticleRequest $request
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function store(ArticleRequest $request)
+    public function create()
+    {
+        return view('admin.forms.article', $this->formVariables('article', null, $this->options()));
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function store(Request $request)
     {
         return $this->createFlashRedirect(Article::class, $request);
     }
 
     /**
-     * Display the specified article.
+     * @param \App\Models\Article $article
      *
-     * @param Article $article
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function show(Article $article)
     {
-        return $this->viewPath('show', $article);
+        return view('admin.show', ['object' => $article]);
     }
 
     /**
-     * Show the form for editing the specified article.
+     * @param \App\Models\Article $article
      *
-     * @param Article $article
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function edit(Article $article)
     {
-        return $this->getForm($article);
+        return view('admin.forms.article', $this->formVariables('article', $article, $this->options()));
     }
 
     /**
-     * Update the specified article in storage.
+     * @param \App\Models\Article $article
+     * @param \Illuminate\Http\Request  $request
      *
-     * @param Article $article
-     * @param ArticleRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function update(Article $article, ArticleRequest $request)
+    public function update(Article $article, Request $request)
     {
         return $this->saveFlashRedirect($article, $request);
     }
 
     /**
-     * Remove the specified article from storage.
+     * @param \App\Models\Article $article
      *
-     * @param  Article  $article
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Article $article)
     {
@@ -77,12 +94,10 @@ class ArticleController extends AdminController
     }
 
     /**
-     * Get select list for categories
-     *
-     * @return mixed
+     * @return array
      */
-    protected function getSelectList()
+    protected function options()
     {
-        return session('current_lang')->categories->pluck('title', 'id')->all();
+        return ['options' => Category::pluck('title', 'id')];
     }
 }

@@ -6,7 +6,7 @@
                 <li>{{ $error }}</li>
             @endforeach
             @if (!empty(session('csrf_error')))
-                <li> {{ session('csrf_error') }}</li>
+                <li>{{ session('csrf_error') }}</li>
             @endif
         </ul>
     </div>

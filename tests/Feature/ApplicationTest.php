@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Article;
+use App\Models\Article;
 use Illuminate\Support\Collection;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -26,7 +26,7 @@ class ApplicationTest extends TestCase
             'category_id' => 1,
             'content' => 'Some content',
             'description' => 'A description',
-            'published_at' => date($format = 'Y-m-d', time()),
+            'published_at' => date($format = 'Y-m-d'),
             'title' => 'The title',
         ]);
     }
@@ -37,14 +37,6 @@ class ApplicationTest extends TestCase
     public function testTitleOnHomePage()
     {
         $this->visit('/')->see('Blog');
-    }
-
-    /**
-     * @group application-home-tests
-     */
-    public function testLanguagesOnHomePage()
-    {
-        $this->visit('/')->seeElement('span', ['data-code' => 'en']);
     }
 
     /**

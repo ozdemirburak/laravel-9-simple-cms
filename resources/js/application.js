@@ -1,23 +1,10 @@
-$(function() {
-  $('iframe[src*="youtube.com"]').each(function() {
-    if (!$(this).hasClass('embed-responsive-item')) {
-      $(this).wrap("<div class='row'><div class='col-sm-6 padding-left-0'><div class='embed-responsive embed-responsive-16by9'></div></div></div>");
-      $(this).addClass("embed-responsive-item");
-    }
-  });
+const Turbolinks = require('turbolinks');
 
-  WebFont.load({
-    google: {
-      families: ['Open+Sans:400,700:latin,latin-ext']
-    }
-  });
-
-  $("body").floatingSocialShare({
-    buttons: ["facebook", "twitter", "google-plus"]
-  });
-
-  $('.chosen-one').click(function(){
-    $('input[name="language"]').val($(this).data("code"));
-    $('#anakin-skywalker').submit();
-  });
+document.addEventListener('turbolinks:load', function() {
+  document.getElementById('toggle-menu').onclick = function () {
+    document.getElementById('menu').style.display = document.getElementById('menu').style.display === 'block' ? 'none' : 'block';
+  }
+  // Your application logic here
 });
+
+Turbolinks.start();

@@ -1,11 +1,33 @@
-<li class="treeview {{ str_contains(url()->current(), route('admin.' . $resource . '.index')) ? 'active' : '' }}">
-    <a href="{{ route('admin.' . $resource . '.index') }}"><i class="fa fa-{{ $icon }}"></i>{{ trans('admin.' . $resource . '.index') }}</a>
-    <ul class="treeview-menu">
-        <li class="{{ url()->current() === route('admin.' . $resource . '.create') ? 'active' : '' }}">
-            <a href="{{ route('admin.' . $resource . '.create') }}"><i class="fa fa-circle-o"></i>{{ trans('admin.' . $resource . '.create') }}</a>
-        </li>
-        <li class="{{ url()->current() === route('admin.' . $resource . '.index') ? 'active' : '' }}">
-            <a href="{{ route('admin.' . $resource . '.index') }}"><i class="fa fa-circle-o"></i>{{ trans('admin.' . $resource . '.all') }}</a>
-        </li>
-    </ul>
-</li>
+<div class="navbar-item has-dropdown is-hoverable">
+    <div class="navbar-link">
+        <span class="icon">{!! icon($icon) !!}</span>
+        <span>{{ empty($resource) && !empty($text) ? $text : __('admin.' . $resource . '.index') }}</span>
+    </div>
+    <div class="navbar-dropdown">
+        @if (empty($items))
+            <a class="navbar-item" href="{{ route('admin.' . $resource . '.create') }}">
+                <span class="icon">{!! icon('add') !!}</span>
+                <span>{{ __('admin.' . $resource . '.create') }}</span>
+            </a>
+            @if(!empty($extra))
+                @foreach (array_wrap($extra) as $e => $i)
+                    <a class="navbar-item" href="{{ route('admin.' . $resource . '.' . $e) }}">
+                        <span class="icon">{!! icon($i) !!}</span>
+                        <span>{{ __('admin.' . $resource . '.' . $e) }}</span>
+                    </a>
+                @endforeach
+            @endif
+            <a class="navbar-item" href="{{ route('admin.' . $resource . '.index') }}">
+                <span class="icon">{!! icon('list') !!}</span>
+                <span>{{ __('admin.' . $resource . '.all') }}</span>
+            </a>
+        @else
+            @foreach ($items as $text => $values)
+                <a class="navbar-item" href="{{ $values[0] }}">
+                    <span class="icon">{!! icon($values[1]) !!}</span>
+                    <span>{{ $text }}</span>
+                </a>
+            @endforeach
+        @endif
+    </div>
+</div>

@@ -13,32 +13,36 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(\App\Models\User::class, function (Faker $faker) {
     static $password;
-
     return [
-        'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(App\Category::class, function (Faker $faker) {
+$factory->define(\App\Models\Category::class, function (Faker $faker) {
     return [
-        'color' => $faker->hexColor,
         'description' => $faker->sentence(5),
-        'language_id' => $faker->numberBetween(1, 2),
-        'title' => $faker->sentence(5)
+        'title' => title_case($faker->words(2, true))
     ];
 });
 
-$factory->define(App\Article::class, function (Faker $faker) {
+$factory->define(\App\Models\Page::class, function (Faker $faker, $attributes) {
+    return [
+        'content' => implode('<br/><br/>', $faker->paragraphs(8)),
+        'description' => $faker->sentence(6),
+        'title' => title_case($faker->words(2, true))
+    ];
+});
+
+$factory->define(\App\Models\Article::class, function (Faker $faker) {
     return [
         'category_id' => $faker->numberBetween(1, 5),
         'content' => implode('<br/><br/>', $faker->paragraphs(8)),
         'description' => $faker->sentence(5),
         'published_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'title' => $faker->sentence(5)
+        'title' => title_case($faker->words(4, true))
     ];
 });

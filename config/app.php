@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel 5 Simple CMS',
+    'name' => env('APP_NAME', 'Laravel 5 Simple CMS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,15 +166,11 @@ return [
          */
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
-        Baum\Providers\BaumServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
-        Yajra\DataTables\DatatablesServiceProvider::class,
-        Watson\Sitemap\SitemapServiceProvider::class
+        Yajra\DataTables\DatatablesServiceProvider::class
     ],
 
     /*
@@ -230,16 +226,11 @@ return [
         /*
          * Custom Third Party Aliases...
          */
-        'Analytics'         => Spatie\Analytics\AnalyticsFacade::class,
-        'Datatables'        => Yajra\DataTables\Facades\DataTables::class,
-        'Flash'             => Laracasts\Flash\Flash::class,
-        'Form'              => Collective\Html\FormFacade::class,
-        'FormBuilder'       => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-        'HTML'              => Collective\Html\HtmlFacade::class,
-        'Input'             => Illuminate\Support\Facades\Input::class,
-        'PDF'               => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'Sitemap'           => Watson\Sitemap\Facades\Sitemap::class,
-        'SnappyImage'       => Barryvdh\Snappy\Facades\SnappyImage::class
+        'Analytics'   => Spatie\Analytics\AnalyticsFacade::class,
+        'Datatables'  => Yajra\DataTables\Facades\DataTables::class,
+        'Flash'       => Laracasts\Flash\Flash::class,
+        'PDF'         => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class
     ],
 
 ];

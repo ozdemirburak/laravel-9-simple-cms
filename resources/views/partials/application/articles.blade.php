@@ -1,29 +1,31 @@
-@if($articles->isNotEmpty())
-    @foreach($articles as $article)
-        <article class="post">
-            <header class="post-header">
-                <div class="post-category">
-                    <a style="background-color: {{ $article->category->color }}" href="{{ $article->category->link }}">{{ $article->category->title }}</a>
+<div class="columns is-multiline">
+    @foreach ($articles as $article)
+        <div class="column is-12">
+            <div class="columns is-vcentered">
+                <div class="column is-9">
+                    <h2 class="title"><a class="has-text-grey-dark" href="{{ $article->link }}">{{ $article->title }}</a></h2>
                 </div>
-                <div class="post-title">
-                    <h2>
-                        <a href="{{ $article->link }}">{{ $article->title }}</a>
-                    </h2>
+                <div class="column is-3 has-text-right-desktop">
+                    <a href="{{ $article->category->link }}" class="button is-default">{{ $article->category->title }}</a>
                 </div>
-            </header>
-            <div class="post-excerpt">
-                {{ getNWords(escapeAndTrim($article->content), 50)  }}
             </div>
-            <footer class="post-footer">
-                <div class="post-meta-date pull-left">
-                    <i class="fa fa-clock-o"></i>
-                    {{ $article->published_at }}
+            <div class="level"></div>
+            <div class="content">
+                <p>{{ getNWords($article->content, 50) }}</p>
+            </div>
+            <div class="columns is-vcentered">
+                <div class="column is-9">
+                    <a class="button is-link" href="{{ $article->link }}">{{ __('application.read_more') }}</a>
                 </div>
-                <div class="pull-right">
-                    <a class="btn post-btn btn-sm" href="{{ $article->link }}">{{ trans('application.read_more') }}</a>
+                <div class="column is-3 has-text-right-desktop">
+                    <p class="has-text-grey">{{ $article->localized_published_at }}</p>
                 </div>
-            </footer>
-        </article>
+            </div>
+        </div>
     @endforeach
-    {!! $articles->render() !!}
-@endif
+    @if ($articles->total() > $articles->count())
+        <div class="column is-12">
+            {!! $articles->appends(request()->except('page'))->links() !!}
+        </div>
+    @endif
+</div>

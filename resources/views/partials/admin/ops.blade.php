@@ -1,24 +1,24 @@
-@php $isButton = !isset($class) || $class === 'btn'; @endphp
-
-<ul class="list-inline no-margin-bottom">
-    <li>
-        <a class="{{ $isButton ? 'btn btn-xs bg-navy' : 'inline-show' }}"
-           href="{{ route(implode('.', ['admin', $resource, 'show']), compact('id'))  }}">
-            @fa('search') {{ trans('admin.ops.show') }}
+<ul>
+    <li class="is-inline">
+        <a class="button is-small is-info" href="{{ route(implode('.', ['admin', $resource, 'show']), compact('id'))  }}">
+            <span class="icon">{!! icon('search') !!}</span>
+            <span>{{ __('admin.ops.show') }}</span>
         </a>
     </li>
-    <li>
-        <a class="{{ $isButton ? 'btn btn-xs bg-olive' : 'inline-edit' }}"
-           href="{{ route(implode('.', ['admin', $resource, 'edit']), compact('id'))  }}">
-            @fa('pencil-square-o') {{ trans('admin.ops.edit') }}
+    <li class="is-inline">
+        <a class="button is-small is-primary" href="{{ route(implode('.', ['admin', $resource, 'edit']), compact('id')) }}">
+            <span class="icon">{!! icon('create') !!}</span>
+            <span>{{ __('admin.ops.edit') }}</span>
         </a>
     </li>
-    <li>
-        {{ Form::open(['method' => 'DELETE', 'url' => route(implode('.', ['admin', $resource, 'destroy']), compact('id'))]) }}
-        <button class="{{ $isButton ? 'btn btn-xs btn-danger destroy' : 'inline-delete' }}"
-                onclick="return confirm('{{ trans('admin.ops.confirmation') }}')">
-            @fa('trash') {{ trans('admin.ops.delete') }}
-        </button>
-        {{ Form::close() }}
+    <li class="is-inline">
+        <form class="is-inline" method="POST" action="{{ route(implode('.', ['admin', $resource, 'destroy']), ['id' => $id]) }}">
+            <input type="hidden" name="_token" id="csrf-token" value="{{ csrf_token() }}" />
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="button is-small is-danger" type="submit" onclick="return confirm('{{ __('admin.ops.confirmation') }}')">
+                <span class="icon">{!! icon('trash') !!}</span>
+                <span>{{ __('admin.ops.delete') }}</span>
+            </button>
+        </form>
     </li>
 </ul>

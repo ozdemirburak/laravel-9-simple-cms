@@ -3,73 +3,83 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Base\Controllers\AdminController;
-use App\Category;
-use App\Http\Controllers\Api\DataTables\CategoryDataTable;
-use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Controllers\Admin\DataTables\CategoryDataTable;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends AdminController
 {
     /**
-     * Display a listing of the categories.
+     * @var array
+     */
+    protected $validation = ['title' => 'required|string|max:200', 'description' => 'required|string|max:160'];
+
+    /**
+     * @param \App\Http\Controllers\Admin\DataTables\CategoryDataTable $dataTable
      *
-     * @param CategoryDataTable $dataTable
-     * @return Response
+     * @return mixed
      */
     public function index(CategoryDataTable $dataTable)
     {
-        return $dataTable->render($this->viewPath());
+        return $dataTable->render('admin.table', ['link' => route('admin.category.create')]);
     }
 
     /**
-     * Store a newly created category in storage
-     *
-     * @param CategoryRequest $request
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function store(CategoryRequest $request)
+    public function create()
+    {
+        return view('admin.forms.category', $this->formVariables('category', null));
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function store(Request $request)
     {
         return $this->createFlashRedirect(Category::class, $request);
     }
 
     /**
-     * Display the specified category.
+     * @param \App\Models\Category $category
      *
-     * @param Category $category
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function show(Category $category)
     {
-        return $this->viewPath('show', $category);
+        return view('admin.show', ['object' => $category]);
     }
 
     /**
-     * Show the form for editing the specified category.
+     * @param \App\Models\Category $category
      *
-     * @param Category $category
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function edit(Category $category)
     {
-        return $this->getForm($category);
+        return view('admin.forms.category', $this->formVariables('category', $category));
     }
 
     /**
-     * Update the specified category in storage.
+     * @param \App\Models\Category $category
+     * @param \Illuminate\Http\Request  $request
      *
-     * @param Category $category
-     * @param CategoryRequest $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
-    public function update(Category $category, CategoryRequest $request)
+    public function update(Category $category, Request $request)
     {
         return $this->saveFlashRedirect($category, $request);
     }
 
     /**
-     * Remove the specified category from storage.
+     * @param \App\Models\Category $category
      *
-     * @param  Category  $category
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {
