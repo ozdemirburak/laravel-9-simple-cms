@@ -162,6 +162,17 @@ class DashboardController extends AdminController
     }
 
     /**
+     * Use Analytics::fetchMostVisitedPages($this->period, $this->limit) instead if you want to group by page titles
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function getPages(): \Illuminate\Support\Collection
+    {
+        $options = ['dimensions' => 'ga:pagePath', 'sort' => '-ga:pageviews', 'max-results' => $this->limit];
+        return $this->makeCollection($this->query($options, 'ga:pageviews'), ['0' => 'url', '1' => 'pageViews']);
+    }
+
+    /**
      * @param array $visits
      *
      * @return false|string
@@ -240,11 +251,11 @@ class DashboardController extends AdminController
     {
         return Cache::remember('analytics', $this->getCache(), function () {
             return [
+                'alexa' => AlexaService::getAlexaRank(env('APP_URL')),
                 'referrers' => Analytics::fetchTopReferrers($this->period, $this->limit),
-                'pages' => Analytics::fetchMostVisitedPages($this->period, $this->limit),
+                'pages' => $this->getPages(),
                 'total_visits' => $this->getTotalVisits(),
                 'landings' => $this->getLandings(),
-                'alexa' => AlexaService::getAlexaRank(env('APP_URL')),
                 'exits' => $this->getExits(),
                 'times' => $this->getTimeOnPages(),
                 'sources' => $this->getSources(),
