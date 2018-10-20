@@ -38,7 +38,7 @@ Run the command below to initialize. Do not forget to configure your .env file.
 
     $ php artisan cms:initialize --seed
 
-Install node and npm following one of the techniques explained within 
+Install node and npm following one of the techniques explained in 
 this [link](https://gist.github.com/isaacs/579814) to create and compile the assets of the 
 application.
     
@@ -82,7 +82,7 @@ Run `php artisan cms:initialize --seed` which will ask you to create a database 
 with fake data. Do not forget that all variables with `DB_` prefixes in your `.env` file relates to your database configuration. 
 After configuring your `.env` file, with the proper data, you need to create the assets.
 
-If you do not have node and npm installed, follow one of the techniques explained within this [link](https://gist.github.com/isaacs/579814).
+If you do not have node and npm installed, follow one of the techniques explained in this [link](https://gist.github.com/isaacs/579814).
 Then, to install our boilerplate project's asset dependencies, run `npm install`. Finally to combine the 
 javascript and style files run `npm run production`.
 
@@ -160,4 +160,5 @@ You can check it on: [https://ozdemirburak.com/a/deploying-laravel-projects-with
 ![Admin Auth](https://ozdemirburak.com/i/upload/cms/login.png)
 ![Admin Dashboard](https://ozdemirburak.com/i/upload/cms/dashboard.png)
 ![Admin Datatables](https://ozdemirburak.com/i/upload/cms/datatables.png)
+![Admin Dashboard](https://ozdemirburak.com/i/upload/cms/editor.png)
 ![Admin File Manager](https://ozdemirburak.com/i/upload/cms/file-manager.png)
