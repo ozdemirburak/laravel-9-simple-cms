@@ -20,6 +20,13 @@ abstract class DataTableController extends DataTable
     ];
 
     /**
+     * Datatables order for parameters, 0 is the first column
+     *
+     * @var array
+     */
+    protected $order = [0, 'asc'];
+
+    /**
      * Model that is used to generate this DataTable
      *
      * @var string
@@ -271,9 +278,8 @@ abstract class DataTableController extends DataTable
      */
     protected function getColumnParameters(): array
     {
-        $columns = array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns);
         return [
-            $columns,
+            $columns = array_merge($this->image_columns, $this->columns, $this->boolean_columns, $this->count_columns),
             \count($columns) - \count($this->count_columns),
             $this->getModelName(),
             $this->getTableName()
@@ -316,12 +322,17 @@ abstract class DataTableController extends DataTable
 
     /**
      * Translate DataTable parameters, such as search, showing number to number out of number entries exc.
+     * Also add the order parameter
      *
      * @return array
      */
     protected function getParameters(): array
     {
-        return array_merge($this->parameters, ['oLanguage' => __('admin.datatables')]);
+        return array_merge(
+            $this->parameters,
+            ['order' => [$this->order]],
+            ['oLanguage' => __('admin.datatables')]
+        );
     }
 
     /**
