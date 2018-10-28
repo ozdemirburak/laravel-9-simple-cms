@@ -64,7 +64,7 @@ class Resource extends Command
     {
         [$rtcp, $now] = [str_plural($this->rtc), now()];
         $result = File::put(
-            $f = 'database/migrations/' . $now->format('Y_m_d') . '_000000_create_' . strtolower($rtcp) . '_tables.php',
+            $f = 'database/migrations/' . $now->format('Y_m_d') . '_000000_create_' . strtolower($rtcp) . '_table.php',
             $this->replaceStub('migration')
         );
         $this->printMessage($result, $f);

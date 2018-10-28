@@ -135,7 +135,7 @@ even it will add the basic language key value pairs to the language file.
 Just check and edit the files below to proceed.
 
 ```
-Created file: database/migrations/2018_10_19_000000_create_fruits_tables.php
+Created file: database/migrations/2018_10_19_000000_create_fruits_table.php
 Created file: app/Models/Fruit.php
 Created file: app/Http/Controllers/Admin/DataTables/FruitDataTable.php
 Created file: app/Http/Controllers/Admin/FruitController.php
