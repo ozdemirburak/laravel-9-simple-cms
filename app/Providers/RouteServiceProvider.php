@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
     private function bootRouteModelBinders()
     {
         Route::model('article', Article::class);
+        Route::model('category', Category::class);
         Route::model('page', Page::class);
         Route::model('user', User::class);
         /** GENERATOR_MODEL_BINDER **/
