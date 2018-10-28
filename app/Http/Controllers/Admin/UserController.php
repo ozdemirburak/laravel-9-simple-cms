@@ -74,7 +74,7 @@ class UserController extends AdminController
      * @throws \Exception
      */
     public function update(User $user, Request $request)
-    {;
+    {
         return $this->saveFlashRedirect($user, $request);
     }
 
