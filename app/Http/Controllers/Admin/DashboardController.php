@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Base\Controllers\AdminController;
 use Analytics;
 use App\Base\Services\AlexaService;
-use Cache;
 use Carbon\Carbon;
 use Spatie\Analytics\Period;
 
@@ -26,13 +25,6 @@ class DashboardController extends AdminController
     protected $limit;
 
     /**
-     * Country variable for the regions distribution
-     *
-     * @var mixed
-     */
-    protected $country;
-
-    /**
      * DashboardController constructor.
      */
     public function __construct()
@@ -41,11 +33,11 @@ class DashboardController extends AdminController
         $end = Carbon::now();
         $this->limit = 20;
         $this->period = Period::create($end->copy()->startOfDay()->subDays(30), $end);
-        $this->country = env('GOOGLE_ANALYTICS_COUNTRY');
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @throws \Exception
      */
     public function getIndex()
     {
@@ -74,19 +66,19 @@ class DashboardController extends AdminController
      * @param       $data
      * @param       $fields
      * @param int   $offset
-     * @param array $keywordData
+     * @param array $kw
      *
      * @return \Illuminate\Support\Collection
      */
-    protected function makeCollection($data, $fields, $offset = 1, array $keywordData = []): \Illuminate\Support\Collection
+    protected function makeCollection($data, $fields, $offset = 1, array $kw = []): \Illuminate\Support\Collection
     {
         if ($data === null) {
             return collect([]);
         }
         foreach ($data as $pageRow) {
-            $keywordData[] = [$fields[0] => $pageRow[0], $fields[1] => $pageRow[$offset]];
+            $kw[] = [$fields[0] => $pageRow[0], $fields[1] => $pageRow[$offset]];
         }
-        return collect($keywordData);
+        return collect($kw);
     }
 
     /**
@@ -206,27 +198,6 @@ class DashboardController extends AdminController
     }
 
     /**
-     * @param array $visits
-     *
-     * @return false|string
-     */
-    private function getRegions(array $visits = [])
-    {
-        $options = [
-            'dimensions' => 'ga:country, ga:region',
-            'sort' => '-ga:visits',
-            'filters' => 'ga:country==' . $this->country . ''
-        ];
-        $array = $this->query($options);
-        if (\count($array)) {
-            foreach ($array as $k => $v) {
-                $visits[$k] = [str_replace(' Province', '', $v[1]), (int) $v[2]];
-            }
-        }
-        return json_encode($visits);
-    }
-
-    /**
      * @return array
      */
     private function getAverages(): array
@@ -246,10 +217,11 @@ class DashboardController extends AdminController
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     private function getStatistics()
     {
-        return Cache::remember('analytics', $this->getCache(), function () {
+        return cache()->remember('analytics', $this->getCache(), function () {
             return [
                 'alexa' => AlexaService::getAlexaRank(env('APP_URL')),
                 'referrers' => Analytics::fetchTopReferrers($this->period, $this->limit),
@@ -263,7 +235,6 @@ class DashboardController extends AdminController
                 'os' => $this->getOperatingSystems(),
                 'countries' => $this->getCountries(),
                 'visits' => $this->getDailyVisits(),
-                'regions' => $this->getRegions(),
                 'keywords' => $this->getTopKeywords(),
                 'averages' => $this->getAverages()
             ];
@@ -272,10 +243,11 @@ class DashboardController extends AdminController
 
     /**
      * @return mixed
+     * @throws \Exception
      */
     private function getToday()
     {
-        return Cache::remember('today', $this->getCache(), function () {
+        return cache()->remember('today', $this->getCache(), function () {
             try {
                 $this->period = Period::create(Carbon::now()->startOfDay(), Carbon::now());
                 return $this->getTotalVisits();

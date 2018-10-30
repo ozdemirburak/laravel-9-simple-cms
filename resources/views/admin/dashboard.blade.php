@@ -46,14 +46,10 @@
                         <div class="card-content"><div class="chart right-charts" id="visitor-chart"></div></div>
                     </div>
                     <div class="card">
-                        <header class="card-header"><p class="card-header-title">{{ __('admin.fields.dashboard.region_visitors') }}</p></header>
-                        <div class="card-content"><div id="region-map"></div></div>
+                        <header class="card-header"><p class="card-header-title">{{ __('admin.fields.dashboard.world_visitors') }}</p></header>
+                        <div class="card-content"><div id="world-map"></div></div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <header class="card-header"><p class="card-header-title">{{ __('admin.fields.dashboard.world_visitors') }}</p></header>
-                <div class="card-content"><div id="world-map"></div></div>
             </div>
         </div>
     </section>
@@ -84,10 +80,8 @@
           redraw: true
         });
       });
-      google.charts.load("visualization", "1", {packages:["geochart"], mapsApiKey: '{{ env('GOOGLE_MAPS_API_KEY') }}'});
-      google.charts.setOnLoadCallback(drawRegionsMap);
-      google.charts.setOnLoadCallback(drawLocalRegionsMap);
-      function drawRegionsMap() {
+      google.charts.load("visualization", "1", {packages:["geochart"]});
+      google.charts.setOnLoadCallback(function () {
         var data = new google.visualization.DataTable();
         data.addColumn('string', '{{ __('admin.fields.dashboard.chart_country') }}');
         data.addColumn('number', '{{ __('admin.fields.dashboard.chart_visitors') }}');
@@ -100,21 +94,6 @@
         };
         var chart = new google.visualization.GeoChart(document.getElementById('world-map'));
         chart.draw(data, options);
-      }
-      function drawLocalRegionsMap(){
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '{{ __('admin.fields.dashboard.chart_region') }}');
-        data.addColumn('number', '{{ __('admin.fields.dashboard.chart_visitors') }}');
-        data.addRows({!! $statistics['regions'] !!});
-        var options = {
-          colorAxis: {colors: ['#92c1dc', '#2d688a']},
-          backgroundColor: '#55a9bc',
-          legend:  {textStyle: {color: '#000', fontName: 'sans-serif'}},
-          displayMode: 'markers',
-          region: '{{  env('GOOGLE_ANALYTICS_COUNTRY_CODE') }}'
-        };
-        var chart = new google.visualization.GeoChart(document.getElementById('region-map'));
-        chart.draw(data, options);
-      }
+      });
     </script>
 @endsection

@@ -12,7 +12,7 @@
                 <div class="content">
                     <p class="title is-5">{{ __('application.footer.latest') }}</p>
                     @foreach (getFooterArticles(3) as $article)
-                        <p><a href="{{ $article->link }}">{{ $article->title }}{{ $article->title }}</a></p>
+                        <p><a href="{{ $article->link }}">{{ $article->title }}</a></p>
                     @endforeach
                 </div>
             </div>
