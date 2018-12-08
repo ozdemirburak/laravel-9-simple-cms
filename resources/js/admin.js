@@ -21,7 +21,8 @@ $(function() {
       ['link', 'insertImage', 'base64', 'noembed'],
       ['preformatted', 'backColor', 'strong', 'em', 'del', 'unorderedList'],
       ['viewHTML']
-    ]
+    ],
+    resetCss: true
   });
   $('.file-input').on('change', function () {
     $(this).parent().find('.file-name').removeClass('is-hidden').text(this.value.replace(/.*[\/\\]/, ''));
