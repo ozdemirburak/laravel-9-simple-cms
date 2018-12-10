@@ -21,7 +21,7 @@
 @endsection
 
 @section('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ asset(mix('dist/js/admin.js')) }}" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="{{ asset($dir.'/js/elfinder.min.js') }}"></script>
     <script type="text/javascript" charset="utf-8">
