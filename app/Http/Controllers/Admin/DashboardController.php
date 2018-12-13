@@ -31,7 +31,7 @@ class DashboardController extends AdminController
     {
         parent::__construct();
         $end = Carbon::now();
-        $this->limit = 20;
+        $this->limit = 10;
         $this->period = Period::create($end->copy()->startOfDay()->subDays(30), $end);
     }
 

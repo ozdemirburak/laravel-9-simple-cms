@@ -45,10 +45,6 @@
                         <header class="card-header"><p class="card-header-title">{{ __('admin.fields.dashboard.visits') }}</p></header>
                         <div class="card-content"><div class="chart right-charts" id="visitor-chart"></div></div>
                     </div>
-                    <div class="card">
-                        <header class="card-header"><p class="card-header-title">{{ __('admin.fields.dashboard.world_visitors') }}</p></header>
-                        <div class="card-content"><div id="world-map"></div></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +54,6 @@
 @section('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
       $('#tab-header ul li').on('click', function() {
         $('#tab-header ul li').removeClass('is-active');
@@ -79,21 +74,6 @@
           resize: true,
           redraw: true
         });
-      });
-      google.charts.load("visualization", "1", {packages:["geochart"]});
-      google.charts.setOnLoadCallback(function () {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '{{ __('admin.fields.dashboard.chart_country') }}');
-        data.addColumn('number', '{{ __('admin.fields.dashboard.chart_visitors') }}');
-        data.addRows({!! $statistics['countries'] !!});
-        var options = {
-          colors:['#c8e0ed','#24536e'],
-          backgroundColor: '#f9f9f9',
-          datalessRegionColor: '#e5e5e5',
-          legend:  {textStyle: {fontName: 'sans-serif'}}
-        };
-        var chart = new google.visualization.GeoChart(document.getElementById('world-map'));
-        chart.draw(data, options);
       });
     </script>
 @endsection
