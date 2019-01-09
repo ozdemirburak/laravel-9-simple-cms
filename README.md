@@ -117,7 +117,6 @@ update the assets for you.
 ## User Guide
 
 * [How to Create a New Resource](#u1)
-* [How to Deploy](#u2)
 
 -----
 <a name="u1"></a>
@@ -144,13 +143,6 @@ Added route to: routes/admin.php
 Added resource language key to: resources/lang/en/resources.php
 Added model binding to: app/Providers/RouteServiceProvider.php
 ```
-
------
-<a name="u2"></a>
-### How to Deploy 
-
-I have showed all the required steps in detail for a deployment with Git and Capistrano from scratch on my blog.
-You can check it on: [https://ozdemirburak.com/a/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server](https://ozdemirburak.com/a/deploying-laravel-projects-with-git-and-capistrano-to-nginx-server)
 
 -----
 <a name="item5"></a>
