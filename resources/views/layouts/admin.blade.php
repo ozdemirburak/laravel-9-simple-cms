@@ -16,7 +16,6 @@
 @yield('content')
 @if($currentUser = auth()->user())@include('partials.admin.breadcrumbs')@endif
 <script src="{{ asset(mix('dist/js/admin.js')) }}" type="text/javascript"></script>
-<script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>
 @hasSection('scripts')@yield('scripts')@endif
 </body>
 </html>

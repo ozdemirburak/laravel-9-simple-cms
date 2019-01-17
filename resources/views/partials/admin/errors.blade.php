@@ -3,8 +3,8 @@
         <div class="message-body">
             @foreach ($errors->all() as $error)
                 <p class="help is-danger">
-                    <span class="icon">{!! icon('warning') !!}</span>
-                    <span>{{ $error }}</span>
+                    <span class="icon">{!! icon('alert-circle') !!}</span>
+                    <span class="text">{{ $error }}</span>
                 </p>
             @endforeach
         </div>

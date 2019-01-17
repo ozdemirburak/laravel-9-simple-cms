@@ -161,3 +161,19 @@ if (!function_exists('active')) {
         return strpos(request()->url(), $object->$property) !== false ? 'is-active' : '';
     }
 }
+
+if (!function_exists('icon')) {
+    /**
+     * @param string $icon
+     * @param null   $class
+     *
+     * @return string
+     */
+    function icon($icon, $class = null)
+    {
+        if ($class === null) {
+            return '<i data-feather="' . $icon . '"></i>';
+        }
+        return '<i class="' . $class . '" data-feather="' . $icon . '"></i>';
+    }
+}

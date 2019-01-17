@@ -10,27 +10,32 @@ class SitemapService
     /**
      * @var int
      */
-    protected static $cacheDuration = 1440;
+    private $cacheDuration = 1440;
+
+    /**
+     * @var string
+     */
+    private $xml;
 
     /**
      * @return mixed
      * @throws \Exception
      */
-    public static function render()
+    public function render()
     {
-        return cache()->remember('sitemap_events', static::$cacheDuration, function () {
-            $xml = static::init();
-            static::addUrl($xml, route('root'), static::getToday(), 'daily', '1.0');
-            Page::all()->each(function ($p) use (&$xml) {
-                static::addUrl($xml, $p->link, static::getToday(), 'daily', '1.0');
+        return cache()->remember('sitemap', $this->cacheDuration, function () {
+            $this->init();
+            $this->addUrl(route('root'));
+            Page::all()->each(function ($p) {
+                $this->addUrl($p->link, $p->updated_at);
             });
-            Category::with('articles')->get()->each(function ($c) use (&$xml) {
-                static::addUrl($xml, $c->link, static::getToday(), 'daily', '1.0');
-                $c->articles->each(function ($a) use (&$xml) {
-                    static::addUrl($xml, $a->link, static::getToday(), 'daily', '1.0');
+            Category::with('articles')->get()->each(function ($c) {
+                $this->addUrl($c->link);
+                $c->articles->each(function ($a) {
+                    $this->addUrl($a->link, $a->updated_at);
                 });
             });
-            return static::end($xml);
+            return $this->end();
         });
     }
 
@@ -39,61 +44,38 @@ class SitemapService
      *
      * @return string
      */
-    private static function init($set = 'urlset') : string
+    private function init($set = 'urlset') : string
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= '<'. $set .' xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        return $xml;
+        $this->xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $this->xml .= '<'. $set .' xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        return $this->xml;
     }
 
     /**
-     * @param        $xml
      * @param string $set
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
-    private static function end($xml, $set = 'urlset')
+    private function end($set = 'urlset')
     {
-        $xml .= '</'. $set . '>';
-        return response($xml)->header('Content-Type', 'application/xml');
+        $this->xml .= '</'. $set . '>';
+        return response($this->xml)->header('Content-Type', 'application/xml');
     }
 
     /**
-     * @param        $xml
-     * @param        $loc
-     * @param        $lastmod
-     * @param string $changefreq
-     * @param float  $priority
-     */
-    private static function addUrl(&$xml, $loc, $lastmod, $changefreq = 'monthly', $priority = 0.9): void
-    {
-        $xml .= '<url>';
-        $xml .= '<loc>' . $loc . '</loc>';
-        $xml .= '<lastmod>' . $lastmod . '</lastmod>';
-        $xml .= '<changefreq>' . $changefreq .'</changefreq>';
-        $xml .= '<priority>' . $priority . '</priority>';
-        $xml .= '</url>';
-    }
-
-
-    /**
-     * @param $xml
-     * @param $loc
-     * @param $lastmod
-     */
-    private static function addSitemap(&$xml, $loc, $lastmod): void
-    {
-        $xml .= '<sitemap>';
-        $xml .= '<loc>' . $loc . '</loc>';
-        $xml .= '<lastmod>' . $lastmod . '</lastmod>';
-        $xml .= '</sitemap>';
-    }
-
-    /**
+     * @param string $loc
+     * @param string $lastmod
+     *
      * @return string
      */
-    private static function getToday() : string
+    private function addUrl($loc, $lastmod = null): string
     {
-        return now()->startOfDay()->hour(7)->toAtomString();
+        $this->xml .= '<url>';
+        $this->xml .= '<loc>' . $loc . '</loc>';
+        if ($lastmod !== null) {
+            $this->xml .= '<lastmod>' . $lastmod . '</lastmod>';
+        }
+        $this->xml .= '</url>';
+        return $this->xml;
     }
 }

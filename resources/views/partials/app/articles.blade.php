@@ -15,7 +15,7 @@
             </div>
             <div class="columns is-vcentered">
                 <div class="column is-9">
-                    <a class="button is-link" href="{{ $article->link }}">{{ __('application.read_more') }}</a>
+                    <a class="button is-link" href="{{ $article->link }}">{{ __('app.read_more') }}</a>
                 </div>
                 <div class="column is-3 has-text-right-desktop">
                     <p class="has-text-grey">{{ $article->localized_published_at }}</p>

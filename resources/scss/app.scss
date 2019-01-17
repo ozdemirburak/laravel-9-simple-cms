@@ -1,7 +1,8 @@
-@import "application/_variables";
+@import "app/_variables";
 @import "../../node_modules/bulma/bulma";
-@import "application/_overrides";
-@import "application/utilities";
+@import "app/_overrides";
+@import "app/_icons";
+@import "app/_utilities";
 
 iframe {
   border: 0;

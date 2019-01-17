@@ -9,9 +9,9 @@
         <div class="container is-fluid">
             <section class="info-tiles">
                 <div class="tile is-ancestor has-text-centered">
-                    @include('partials.admin.dashboard.tile', ['icon' => 'person',  'value' => formatNumber($today), 'key' => 'visits_today'])
-                    @include('partials.admin.dashboard.tile', ['icon' => 'people', 'value' => formatNumber($statistics['total_visits']), 'key' => 'total_visits'])
-                    @include('partials.admin.dashboard.tile', ['icon' => 'redo', 'value' => $statistics['averages']['bounce'] . '%', 'key' => 'bounce_rate'])
+                    @include('partials.admin.dashboard.tile', ['icon' => 'user',  'value' => formatNumber($today), 'key' => 'visits_today'])
+                    @include('partials.admin.dashboard.tile', ['icon' => 'users', 'value' => formatNumber($statistics['total_visits']), 'key' => 'total_visits'])
+                    @include('partials.admin.dashboard.tile', ['icon' => 'corner-down-left', 'value' => $statistics['averages']['bounce'] . '%', 'key' => 'bounce_rate'])
                     @include('partials.admin.dashboard.tile', ['icon' => 'globe', 'value' => formatNumber($statistics['alexa'][1]), 'key' => 'alexa_world'])
                 </div>
             </section>
@@ -19,14 +19,14 @@
                 <div class="column is-6">
                     <div class="tabs is-boxed" id="tab-header">
                         <ul>
-                            @include('partials.admin.dashboard.tab_header', ['isActive' => 'is-active', 'id' => 'pages', 'icon' => 'document'])
-                            @include('partials.admin.dashboard.tab_header', ['id' => 'keywords', 'icon' => 'key'])
+                            @include('partials.admin.dashboard.tab_header', ['isActive' => 'is-active', 'id' => 'pages', 'icon' => 'book'])
+                            @include('partials.admin.dashboard.tab_header', ['id' => 'keywords', 'icon' => 'eye'])
                             @include('partials.admin.dashboard.tab_header', ['id' => 'entrance-pages', 'icon' => 'log-in'])
                             @include('partials.admin.dashboard.tab_header', ['id' => 'exit-pages', 'icon' => 'log-out'])
                             @include('partials.admin.dashboard.tab_header', ['id' => 'time-pages', 'icon' => 'clock'])
-                            @include('partials.admin.dashboard.tab_header', ['id' => 'traffic-sources', 'icon' => 'bulb'])
-                            @include('partials.admin.dashboard.tab_header', ['id' => 'browsers', 'icon' => 'browsers'])
-                            @include('partials.admin.dashboard.tab_header', ['id' => 'os', 'icon' => 'laptop'])
+                            @include('partials.admin.dashboard.tab_header', ['id' => 'traffic-sources', 'icon' => 'square'])
+                            @include('partials.admin.dashboard.tab_header', ['id' => 'browsers', 'icon' => 'chrome'])
+                            @include('partials.admin.dashboard.tab_header', ['id' => 'os', 'icon' => 'hard-drive'])
                         </ul>
                     </div>
                     <div id="tab-container">

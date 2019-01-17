@@ -20,7 +20,7 @@ Basic boilerplate content management system for starters, supports Laravel 5.7.
   * Page, category, and article management
   * [Trumbowyg](https://alex-d.github.io/Trumbowyg/) as the WYSIWYG editor
   * [elFinder](https://studio-42.github.io/elFinder/) as the file manager
-  * [Ionicons](https://ionicons.com/) as the icon package
+  * [Feather Icons](https://feathericons.com) as the icon package
 * Front-end
   * Custom template with Bulma
   * View pages, articles and categories

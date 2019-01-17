@@ -1,0 +1,29 @@
+[class*=" icon"], [class^=icon] {
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  line-height: 1;
+  position: relative;
+  top: -.05em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+span.text {
+  vertical-align: middle;
+}
+
+.button .icon:first-child:not(:last-child) {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.icon.is-large {
+  top: 0.22em;
+}
+
+.control.has-icons-left .icon, .control.has-icons-right .icon {
+  top: 0.5em;
+  padding-left: 0.25em;
+}

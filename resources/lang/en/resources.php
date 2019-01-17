@@ -9,7 +9,6 @@ return [
     */
 
     'article' => [
-        'all'    => 'All Articles',
         'create' => 'Create article',
         'edit'   => 'Edit article',
         'fields' => [
@@ -23,7 +22,6 @@ return [
         'show'   => 'Show article'
     ],
     'category' => [
-        'all'    => 'All Categories',
         'create' => 'Create category',
         'edit'   => 'Edit category',
         'fields' => [
@@ -66,7 +64,6 @@ return [
         'index' => 'File Manager',
     ],
     'page' => [
-        'all'    => 'All Pages',
         'create' => 'Create page',
         'edit'   => 'Edit page',
         'fields' => [
@@ -84,7 +81,6 @@ return [
         ]
     ],
     'user' => [
-        'all'    => 'All Users',
         'create' => 'Create user',
         'edit'   => 'Edit user',
         'fields' => [

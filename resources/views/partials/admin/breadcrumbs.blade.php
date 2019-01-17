@@ -3,7 +3,7 @@
     @php $index = substr($route, 0, strrpos($route, '.') + 1) . 'index' @endphp
     <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
         <ul>
-            <li><a href="{{ route('root') }}">{{ __('application.home') }}</a></li>
+            <li><a href="{{ route('root') }}">{{ config('settings.site_title') }}</a></li>
             <li><a href="{{ route('admin.dashboard.index') }}">{{ __('admin.dashboard.index') }}</a></li>
             @if (strpos($route, 'root') === false && Route::has($index))
                 @php $isIndex = strpos($route, 'index') !== false @endphp

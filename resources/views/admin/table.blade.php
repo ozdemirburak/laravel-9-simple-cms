@@ -9,7 +9,7 @@
                         {{ __(Route::getCurrentRoute()->getName()) }}
                         @if (isset($link))
                             <a class="navbar-item" href="{{ $link }}">
-                                <span class="icon">{!! icon('add') !!}</span>
+                                <span class="icon">{!! icon('plus') !!}</span>
                             </a>
                         @endif
                     </p>

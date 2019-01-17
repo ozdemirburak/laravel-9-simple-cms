@@ -18,7 +18,7 @@
     <meta name="twitter:description" content="@yield('description')">
     <meta name="twitter:image" content="@yield('image')">
     <meta name="twitter:url" content="{{ request()->url() }}">
-    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="token" content="{{ csrf_token() }}">
     <meta itemprop="name" content="@yield('title')">
     <meta itemprop="description" content="@yield('description')">
     <meta itemprop="image" content="@yield('image')">
@@ -31,18 +31,18 @@
     <meta name="msapplication-TileColor" content="#336699">
     <meta name="msapplication-config" content="{{ asset('i/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#336699">
-    <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/application.css')) }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/app.css')) }}">
     @hasSection('canonical')<link rel="canonical" href="@yield('canonical')">@endif
-    <script src="{{ asset(mix('dist/js/application.js')) }}"></script>
-    @if (config('settings.analytics_id') !== null)
+    <script src="{{ asset(mix('dist/js/app.js')) }}"></script>
+    @if (env('APP_ENV') !== 'local' && config('settings.analytics_id') !== null)
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('settings.analytics_id') }}"></script>
-        <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ config('settings.analytics_id') }}');</script>
+        <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ config('settings.analytics_id') }}', {'anonymize_ip': true});</script>
     @endif
 </head>
 <body>
-@include('partials.application.nav')
+@include('partials.app.nav')
 @yield('content')
-@include('partials.application.footer')
+@include('partials.app.footer')
 @hasSection('scripts')@yield('scripts')@endif
 </body>
 </html>

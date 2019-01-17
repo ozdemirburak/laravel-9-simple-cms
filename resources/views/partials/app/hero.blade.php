@@ -1,4 +1,4 @@
-<section class="hero is-primary">
+<section class="hero is-primary {{ $class ?? '' }}">
     <div class="hero-body">
         <div class="container">
             <div class="columns">
@@ -10,4 +10,4 @@
         </div>
     </div>
 </section>
-@include('partials.application.errors')
+@include('partials.app.errors')

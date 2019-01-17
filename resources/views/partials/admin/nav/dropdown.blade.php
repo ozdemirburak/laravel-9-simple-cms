@@ -6,7 +6,7 @@
     <div class="navbar-dropdown">
         @if (empty($items))
             <a class="navbar-item" href="{{ route('admin.' . $resource . '.create') }}">
-                <span class="icon">{!! icon('add') !!}</span>
+                <span class="icon">{!! icon('plus') !!}</span>
                 <span>{{ __('admin.' . $resource . '.create') }}</span>
             </a>
             @if(!empty($extra))
@@ -19,7 +19,7 @@
             @endif
             <a class="navbar-item" href="{{ route('admin.' . $resource . '.index') }}">
                 <span class="icon">{!! icon('list') !!}</span>
-                <span>{{ __('admin.' . $resource . '.all') }}</span>
+                <span>{{ __('admin.' . $resource . '.index') }}</span>
             </a>
         @else
             @foreach ($items as $text => $values)

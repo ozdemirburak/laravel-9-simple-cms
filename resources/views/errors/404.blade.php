@@ -1,8 +1,8 @@
-@extends('layouts.application')
+@extends('layouts.app')
 
 @section('title'){{ getTitle($t = __('http.404.title')) }}@endsection
 @section('description'){{ getDescription($d = __('http.404.description')) }}@endsection
 
 @section('content')
-    @include('partials.application.hero', ['title' => $t, 'description' => $d])
+    @include('partials.app.hero', ['title' => $t, 'description' => $d, 'class' => 'is-large'])
 @endsection

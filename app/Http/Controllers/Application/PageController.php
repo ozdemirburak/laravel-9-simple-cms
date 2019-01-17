@@ -15,7 +15,7 @@ class PageController extends Controller
      */
     public function getIndex()
     {
-        return view('application.articles', [
+        return view('app.articles', [
             'title' => getTitle(),
             'description' => getDescription(),
             'articles' => Article::published()->paginate(4)
@@ -29,7 +29,7 @@ class PageController extends Controller
      */
     public function getCategory(Category $category)
     {
-        return view('application.articles', [
+        return view('app.articles', [
             'title' => $category->title,
             'description' => $category->description,
             'articles' => Article::where('category_id', $category->id)->paginate(4)
@@ -43,7 +43,7 @@ class PageController extends Controller
      */
     public function getPage(Page $page)
     {
-        return view('application.content', ['object' => $page]);
+        return view('app.content', ['object' => $page]);
     }
 
     /**
@@ -53,7 +53,7 @@ class PageController extends Controller
      */
     public function getArticle(Article $article)
     {
-        return view('application.content', ['object' => $article]);
+        return view('app.content', ['object' => $article]);
     }
 
     /**
@@ -62,6 +62,6 @@ class PageController extends Controller
      */
     public function getSitemap()
     {
-        return SitemapService::render();
+        return app()->make(SitemapService::class)->render();
     }
 }

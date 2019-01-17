@@ -1,11 +1,12 @@
 window.$ = window.jQuery = require('jquery');
 
-const trumbowyg = require('trumbowyg'),
-  base64 = require('trumbowyg/plugins/base64/trumbowyg.base64.js'),
-  noembed = require('trumbowyg/plugins/noembed/trumbowyg.noembed.js'),
-  preformatted = require('trumbowyg/plugins/preformatted/trumbowyg.preformatted.js'),
-  colors = require('trumbowyg/plugins/colors/trumbowyg.colors.js'),
-  flatpickr = require('flatpickr');
+const trumbowyg = require('trumbowyg');
+const base64 = require('trumbowyg/plugins/base64/trumbowyg.base64.js');
+const noembed = require('trumbowyg/plugins/noembed/trumbowyg.noembed.js');
+const preformatted = require('trumbowyg/plugins/preformatted/trumbowyg.preformatted.js');
+const colors = require('trumbowyg/plugins/colors/trumbowyg.colors.js');
+const flatpickr = require('flatpickr');
+const feather = require('feather-icons');
 
 require('datatables.net');
 require('datatables.net-buttons');
@@ -27,4 +28,5 @@ $(function() {
   $('.file-input').on('change', function () {
     $(this).parent().find('.file-name').removeClass('is-hidden').text(this.value.replace(/.*[\/\\]/, ''));
   });
+  feather.replace();
 });

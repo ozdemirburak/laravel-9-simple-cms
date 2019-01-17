@@ -14,11 +14,12 @@ class Create{{MODEL_NAME_PLURAL}}Table extends Migration
     {
         Schema::create('{{MODEL_NAME_PLURAL_LOWERCASE}}', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug')->index();
+            $table->string('slug');
             $table->string('title');
             $table->string('description');
             $table->text('content');
             $table->timestamps();
+            $table->index('slug');
         });
     }
 

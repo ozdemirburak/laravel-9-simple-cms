@@ -1,6 +1,5 @@
 ,
     '{{MODEL_NAME_SNAKECASE}}' => [
-        'all'    => 'All {{MODEL_NAME_PLURAL}}',
         'create' => 'Create a {{MODEL_NAME}}',
         'edit'   => 'Edit a {{MODEL_NAME}}',
         'fields' => [

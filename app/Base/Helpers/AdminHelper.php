@@ -57,15 +57,3 @@ if (!function_exists('formatNumber')) {
         return strpos($number, ',') !== false ? rtrim(rtrim($number, '0'), ',') : $number;
     }
 }
-
-if (!function_exists('icon')) {
-    /**
-     * @param string $icon
-     *
-     * @return string
-     */
-    function icon($icon)
-    {
-        return '<ion-icon name="' . $icon . '"></ion-icon>';
-    }
-}
