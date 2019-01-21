@@ -62,9 +62,9 @@ class Resource extends Command
      */
     private function generateMigration(): void
     {
-        [$rtcp, $now] = [str_plural($this->rtc), now()];
+        [$rscp, $now] = [str_plural($this->rsc), now()];
         $result = File::put(
-            $f = 'database/migrations/' . $now->format('Y_m_d') . '_000000_create_' . strtolower($rtcp) . '_table.php',
+            $f = 'database/migrations/' . $now->format('Y_m_d') . '_000000_create_' . $rscp . '_table.php',
             $this->replaceStub('migration')
         );
         $this->printMessage($result, $f);
@@ -138,7 +138,7 @@ class Resource extends Command
         $result = File::put(
             $f = 'resources/lang/' . config('app.locale') . '/resources.php',
             trim(str_replace($char = '];' . PHP_EOL, '', File::get($f)), "\t\n\r,") .
-                $this->replaceStub('language') . $char
+            $this->replaceStub('language') . $char
         );
         $this->printMessage($result, $f, 'Added resource language key to:', 'Could not add language key to', $f);
     }
@@ -208,7 +208,7 @@ class Resource extends Command
     {
         return str_replace(
             ['{{MODEL_NAME}}', '{{MODEL_NAME_SNAKECASE}}', '{{MODEL_NAME_PLURAL}}', '{{MODEL_NAME_PLURAL_LOWERCASE}}'],
-            [$this->rtc, $this->rsc, $rtcp = str_plural($this->rtc), strtolower($rtcp)],
+            [$this->rtc, $this->rsc, $rtcp = str_plural($this->rtc), str_plural($this->rsc)],
             File::get(storage_path('stubs/' . $stub))
         );
     }
