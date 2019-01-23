@@ -6,7 +6,14 @@
                 <div class="file-icon">{!! icon('upload-cloud') !!}</div>
                 <div class="file-label">{{ __('admin.fields.' . $attribute) }}</div>
             </div>
-            <div class="file-name is-hidden"></div>
+            @if (isset(${$resource}->$attribute))
+                <div class="file-name">
+                    <a target="_blank" rel="noopener" href="{{ asset(${$resource}->$attribute) }}">{{ ${$resource}->$attribute }}</a>
+                </div>
+            @else
+                <div class="file-name is-hidden"></div>
+            @endif
         </label>
     </div>
 </div>
+
