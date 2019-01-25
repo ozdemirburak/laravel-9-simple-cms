@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "bulma": "^0.7.2",
-    "clipboard": "^1.7.1",
     "datatables-bulma": "^1.0.1",
     "datatables.net": "^1.10.19",
     "datatables.net-buttons": "^1.5.4",
