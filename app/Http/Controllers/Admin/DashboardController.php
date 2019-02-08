@@ -172,7 +172,7 @@ class DashboardController extends AdminController
     private function getCountries(array $visits = [])
     {
         $array = $this->query(['dimensions' => 'ga:country', 'sort' => '-ga:visits']);
-        if (\count($array)) {
+        if (!empty($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k] = [$v[0], (int) $v[1]];
             }
@@ -188,7 +188,7 @@ class DashboardController extends AdminController
     private function getDailyVisits(array $visits = [])
     {
         $array = $this->query(['dimensions' => 'ga:date']);
-        if (\count($array)) {
+        if (!empty($array)) {
             foreach ($array as $k => $v) {
                 $visits[$k]['date'] = Carbon::parse($v['0'])->format('Y-m-d');
                 $visits[$k]['visits'] = $v['1'];
