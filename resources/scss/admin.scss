@@ -7,11 +7,6 @@
 @import "admin/_overrides";
 @import "admin/_buttons";
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-}
-
 .box {
   margin-top: 5rem;
 }
@@ -56,6 +51,22 @@ p {
 table.dataTable thead>tr>td.sorting, table.dataTable thead>tr>td.sorting_asc, table.dataTable thead>tr>td.sorting_desc, table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_desc {
   padding-right: 0;
   text-align: left;
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_desc_disabled:after {
+  font-family: $body-family;
+}
+
+table.dataTable thead .sorting:after {
+  content: "\2195";
+}
+
+table.dataTable thead .sorting_asc:after {
+  content: "\2191";
+}
+
+table.dataTable thead .sorting_desc:after {
+  content: "\2193";
 }
 
 #dataTableBuilder_processing {
