@@ -1,5 +1,5 @@
 # Laravel 5 Simple CMS
-Basic boilerplate content management system for starters, supports Laravel 5.7.
+Basic boilerplate content management system for starters, supports Laravel 5.8.
 
 -----
 ## Table of Contents
