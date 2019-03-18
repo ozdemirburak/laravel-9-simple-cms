@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 use Storage;
 
 abstract class AdminController extends Controller
@@ -171,7 +172,7 @@ abstract class AdminController extends Controller
      */
     protected function uploadAndGetPath(UploadedFile $file): string
     {
-        $subfolder = str_plural(mb_strtolower($this->model));
+        $subfolder = Str::plural(mb_strtolower($this->model));
         $path = Storage::disk('uploads')->putFile($subfolder, $file);
         $fullPath = Storage::disk('uploads')->getAdapter()->applyPathPrefix($path);
         [$host, $uploadPath] = explode('/public/', $fullPath);
@@ -185,7 +186,7 @@ abstract class AdminController extends Controller
      */
     protected function getUploadPath(): string
     {
-        return implode(DIRECTORY_SEPARATOR, [$this->uploadPath, str_plural(strtolower($this->getModel()))]);
+        return implode(DIRECTORY_SEPARATOR, [$this->uploadPath, Str::plural(strtolower($this->getModel()))]);
     }
 
     /**

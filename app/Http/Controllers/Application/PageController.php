@@ -57,11 +57,13 @@ class PageController extends Controller
     }
 
     /**
+     * @param \App\Base\Services\SitemapService $sitemapService
+     *
      * @return mixed
      * @throws \Exception
      */
-    public function getSitemap()
+    public function getSitemap(SitemapService $sitemapService)
     {
-        return app()->make(SitemapService::class)->render();
+        return $sitemapService->render();
     }
 }

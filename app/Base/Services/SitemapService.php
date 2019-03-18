@@ -10,7 +10,7 @@ class SitemapService
     /**
      * @var int
      */
-    private $cacheDuration = 1440;
+    private $cacheDuration = 86400;
 
     /**
      * @var string
