@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Contracts\Console\Kernel;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
@@ -16,7 +16,7 @@ class TestCase extends BaseTestCase
     protected $baseUrl = 'http://localhost';
 
     /**
-     * @var \App\User
+     * @var \App\Models\User
      */
     protected $user;
 
