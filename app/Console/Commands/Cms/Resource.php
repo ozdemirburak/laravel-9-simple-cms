@@ -4,6 +4,7 @@ namespace App\Console\Commands\Cms;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class Resource extends Command
 {
@@ -62,7 +63,7 @@ class Resource extends Command
      */
     private function generateMigration(): void
     {
-        [$rscp, $now] = [str_plural($this->rsc), now()];
+        [$rscp, $now] = [Str::plural($this->rsc), now()];
         $result = File::put(
             $f = 'database/migrations/' . $now->format('Y_m_d') . '_000000_create_' . $rscp . '_table.php',
             $this->replaceStub('migration')
@@ -208,7 +209,7 @@ class Resource extends Command
     {
         return str_replace(
             ['{{MODEL_NAME}}', '{{MODEL_NAME_SNAKECASE}}', '{{MODEL_NAME_PLURAL}}', '{{MODEL_NAME_PLURAL_LOWERCASE}}'],
-            [$this->rtc, $this->rsc, $rtcp = str_plural($this->rtc), str_plural($this->rsc)],
+            [$this->rtc, $this->rsc, $rtcp = Str::plural($this->rtc), Str::plural($this->rsc)],
             File::get(storage_path('stubs/' . $stub))
         );
     }

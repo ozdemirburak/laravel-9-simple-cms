@@ -10,6 +10,7 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
     'name' => env('APP_NAME', 'Laravel 5 Simple CMS'),
@@ -25,7 +26,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'local'),
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,6 +53,8 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    'asset_url' => env('ASSET_URL', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -91,6 +94,19 @@ return [
     */
 
     'fallback_locale' => 'en',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Faker Locale
+    |--------------------------------------------------------------------------
+    |
+    | This locale will be used by the Faker PHP library when generating fake
+    | data for your database seeds. For example, this will be used to get
+    | localized telephone numbers, street address information and more.
+    |
+    */
+
+    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -147,22 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-
-        /*
-         * Application Custom Service Providers...
-         */
-        App\Providers\CollectionServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,
-
-        /*
-         * Third Party Stuff
+         * Package Service Providers...
          */
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
@@ -170,7 +171,19 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
-        Yajra\DataTables\DatatablesServiceProvider::class
+        Yajra\DataTables\DatatablesServiceProvider::class,
+
+        /*
+         * Application Service Providers...
+         */
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\CollectionServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+
     ],
 
     /*
@@ -186,10 +199,8 @@ return [
 
     'aliases' => [
 
-        /*
-         * Laravel Framework Aliases...
-         */
         'App' => Illuminate\Support\Facades\App::class,
+        'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
@@ -219,18 +230,11 @@ return [
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
+        'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        /*
-         * Custom Third Party Aliases...
-         */
-        'Analytics'   => Spatie\Analytics\AnalyticsFacade::class,
-        'Datatables'  => Yajra\DataTables\Facades\DataTables::class,
-        'Flash'       => Laracasts\Flash\Flash::class,
-        'PDF'         => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class
     ],
 
 ];
