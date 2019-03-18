@@ -36,7 +36,7 @@ class ApplicationTest extends TestCase
      */
     public function testTitleOnHomePage()
     {
-        $this->visit('/')->see('Blog');
+        $this->visit('/')->see('Laravel 5 Simple CMS');
     }
 
     /**

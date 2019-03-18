@@ -12,7 +12,7 @@ class AdminTest extends TestCase
     public function testDashboard()
     {
         $this->signIn();
-        $this->visit('admin')->seePageIs(env('GOOGLE_ANALYTICS_CONFIGURED') ? 'admin' : 'admin/user');
+        $this->visit('admin')->seePageIs(!empty(env('GOOGLE_ANALYTICS_CREDENTIAL_PATH')) ? 'admin' : 'admin/user');
     }
 
     /**
@@ -30,7 +30,7 @@ class AdminTest extends TestCase
     public function testArticlesCrud()
     {
         $this->signIn();
-        $this->visit('admin')->click('All Articles')->seePageIs('admin/article');
+        $this->visit('admin')->click('Articles')->seePageIs('admin/article');
     }
 
     /**
@@ -39,7 +39,7 @@ class AdminTest extends TestCase
     public function testCategoriesCrud()
     {
         $this->signIn();
-        $this->visit('admin')->click('All Categories')->seePageIs('admin/category');
+        $this->visit('admin')->click('Categories')->seePageIs('admin/category');
     }
 
     /**
@@ -48,6 +48,6 @@ class AdminTest extends TestCase
     public function testPagesCrud()
     {
         $this->signIn();
-        $this->visit('admin')->click('All Pages')->seePageIs('admin/page');
+        $this->visit('admin')->click('Pages')->seePageIs('admin/page');
     }
 }
