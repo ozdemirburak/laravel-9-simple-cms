@@ -71,9 +71,7 @@ abstract class AdminController extends Controller
     {
         $this->validate($request, $this->validation);
         $model = $class::create($this->getData($request, $imageColumn));
-        $this->flash('create', $model->id ? 'success' : 'error');
-        $this->resetCache();
-        return $this->redirectRoutePath($path);
+        return $this->flashRedirect('create', $model->id, $path);
     }
 
     /**
@@ -91,9 +89,7 @@ abstract class AdminController extends Controller
     {
         $this->validate($request, $this->validation);
         $model->fill($this->getData($request, $imageColumn));
-        $this->flash('update', $model->save() ? 'success' : 'error');
-        $this->resetCache();
-        return $this->redirectRoutePath($path);
+        return $this->flashRedirect('update', $model->save(), $path);
     }
 
     /**
@@ -107,7 +103,22 @@ abstract class AdminController extends Controller
      */
     public function destroyFlashRedirect($model, $path = 'index')
     {
-        $this->flash('delete', $model->delete() ? 'success' : 'error');
+        return $this->flashRedirect('delete', $model->delete(), $path);
+    }
+
+    /**
+     * Flash operation and then redirect to path 
+     *
+     * @param        $isSuccess
+     * @param        $operation
+     * @param string $path
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function flashRedirect($operation, $isSuccess, $path = 'index')
+    {
+        $this->flash($operation, $isSuccess ? 'success' : 'fail');
         $this->resetCache();
         return $this->redirectRoutePath($path);
     }
