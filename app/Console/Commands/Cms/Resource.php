@@ -44,7 +44,7 @@ class Resource extends Command
      */
     public function handle()
     {
-        [$this->rtc, $this->rsc] = [ucfirst($this->argument('name')), snake_case($this->argument('name'))];
+        [$this->rtc, $this->rsc] = [ucfirst($this->argument('name')), Str::snake($this->argument('name'))];
         $this->generateMigration();
         $this->generateModel();
         $this->generateDatatable();
