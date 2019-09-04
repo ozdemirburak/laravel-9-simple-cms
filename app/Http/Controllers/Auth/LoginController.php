@@ -44,8 +44,8 @@ class LoginController extends Controller
     protected function validateLogin(Request $request): void
     {
         $rules = [$this->username() => 'required|string', 'password' => 'required|string'];
-        if (!empty(env('GOOGLE_NOCAPTCHA_SECRET')) && strpos(env('GOOGLE_NOCAPTCHA_SECRET'), 'google') === false) {
-            $rules['g-recaptcha-response'] = 'required|captcha';
+        if (!empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false) {
+            $rules['g-recaptcha-response'] = 'required|recaptcha';
         }
         $this->validate($request, $rules);
     }

@@ -26,7 +26,7 @@ $factory->define(\App\Models\User::class, function (Faker $faker) {
 $factory->define(\App\Models\Category::class, function (Faker $faker) {
     return [
         'description' => $faker->sentence(5),
-        'title' => title_case($faker->words(2, true))
+        'title' => Str::title($faker->words(2, true))
     ];
 });
 
@@ -34,7 +34,7 @@ $factory->define(\App\Models\Page::class, function (Faker $faker, $attributes) {
     return [
         'content' => implode('<br/><br/>', $faker->paragraphs(8)),
         'description' => $faker->sentence(6),
-        'title' => title_case($faker->words(2, true))
+        'title' => Str::title($faker->words(2, true))
     ];
 });
 
@@ -44,6 +44,6 @@ $factory->define(\App\Models\Article::class, function (Faker $faker) {
         'content' => implode('<br/><br/>', $faker->paragraphs(8)),
         'description' => $faker->sentence(5),
         'published_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'title' => title_case($faker->words(4, true))
+        'title' => Str::title($faker->words(4, true))
     ];
 });

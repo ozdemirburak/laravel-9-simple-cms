@@ -8,6 +8,8 @@ use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    use CreatesApplication;
+
     /**
      * The base URL to use while testing the application.
      *
@@ -37,17 +39,5 @@ class TestCase extends BaseTestCase
         }
         $this->actingAs($this->user = $user);
         return $this;
-    }
-
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../bootstrap/app.php';
-        $app->make(Kernel::class)->bootstrap();
-        return $app;
     }
 }

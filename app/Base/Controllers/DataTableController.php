@@ -2,6 +2,7 @@
 
 namespace App\Base\Controllers;
 
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 
@@ -303,7 +304,7 @@ abstract class DataTableController extends DataTable
      */
     protected function getModelName(): string
     {
-        return snake_case(class_basename($this->model));
+        return Str::snake(class_basename($this->model));
     }
 
     /**
@@ -317,7 +318,7 @@ abstract class DataTableController extends DataTable
     protected function wrapImage($model, $image_column): string
     {
         $url = asset($model->$image_column);
-        return "<a target='_blank' href='{$url}'><img style='max-height:50px' src='{$url}'/></a>";
+        return "<a target='_blank' href='{$url}'><img alt='Image' style='max-height:50px' src='{$url}'/></a>";
     }
 
     /**

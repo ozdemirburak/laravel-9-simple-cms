@@ -10,7 +10,7 @@
                         <figure class="avatar">
                             <img alt="Avatar" src="{{ config('settings.login_image') }}">
                         </figure>
-                        <form method="POST" action="{{ route('auth.login.post') }}">
+                        <form id="login" method="POST" action="{{ route('auth.login.post') }}">
                             @include('partials.admin.errors')
                             <div class="field">
                                 <div class="control">
@@ -22,11 +22,10 @@
                                     <input class="input is-large" type="password" name="password" placeholder="{{ __('auth.login.password') }}">
                                 </div>
                             </div>
-                            @if (!empty(env('GOOGLE_NOCAPTCHA_SECRET')) && strpos(env('GOOGLE_NOCAPTCHA_SECRET'), 'google') === false)
+                            @if (!empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false)
                                 <div class="field has-addons has-addons-centered">
                                     <div class="control">
-                                        {!! NoCaptcha::display() !!}
-                                        {!! NoCaptcha::renderJs() !!}
+                                        {!! htmlFormSnippet() !!}
                                     </div>
                                 </div>
                             @endif
@@ -45,4 +44,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    {!! htmlScriptTagJsApi('login') !!}
 @endsection

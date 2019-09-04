@@ -22,7 +22,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->timestamps();
             $table->index(['published_at', 'slug']);
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

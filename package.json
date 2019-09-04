@@ -1,34 +1,32 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-  },
-  "devDependencies": {
-    "axios": "^0.18.1",
-    "cross-env": "^5.2.0",
-    "jquery": "^3.4.1",
-    "laravel-mix": "^4.1.2",
-    "lodash": "^4.17.15",
-    "resolve-url-loader": "^2.3.2",
-    "sass": "^1.22.10",
-    "sass-loader": "^7.3.1",
-    "vue-template-compiler": "^2.6.10",
-    "webpack-dev-server": "^3.8.0"
-  },
-  "dependencies": {
-    "bulma": "^0.7.5",
-    "datatables-bulma": "^1.0.1",
-    "datatables.net": "^1.10.19",
-    "datatables.net-buttons": "^1.5.4",
-    "feather-icons": "^4.24.1",
-    "flatpickr": "^4.6.2",
-    "trumbowyg": "^2.18.0",
-    "turbolinks": "^5.2.0"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.19",
+        "cross-env": "^5.2.1",
+        "laravel-mix": "^4.0.7",
+        "lodash": "^4.17.13",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "^7.1.0",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "bulma": "^0.7.5",
+        "datatables-bulma": "^1.0.1",
+        "datatables.net": "^1.10.19",
+        "datatables.net-buttons": "^1.5.4",
+        "feather-icons": "^4.24.1",
+        "flatpickr": "^4.6.2",
+        "trumbowyg": "^2.19.1",
+        "turbolinks": "^5.2.0"
+    }
 }

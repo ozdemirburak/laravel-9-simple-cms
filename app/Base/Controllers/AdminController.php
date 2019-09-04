@@ -107,7 +107,7 @@ abstract class AdminController extends Controller
     }
 
     /**
-     * Flash operation and then redirect to path 
+     * Flash operation and then redirect to path
      *
      * @param        $isSuccess
      * @param        $operation
@@ -146,7 +146,7 @@ abstract class AdminController extends Controller
      */
     public function routePath($path = 'index'): string
     {
-        return 'admin.' . snake_case($this->model) . '.' . $path;
+        return 'admin.' . Str::snake($this->model) . '.' . $path;
     }
 
     /**

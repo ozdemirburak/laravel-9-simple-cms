@@ -1,6 +1,6 @@
 <ul>
     <li class="is-inline">
-        <a class="button is-small is-info" href="{{ route(implode('.', ['admin', $resource, 'show']), compact('id'))  }}">
+        <a class="button is-small is-info" href="{{ route(implode('.', ['admin', $resource, 'show']), [$resource => $id])  }}">
             <span class="icon">
                 <svg viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                     <circle cx="14" cy="14" r="12"></circle>
@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="is-inline">
-        <a class="button is-small is-primary" href="{{ route(implode('.', ['admin', $resource, 'edit']), compact('id')) }}">
+        <a class="button is-small is-primary" href="{{ route(implode('.', ['admin', $resource, 'edit']), [$resource => $id]) }}">
             <span class="icon">
                 <svg viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                     <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"></path>
@@ -21,9 +21,9 @@
         </a>
     </li>
     <li class="is-inline">
-        <form class="is-inline" method="POST" action="{{ route(implode('.', ['admin', $resource, 'destroy']), ['id' => $id]) }}">
+        <form class="is-inline" method="POST" action="{{ route(implode('.', ['admin', $resource, 'destroy']), [$resource => $id]) }}">
             @csrf
-            <input type="hidden" name="_method" value="DELETE">
+            @method('DELETE')
             <button class="button is-small is-danger" type="submit" onclick="return confirm('{{ __('admin.ops.confirmation') }}')">
                 <span class="icon">
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
