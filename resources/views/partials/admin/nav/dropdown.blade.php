@@ -10,7 +10,7 @@
                 <span>{{ __('admin.' . $resource . '.create') }}</span>
             </a>
             @if(!empty($extra))
-                @foreach (array_wrap($extra) as $e => $i)
+                @foreach (\Illuminate\Support\Arr::wrap($extra) as $e => $i)
                     <a class="navbar-item" href="{{ route('admin.' . $resource . '.' . $e) }}">
                         <span class="icon">{!! icon($i) !!}</span>
                         <span>{{ __('admin.' . $resource . '.' . $e) }}</span>
