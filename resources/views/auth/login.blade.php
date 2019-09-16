@@ -22,7 +22,7 @@
                                     <input class="input is-large" type="password" name="password" placeholder="{{ __('auth.login.password') }}">
                                 </div>
                             </div>
-                            @if (!empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false)
+                            @if ($hasCaptcha)
                                 <div class="field has-addons has-addons-centered">
                                     <div class="control">
                                         {!! htmlFormSnippet() !!}
@@ -46,6 +46,9 @@
     </section>
 @endsection
 
-@section('scripts')
-    {!! htmlScriptTagJsApi('login') !!}
-@endsection
+@if ($hasCaptcha)
+    @section('scripts')
+        {!! htmlScriptTagJsApi('login') !!}
+    @endsection
+@endif
+

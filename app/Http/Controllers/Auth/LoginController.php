@@ -37,6 +37,14 @@ class LoginController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login', ['hasCaptcha' => $this->hasCaptcha()]);
+    }
+
+    /**
      * @param \Illuminate\Http\Request $request
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -44,9 +52,18 @@ class LoginController extends Controller
     protected function validateLogin(Request $request): void
     {
         $rules = [$this->username() => 'required|string', 'password' => 'required|string'];
-        if (!empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false) {
+        if ($this->hasCaptcha()) {
             $rules['g-recaptcha-response'] = 'required|recaptcha';
         }
         $this->validate($request, $rules);
     }
+
+    /**
+     * @return bool
+     */
+    private function hasCaptcha()
+    {
+        return !empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false;
+    }
 }
+
