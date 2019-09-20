@@ -68,6 +68,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan elfinder:publish"
         ]
 	}
 }
