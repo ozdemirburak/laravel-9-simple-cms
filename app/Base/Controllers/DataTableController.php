@@ -205,11 +205,11 @@ abstract class DataTableController extends DataTable
             $orderAndSearch = $key < $countColumnsPosition;
             $this->pushColumns($result, [
                 'data' => $column,
-                'name' => implode([$table, $column], '.'),
-                'title' => __('admin.fields.' . implode([$model, $column], '.'))
+                'name' => implode('.', [$table, $column]),
+                'title' => __('admin.fields.' . implode('.', [$model, $column]))
             ], $orderAndSearch, $orderAndSearch);
         })->recollect($this->eager_columns)->each(function ($column, $key) use (&$result) {
-            $string = implode([$key, $column], '.');
+            $string = implode('.', [$key, $column]);
             $this->pushColumns($result, [
                 'data'  => $string,
                 'name'  => $string,
@@ -219,10 +219,10 @@ abstract class DataTableController extends DataTable
             $this->pushColumns($result, [
                 'data'  => $column,
                 'name'  => $column,
-                'title' => __('admin.fields.' . implode([$model, $column], '.')),
+                'title' => __('admin.fields.' . implode('.', [$model, $column])),
             ], true, false);
         })->recollect($this->common_columns)->each(function ($column) use ($table, &$result) {
-            $string = implode([$table, $column], '.');
+            $string = implode('.', [$table, $column]);
             $this->pushColumns($result, [
                 'data'  => $column,
                 'name'  => $string,
