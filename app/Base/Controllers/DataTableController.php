@@ -15,7 +15,7 @@ abstract class DataTableController extends DataTable
      */
     protected $parameters = [
         'dom' => 'Bfrtip',
-        'buttons' => ['export', 'print', 'reset', 'reload'],
+        'buttons' => ['excel', 'csv', 'reload'],
         'columnDefs' => [['defaultContent' => '-', 'targets' => '_all']],
         'scrollX' => true
     ];

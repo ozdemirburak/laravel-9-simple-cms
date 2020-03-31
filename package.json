@@ -12,15 +12,17 @@
     "devDependencies": {
         "axios": "^0.19.2",
         "cross-env": "^5.2.1",
+        "jquery": "^3.4.1",
         "laravel-mix": "^4.1.4",
-        "lodash": "^4.17.13",
-        "resolve-url-loader": "^2.3.1",
-        "sass": "^1.25.0",
-        "sass-loader": "^7.1.0",
-        "vue-template-compiler": "^2.6.11"
+        "lodash": "^4.17.15",
+        "resolve-url-loader": "^2.3.2",
+        "sass": "^1.26.3",
+        "sass-loader": "^7.3.1",
+        "vue-template-compiler": "^2.6.11",
+        "webpack-dev-server": "^3.10.2"
     },
     "dependencies": {
-        "bulma": "^0.7.5",
+        "bulma": "^0.8.1",
         "datatables-bulma": "^1.0.1",
         "datatables.net": "^1.10.20",
         "datatables.net-buttons": "^1.6.1",

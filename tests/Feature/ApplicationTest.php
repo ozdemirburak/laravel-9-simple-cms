@@ -19,7 +19,7 @@ class ApplicationTest extends TestCase
     /**
      * Create article
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->articles = factory(Article::class)->make([
@@ -36,7 +36,7 @@ class ApplicationTest extends TestCase
      */
     public function testTitleOnHomePage()
     {
-        $this->visit('/')->see('Laravel 5 Simple CMS');
+        $this->visit('/')->see(env('APP_NAME'));
     }
 
     /**

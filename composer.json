@@ -1,37 +1,35 @@
 {
-	"name": "ozdemirburak/laravel-6-simple-cms",
-	"description": "Simple Laravel 6 CMS (Content Management System) for starters.",
-	"keywords": ["php", "laravel", "cms"],
-	"license": "MIT",
-	"type": "project",
-	"require": {
-        "php": "^7.2",
-		"biscolab/laravel-recaptcha": "~3.6",
-		"barryvdh/laravel-elfinder": "~0.3",
-        "barryvdh/laravel-snappy": "~0.4",
-		"cviebrock/eloquent-sluggable": "~6.0",
-		"fideloper/proxy": "~4.0",
-		"h4cc/wkhtmltoimage-amd64": "~0.12",
-		"h4cc/wkhtmltopdf-amd64": "~0.12",
-		"laracasts/flash": "~3.0",
-        "laravel/framework": "^6.0",
-		"laravel/tinker": "~1.0",
-		"predis/predis": "~1.1",
-		"spatie/laravel-analytics": "~3.8",
-		"yajra/laravel-datatables-buttons": "~4.7",
-		"yajra/laravel-datatables-oracle": "~9.6"
-	},
-	"require-dev": {
-		"barryvdh/laravel-debugbar": "~3.2",
-		"barryvdh/laravel-ide-helper": "~2.6",
-		"doctrine/dbal": "~2.8",
-        "facade/ignition": "^1.4",
-        "fzaninotto/faker": "^1.4",
-		"laravel/browser-kit-testing": "~5.0",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
-	},
+    "name": "ozdemirburak/laravel-7-simple-cms",
+    "description": "Simple Laravel 7 CMS (Content Management System) for starters.",
+    "keywords": ["php", "laravel", "cms"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.2.5",
+        "anhskohbo/no-captcha": "~3.2",
+        "barryvdh/laravel-elfinder": "~0.4",
+        "cviebrock/eloquent-sluggable": "~7.0",
+        "fideloper/proxy": "~4.0",
+        "laracasts/flash": "~3.1",
+        "laravel/framework": "~7.0",
+        "laravel/tinker": "~2.0",
+        "laravel/ui": "^2.0",
+        "spatie/laravel-analytics": "~3.8",
+        "yajra/laravel-datatables-buttons": "~4.9",
+        "yajra/laravel-datatables-oracle": "~9.9"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "~3.2",
+        "barryvdh/laravel-ide-helper": "~2.6",
+        "beyondcode/laravel-dump-server": "~1.2",
+        "doctrine/dbal": "~2.8",
+        "facade/ignition": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "laravel/browser-kit-testing": "~6.0",
+        "mockery/mockery": "~1.0",
+        "nunomaduro/collision": "~4.0",
+        "phpunit/phpunit": "~8.5"
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
@@ -58,7 +56,7 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-	"scripts": {
+    "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -72,5 +70,5 @@
         "post-update-cmd": [
             "@php artisan elfinder:publish"
         ]
-	}
+    }
 }

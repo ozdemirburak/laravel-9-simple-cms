@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel 6 Simple CMS'),
+    'name' => env('APP_NAME', 'Laravel 7 Simple CMS'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,14 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Barryvdh\Elfinder\ElfinderServiceProvider::class,
-        Barryvdh\Snappy\ServiceProvider::class,
-        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
-        Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Spatie\Analytics\AnalyticsServiceProvider::class,
-        Yajra\DataTables\ButtonsServiceProvider::class,
-        Yajra\DataTables\DatatablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -180,11 +172,24 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\CollectionServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Application Custom Service Providers...
+         */
+        App\Providers\CollectionServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
+
+        /*
+         * Third Party Stuff
+         */
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Barryvdh\Elfinder\ElfinderServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        Yajra\DataTables\DatatablesServiceProvider::class
     ],
 
     /*
@@ -200,6 +205,9 @@ return [
 
     'aliases' => [
 
+        /*
+         * Laravel Framework Aliases...
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -217,6 +225,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
@@ -236,6 +245,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Custom Third Party Aliases...
+         */
+        'Analytics'  => Spatie\Analytics\AnalyticsFacade::class,
+        'Datatables' => Yajra\DataTables\Facades\DataTables::class,
+        'NoCaptcha'   => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class
     ],
 
 ];

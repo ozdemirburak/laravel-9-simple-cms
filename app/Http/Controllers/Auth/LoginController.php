@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         $rules = [$this->username() => 'required|string', 'password' => 'required|string'];
         if ($this->hasCaptcha()) {
-            $rules['g-recaptcha-response'] = 'required|recaptcha';
+            $rules['g-recaptcha-response'] = 'required|captcha';
         }
         $this->validate($request, $rules);
     }
@@ -63,7 +63,7 @@ class LoginController extends Controller
      */
     private function hasCaptcha()
     {
-        return !empty(env('RECAPTCHA_SITEKEY')) && strpos(env('RECAPTCHA_SITEKEY'), 'google') === false;
+        return !empty(env('GOOGLE_NOCAPTCHA_SITEKEY')) && strpos(env('GOOGLE_NOCAPTCHA_SECRET'), 'google') === false;
     }
 }
 

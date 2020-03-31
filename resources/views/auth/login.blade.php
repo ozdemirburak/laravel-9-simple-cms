@@ -25,7 +25,7 @@
                             @if ($hasCaptcha)
                                 <div class="field has-addons has-addons-centered">
                                     <div class="control">
-                                        {!! htmlFormSnippet() !!}
+                                        {!! NoCaptcha::display() !!}
                                     </div>
                                 </div>
                             @endif
@@ -48,7 +48,7 @@
 
 @if ($hasCaptcha)
     @section('scripts')
-        {!! htmlScriptTagJsApi('login') !!}
+        {!! NoCaptcha::renderJs('en') !!}
     @endsection
 @endif
 
