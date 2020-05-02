@@ -3,7 +3,7 @@
 @extends('layouts.admin')
 
 @push('styles')
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset($dir . '/css/elfinder.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset($dir . '/css/theme.css') }}">
 @endpush
@@ -21,8 +21,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset(mix('dist/js/admin.js')) }}" type="text/javascript"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{ asset($dir.'/js/elfinder.min.js') }}"></script>
     <script type="text/javascript" charset="utf-8">
       $(function() {
