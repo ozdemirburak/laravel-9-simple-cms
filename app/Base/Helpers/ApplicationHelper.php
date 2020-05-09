@@ -114,7 +114,7 @@ if (!function_exists('getRobots')) {
      */
     function getRobots()
     {
-        if (request()->get('PageSpeed') || strpos(url()->current(), env('APP_URL')) === false) {
+        if (request()->get('PageSpeed')) {
             return 'noindex,nofollow';
         }
         return 'index,follow';
