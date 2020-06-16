@@ -16,16 +16,16 @@
         "laravel-mix": "^4.1.4",
         "lodash": "^4.17.15",
         "resolve-url-loader": "^2.3.2",
-        "sass": "^1.26.3",
+        "sass": "^1.26.8",
         "sass-loader": "^7.3.1",
         "vue-template-compiler": "^2.6.11",
-        "webpack-dev-server": "^3.10.2"
+        "webpack-dev-server": "^3.11.0"
     },
     "dependencies": {
         "bulma": "^0.8.1",
         "datatables-bulma": "^1.0.1",
-        "datatables.net": "^1.10.20",
-        "datatables.net-buttons": "^1.6.1",
+        "datatables.net": "^1.10.21",
+        "datatables.net-buttons": "^1.6.2",
         "feather-icons": "^4.26.0",
         "flatpickr": "^4.6.3",
         "trumbowyg": "^2.21.0",
