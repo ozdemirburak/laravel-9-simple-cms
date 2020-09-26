@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Base\SluggableModel;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Page extends SluggableModel
 {
+    use HasFactory;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

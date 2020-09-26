@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Base\SluggableModel;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends SluggableModel
 {
+    use HasFactory;
+
     /**
      * Carbon instance fields
      *

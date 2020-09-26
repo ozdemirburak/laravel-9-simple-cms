@@ -7,6 +7,6 @@
 ])
 
 @section('content')
-    @include('partials.app.hero')
+    @include('partials.app.hero', ['class' => 'has-text-centered'])
     @include('partials.app.content', ['content' => $object->content])
 @endsection

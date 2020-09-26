@@ -1,4 +1,4 @@
-<nav class="breadcrumb" aria-label="breadcrumbs">
+<nav class="breadcrumb is-small is-centered" aria-label="breadcrumbs">
     <ul>
         <li><a href="{{ route('root') }}">{{ getTitle() }}</a></li>
         @if (isset($object->parent))

@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePagesTable extends Migration
 {
@@ -13,9 +14,9 @@ class CreatePagesTable extends Migration
     public function up()
     {
         Schema::create('pages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('slug');
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreignId('parent_id')->nullable();
             $table->string('title');
             $table->string('description');
             $table->text('content');

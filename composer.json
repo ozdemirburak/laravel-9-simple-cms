@@ -1,34 +1,35 @@
 {
-    "name": "ozdemirburak/laravel-7-simple-cms",
-    "description": "Simple Laravel 7 CMS (Content Management System) for starters.",
+    "name": "ozdemirburak/laravel-8-simple-cms",
+    "description": "Simple Laravel 8 CMS (Content Management System) for starters.",
     "keywords": ["php", "laravel", "cms"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.2.5",
-        "anhskohbo/no-captcha": "~3.2",
-        "barryvdh/laravel-elfinder": "~0.4",
-        "cviebrock/eloquent-sluggable": "~7.0",
-        "fideloper/proxy": "~4.0",
-        "laracasts/flash": "~3.1",
-        "laravel/framework": "~7.0",
-        "laravel/tinker": "~2.0",
-        "laravel/ui": "^2.0",
-        "spatie/laravel-analytics": "~3.8",
-        "yajra/laravel-datatables-buttons": "~4.9",
-        "yajra/laravel-datatables-oracle": "~9.9"
+        "php": "~7.3",
+        "anhskohbo/no-captcha": "~3.3",
+        "barryvdh/laravel-elfinder": "~0.4.6",
+        "cviebrock/eloquent-sluggable": "~8.0",
+        "fideloper/proxy": "~4.2",
+        "fruitcake/laravel-cors": "~2.0",
+        "guzzlehttp/guzzle": "~7.0.1",
+        "laracasts/flash": "~3.2",
+        "laravel/framework": "~8.0",
+        "laravel/tinker": "~2.4",
+        "laravel/ui": "~2.0",
+        "spatie/laravel-analytics": "~3.10",
+        "yajra/laravel-datatables-buttons": "~4.10",
+        "yajra/laravel-datatables-oracle": "~9.11"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "~3.2",
-        "barryvdh/laravel-ide-helper": "~2.6",
-        "beyondcode/laravel-dump-server": "~1.2",
-        "doctrine/dbal": "~2.8",
-        "facade/ignition": "~2.0",
-        "fzaninotto/faker": "~1.4",
-        "laravel/browser-kit-testing": "~6.0",
-        "mockery/mockery": "~1.0",
-        "nunomaduro/collision": "~4.0",
-        "phpunit/phpunit": "~8.5"
+        "barryvdh/laravel-debugbar": "~3.5",
+        "barryvdh/laravel-ide-helper": "~2.8",
+        "doctrine/dbal": "~2.11",
+        "facade/ignition": "~2.3.6",
+        "fzaninotto/faker": "~1.9.1",
+        "laravel/browser-kit-testing": "~6.1",
+        "mockery/mockery": "~1.3.1",
+        "nunomaduro/collision": "~5.0",
+        "phpunit/phpunit": "~9.3"
     },
     "config": {
         "optimize-autoloader": true,
@@ -42,12 +43,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

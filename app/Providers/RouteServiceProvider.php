@@ -6,8 +6,11 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\User;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,13 +39,22 @@ class RouteServiceProvider extends ServiceProvider
     protected $adminNamespace = 'App\Http\Controllers\Admin';
 
     /**
+     * The path to the "home" route for your application.
+     *
+     * This is used by Laravel authentication to redirect users after login.
+     *
+     * @var string
+     */
+    public const HOME = '/admin';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void
      */
     public function boot()
     {
-        parent::boot();
+        $this->configureRateLimiting();
         $this->bootRouteModelBinders();
         $this->bootRouteParameterBinders();
     }
@@ -142,5 +154,17 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->adminNamespace)
             ->prefix('admin')
             ->group(base_path('routes/admin.php'));
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60);
+        });
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -71,14 +70,14 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param \Exception $e
+     * @param \Throwable $exception
      *
      * @return bool
      */
-    protected function dontReportException(Exception $e)
+    protected function dontReportException(Throwable $exception)
     {
         foreach ($this->dontReport as $dontReport) {
-            if ($e instanceof $dontReport) {
+            if ($exception instanceof $dontReport) {
                 return true;
             }
         }

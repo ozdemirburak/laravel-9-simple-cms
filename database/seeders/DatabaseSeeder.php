@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,13 +32,13 @@ class DatabaseSeeder extends Seeder
     public function addContent(): void
     {
         \DB::table('categories')->delete();
-        factory(\App\Models\Category::class, 5)->create();
+        \App\Models\Category::factory(5)->create();
         \DB::table('articles')->delete();
-        factory(\App\Models\Article::class, 40)->create();
+        \App\Models\Article::factory(40)->create();
         \DB::table('pages')->delete();
-        factory(\App\Models\Page::class, 6)->create(['parent_id' => null]);
+        \App\Models\Page::factory(6)->create(['parent_id' => null]);
         foreach (range(4, 5) as $p) {
-            factory(\App\Models\Page::class, 2)->create(['parent_id' => $p]);
+            \App\Models\Page::factory(2)->create(['parent_id' => $p]);
         }
     }
 }
