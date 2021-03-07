@@ -2,7 +2,6 @@
 
 namespace App\Base;
 
-use App\Base\Traits\SluggableEngine;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SluggableModel extends Model
 {
-    use Sluggable, SluggableEngine, SluggableScopeHelpers;
+    use Sluggable, SluggableScopeHelpers;
 
     /**
      * @var array
