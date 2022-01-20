@@ -1,4 +1,9 @@
-const mix = require('laravel-mix'), assetsDir = 'resources/', distDir = 'public/dist/';
+const mix = require('laravel-mix');
+
+const assetsDir = 'resources/';
+const distDir = 'public/dist/';
+
+mix.options({ terser: { extractComments: false }});
 
 mix.sass(assetsDir + 'scss/admin.scss', distDir + 'css/admin.css')
   .sass(assetsDir + 'scss/app.scss', distDir + 'css/app.css')
