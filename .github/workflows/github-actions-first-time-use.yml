@@ -1,6 +1,7 @@
-name: GitHub Actions First Time Use
+name: GitHub Actions Checking Laravel Environment & Spell Check README.md
 on: [push]
 jobs:
+  # Checking Repository Files
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
@@ -15,3 +16,72 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+  # Checking SQL Environment
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.3
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_DATABASE: homestead
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Install composer dependencies
+        run: |
+          composer install --no-scripts
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+
+      - name: Run Testsuite
+        run: vendor/bin/phpunit tests/
+  # Checking Frontend Assest Install
+  build-js-production:
+    name: Build JavaScript/CSS for Production Server
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v1
+      - name: NPM Build
+        run: |
+          npm install
+          npm run production
+      - name: Put built assets in Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: assets
+          path: public
+          retention-days: 3
+
+  build-spell-checking:
+    name: Spellcheck
+    runs-on: ubuntu-latest
+    steps:
+      # The checkout step
+      - uses: actions/checkout@v3
+
+      - uses: rojopolis/spellcheck-github-actions@0.26.0
+        name: Spellcheck
+        with:
+          source_files: README.md
+          task_name: Markdown
+          output_file: spellcheck-output.txt
+
+      - uses: actions/upload-artifact@v3
+        name: Archive spellcheck output
+        with:
+          name: Spellcheck artifact
+          path: spellcheck-output.txt
