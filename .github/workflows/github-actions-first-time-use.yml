@@ -16,7 +16,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  # Checking SQL Environment
+
+  # Laravel Test
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
@@ -38,41 +39,9 @@ jobs:
           touch database/database.sqlite
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
+          DB_CONNECTION: mysql
+          DB_DATABASE: homestead
         run: vendor/bin/phpunit
-
-  phpunit:
-    runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:7.3
-
-    services:
-      mysql:
-        image: mysql:5.7
-        env:
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_DATABASE: homestead
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-
-      - name: Install composer dependencies
-        run: |
-          composer install --no-scripts
-
-      - name: Prepare Laravel Application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-
-      - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
 
   # Checking Frontend Assest Install
   build-js-production:
