@@ -145,12 +145,3 @@ Added model binding to: app/Providers/RouteServiceProvider.php
 ```
 
 -----
-<a name="item5"></a>
-## Screenshots
-
-![Index](https://ozdemirburak.com/i/upload/cms/index.png)
-![Admin Auth](https://ozdemirburak.com/i/upload/cms/login.png)
-![Admin Dashboard](https://ozdemirburak.com/i/upload/cms/dashboard.png)
-![Admin Datatables](https://ozdemirburak.com/i/upload/cms/datatables.png)
-![Admin Dashboard](https://ozdemirburak.com/i/upload/cms/editor.png)
-![Admin File Manager](https://ozdemirburak.com/i/upload/cms/file-manager.png)
