@@ -1,0 +1,11 @@
+Admin (Tests\Feature\Admin)
+ [x] Dashboard
+ [x] Unauthorized access
+ [x] Articles crud
+ [x] Categories crud
+ [x] Pages crud
+
+Application (Tests\Feature\Application)
+ [x] Title on home page
+ [x] Articles on home page
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="7" assertions="25" errors="0" warnings="0" failures="0" skipped="0" time="2.358599">
+    <testsuite name="Feature" tests="7" assertions="25" errors="0" warnings="0" failures="0" skipped="0" time="2.358599">
+      <testsuite name="Tests\Feature\AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" tests="5" assertions="22" errors="0" warnings="0" failures="0" skipped="0" time="1.292562">
+        <testcase name="testDashboard" class="Tests\Feature\AdminTest" classname="Tests.Feature.AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" line="12" assertions="4" time="0.315291"/>
+        <testcase name="testUnauthorizedAccess" class="Tests\Feature\AdminTest" classname="Tests.Feature.AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" line="21" assertions="3" time="0.135074"/>
+        <testcase name="testArticlesCrud" class="Tests\Feature\AdminTest" classname="Tests.Feature.AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" line="30" assertions="5" time="0.281490"/>
+        <testcase name="testCategoriesCrud" class="Tests\Feature\AdminTest" classname="Tests.Feature.AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" line="39" assertions="5" time="0.282166"/>
+        <testcase name="testPagesCrud" class="Tests\Feature\AdminTest" classname="Tests.Feature.AdminTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\AdminTest.php" line="48" assertions="5" time="0.278542"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\ApplicationTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\ApplicationTest.php" tests="2" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="1.066036">
+        <testcase name="testTitleOnHomePage" class="Tests\Feature\ApplicationTest" classname="Tests.Feature.ApplicationTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\ApplicationTest.php" line="37" assertions="2" time="0.759762"/>
+        <testcase name="testArticlesOnHomePage" class="Tests\Feature\ApplicationTest" classname="Tests.Feature.ApplicationTest" file="D:\SEY3\Y3S2\SCC\SCCassignment3\laravel-8-simple-cms\tests\Feature\ApplicationTest.php" line="45" assertions="1" time="0.306274"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
