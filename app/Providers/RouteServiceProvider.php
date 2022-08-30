@@ -71,6 +71,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('category', Category::class);
         Route::model('page', Page::class);
         Route::model('user', User::class);
+        Route::model('product', \App\Models\Product::class);
         /** GENERATOR_MODEL_BINDER **/
     }
 
@@ -90,6 +91,9 @@ class RouteServiceProvider extends ServiceProvider
         });
         Route::bind('pSlug', function ($slug) {
             return Page::with('parent')->where('slug', $slug)->firstOrFail();
+        });
+        Route::bind('productSlug', function ($slug) {
+            return \App\Models\Product::where('slug', $slug)->firstOrFail();
         });
         /** GENERATOR_PARAMETER_BINDER **/
     }

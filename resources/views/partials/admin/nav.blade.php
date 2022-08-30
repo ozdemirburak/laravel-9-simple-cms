@@ -1,4 +1,4 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+				<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
     <div class="container is-fluid">
         <div class="navbar-brand">
             <a class="navbar-item" href="{{ route('root') }}">
@@ -20,6 +20,7 @@
                 @include('partials.admin.nav.dropdown', ['resource' => 'user', 'icon' => 'users'])
                 <!--  Do not remove line NAVIGATION_FLAG if you want to use CMS generator properly -->
                 <!-- Check the file app/Console/Commands/Cms/Resource.php -->
+				@include('partials.admin.nav.dropdown', ['resource' => 'product', 'icon' => 'more-horizontal'])
 				<!--NAVIGATION_FLAG-->
                 @include('partials.admin.nav.single', ['link' => route('elfinder.index'), 'text' => __('admin.elfinder.index'), 'icon' => 'film'])
                 @include('partials.admin.nav.logout', ['class' => 'is-hidden-tablet'])

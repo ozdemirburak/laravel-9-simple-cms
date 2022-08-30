@@ -5,3 +5,4 @@ Route::resource('article', 'ArticleController');
 Route::resource('category', 'CategoryController');
 Route::resource('page', 'PageController');
 Route::resource('user', 'UserController');
+Route::resource('product', 'ProductController');
