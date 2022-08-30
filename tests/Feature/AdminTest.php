@@ -12,7 +12,7 @@ class AdminTest extends TestCase
     public function testDashboard()
     {
         $this->signIn();
-        $this->visit('admin')->seePageIs(!empty(env('GOOGLE_ANALYTICS_CREDENTIAL_PATH')) ? 'admin' : 'admin/user');
+        $this->visit('admin')->seePageIs(!empty(env('GOOGLE_ANALYTICS_CREDENTIAL_PATH')) ? 'admin/user' : 'admin/user');
     }
 
     /**

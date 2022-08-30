@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests>
+  <test className="Tests\Feature\AdminTest" methodName="testDashboard" prettifiedClassName="Admin (Tests\Feature\Admin)" prettifiedMethodName="Dashboard" status="0" time="0.315291" size="-1" groups="admin-base-tests">
+    <group name="admin-base-tests"/>
+  </test>
+  <test className="Tests\Feature\AdminTest" methodName="testUnauthorizedAccess" prettifiedClassName="Admin (Tests\Feature\Admin)" prettifiedMethodName="Unauthorized access" status="0" time="0.1350737" size="-1" groups="admin-base-tests">
+    <group name="admin-base-tests"/>
+  </test>
+  <test className="Tests\Feature\AdminTest" methodName="testArticlesCrud" prettifiedClassName="Admin (Tests\Feature\Admin)" prettifiedMethodName="Articles crud" status="0" time="0.2814899" size="-1" groups="admin-crud-tests">
+    <group name="admin-crud-tests"/>
+  </test>
+  <test className="Tests\Feature\AdminTest" methodName="testCategoriesCrud" prettifiedClassName="Admin (Tests\Feature\Admin)" prettifiedMethodName="Categories crud" status="0" time="0.282166" size="-1" groups="admin-crud-tests">
+    <group name="admin-crud-tests"/>
+  </test>
+  <test className="Tests\Feature\AdminTest" methodName="testPagesCrud" prettifiedClassName="Admin (Tests\Feature\Admin)" prettifiedMethodName="Pages crud" status="0" time="0.2785419" size="-1" groups="admin-crud-tests">
+    <group name="admin-crud-tests"/>
+  </test>
+  <test className="Tests\Feature\ApplicationTest" methodName="testTitleOnHomePage" prettifiedClassName="Application (Tests\Feature\Application)" prettifiedMethodName="Title on home page" status="0" time="0.7597624" size="-1" groups="application-home-tests">
+    <group name="application-home-tests"/>
+  </test>
+  <test className="Tests\Feature\ApplicationTest" methodName="testArticlesOnHomePage" prettifiedClassName="Application (Tests\Feature\Application)" prettifiedMethodName="Articles on home page" status="0" time="0.3062739" size="-1" groups="application-home-tests">
+    <group name="application-home-tests"/>
+  </test>
+</tests>

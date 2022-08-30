@@ -22,7 +22,7 @@ class ApplicationTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->articles = factory(Article::class)->make([
+        $this->articles = Article::factory()->make([
             'category_id' => 1,
             'content' => 'Some content',
             'description' => 'A description',

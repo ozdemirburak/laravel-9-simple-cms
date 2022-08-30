@@ -16,11 +16,34 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
-    <filter>
+    <!-- <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./app</directory>
         </whitelist>
-    </filter>
+    </filter> -->
+        <coverage cacheDirectory=".phpunit.cache/code-coverage" processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">tests/</directory>
+            <directory suffix=".php">tests/Feature/AdminTest</directory>
+            <directory suffix=".php">tests/Feature/ApplicationTest</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./vendor</directory>
+            
+        </exclude>
+        <report>
+            <html outputDirectory="build/coverage.html" />
+        </report>
+    </coverage>
+
+    
+
+    <logging>
+        <junit outputFile="build/report.junit.xml" />
+        <testdoxHtml outputFile="build/coverage.html" />
+        <testdoxText outputFile="build/coverage.txt" />
+        <testdoxXml outputFile="build/logs/clover.xml" />
+    </logging>
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>

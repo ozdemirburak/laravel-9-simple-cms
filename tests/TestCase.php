@@ -30,7 +30,7 @@ class TestCase extends BaseTestCase
     public function signIn($user = null)
     {
         if (!$user) {
-            $user = factory(User::class)->make([
+            $user = User::factory()->make([
                 'email' => 'test@user.com',
                 'name' => 'user',
                 'password' => bcrypt('123456'),
