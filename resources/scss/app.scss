@@ -5,11 +5,11 @@
 @import "app/_utilities";
 
 iframe {
-  border: 0.5; //changed border to 0.5 from 0
+  border: 0; //changed border to 0 from 0.5
 }
 
 .turbolinks-progress-bar {
-  height: 3px; //changed height to 0.5 from 0
+  height: 2.5px; //changed height to 2.5 from 3
   background: $primary;
   background: -webkit-linear-gradient(to right, $primary, darken($primary, 5%));
   background: linear-gradient(to right, $primary, darken($primary, 5%));
