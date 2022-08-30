@@ -11,7 +11,7 @@
             </div>
             <div class="level"></div>
             <div class="content">
-                <p>{{ getNWords($article->content, 50) }}</p>
+                <p style="text-align: justify;text-justify: inter-word;">{{ getNWords($article->content, 50) }}</p>
             </div>
             <div class="columns is-vcentered">
                 <div class="column is-9">

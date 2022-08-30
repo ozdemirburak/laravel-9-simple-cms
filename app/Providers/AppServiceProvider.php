@@ -6,6 +6,7 @@ use Barryvdh\Debugbar\ServiceProvider as DebugbarServiceProvider;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('pagination::bulma');
         Paginator::defaultSimpleView('pagination::simple-bulma');
+        Schema::defaultStringLength(191);
     }
 
     /**
