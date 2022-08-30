@@ -93,5 +93,16 @@ return [
         ],
         'index'  => 'Users',
         'show'   => 'Show user'
+    ],
+    'product' => [
+        'create' => 'Create a Product',
+        'edit'   => 'Edit a Product',
+        'fields' => [
+          'content'     => 'Content',
+          'description' => 'Description',
+          'title'       => 'Title'
+        ],
+        'index'  => 'Products',
+        'show'   => 'Show a Product'
     ]
 ];
