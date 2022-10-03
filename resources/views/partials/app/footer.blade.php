@@ -3,15 +3,17 @@
         <div class="content">
             <div class="columns">
                 <div class="column is-3">
-                    <p class="title is-5">{{ __('app.footer.share') }}</p>
-                    @foreach (['facebook', 'twitter'] as $social)
+                    <p class="title is-5">{{ __('app.footer.follow') }}</p>
                         <p>
-                            <a href="@yield($social)" rel="nofollow noopener" target="_blank">
-                                <span class="icon">{!! icon($social) !!}</span>
-                                <span class="text">{{ ucfirst($social) }}</span>
+                            <a href="https://www.facebook.com" rel="nofollow noopener" target="_blank">
+                                <span class="text">Facebook</span>
                             </a>
                         </p>
-                    @endforeach
+                    <p>
+                        <a href="https://twitter.com" rel="nofollow noopener" target="_blank">
+                            <span class="text">Twitter</span>
+                        </a>
+                    </p>
                 </div>
                 <div class="column is-3">
                     <p class="title is-5">{{ __('app.footer.latest') }}</p>

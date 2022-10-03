@@ -28,9 +28,9 @@
     <link rel="manifest" href="{{ asset('i/icons/site.webmanifest') }}">
     <link rel="mask-icon" href="{{ asset('i/icons/safari-pinned-tab.svg') }}" color="#336699">
     <link rel="shortcut icon" href="{{ asset('i/icons/favicon.ico') }}">
-    <meta name="msapplication-TileColor" content="#336699">
+    <meta name="msapplication-TileColor" content="#333">
     <meta name="msapplication-config" content="{{ asset('i/icons/browserconfig.xml') }}">
-    <meta name="theme-color" content="#336699">
+    <meta name="theme-color" content="#333">
     <link rel="stylesheet" type="text/css" href="{{ asset(mix('dist/css/app.css')) }}">
     @hasSection('canonical')<link rel="canonical" href="@yield('canonical')">@endif
     <script src="{{ asset(mix('dist/js/app.js')) }}"></script>

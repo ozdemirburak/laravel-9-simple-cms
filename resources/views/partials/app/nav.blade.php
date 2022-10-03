@@ -35,24 +35,6 @@
                     @endif
                 @endforeach
             </div>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a target="_blank" rel="noopener noreferrer" href="@yield('facebook')" class="button button-facebook">
-                                <span class="icon">{!! icon('facebook') !!}</span>
-                                <span>{{ __('app.buttons.share') }}</span>
-                            </a>
-                        </p>
-                        <p class="control">
-                            <a target="_blank" rel="noopener noreferrer" href="@yield('twitter')" class="button button-twitter">
-                                <span class="icon">{!! icon('twitter') !!}</span>
-                                <span>{{ __('app.buttons.tweet') }}</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </nav>

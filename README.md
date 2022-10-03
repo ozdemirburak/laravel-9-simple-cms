@@ -1,5 +1,5 @@
-# Laravel 8 Simple CMS
-Basic boilerplate content management system for starters, supports Laravel 8.0.
+# Laravel 9 Simple CMS
+Basic boilerplate content management system for starters, supports Laravel 9.0.
 
 -----
 ## Table of Contents
@@ -31,7 +31,7 @@ Basic boilerplate content management system for starters, supports Laravel 8.0.
 
 Clone this repository and install the dependencies.
 
-    $ git clone https://github.com/ozdemirburak/laravel-8-simple-cms.git && cd laravel-8-simple-cms
+    $ git clone https://github.com/ozdemirburak/laravel-9-simple-cms.git && cd laravel-9-simple-cms
     $ composer install
 
 Run the command below to initialize. Do not forget to configure your .env file. 
@@ -67,8 +67,8 @@ The application comes with default user with email address `admin@admin.com` and
 <a name="step1"></a>
 ### Step 1: Download the Repository
 
-Either Clone the repository using git clone: `git clone https://github.com/ozdemirburak/laravel-8-simple-cms.git` 
-or install via <a target="_blank" href="https://github.com/ozdemirburak/laravel-8-simple-cms/archive/master.zip">zip</a> and extract 
+Either Clone the repository using git clone: `git clone https://github.com/ozdemirburak/laravel-9-simple-cms.git` 
+or install via <a target="_blank" href="https://github.com/ozdemirburak/laravel-9-simple-cms/archive/master.zip">zip</a> and extract 
 to any of your folders you wish.
 
 -----
@@ -76,7 +76,7 @@ to any of your folders you wish.
 ### Step 2: Initialize the Application
 
 To install the composer dependencies you need to have composer installed, if you don't have composer installed, 
-then [follow these instructions](https://getcomposer.org/download/). Finally run, `composer install` in the `laravel-8-simple-cms` directory.
+then [follow these instructions](https://getcomposer.org/download/). Finally run, `composer install` in the `laravel-9-simple-cms` directory.
 
 Run `php artisan cms:initialize --seed` which will ask you to create a database to migrate and seed our boilerplate application 
 with fake data. Do not forget that all variables with `DB_` prefixes in your `.env` file relates to your database configuration. 

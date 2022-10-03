@@ -46,8 +46,9 @@ class Initialize extends Command
     private function askEnvConfiguration(): void
     {
         $this->runProcess(['mv', '.env.example', '.env']);
+        $this->call('config:clear');
         $this->call('key:generate');
-        $this->continue = $this->confirm('Create database and configure your .env file, then hit Y to continue.');
+        $this->continue = $this->confirm('Create a database and configure your .env file, then hit Y to continue.');
     }
 
     /**

@@ -1,6 +1,6 @@
 {
-    "name": "ozdemirburak/laravel-8-simple-cms",
-    "description": "Simple Laravel 8 CMS (Content Management System) for starters.",
+    "name": "ozdemirburak/laravel-9-simple-cms",
+    "description": "Simple Laravel 9 CMS (Content Management System) for starters.",
     "keywords": ["php", "laravel", "cms"],
     "license": "MIT",
     "type": "project",
@@ -11,7 +11,7 @@
         "cviebrock/eloquent-sluggable": "~9.0",
         "fruitcake/laravel-cors": "~2.0",
         "guzzlehttp/guzzle": "~7.4.3",
-        "laracasts/flash": "~3.2",
+        "laracasts/flash": "~3.2.1",
         "laravel/framework": "^9.0",
         "laravel/tinker": "~2.4",
         "laravel/ui": "~3.0",
