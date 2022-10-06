@@ -53,7 +53,7 @@ class UserController extends AdminController
      */
     public function show(User $user)
     {
-        return view('admin.show', ['object' => $user]);
+        return view('admin.show.user', $this->formVariables('user', $user));
     }
 
     /**

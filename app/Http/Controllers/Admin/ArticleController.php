@@ -57,7 +57,7 @@ class ArticleController extends AdminController
      */
     public function show(Article $article)
     {
-        return view('admin.show', ['object' => $article]);
+        return view('admin.show.article', $this->formVariables('article', $article, $this->options()));
     }
 
     /**
