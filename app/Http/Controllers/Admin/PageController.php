@@ -55,7 +55,7 @@ class PageController extends AdminController
      */
     public function show(Page $page)
     {
-        return view('admin.show', ['object' => $page]);
+        return view('admin.show.page', $this->formVariables('page', $page, $this->options($page->id)));
     }
 
     /**

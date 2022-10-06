@@ -50,7 +50,7 @@ class CategoryController extends AdminController
      */
     public function show(Category $category)
     {
-        return view('admin.show', ['object' => $category]);
+        return view('admin.show.category', $this->formVariables('category', $category));
     }
 
     /**
